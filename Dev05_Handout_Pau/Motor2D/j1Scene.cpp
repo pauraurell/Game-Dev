@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -63,15 +64,16 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		App->render->camera.x += 1;
 
-	//App->render->Blit(img, 0, 0);
+
 	App->map->Draw();
-	//iPoint mouse(App->input->GetMousePosition);
+	App->player->Draw();
+
 
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d MouseCoordinates:%d,%d",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count());
-					//App->map->WorldToMap(mouse.x, mouse.y);
+				
 
 	App->win->SetTitle(title.GetString());
 	return true;
