@@ -30,8 +30,9 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("FirstLevel2.tmx");
-	//App->map->Load("hello2.tmx");
+	App->map->Load("FirstLevel.tmx");
+	App->render->camera.y = -500;
+
 	return true;
 }
 
@@ -56,10 +57,10 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->render->camera.y += 1;
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		App->render->camera.x += 1;
 
 	//App->render->Blit(img, 0, 0);
