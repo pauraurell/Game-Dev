@@ -126,7 +126,7 @@ void j1Render::ResetViewPort()
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speedX, float speedY, double angle, int pivot_x, int pivot_y) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale()*2;
+	uint scale = App->win->GetScale()*3;
 
 	SDL_Rect rect;
 	rect.x = (int)(camera.x * speedX) + x * scale;
