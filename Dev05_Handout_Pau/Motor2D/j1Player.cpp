@@ -73,7 +73,6 @@ void j1Player::Draw()
 }
 
 
-
 // Called before quitting
 bool j1Player::CleanUp()
 {
