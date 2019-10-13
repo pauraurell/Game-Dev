@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("FirstLevel.tmx");
-	App->render->camera.y = -500;
+	App->render->camera.y = -700;
 
 	return true;
 }
@@ -59,10 +59,10 @@ bool j1Scene::Update(float dt)
 		App->render->camera.y += 1;
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+		App->render->camera.x -= 2;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+		App->render->camera.x += 2;
 
 
 	App->map->Draw();
@@ -76,6 +76,7 @@ bool j1Scene::Update(float dt)
 				
 
 	App->win->SetTitle(title.GetString());
+
 	return true;
 }
 
