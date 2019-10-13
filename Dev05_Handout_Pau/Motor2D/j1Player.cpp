@@ -93,5 +93,9 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::Pushbacks()
 {
-	idle.PushBack({ 13, 7, 19, 29 });
+	idle.PushBack({ 14, 7, 19, 29 });
+	idle.PushBack({ 66, 6, 17, 30 });
+	idle.PushBack({ 115, 6, 19, 30 });
+	idle.PushBack({ 163, 7, 20, 29 });
+	idle.speed = 0.02f;
 }
