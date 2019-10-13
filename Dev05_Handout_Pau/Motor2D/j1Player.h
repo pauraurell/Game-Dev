@@ -39,6 +39,7 @@ public:
 	iPoint			position;
 	Animation*		current_animation;
 	Animation		idle;
+	Animation		running;
 	SDL_Texture*	Character_tex;
 
 	void Pushbacks();
