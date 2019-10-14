@@ -40,6 +40,7 @@ public:
 	Animation*		current_animation;
 	Animation		idle;
 	Animation		running;
+	Animation		jump;
 	SDL_Texture*	Character_tex;
 
 	void Pushbacks();

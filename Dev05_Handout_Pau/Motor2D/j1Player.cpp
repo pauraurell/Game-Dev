@@ -56,7 +56,6 @@ bool j1Player::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		current_animation = &running;
-
 	else
 		current_animation = &idle;
 	return true;
@@ -76,6 +75,7 @@ void j1Player::Draw()
 // Called before quitting
 bool j1Player::CleanUp()
 {
+	App->tex->UnLoad(Character_tex);
 
 	return true;
 }
@@ -101,7 +101,7 @@ void j1Player::Pushbacks()
 	idle.PushBack({ 66, 6, 17, 30 });
 	idle.PushBack({ 115, 6, 19, 30 });
 	idle.PushBack({ 163, 7, 20, 29 });
-	idle.speed = 0.02f;
+	idle.speed = 0.065f;
 
 	running.PushBack({ 67, 45, 20, 28 });
 	running.PushBack({ 116, 46, 20, 27 });
@@ -109,5 +109,5 @@ void j1Player::Pushbacks()
 	running.PushBack({ 217, 45, 23, 28 });
 	running.PushBack({ 266, 46, 20, 27 });
 	running.PushBack({ 316, 48, 20, 25 });
-	running.speed = 0.03f;
+	running.speed = 0.08f;
 }
