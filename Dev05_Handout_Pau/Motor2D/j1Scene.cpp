@@ -31,7 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("SecondLevel.tmx");
+	App->map->Load("FirstLevel.tmx");
 	App->render->camera.y = -400;
 
 	return true;
@@ -70,7 +70,7 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 	App->player->Draw();
-
+	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
 
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d MouseCoordinates:%d,%d",
 					App->map->data.width, App->map->data.height,

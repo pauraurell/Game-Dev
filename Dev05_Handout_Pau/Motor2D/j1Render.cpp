@@ -3,6 +3,8 @@
 #include "j1App.h"
 #include "j1Window.h"
 #include "j1Render.h"
+#include "j1Player.h"
+#include "j1Map.h"
 
 #define VSYNC true
 
@@ -244,4 +246,13 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 	}
 
 	return ret;
+}
+
+void j1Render::cameraFollowingPlayer(int x, int y)
+{
+	camera.x = (-x * 2) + App->win->width / 2;
+	//if (camera.x < 0)camera.x = 0;
+	camera.y = (-y * 2) + App->win->height / 2;
+	//if (camera.y + App->win->height > App->map->data.height*App->map->data.tile_height) camera.y = App->map->data.height*App->map->data.tile_height - App->win->height;
+
 }

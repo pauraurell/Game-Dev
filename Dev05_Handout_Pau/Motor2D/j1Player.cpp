@@ -54,8 +54,18 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
 		current_animation = &running;
+		position.y--;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		current_animation = &running;
+		position.x++;
+	}
+		
 	else
 		current_animation = &idle;
 	return true;
