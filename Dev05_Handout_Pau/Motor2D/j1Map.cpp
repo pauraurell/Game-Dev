@@ -40,22 +40,25 @@ void j1Map::Draw()
 		MapLayer* l = item_layer->data;
 		item_layer = item_layer->next;
 
-		for (int i = 0; i < l->width; i++)
+		if (l->draw == true)
 		{
-			for (int j = 0; j < l->height; j++)
+			for (int i = 0; i < l->width; i++)
 			{
-				tile_id = l->gid[l->Get(i, j)];
-
-				if (tile_id != 0)
+				for (int j = 0; j < l->height; j++)
 				{
-					SDL_Texture* texture = data.tilesets.start->data->texture;
-					iPoint position = MapToWorld(i, j);
-					SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
+					tile_id = l->gid[l->Get(i, j)];
 
-					App->render->Blit(texture, position.x, position.y, sect, l->speed);
+					if (tile_id != 0)
+					{
+						SDL_Texture* texture = data.tilesets.start->data->texture;
+						iPoint position = MapToWorld(i, j);
+						SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
+
+						App->render->Blit(texture, position.x, position.y, sect, l->speed);
+
+					}
 
 				}
-
 			}
 		}
 	}
@@ -216,7 +219,7 @@ bool j1Map::Load(const char* file_name)
 			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
 			LOG("name: %s", l->name.GetString());
-			LOG("tile width: %d tile height: %d", l->width, l->height);
+			LOG("tile width: %d tile height: %d layer speed: %f layer draw: %i collisions: %i", l->width, l->height, l->speed, l->draw, l->collision);
 			item_layer = item_layer->next;
 		}
 	}
@@ -356,11 +359,18 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
 	bool ret = true;
+	pugi::xml_node property;
+	property = node.child("properties").child("property");
 
 	layer->name.create(node.attribute("name").as_string());
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
 	layer->speed = node.child("properties").child("property").attribute("value").as_float();
+	layer->collision = property.attribute("value").as_bool();
+	property = property.next_sibling("property");
+	layer->draw = property.attribute("value").as_bool();
+	property = property.next_sibling("property");
+	layer->speed = property.attribute("value").as_float();
 
 	layer->gid = new uint[layer->width * layer->height];
 	memset(layer->gid, 0, layer->width * layer->height);

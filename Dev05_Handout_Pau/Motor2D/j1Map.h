@@ -15,6 +15,8 @@ struct MapLayer
 	uint height;
 	uint* gid;
 	float speed;
+	bool draw;
+	bool collision;
 	inline uint Get(int x, int y) const
 	{
 		return x + y * width;
