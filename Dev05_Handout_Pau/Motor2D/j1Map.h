@@ -96,6 +96,9 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 
+	void drawColliders();
+	bool colliders = false;
+
 private:
 
 	bool LoadMap();

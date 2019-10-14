@@ -39,8 +39,32 @@ void j1Map::Draw()
 	{
 		MapLayer* l = item_layer->data;
 		item_layer = item_layer->next;
+		
+		if (colliders == false)
+		{
+			if (l->draw == true)
+			{
+				for (int i = 0; i < l->width; i++)
+				{
+					for (int j = 0; j < l->height; j++)
+					{
+						tile_id = l->gid[l->Get(i, j)];
 
-		if (l->draw == true)
+						if (tile_id != 0)
+						{
+							SDL_Texture* texture = data.tilesets.start->data->texture;
+							iPoint position = MapToWorld(i, j);
+							SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
+
+							App->render->Blit(texture, position.x, position.y, sect, l->speed);
+
+						}
+
+					}
+				}
+			}
+		}
+		else
 		{
 			for (int i = 0; i < l->width; i++)
 			{
@@ -387,4 +411,15 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 
 	return ret;
+}
+
+void j1Map::drawColliders() {
+	switch (colliders) {
+	case true:
+		colliders = false;
+		break;
+	case false:
+		colliders = true;
+		break;
+	}
 }

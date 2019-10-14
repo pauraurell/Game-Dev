@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("FirstLevel.tmx");
-	App->render->camera.y = -700;
+	App->render->camera.y = -400;
 
 	return true;
 }
@@ -63,6 +63,9 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		App->render->camera.x += 2;
+
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		App->map->drawColliders();
 
 
 	App->map->Draw();
