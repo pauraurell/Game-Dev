@@ -122,29 +122,26 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::Pushbacks()
 {
-	idle.PushBack({ 14, 7, 19, 29 });
-	idle.PushBack({ 66, 6, 17, 30 });
-	idle.PushBack({ 115, 6, 19, 30 });
-	idle.PushBack({ 163, 7, 20, 29 });
-	idle.speed = 0.065f;
+	idle.PushBack({ 14, 7, 19, 29 }, 0.065f, 1, 1, 1, 1);
+	idle.PushBack({ 66, 6, 17, 30 }, 0.065f, 1, 1, 1, 1);
+	idle.PushBack({ 115, 6, 19, 30 }, 0.065f, 1, 1, 1, 1);
+	idle.PushBack({ 163, 7, 20, 29 }, 0.065f, 1, 1, 1, 1);
 
-	running.PushBack({ 67, 45, 20, 28 });
-	running.PushBack({ 116, 46, 20, 27 });
-	running.PushBack({ 166, 48, 20, 25 });
-	running.PushBack({ 217, 45, 23, 28 });
-	running.PushBack({ 266, 46, 20, 27 });
-	running.PushBack({ 316, 48, 20, 25 });
-	running.speed = 0.08f;
+	running.PushBack({ 67, 45, 20, 28 }, 0.08f, 1, 1, 1, 1);
+	running.PushBack({ 116, 46, 20, 27 }, 0.08f, 1, 1, 1, 1);
+	running.PushBack({ 166, 48, 20, 25 }, 0.08f, 1, 1, 1, 1);
+	running.PushBack({ 217, 45, 23, 28 }, 0.08f, 1, 1, 1, 1);
+	running.PushBack({ 266, 46, 20, 27 }, 0.08f, 1, 1, 1, 1);
+	running.PushBack({ 316, 48, 20, 25 }, 0.08f, 1, 1, 1, 1);
 
-	jump.PushBack({ 15, 86, 20, 24 });
-	jump.PushBack({ 65, 88, 20, 22 });
-	jump.PushBack({ 117, 81, 19, 27 });
-	jump.PushBack({ 164, 79, 21, 23 });
-	jump.PushBack({ 218, 46, 15, 21 });
-	jump.PushBack({ 264, 84, 24, 17 });
-	jump.PushBack({ 320, 81, 19, 21 });
-	jump.PushBack({ 11, 124, 26, 17 });
-	jump.PushBack({ 68, 112, 17, 31 });
-	jump.PushBack({ 118, 113, 17, 30 });
-	jump.speed = 0.08f;
+	jump.PushBack({ 15, 86, 20, 24 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 65, 88, 20, 22 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 117, 81, 19, 27 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 164, 79, 21, 23 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 218, 46, 15, 21 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 264, 84, 24, 17 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 320, 81, 19, 21 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 11, 124, 26, 17 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 68, 112, 17, 31 }, 0.08f, 1, 1, 1, 1);
+	jump.PushBack({ 118, 113, 17, 30 }, 0.08f, 1, 1, 1, 1);
 }
