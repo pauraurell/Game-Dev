@@ -31,7 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("FirstLevel.tmx");
+	App->map->Load("SecondLevel.tmx");
 	App->render->camera.y = -400;
 
 	return true;
