@@ -32,7 +32,6 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("FirstLevel.tmx");
-	App->render->camera.y = -400;
 
 	return true;
 }

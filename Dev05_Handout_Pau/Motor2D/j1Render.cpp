@@ -7,6 +7,8 @@
 #include "j1Map.h"
 
 #define VSYNC true
+#define SCALE 2
+
 
 j1Render::j1Render() : j1Module()
 {
@@ -128,7 +130,7 @@ void j1Render::ResetViewPort()
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speedX, float speedY, double angle, int pivot_x, int pivot_y) const
 {
 	bool ret = true;
-	uint scale = App->win->GetScale()*2;
+	uint scale = App->win->GetScale()*SCALE;
 
 	SDL_Rect rect;
 	rect.x = (int)(camera.x * speedX) + x * scale;
@@ -250,9 +252,18 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 void j1Render::cameraFollowingPlayer(int x, int y)
 {
-	camera.x = (-x * 2) + App->win->width / 2;
-	//if (camera.x < 0)camera.x = 0;
-	camera.y = (-y * 2) + App->win->height / 2;
-	//if (camera.y + App->win->height > App->map->data.height*App->map->data.tile_height) camera.y = App->map->data.height*App->map->data.tile_height - App->win->height;
+	//camera follows player
+	camera.x = (-x * SCALE) + App->win->width / 2;
+	camera.y = (-y * SCALE) + App->win->height / 2;
 
+	//camera limits
+	if (camera.x > 0)
+	{
+		camera.x = 0;
+	}
+	
+	if (camera.y + App->win->height > App->map->data.height*App->map->data.tile_height)
+	{
+		camera.y = App->map->data.height*App->map->data.tile_height - App->win->height;
+	}
 }

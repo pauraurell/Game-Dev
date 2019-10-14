@@ -56,7 +56,7 @@ bool j1Player::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		current_animation = &running;
+		current_animation = &jump;
 		position.y--;
 	}
 
@@ -65,9 +65,24 @@ bool j1Player::Update(float dt)
 		current_animation = &running;
 		position.x++;
 	}
-		
-	else
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
 		current_animation = &idle;
+		position.y++;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		current_animation = &idle;
+		position.x--;
+	}
+		
+	/*else 
+	{
+		current_animation = &idle;
+	}*/
+		
 	return true;
 }
 
@@ -120,4 +135,16 @@ void j1Player::Pushbacks()
 	running.PushBack({ 266, 46, 20, 27 });
 	running.PushBack({ 316, 48, 20, 25 });
 	running.speed = 0.08f;
+
+	jump.PushBack({ 15, 86, 20, 24 });
+	jump.PushBack({ 65, 88, 20, 22 });
+	jump.PushBack({ 117, 81, 19, 27 });
+	jump.PushBack({ 164, 79, 21, 23 });
+	jump.PushBack({ 218, 46, 15, 21 });
+	jump.PushBack({ 264, 84, 24, 17 });
+	jump.PushBack({ 320, 81, 19, 21 });
+	jump.PushBack({ 11, 124, 26, 17 });
+	jump.PushBack({ 68, 112, 17, 31 });
+	jump.PushBack({ 118, 113, 17, 30 });
+	jump.speed = 0.08f;
 }

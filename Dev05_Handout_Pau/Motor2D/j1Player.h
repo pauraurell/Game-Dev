@@ -37,7 +37,7 @@ public:
 	bool CleanUp();
 
 	iPoint			position;
-	Animation*		current_animation;
+	Animation*		current_animation = nullptr;
 	Animation		idle;
 	Animation		running;
 	Animation		jump;
