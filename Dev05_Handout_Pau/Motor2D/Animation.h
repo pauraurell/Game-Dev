@@ -11,15 +11,21 @@ public:
 	bool loop = true;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
+	int pivotx;
+	int pivoty;
+	int pivotx2[MAX_FRAMES];
+	int pivoty2[MAX_FRAMES];
 
 private:
 	float current_frame;
 	int last_frame = 0;
 	int loops = 0;
+	int speeddelay = 0;
+	bool animend = false;
 
 public:
 
-	void PushBack(const SDL_Rect& rect)
+	void PushBack(const SDL_Rect& rect/*, double delay, int px, int py, int px2, int py2*/)
 	{
 		if (last_frame < MAX_FRAMES)
 			frames[last_frame++] = rect;
