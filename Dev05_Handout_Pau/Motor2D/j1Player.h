@@ -42,7 +42,8 @@ public:
 	Animation		running;
 	Animation		jump;
 	SDL_Texture*	Character_tex;
-	int				speed;
+	int				speed = 0;
+	p2SString		orientation = "right";
 
 	void Pushbacks();
 

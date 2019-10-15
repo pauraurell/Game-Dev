@@ -56,7 +56,7 @@ void j1Map::Draw()
 							iPoint position = MapToWorld(i, j);
 							SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
 
-							App->render->Blit(texture, position.x, position.y, sect, l->speed);
+							App->render->Blit(texture, position.x, position.y, sect, SDL_FLIP_NONE, l->speed);
 
 						}
 
@@ -78,7 +78,7 @@ void j1Map::Draw()
 						iPoint position = MapToWorld(i, j);
 						SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
 
-						App->render->Blit(texture, position.x, position.y, sect, l->speed);
+						App->render->Blit(texture, position.x, position.y, sect, SDL_FLIP_NONE, l->speed);
 
 					}
 

@@ -30,7 +30,7 @@
     <folder>textures/</folder>
     <sprite_sheet source="adventurer-v1.5-Sheet.png"/>
     <initialPosition x="20" y="484"/>
-    <speed value= "1"/>
+    <speed value= "2"/>
   </player>
 
 </config>
