@@ -9,6 +9,8 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Player.h"
+#include "j1FadeToBlack.h"
+
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -65,6 +67,9 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		App->map->drawColliders();
+
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+		App->fade->FadeToBlack(3.5f);
 
 
 	App->map->Draw();
