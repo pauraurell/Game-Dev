@@ -29,6 +29,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	texture_path = config.child("sprite_sheet").attribute("source").as_string();
 	position.x = config.child("initialPosition").attribute("x").as_int();
 	position.y = config.child("initialPosition").attribute("y").as_int();
+	speed = config.child("speed").attribute("value").as_int();
 	node = config;
 
 	return ret;
@@ -38,7 +39,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 bool j1Player::Start()
 {
 	Pushbacks();
-
 
 	current_animation = &idle;
 	
@@ -57,31 +57,31 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		current_animation = &jump;
-		position.y--;
+		position.y = position.y - speed;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		current_animation = &running;
-		position.x++;
+		position.x = position.x + speed;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		current_animation = &idle;
-		position.y++;
+		position.y = position.y + speed;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		current_animation = &idle;
-		position.x--;
+		position.x = position.x - speed;
 	}
 		
-	/*else 
+	else 
 	{
 		current_animation = &idle;
-	}*/
+	}
 		
 	return true;
 }

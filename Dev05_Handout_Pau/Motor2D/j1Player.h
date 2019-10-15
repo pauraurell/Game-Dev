@@ -42,6 +42,7 @@ public:
 	Animation		running;
 	Animation		jump;
 	SDL_Texture*	Character_tex;
+	int				speed;
 
 	void Pushbacks();
 
