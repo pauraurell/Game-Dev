@@ -7,7 +7,6 @@
 #include "j1Map.h"
 
 #define VSYNC true
-#define SCALE 2
 
 
 j1Render::j1Render() : j1Module()

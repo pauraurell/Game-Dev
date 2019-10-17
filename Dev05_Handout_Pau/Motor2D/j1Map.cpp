@@ -225,7 +225,7 @@ bool j1Map::Load(const char* file_name)
 	for (object = map_file.child("map").child("objectgroup"); object && ret; object = object.next_sibling("objectgroup"))
 	{
 		object_name = object.attribute("name").as_string();
-		if (object_name == "Collision")
+		if (object_name == "Colliders")
 		{
 			LoadColliders(object);
 		}
@@ -447,17 +447,13 @@ bool j1Map::LoadColliders(pugi::xml_node& node)
 	p2SString type;
 	for (object = node.child("object"); object; object = object.next_sibling("object"))
 	{
-		type = object.attribute("type").as_string();
-		if (type == "floor")
-		{
-			collider_type = COLLIDER_WALL;
-		}
+		collider_type = COLLIDER_WALL;
 
 		SDL_Rect shape;
-		shape.x = object.attribute("x").as_int();
-		shape.y = object.attribute("y").as_int();
-		shape.w = object.attribute("width").as_int();
-		shape.h = object.attribute("height").as_int();
+		shape.x = object.attribute("x").as_int() * SCALE;
+		shape.y = object.attribute("y").as_int() * SCALE;
+		shape.w = object.attribute("width").as_int() * SCALE;
+		shape.h = object.attribute("height").as_int() * SCALE;
 
 		App->col->AddCollider(shape, collider_type);
 	}

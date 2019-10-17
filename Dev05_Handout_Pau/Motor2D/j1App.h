@@ -90,6 +90,8 @@ public:
 	j1FadeToBlack*		fade;
 	j1Collision*		col;
 
+	#define SCALE 2
+
 private:
 
 	p2List<j1Module*>	modules;
