@@ -28,8 +28,8 @@ struct Collider
 
 	void SetPos(int x, int y)
 	{
-		rect.x = x;
-		rect.y = y;
+		rect.x = x * SCALE;
+		rect.y = y * SCALE;
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;

@@ -8,6 +8,7 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+struct Collider;
 
 class j1Player : public j1Module
 {
@@ -27,6 +28,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+
 	// Called each loop iteration
 	void Draw();
 
@@ -35,6 +37,7 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+	void OnCollision(Collider* c1, Collider* c2);
 
 	iPoint			position;
 	Animation*		current_animation = nullptr;
@@ -44,6 +47,9 @@ public:
 	SDL_Texture*	Character_tex;
 	int				speed = 0;
 	p2SString		orientation = "right";
+
+	Collider* colPlayer;
+
 
 	void Pushbacks();
 

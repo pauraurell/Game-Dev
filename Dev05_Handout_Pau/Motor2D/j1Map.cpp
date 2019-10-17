@@ -450,10 +450,10 @@ bool j1Map::LoadColliders(pugi::xml_node& node)
 		collider_type = COLLIDER_WALL;
 
 		SDL_Rect shape;
-		shape.x = object.attribute("x").as_int() * SCALE;
-		shape.y = object.attribute("y").as_int() * SCALE;
-		shape.w = object.attribute("width").as_int() * SCALE;
-		shape.h = object.attribute("height").as_int() * SCALE;
+		shape.x = object.attribute("x").as_int();
+		shape.y = object.attribute("y").as_int();
+		shape.w = object.attribute("width").as_int();
+		shape.h = object.attribute("height").as_int();
 
 		App->col->AddCollider(shape, collider_type);
 	}

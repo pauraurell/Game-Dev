@@ -8,6 +8,7 @@
 #include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Window.h"
+#include "j1Collision.h"
 #include "SDL_image/include/SDL_image.h"
 
 
@@ -41,7 +42,8 @@ bool j1Player::Start()
 	Pushbacks();
 
 	current_animation = &idle;
-	
+	colPlayer = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h }, COLLIDER_PLAYER, this);
+
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -85,11 +87,14 @@ bool j1Player::Update(float dt)
 		current_animation = &idle;
 	}
 		
+	colPlayer->SetPos(position.x , position.y);
+
 	return true;
 }
 
 bool j1Player::PostUpdate()
 {
+
 	return true;
 }
 
@@ -155,4 +160,13 @@ void j1Player::Pushbacks()
 	jump.PushBack({ 11, 124, 26, 17 }, 0.16f, 1, 1, 1, 1);
 	jump.PushBack({ 68, 112, 17, 31 }, 0.16f, 1, 1, 1, 1);
 	jump.PushBack({ 118, 113, 17, 30 }, 0.16f, 1, 1, 1, 1);
+}
+
+void j1Player::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_PLAYER)
+	{
+		//what does the collision here
+	}
+
 }

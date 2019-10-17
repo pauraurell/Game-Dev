@@ -129,6 +129,10 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* 
 	{
 		if (colliders[i] == nullptr)
 		{
+			rect.x = rect.x * SCALE;
+			rect.y = rect.y * SCALE;
+			rect.w = rect.w * SCALE;
+			rect.h = rect.h * SCALE;
 			ret = colliders[i] = new Collider(rect, type, callback);
 			break;
 		}
