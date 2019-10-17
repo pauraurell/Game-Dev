@@ -4,6 +4,9 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Collision.h"
+#include "j1Player.h"
+#include "j1Window.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -20,6 +23,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
+	
 
 	folder.create(config.child("folder").child_value());
 
@@ -30,7 +34,6 @@ void j1Map::Draw()
 {
 	if (map_loaded == false)
 		return;
-
 
 	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	uint tile_id;
@@ -215,6 +218,17 @@ bool j1Map::Load(const char* file_name)
 		}
 
 		data.layers.add(set1);
+	}
+
+	pugi::xml_node object;
+	p2SString object_name;
+	for (object = map_file.child("map").child("objectgroup"); object && ret; object = object.next_sibling("objectgroup"))
+	{
+		object_name = object.attribute("name").as_string();
+		if (object_name == "Collision")
+		{
+			LoadColliders(object);
+		}
 	}
 
 
@@ -422,4 +436,31 @@ void j1Map::drawColliders() {
 		colliders = true;
 		break;
 	}
+}
+
+bool j1Map::LoadColliders(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	pugi::xml_node object;
+	COLLIDER_TYPE collider_type;
+	p2SString type;
+	for (object = node.child("object"); object; object = object.next_sibling("object"))
+	{
+		type = object.attribute("type").as_string();
+		if (type == "floor")
+		{
+			collider_type = COLLIDER_WALL;
+		}
+
+		SDL_Rect shape;
+		shape.x = object.attribute("x").as_int();
+		shape.y = object.attribute("y").as_int();
+		shape.w = object.attribute("width").as_int();
+		shape.h = object.attribute("height").as_int();
+
+		App->col->AddCollider(shape, collider_type);
+	}
+
+	return ret;
 }
