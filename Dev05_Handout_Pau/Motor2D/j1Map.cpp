@@ -59,7 +59,6 @@ void j1Map::Draw()
 							App->render->Blit(texture, position.x, position.y, sect, SDL_FLIP_NONE, l->speed);
 
 						}
-
 					}
 				}
 			}

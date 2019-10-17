@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="128" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="29" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="128" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="5">
  <tileset firstgid="1" name="Tilesets" tilewidth="16" tileheight="16" tilecount="1664" columns="32">
   <image source="Tilesets.png" width="512" height="840"/>
   <terraintypes>
@@ -30807,7 +30807,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="28" name="Metadata" width="128" height="40">
+ <layer id="28" name="Metadata" width="128" height="40" visible="0">
   <properties>
    <property name="collision" type="bool" value="true"/>
    <property name="draw" type="bool" value="false"/>
@@ -35936,4 +35936,8 @@
    <tile/>
   </data>
  </layer>
+ <objectgroup id="29" name="Capa de Objetos 1">
+  <object id="3" x="584.75" y="178.25" width="46.75" height="20"/>
+  <object id="4" x="1" y="512" width="163.667" height="26"/>
+ </objectgroup>
 </map>
