@@ -44,6 +44,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	void GetPlayerState();
+	void GetPlayerPosition();
 
 	// Called before quitting
 	bool CleanUp();
@@ -55,8 +56,9 @@ public:
 	Animation		running;
 	Animation		jump;
 	SDL_Texture*	Character_tex;
-	int				speed;
+	int				maxSpeed;
 	int				gravity;
+	fPoint		    vel;
 	p2SString		orientation = "right";
 
 	Collider* colPlayer;
@@ -75,4 +77,4 @@ private:
 
 #endif // __j1MAP_H__
 
-void PlayerInput();
+

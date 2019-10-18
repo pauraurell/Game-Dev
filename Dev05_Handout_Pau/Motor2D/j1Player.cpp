@@ -11,6 +11,7 @@
 #include "j1Collision.h"
 #include "SDL_image/include/SDL_image.h"
 
+#define G 0.4
 
 j1Player::j1Player() : j1Module()
 {
@@ -31,7 +32,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	position.x = config.child("initialPosition").attribute("x").as_int();
 	position.y = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	speed = config.child("speed").attribute("value").as_int();
+	maxSpeed = config.child("speed").attribute("value").as_int();
 	gravity = config.child("gravity").attribute("value").as_int();
 	node = config;
 
@@ -42,6 +43,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 bool j1Player::Start()
 {
 	Pushbacks();
+	vel.x = 0;
+	vel.y = 0;
 
 	current_animation = &idle;
 	colPlayer = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h }, COLLIDER_PLAYER, this);
@@ -53,6 +56,7 @@ bool j1Player::Start()
 // Called each loop iteration
 bool j1Player::PreUpdate()
 {
+	colPlayer->SetPos(position.x, position.y);
 	return true;
 }
 
@@ -62,37 +66,56 @@ bool j1Player::Update(float dt)
 	
 	if (state == PLAYER_JUMP)
 	{
-		current_animation = &jump;
+		while (vel.y > -6)
+		{
+			current_animation = &jump;
+			vel.y -= 0.7;
+
+		}
 	}
 
 	if (state == PLAYER_RUN_LEFT)
 	{
 		orientation = "left";
-		position.x -= speed;
+		vel.x -= 0.5;
 		current_animation = &running;
 	}
 
 	if (state == PLAYER_RUN_RIGHT)
 	{
 		orientation = "right";
-		position.x += speed;
+		vel.x += 0.5;
 		current_animation = &running;
 	}
 
 	if (state == PLAYER_IDLE)
 	{
-		current_animation = &idle;
+		//Slowing down velocity
+		if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
+		if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
+
+		if(vel.y == 0)
+			current_animation = &idle;
 	}
 
-	colPlayer->SetPos(position.x , position.y);
-	position.y += gravity;
+	//Controlling the maximum speed that the player can go
+	if (vel.x > maxSpeed) { vel.x = maxSpeed; }
+	if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
 
+
+
+	vel.y += G;
+
+
+	GetPlayerPosition();
 	return true;
+
+
 }
 
 bool j1Player::PostUpdate()
 {
-
+	colPlayer->SetPos(position.x, position.y);
 	return true;
 }
 
@@ -135,7 +158,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::GetPlayerState()
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		state = PLAYER_JUMP;
 	}
@@ -170,16 +193,16 @@ void j1Player::Pushbacks()
 	running.PushBack({ 266, 46, 20, 27 }, 0.16f, 1, 1, 1, 1);
 	running.PushBack({ 316, 48, 20, 25 }, 0.16f, 1, 1, 1, 1);
 
-	jump.PushBack({ 15, 86, 20, 24 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 65, 88, 20, 22 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 117, 81, 19, 27 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 164, 79, 21, 23 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 218, 46, 15, 21 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 264, 84, 24, 17 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 320, 81, 19, 21 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 11, 124, 26, 17 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 68, 112, 17, 31 }, 0.16f, 1, 1, 1, 1);
-	jump.PushBack({ 118, 113, 17, 30 }, 0.16f, 1, 1, 1, 1);
+	jump.PushBack({ 15, 86, 20, 24 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 65, 88, 20, 22 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 117, 81, 19, 27 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 164, 79, 21, 23 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 218, 46, 15, 21 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 264, 84, 24, 17 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 320, 81, 19, 21 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 11, 124, 26, 17 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 68, 112, 17, 31 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 118, 113, 17, 30 }, 0.25f, 1, 1, 1, 1);
 }
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
@@ -187,8 +210,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_PLAYER)
 	{
 		//*provisional*
-		position.y -= gravity;
+		//Normal
+			vel.y =0 ;
+		
 		//what does the collision here
 	}
 }
+
+void j1Player::GetPlayerPosition()
+{
+	position.x = position.x + vel.x;
+	position.y = position.y + vel.y;
+}
+
 
