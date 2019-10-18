@@ -30,7 +30,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	texture_path = config.child("sprite_sheet").attribute("source").as_string();
 	position.x = config.child("initialPosition").attribute("x").as_int();
 	position.y = config.child("initialPosition").attribute("y").as_int();
+	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	speed = config.child("speed").attribute("value").as_int();
+	gravity = config.child("gravity").attribute("value").as_int();
 	node = config;
 
 	return ret;
@@ -83,6 +85,7 @@ bool j1Player::Update(float dt)
 	}
 
 	colPlayer->SetPos(position.x , position.y);
+	position.y += gravity;
 
 	return true;
 }
@@ -183,6 +186,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_PLAYER)
 	{
+		//*provisional*
+		position.y -= gravity;
 		//what does the collision here
 	}
 }

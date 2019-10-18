@@ -55,7 +55,8 @@ public:
 	Animation		running;
 	Animation		jump;
 	SDL_Texture*	Character_tex;
-	int				speed = 0;
+	int				speed;
+	int				gravity;
 	p2SString		orientation = "right";
 
 	Collider* colPlayer;
