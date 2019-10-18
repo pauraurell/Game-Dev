@@ -56,37 +56,32 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	GetPlayerState();
+	
+	if (state == PLAYER_JUMP)
 	{
 		current_animation = &jump;
-		position.y = position.y - speed;
 	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (state == PLAYER_RUN_LEFT)
 	{
-		current_animation = &running;
-		orientation = "right";
-		position.x = position.x + speed;
-	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		current_animation = &idle;
-		position.y = position.y + speed;
-	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		current_animation = &running;
 		orientation = "left";
-		position.x = position.x - speed;
+		position.x -= speed;
+		current_animation = &running;
 	}
-		
-	else 
+
+	if (state == PLAYER_RUN_RIGHT)
+	{
+		orientation = "right";
+		position.x += speed;
+		current_animation = &running;
+	}
+
+	if (state == PLAYER_IDLE)
 	{
 		current_animation = &idle;
 	}
-		
+
 	colPlayer->SetPos(position.x , position.y);
 
 	return true;
@@ -135,6 +130,28 @@ bool j1Player::Save(pugi::xml_node& data) const
 	return true;
 }
 
+void j1Player::GetPlayerState()
+{
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		state = PLAYER_JUMP;
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		state = PLAYER_RUN_RIGHT;
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		state = PLAYER_RUN_LEFT;
+	}
+
+	else
+	{
+		state = PLAYER_IDLE;
+	}
+}
 
 void j1Player::Pushbacks()
 {
@@ -168,5 +185,5 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		//what does the collision here
 	}
-
 }
+

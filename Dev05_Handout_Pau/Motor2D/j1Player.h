@@ -10,6 +10,14 @@
 struct SDL_Texture;
 struct Collider;
 
+enum playerStates
+{
+	PLAYER_IDLE,
+	PLAYER_RUN_LEFT,
+	PLAYER_RUN_RIGHT,
+	PLAYER_JUMP,
+};
+
 class j1Player : public j1Module
 {
 public:
@@ -35,6 +43,8 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
+	void GetPlayerState();
+
 	// Called before quitting
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
@@ -50,8 +60,10 @@ public:
 
 	Collider* colPlayer;
 
-
 	void Pushbacks();
+
+	playerStates state;
+
 
 private:
 
@@ -61,3 +73,5 @@ private:
 };
 
 #endif // __j1MAP_H__
+
+void PlayerInput();
