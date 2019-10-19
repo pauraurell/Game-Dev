@@ -102,15 +102,8 @@ bool j1Player::Update(float dt)
 	if (vel.x > maxSpeed) { vel.x = maxSpeed; }
 	if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
 
-
-
-	vel.y += G;
-
-
 	GetPlayerPosition();
 	return true;
-
-
 }
 
 bool j1Player::PostUpdate()
@@ -158,7 +151,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::GetPlayerState()
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && vel.y == 0)
 	{
 		state = PLAYER_JUMP;
 	}
@@ -211,14 +204,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		//*provisional*
 		//Normal
-			vel.y =0 ;
-		
+		if(position.y - c1->rect.h < c2->rect.y / SCALE) {vel.y =0 ;} //if the collider is under the player
 		//what does the collision here
 	}
 }
 
 void j1Player::GetPlayerPosition()
 {
+	vel.y += G;
 	position.x = position.x + vel.x;
 	position.y = position.y + vel.y;
 }
