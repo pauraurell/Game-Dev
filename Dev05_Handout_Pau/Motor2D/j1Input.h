@@ -9,6 +9,29 @@
 
 struct SDL_Rect;
 
+enum player_states
+{
+	ST_IDLE,
+	ST_WALK,
+	ST_JUMP,
+	ST_DASH,
+	ST_FALL,
+};
+
+enum player_inputs
+{
+	IN_LEFT_LEFT,
+	IN_LEFT_UP,
+	IN_LEFT,
+	IN_RIGHT_RIGHT,
+	IN_RIGHT_UP,
+	IN_RIGHT,
+	IN_LEFT_RIGHT,
+	IN_UP,
+	IN_UP_RIGHT_RIGHT,
+	IN_UP_LEFT_LEFT,
+};
+
 enum j1EventWindow
 {
 	WE_QUIT = 0,
