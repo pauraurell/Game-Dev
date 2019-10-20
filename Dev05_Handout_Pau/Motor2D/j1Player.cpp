@@ -11,7 +11,7 @@
 #include "j1Collision.h"
 #include "SDL_image/include/SDL_image.h"
 
-#define G 0.4
+#define G 0.25 //Constant acceleration in y (gravity)
 
 j1Player::j1Player() : j1Module()
 {
@@ -66,11 +66,10 @@ bool j1Player::Update(float dt)
 	
 	if (state == PLAYER_JUMP)
 	{
-		while (vel.y > -6)
+		while (vel.y > -5)
 		{
 			current_animation = &jump;
-			vel.y -= 0.7;
-
+			vel.y -= 0.6;
 		}
 	}
 
@@ -94,8 +93,11 @@ bool j1Player::Update(float dt)
 		if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
 		if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
 
-		if(vel.y == 0)
+		if (vel.y == 0 && vel.x == 0)
+		{
 			current_animation = &idle;
+		}
+			
 	}
 
 	//Controlling the maximum speed that the player can go
@@ -203,9 +205,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_PLAYER)
 	{
 		//*provisional*
-		//Normal
-		if(position.y - c1->rect.h < c2->rect.y / SCALE) {vel.y =0 ;} //if the collider is under the player
-		//what does the collision here
+
+		if((position.y - c1->rect.h) < (c2->rect.y / SCALE)) {vel.y =0 ;} //if the collider is under the player
 	}
 }
 
