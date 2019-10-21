@@ -140,14 +140,20 @@ bool j1Player::CleanUp()
 // Load Game State
 bool j1Player::Load(pugi::xml_node& data)
 {
-
+	LOG("Loading player state");
+	position.x = data.child("position").attribute("posX").as_int();
+	position.y = data.child("position").attribute("posY").as_int();
 	return true;
 }
 
 // Save Game State
 bool j1Player::Save(pugi::xml_node& data) const
 {
+	LOG("Saving player state");
+	pugi::xml_node playerNode = data.append_child("position");
 
+	playerNode.append_attribute("posX") = position.x;
+	playerNode.append_attribute("posY") = position.y;
 	return true;
 }
 
