@@ -45,6 +45,101 @@ bool j1Input::Start()
 	return true;
 }
 
+bool j1Input::external_input()
+{
+	SDL_Event event;
+
+	while (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_KEYUP && event.key.repeat == 0)
+		{
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+				return false;
+				break;
+			case SDLK_SPACE:
+				if (playerinput == true)
+					up = false;
+				break;
+			case SDLK_LEFT:
+				if (playerinput == true)
+					left = false;
+				break;
+			case SDLK_RIGHT:
+				if (playerinput == true)
+					right = false;
+				break;
+			}
+		}
+
+		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+		{
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_z:
+				if (playerinput == true)
+					App->input->inputs.Push(IN_DASH);
+				break;
+			case SDLK_SPACE:
+				if (playerinput == true)
+					up = true;
+				break;
+			case SDLK_LEFT:
+				if (playerinput == true)
+					left = true;
+				break;
+			case SDLK_RIGHT:
+				if (playerinput == true)
+					right = true;
+				break;
+			}
+		}
+
+		if (playerinput == true) {
+			if (left && right)
+				App->input->inputs.Push(IN_LEFT_RIGHT);
+			else
+			{
+				if (left)
+					App->input->inputs.Push(IN_LEFT);
+				if (right)
+					App->input->inputs.Push(IN_RIGHT);
+			}
+
+			if (!left)
+				App->input->inputs.Push(IN_LEFT_UP);
+			if (!right)
+				App->input->inputs.Push(IN_RIGHT_UP);
+
+			if (up)
+				App->input->inputs.Push(IN_UP);
+		}
+	}
+	return true;
+}
+
+void j1Input::internal_input(p2List<player_inputs>& inputs)
+{
+	if (jump_timer > 0)
+	{
+		if (SDL_GetTicks() - jump_timer > JUMP_TIME)
+		{
+			inputs.Push(IN_UP_FINISH);
+			jump_timer = 0;
+		}
+	}
+
+	if (dash_timer > 0)
+	{
+		if (SDL_GetTicks() - dash_timer > DASH_TIME)
+		{
+			inputs.Push(IN_DASH_FINISH);
+			dash_timer = 0;
+		}
+	}
+}
+
 // Called each loop iteration
 bool j1Input::PreUpdate()
 {
@@ -77,6 +172,11 @@ bool j1Input::PreUpdate()
 
 		if(mouse_buttons[i] == KEY_UP)
 			mouse_buttons[i] = KEY_IDLE;
+	}
+
+	if (external_input() == false) { return false; }
+	else {
+		internal_input(inputs);
 	}
 
 	while(SDL_PollEvent(&event) != 0)

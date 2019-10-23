@@ -67,6 +67,39 @@ public:
 	}
 
 	/**
+	* Get last item
+	*/
+	p2List_item<tdata>* GetLast()
+	{
+		p2List_item<tdata>* tmp = start;
+
+		while (tmp != NULL && tmp->next != NULL)
+			tmp = tmp->next;
+
+		return tmp;
+	}
+
+	/**
+	* Push new item
+	*/
+	void Push(const tdata& item)
+	{
+		p2List_item<tdata>*   p_data_item;
+		p_data_item = new p2List_item < tdata >(item);
+
+		p2List_item<tdata>* last = GetLast();
+
+		if (last == NULL)
+		{
+			start = p_data_item;
+		}
+		else
+		{
+			last->next = p_data_item;
+		}
+	}
+
+	/**
 	* Add new item
 	*/
 	p2List_item<tdata>* add(const tdata& item)

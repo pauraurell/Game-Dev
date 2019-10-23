@@ -2,10 +2,13 @@
 #define __j1INPUT_H__
 
 #include "j1Module.h"
+#include "p2List.h"
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
+#define JUMP_TIME 900
+#define DASH_TIME 700
 
 struct SDL_Rect;
 
@@ -28,8 +31,11 @@ enum player_inputs
 	IN_RIGHT,
 	IN_LEFT_RIGHT,
 	IN_UP,
+	IN_UP_FINISH,
 	IN_UP_RIGHT_RIGHT,
 	IN_UP_LEFT_LEFT,
+	IN_DASH,
+	IN_DASH_FINISH,
 };
 
 enum j1EventWindow
@@ -70,6 +76,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool external_input();
+	void internal_input(p2List<player_inputs>& inputs);
+
 	// Gather relevant win events
 	bool GetWindowEvent(j1EventWindow ev);
 
@@ -99,6 +108,15 @@ private:
 	int			mouse_motion_y;
 	int			mouse_x;
 	int			mouse_y;
+
+public:
+	p2List<player_inputs> inputs;
+	int jump_timer = 0;
+	int dash_timer = 0;
+	bool left = false;
+	bool right = false;
+	bool up = false;
+	bool playerinput = false;
 };
 
 #endif // __j1INPUT_H__
