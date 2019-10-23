@@ -50,7 +50,10 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
+	void Respawn();
+
 	iPoint			position;
+	int SpawnPointX, SpawnPointY;
 	Animation*		current_animation = nullptr;
 	Animation		idle;
 	Animation		running;
@@ -60,6 +63,7 @@ public:
 	int				gravity;
 	fPoint		    vel;
 	p2SString		orientation = "right";
+	bool dead = false;
 
 	Collider* colPlayer;
 

@@ -8,8 +8,10 @@
 #include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Window.h"
+#include "j1FadeToBlack.h"
 #include "j1Collision.h"
 #include "SDL_image/include/SDL_image.h"
+#include "j1Map.h"
 
 #define G 0.25 //Constant acceleration in y (gravity)
 
@@ -29,8 +31,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 
 	folder.create(config.child("folder").child_value());
 	texture_path = config.child("sprite_sheet").attribute("source").as_string();
-	position.x = config.child("initialPosition").attribute("x").as_int();
-	position.y = config.child("initialPosition").attribute("y").as_int();
+	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
+	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	maxSpeed = config.child("speed").attribute("value").as_int();
 	gravity = config.child("gravity").attribute("value").as_int();
@@ -45,6 +47,9 @@ bool j1Player::Start()
 	Pushbacks();
 	vel.x = 0;
 	vel.y = 0;
+
+	position.x = SpawnPointX;
+	position.y = SpawnPointY;
 
 	current_animation = &idle;
 	colPlayer = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h }, COLLIDER_PLAYER, this);
@@ -105,6 +110,10 @@ bool j1Player::Update(float dt)
 	if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
 
 	GetPlayerPosition();
+	if (dead == true)
+	{
+		Respawn();
+	}
 	return true;
 }
 
@@ -221,6 +230,18 @@ void j1Player::GetPlayerPosition()
 	vel.y += G;
 	position.x = position.x + vel.x;
 	position.y = position.y + vel.y;
+
+	if (position.y > 800) { dead = true; }
+}
+
+void j1Player::Respawn()
+{
+	App->fade->FadeToBlack(1.5);
+	position.x = SpawnPointX;
+	position.y = SpawnPointY;
+	vel.y = 0;
+	orientation = "right";
+	dead = false;
 }
 
 
