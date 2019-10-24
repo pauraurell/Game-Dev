@@ -27,6 +27,9 @@ bool j1Scene::Awake()
 	LOG("Loading Scene");
 	bool ret = true;
 
+	//pugi::xml_node map;
+
+
 	return ret;
 }
 
@@ -34,6 +37,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("FirstLevel.tmx");
+
 	return true;
 }
 
@@ -58,9 +62,6 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		App->render->camera.x += 2;
 
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		App->map->drawColliders();
-
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
 		App->fade->FadeToBlack(3.5f);
 
@@ -73,6 +74,22 @@ bool j1Scene::Update(float dt)
 	{
 		App->SaveGame();
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		//StartFirstLevel();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		//StartSecondLevel();
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		RestartCurrentLevel();
+	}
+
 
 
 	App->map->Draw();
@@ -107,4 +124,10 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+void j1Scene::RestartCurrentLevel()
+{
+	App->player->position.x = App->player->SpawnPointX;
+	App->player->position.y = App->player->SpawnPointY;
 }
