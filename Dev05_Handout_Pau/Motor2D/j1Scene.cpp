@@ -99,8 +99,6 @@ bool j1Scene::Update(float dt)
 		RestartCurrentLevel();
 	}
 
-
-
 	App->map->Draw();
 	App->player->Draw();
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
@@ -144,6 +142,7 @@ void j1Scene::RestartCurrentLevel()
 void j1Scene::StartFirstLevel()
 {
 	//App->fade->FadeToBlack(1.5);
+	App->map->CleanUp();
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
@@ -152,6 +151,7 @@ void j1Scene::StartFirstLevel()
 void j1Scene::StartSecondLevel()
 {
 	//App->fade->FadeToBlack(1.5);
+	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
