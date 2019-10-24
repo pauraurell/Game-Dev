@@ -66,27 +66,7 @@ void j1Map::Draw()
 				}
 			}
 		}
-		else
-		{
-			for (int i = 0; i < l->width; i++)
-			{
-				for (int j = 0; j < l->height; j++)
-				{
-					tile_id = l->gid[l->Get(i, j)];
-
-					if (tile_id != 0)
-					{
-						SDL_Texture* texture = data.tilesets.start->data->texture;
-						iPoint position = MapToWorld(i, j);
-						SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
-
-						App->render->Blit(texture, position.x, position.y, sect, SDL_FLIP_NONE, l->speed);
-
-					}
-
-				}
-			}
-		}
+		
 	}
 }
 

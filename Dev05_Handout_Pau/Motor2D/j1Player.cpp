@@ -221,7 +221,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		//*provisional*
 
-		if((position.y - c1->rect.h) < (c2->rect.y / SCALE)) {vel.y =0 ;} //if the collider is under the player
+		if((position.y - c1->rect.h) < (c2->rect.y)) {vel.y =0 ;} //if the collider is under the player
 	}
 }
 
