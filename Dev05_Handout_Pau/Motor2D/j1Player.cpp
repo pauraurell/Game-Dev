@@ -13,8 +13,6 @@
 #include "SDL_image/include/SDL_image.h"
 #include "j1Map.h"
 
-#define G 0.25 //Constant acceleration in y (gravity)
-
 j1Player::j1Player() : j1Module()
 {
 	name.create("player");
@@ -34,7 +32,10 @@ bool j1Player::Awake(pugi::xml_node& config)
 	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
 	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	maxSpeed = config.child("speed").attribute("value").as_int();
+	maxSpeed = config.child("speed").attribute("MaxSpeed").as_int();
+	SpeedX = config.child("speed").attribute("Speedx").as_float();
+	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
 	node = config;
 
 	return ret;
@@ -73,21 +74,21 @@ bool j1Player::Update(float dt)
 		while (vel.y > -5)
 		{
 			current_animation = &jump;
-			vel.y -= 0.6;
+			vel.y -= SpeedY;
 		}
 	}
 
 	if (state == PLAYER_RUN_LEFT)
 	{
 		orientation = "left";
-		vel.x -= 0.5;
+		vel.x -= SpeedX;
 		current_animation = &running;
 	}
 
 	if (state == PLAYER_RUN_RIGHT)
 	{
 		orientation = "right";
-		vel.x += 0.5;
+		vel.x += SpeedX;
 		current_animation = &running;
 	}
 
@@ -238,7 +239,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 void j1Player::GetPlayerPosition()
 {
-	vel.y += G;
+	vel.y += gravity;
 	position.x = position.x + vel.x;
 	position.y = position.y + vel.y;
 

@@ -41,6 +41,8 @@ public:
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool use_camera = true) const;
 
 	void cameraFollowingPlayer(int x, int y);
+	int offSetCameraX;
+	int offSetCameraY;
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);

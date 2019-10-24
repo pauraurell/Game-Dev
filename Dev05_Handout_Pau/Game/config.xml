@@ -8,6 +8,7 @@
 	
   <renderer>
     <vsync value="true"/>
+    <camera offsetx="128" offsety="198"/>
   </renderer>
 
   <window>
@@ -35,8 +36,8 @@
     <folder>textures/</folder>
     <sprite_sheet source="adventurer-v1.5-Sheet.png"/>
     <initialPosition x="20" y="450" orientation="right"/>
-    <speed value= "2"/>
-    <gravity value= "4"/>
+    <speed MaxSpeed= "2" Speedx= "0.5" Speedy= "0.6"/>
+    <gravity value= "0.25"/>
   </player>
 
 </config>

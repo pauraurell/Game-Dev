@@ -30,6 +30,9 @@ bool j1Render::Awake(pugi::xml_node& config)
 	// load flags
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
+	offSetCameraX = config.child("camera").attribute("offsetx").as_int();
+	offSetCameraY = config.child("camera").attribute("offsety").as_int();
+
 	if(config.child("vsync").attribute("value").as_bool(true) == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
@@ -261,14 +264,14 @@ void j1Render::cameraFollowingPlayer(int x, int y)
 		camera.x = 0;
 	}
 
-	if (camera.x < -App->map->data.width*App->map->data.tile_width + 198)
+	if (camera.x < -App->map->data.width*App->map->data.tile_width + offSetCameraX)
 	{
-		camera.x = -App->map->data.width*App->map->data.tile_width + 198;
+		camera.x = -App->map->data.width*App->map->data.tile_width + offSetCameraX;
 	}
 	
-	if (camera.y < -App->map->data.height*App->map->data.tile_height + 128)
+	if (camera.y < -App->map->data.height*App->map->data.tile_height + offSetCameraY)
 	{
-		camera.y = -App->map->data.height*App->map->data.tile_height + 128;
+		camera.y = -App->map->data.height*App->map->data.tile_height + offSetCameraY;
 	}
 
 	if (camera.y > 0) {

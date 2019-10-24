@@ -60,7 +60,9 @@ public:
 	Animation		jump;
 	SDL_Texture*	Character_tex;
 	int				maxSpeed;
-	int				gravity;
+	float			SpeedX;
+	float			SpeedY;
+	float			gravity;
 	fPoint		    vel;
 	p2SString		orientation = "right";
 	bool dead = false;
