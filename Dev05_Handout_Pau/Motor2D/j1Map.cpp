@@ -126,6 +126,8 @@ bool j1Map::CleanUp()
 	p2List_item<TileSet*>* item;
 	item = data.tilesets.start;
 
+	App->col->MapCleanUp();
+
 	while (item != NULL)
 	{
 		App->tex->UnLoad(item->data->texture);

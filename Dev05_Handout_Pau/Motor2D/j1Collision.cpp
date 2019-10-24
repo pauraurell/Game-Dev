@@ -156,3 +156,24 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 {
 	return (rect.x < r.x + r.w && rect.x + rect.w > r.x && rect.y < r.y + r.h && rect.h + rect.y > r.y);
 }
+
+
+//Deletes map colliders
+
+bool j1Collision::MapCleanUp()
+{
+
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] != nullptr)
+		{
+			if (colliders[i]->type == COLLIDER_WALL || colliders[i]->type == COLLIDER_FINISH)
+			{
+				delete colliders[i];
+				colliders[i] = nullptr;
+			}
+		}
+	}
+
+	return true;
+}
