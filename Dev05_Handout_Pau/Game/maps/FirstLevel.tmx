@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="128" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="128">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="128" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="133">
  <tileset firstgid="1" name="Tilesets" tilewidth="16" tileheight="16" tilecount="1664" columns="32">
   <image source="Tilesets.png" width="512" height="840"/>
   <terraintypes>
@@ -36029,5 +36029,8 @@
   <object id="125" x="645.896" y="467.906" width="35.7083" height="14.4583"/>
   <object id="126" x="649.146" y="481.031" width="30.625" height="11.1667"/>
   <object id="127" x="649.438" y="464.802" width="27.4167" height="4.8333"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="30" name="Finish">
+  <object id="132" x="1416" y="134.826" width="23.25" height="388.424"/>
  </objectgroup>
 </map>

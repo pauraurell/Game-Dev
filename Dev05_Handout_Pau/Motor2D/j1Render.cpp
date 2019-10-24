@@ -271,7 +271,6 @@ void j1Render::cameraFollowingPlayer(int x, int y)
 		camera.y = -App->map->data.height*App->map->data.tile_height + 128;
 	}
 
-
 	if (camera.y > 0) {
 		camera.y = 0;
 	}

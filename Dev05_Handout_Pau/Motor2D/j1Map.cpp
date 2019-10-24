@@ -205,10 +205,11 @@ bool j1Map::Load(const char* file_name)
 	for (object = map_file.child("map").child("objectgroup"); object && ret; object = object.next_sibling("objectgroup"))
 	{
 		object_name = object.attribute("name").as_string();
-		if (object_name == "Colliders")
+		/*if (object_name == "Colliders" || object_name == "Finish")
 		{
 			LoadColliders(object);
-		}
+		}*/
+		LoadColliders(object, object_name);
 	}
 
 
@@ -418,24 +419,44 @@ void j1Map::drawColliders() {
 	}
 }
 
-bool j1Map::LoadColliders(pugi::xml_node& node)
+bool j1Map::LoadColliders(pugi::xml_node& node, p2SString object_name)
 {
 	bool ret = true;
 
 	pugi::xml_node object;
 	COLLIDER_TYPE collider_type;
 	p2SString type;
-	for (object = node.child("object"); object; object = object.next_sibling("object"))
+
+	if (object_name == "Colliders")
 	{
-		collider_type = COLLIDER_WALL;
+		for (object = node.child("object"); object; object = object.next_sibling("object"))
+		{
+			collider_type = COLLIDER_WALL;
 
-		SDL_Rect shape;
-		shape.x = object.attribute("x").as_int();
-		shape.y = object.attribute("y").as_int();
-		shape.w = object.attribute("width").as_int();
-		shape.h = object.attribute("height").as_int();
+			SDL_Rect shape;
+			shape.x = object.attribute("x").as_int();
+			shape.y = object.attribute("y").as_int();
+			shape.w = object.attribute("width").as_int();
+			shape.h = object.attribute("height").as_int();
 
-		App->col->AddCollider(shape, collider_type);
+			App->col->AddCollider(shape, collider_type);
+		}
+	}
+	
+	if (object_name == "Finish")
+	{
+		for (object = node.child("object"); object; object = object.next_sibling("object"))
+		{
+			collider_type = COLLIDER_FINISH;
+
+			SDL_Rect shape;
+			shape.x = object.attribute("x").as_int();
+			shape.y = object.attribute("y").as_int();
+			shape.w = object.attribute("width").as_int();
+			shape.h = object.attribute("height").as_int();
+
+			App->col->AddCollider(shape, collider_type);
+		}
 	}
 
 	return ret;

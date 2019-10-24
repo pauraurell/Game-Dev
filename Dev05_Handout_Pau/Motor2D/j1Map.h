@@ -105,7 +105,7 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-	bool LoadColliders(pugi::xml_node& node);
+	bool LoadColliders(pugi::xml_node& node, p2SString object_name);
 
 public:
 
