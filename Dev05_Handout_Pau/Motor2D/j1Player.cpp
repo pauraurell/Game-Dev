@@ -223,12 +223,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		//*provisional*
 
 		if ((c1->rect.y - c1->rect.h) < (c2->rect.y)) { vel.y = 0;} //if the collider is under the player
+
+
 	}
 
+	
+
+	//Map Change
 	if ((c2->type == COLLIDER_FINISH && c1->type == COLLIDER_PLAYER) || (c2->type == COLLIDER_PLAYER && c1->type == COLLIDER_FINISH))
 	{
-		//*provisional*
-
 		App->scene->StartSecondLevel();
 	}
 }
