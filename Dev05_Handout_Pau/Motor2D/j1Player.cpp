@@ -35,7 +35,6 @@ bool j1Player::Awake(pugi::xml_node& config)
 	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	maxSpeed = config.child("speed").attribute("value").as_int();
-	gravity = config.child("gravity").attribute("value").as_int();
 	node = config;
 
 	return ret;
@@ -110,10 +109,12 @@ bool j1Player::Update(float dt)
 	if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
 
 	GetPlayerPosition();
+
 	if (dead == true)
 	{
 		Respawn();
 	}
+
 	return true;
 }
 
@@ -237,6 +238,7 @@ void j1Player::GetPlayerPosition()
 void j1Player::Respawn()
 {
 	App->fade->FadeToBlack(1.5);
+
 	position.x = SpawnPointX;
 	position.y = SpawnPointY;
 	vel.y = 0;

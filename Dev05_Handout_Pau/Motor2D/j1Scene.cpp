@@ -143,6 +143,7 @@ void j1Scene::RestartCurrentLevel()
 
 void j1Scene::StartFirstLevel()
 {
+	//App->fade->FadeToBlack(1.5);
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
@@ -150,6 +151,7 @@ void j1Scene::StartFirstLevel()
 
 void j1Scene::StartSecondLevel()
 {
+	//App->fade->FadeToBlack(1.5);
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
