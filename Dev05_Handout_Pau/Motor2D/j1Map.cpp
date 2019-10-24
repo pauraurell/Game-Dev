@@ -23,7 +23,6 @@ bool j1Map::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
-	
 
 	folder.create(config.child("folder").child_value());
 
@@ -120,6 +119,8 @@ SDL_Rect TileSet::getTileRect(int id) const
 // Called before quitting
 bool j1Map::CleanUp()
 {
+
+	App->col->CleanUp();
 	LOG("Unloading map");
 
 	// Remove all tilesets
@@ -139,6 +140,8 @@ bool j1Map::CleanUp()
 
 	// Clean up the pugui tree
 	map_file.reset();
+
+
 
 	return true;
 }

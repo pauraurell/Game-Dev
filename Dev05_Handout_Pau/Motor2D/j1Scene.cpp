@@ -22,13 +22,20 @@ j1Scene::~j1Scene()
 {}
 
 // Called before render is available
-bool j1Scene::Awake()
+bool j1Scene::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Scene");
 	bool ret = true;
+	pugi::xml_node map;
 
-	//pugi::xml_node map;
+	LOG("Loading Scene");
 
+	for (map = config.child("map"); map; map = map.next_sibling("map"))
+	{
+		p2SString* level = new p2SString();
+
+		level->create(map.attribute("name").as_string());
+		MapList.add(level->GetString());
+	}
 
 	return ret;
 }
@@ -36,7 +43,9 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("FirstLevel.tmx");
+	CurrentMap = MapList.start->data;
+
+	App->map->Load(CurrentMap.GetString()); //Load the map
 
 	return true;
 }
@@ -77,12 +86,12 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		//StartFirstLevel();
+		StartFirstLevel();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		//StartSecondLevel();
+		StartSecondLevel();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -131,3 +140,18 @@ void j1Scene::RestartCurrentLevel()
 	App->player->position.x = App->player->SpawnPointX;
 	App->player->position.y = App->player->SpawnPointY;
 }
+
+void j1Scene::StartFirstLevel()
+{
+	CurrentMap.create("FirstLevel.tmx");
+	App->map->Load(CurrentMap.GetString());
+	RestartCurrentLevel();
+}
+
+void j1Scene::StartSecondLevel()
+{
+	CurrentMap.create("SecondLevel.tmx");
+	App->map->Load(CurrentMap.GetString());
+	RestartCurrentLevel();
+}
+
