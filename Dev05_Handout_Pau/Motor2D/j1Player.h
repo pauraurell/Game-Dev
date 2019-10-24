@@ -58,6 +58,7 @@ public:
 	Animation		idle;
 	Animation		running;
 	Animation		jump;
+	Animation		ground_dash;
 	SDL_Texture*	Character_tex;
 	int				maxSpeed;
 	float			SpeedX;

@@ -215,6 +215,12 @@ void j1Player::Pushbacks()
 	jump.PushBack({ 11, 124, 26, 17 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 68, 112, 17, 31 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 118, 113, 17, 30 }, 0.25f, 1, 1, 1, 1);
+
+	ground_dash.PushBack({ 155, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
+	ground_dash.PushBack({ 205, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
+	ground_dash.PushBack({ 255, 131, 34, 16 }, 0.25f, 1, 1, 1, 1);
+	ground_dash.PushBack({ 309, 130, 30, 17 }, 0.25f, 1, 1, 1, 1);
+	ground_dash.PushBack({ 15, 167, 22, 17 }, 0.25f, 1, 1, 1, 1);
 }
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)

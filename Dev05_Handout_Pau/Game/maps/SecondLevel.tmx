@@ -61853,8 +61853,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="12"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -62203,7 +62203,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="44"/>
    <tile/>
    <tile/>
    <tile/>
@@ -122816,6 +122816,6 @@
   <object id="341" x="1865.4" y="327.726" width="13.6477" height="5.9205"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="30" name="Finish">
-  <object id="269" x="2983.67" y="306.333" width="13.3333" height="140.667"/>
+  <object id="269" x="2977.85" y="307.606" width="13.3333" height="140.667"/>
  </objectgroup>
 </map>
