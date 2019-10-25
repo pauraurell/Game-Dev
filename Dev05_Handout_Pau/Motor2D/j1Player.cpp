@@ -270,8 +270,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h) > (c2->rect.y))
 		{
-			//position.y = c2->rect.y;
 			vel.y = 0;
+			//position.y += 2;
 		} //if the collider is under the player
 	}
 
