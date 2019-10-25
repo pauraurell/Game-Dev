@@ -36032,6 +36032,6 @@
   <object id="149" x="636" y="-576"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="30" name="Finish">
-  <object id="132" x="1416" y="134.826" width="23.25" height="388.424"/>
+  <object id="132" x="1438.25" y="142.076" width="23.25" height="388.424"/>
  </objectgroup>
 </map>
