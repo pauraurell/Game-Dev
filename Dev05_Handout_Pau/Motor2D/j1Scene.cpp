@@ -86,6 +86,7 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
+		manualFirstLevel = true;
 		StartFirstLevel();
 	}
 
@@ -133,6 +134,31 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
+bool j1Scene::Load(pugi::xml_node& data)
+{
+	LOG("Loading scene state");
+	App->scene->CurrentMap = data.child("map").attribute("currentMap").as_string();
+	if (App->scene->CurrentMap == "SecondLevel.tmx")
+	{
+		App->scene->StartSecondLevel();
+	}
+	else if (App->scene->CurrentMap == "FirstLevel.tmx")
+	{
+		manualFirstLevel = true;
+		App->scene->StartFirstLevel();
+	}
+	return true;
+}
+
+// Save Game State
+bool j1Scene::Save(pugi::xml_node& data) const
+{
+	LOG("Saving scene state");
+	pugi::xml_node sceneNode = data.append_child("map");
+	sceneNode.append_attribute("currentMap") = App->scene->CurrentMap.GetString();
+	return true;
+}
+
 void j1Scene::RestartCurrentLevel()
 {
 	App->player->position.x = App->player->SpawnPointX;
@@ -141,17 +167,42 @@ void j1Scene::RestartCurrentLevel()
 
 void j1Scene::StartFirstLevel()
 {
-	//App->fade->FadeToBlack(1.5);
-	App->map->CleanUp();
-	CurrentMap.create("FirstLevel.tmx");
-	App->map->Load(CurrentMap.GetString());
-	RestartCurrentLevel();
-	scene_change = false;
+	if (manualFirstLevel == true)
+	{
+		App->map->CleanUp();
+		CurrentMap.create("FirstLevel.tmx");
+		App->map->Load(CurrentMap.GetString());
+		RestartCurrentLevel();
+		scene_change = true;
+		manualFirstLevel = false;
+	}
+	
+	else if (manualFirstLevel == false)
+	{
+		if (sceneChangeTimer == false)
+		{
+			scene_change_timer = SDL_GetTicks();
+			App->fade->FadeToBlack(2);
+			sceneChangeTimer = true;
+			App->player->SetPlayerState(PLAYER_IDLE);
+			App->player->input = false;
+		}
+
+		if (SDL_GetTicks() - scene_change_timer > 1040)
+		{
+			App->map->CleanUp();
+			CurrentMap.create("FirstLevel.tmx");
+			App->map->Load(CurrentMap.GetString());
+			RestartCurrentLevel();
+			scene_change = false;
+			sceneChangeTimer = false;
+			App->player->input = true;
+		}
+	}
 }
 
 void j1Scene::StartSecondLevel()
 {
-	//App->fade->FadeToBlack(1.5);
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());

@@ -264,7 +264,10 @@ void j1Player::GetPlayerState()
 	}
 }
 
-
+void j1Player::SetPlayerState(playerStates stateP)
+{
+	state = stateP;
+}
 
 void j1Player::Pushbacks()
 {

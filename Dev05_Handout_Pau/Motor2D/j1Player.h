@@ -45,6 +45,7 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	void GetPlayerState();
+	void SetPlayerState(playerStates state);
 	void GetPlayerPosition();
 
 	// Called before quitting

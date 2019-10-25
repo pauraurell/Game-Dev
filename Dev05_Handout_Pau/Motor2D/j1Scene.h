@@ -36,13 +36,22 @@ public:
 	void StartFirstLevel();
 	void StartSecondLevel();
 
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
 	bool scene_change = false;
 	bool scene_changed = false;
+	bool manualFirstLevel = false;
+
+	Uint32 scene_change_timer;
+	bool sceneChangeTimer = false;
+
+	p2SString CurrentMap;
 
 private:
 
 	p2List<p2SString> MapList;
-	p2SString CurrentMap;
+	//p2SString CurrentMap;
 };
 
 #endif // __j1SCENE_H__
