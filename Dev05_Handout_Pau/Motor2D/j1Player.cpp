@@ -35,6 +35,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	maxSpeed = config.child("speed").attribute("MaxSpeed").as_int();
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	dashSpeed = config.child("speed").attribute("DashSpeed").as_float();
 	gravity = config.child("gravity").attribute("value").as_float();
 	node = config;
 
@@ -104,11 +105,11 @@ bool j1Player::Update(float dt)
 			}
 			if (orientation == "right")
 			{
-				vel.x = 3.5;
+				vel.x = dashSpeed;
 			}
 			else
 			{
-				vel.x = -3.5;
+				vel.x = -dashSpeed;
 			}
 			vel.y = 0;
 			current_animation = &ground_dash;

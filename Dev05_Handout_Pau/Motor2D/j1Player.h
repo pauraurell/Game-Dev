@@ -71,6 +71,7 @@ public:
 	float			SpeedX;
 	float			SpeedY;
 	float			gravity;
+	float			dashSpeed;
 	fPoint		    vel;
 
 	//TIMERS

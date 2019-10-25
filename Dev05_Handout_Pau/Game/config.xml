@@ -36,7 +36,7 @@
     <folder>textures/</folder>
     <sprite_sheet source="adventurer-v1.5-Sheet.png"/>
     <initialPosition x="20" y="450" orientation="right"/>
-    <speed MaxSpeed= "2" Speedx= "0.5" Speedy= "0.6"/>
+    <speed MaxSpeed= "2" Speedx= "0.5" Speedy= "0.6" DashSpeed= "3.5"/>
     <gravity value= "0.25"/>
   </player>
 
