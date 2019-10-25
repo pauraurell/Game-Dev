@@ -52,7 +52,9 @@ bool j1Player::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	colPlayer = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h }, COLLIDER_PLAYER, this);
+	colPlayerHead = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 5, current_animation->GetCurrentFrame().h/3 }, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h/3 }, COLLIDER_PLAYER, this);
+	colPlayerLegs = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 8, current_animation->GetCurrentFrame().h / 3 + 3}, COLLIDER_PLAYER, this);
 
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
@@ -61,7 +63,17 @@ bool j1Player::Start()
 // Called each loop iteration
 bool j1Player::PreUpdate()
 {
-	colPlayer->SetPos(position.x, position.y);
+	if (ColOffssetON == true)
+	{ 
+		colPlayerHead->SetPos(position.x + 3 + ColOffsset, position.y);
+		colPlayerBody->SetPos(position.x + ColOffsset, position.y + colPlayerHead->rect.h /2);
+		colPlayerLegs->SetPos(position.x + 4 + ColOffsset, position.y + colPlayerBody->rect.h);
+	}
+
+
+	if (vel.x = maxSpeed) { ColOffssetON = true; }
+	if (vel.x < maxSpeed) { ColOffssetON = false; }
+
 	return true;
 }
 
@@ -121,7 +133,6 @@ bool j1Player::Update(float dt)
 
 bool j1Player::PostUpdate()
 {
-	colPlayer->SetPos(position.x, position.y);
 	return true;
 }
 

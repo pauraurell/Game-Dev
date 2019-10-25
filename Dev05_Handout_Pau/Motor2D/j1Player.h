@@ -60,15 +60,23 @@ public:
 	Animation		jump;
 	Animation		ground_dash;
 	SDL_Texture*	Character_tex;
+	p2SString		orientation = "right";
+	bool dead = false;
+
+	//SPEED
 	int				maxSpeed;
 	float			SpeedX;
 	float			SpeedY;
 	float			gravity;
 	fPoint		    vel;
-	p2SString		orientation = "right";
-	bool dead = false;
 
-	Collider* colPlayer;
+	//COLLIDERS
+	Collider* colPlayerHead;
+	Collider* colPlayerBody;
+	Collider* colPlayerLegs;
+	int		  ColOffsset = 5;
+	bool	  ColOffssetON = false;
+
 
 	void Pushbacks();
 
