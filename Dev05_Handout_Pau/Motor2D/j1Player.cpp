@@ -63,16 +63,9 @@ bool j1Player::Start()
 // Called each loop iteration
 bool j1Player::PreUpdate()
 {
-	if (ColOffssetON == true)
-	{ 
-		colPlayerHead->SetPos(position.x + 3 + ColOffsset, position.y);
-		colPlayerBody->SetPos(position.x + ColOffsset, position.y + colPlayerHead->rect.h /2);
-		colPlayerLegs->SetPos(position.x + 4 + ColOffsset, position.y + colPlayerBody->rect.h);
-	}
-
-
-	if (vel.x = maxSpeed) { ColOffssetON = true; }
-	if (vel.x < maxSpeed) { ColOffssetON = false; }
+	colPlayerHead->SetPos(position.x + 3, position.y);
+	colPlayerBody->SetPos(position.x , position.y + colPlayerHead->rect.h / 2);
+	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerBody->rect.h);
 
 	return true;
 }
