@@ -16,6 +16,7 @@ enum playerStates
 	PLAYER_RUN_LEFT,
 	PLAYER_RUN_RIGHT,
 	PLAYER_JUMP,
+	PLAYER_DASH,
 };
 
 class j1Player : public j1Module
@@ -61,6 +62,7 @@ public:
 	Animation		ground_dash;
 	SDL_Texture*	Character_tex;
 	p2SString		orientation = "right";
+	bool input = true;
 	bool dead = false;
 
 	//SPEED
@@ -69,6 +71,10 @@ public:
 	float			SpeedY;
 	float			gravity;
 	fPoint		    vel;
+
+	//TIMERS
+	Uint32	dash_timer;
+	bool dashTimer = false;
 
 	//COLLIDERS
 	Collider* colPlayerHead;

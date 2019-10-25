@@ -75,45 +75,71 @@ bool j1Player::Update(float dt)
 	if (godMode == false) 
 	{
 	GetPlayerState();
+	switch (state) {
+		case PLAYER_JUMP:
+			while (vel.y > -5)
+			{
+				current_animation = &jump;
+				vel.y -= SpeedY;
+			}
+			break;
 
-	if (state == PLAYER_JUMP)
-	{
-		while (vel.y > -5)
-		{
-			current_animation = &jump;
-			vel.y -= SpeedY;
-		}
-	}
+		case PLAYER_RUN_LEFT:
+			orientation = "left";
+			vel.x -= SpeedX;
+			current_animation = &running;
+			break;
 
-	if (state == PLAYER_RUN_LEFT)
-	{
-		orientation = "left";
-		vel.x -= SpeedX;
-		current_animation = &running;
-	}
+		case PLAYER_RUN_RIGHT:
+			orientation = "right";
+			vel.x += SpeedX;
+			current_animation = &running;
+			break;
 
-	if (state == PLAYER_RUN_RIGHT)
-	{
-		orientation = "right";
-		vel.x += SpeedX;
-		current_animation = &running;
-	}
+		case PLAYER_DASH:
+			if (dashTimer == false)
+			{
+				dash_timer = SDL_GetTicks();
+				dashTimer = true;
+			}
+			if (orientation == "right")
+			{
+				vel.x = 3.5;
+			}
+			else
+			{
+				vel.x = -3.5;
+			}
+			vel.y = 0;
+			current_animation = &ground_dash;
+			if (SDL_GetTicks() - dash_timer > 300)
+			{
+				input = true;
+				dashTimer = false;
+			}
+			else
+			{
+				input = false;
+			}
+			break;
+			
+		case PLAYER_IDLE:
+			//Slowing down velocity
+			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
+			if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
 
-	if (state == PLAYER_IDLE)
-	{
-		//Slowing down velocity
-		if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
-		if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
-
-		if (vel.y == 0 && vel.x == 0)
-		{
-			current_animation = &idle;
-		}
+			if (vel.y == 0 && vel.x == 0)
+			{
+				current_animation = &idle;
+			}
+			break;
 	}
 
 	//Controlling the maximum speed that the player can go
-	if (vel.x > maxSpeed) { vel.x = maxSpeed; }
-	if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
+	if (state != PLAYER_DASH) {
+		if (vel.x > maxSpeed) { vel.x = maxSpeed; }
+		if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
+	}
 
 	GetPlayerPosition();
 
@@ -209,24 +235,32 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::GetPlayerState()
 {
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && vel.y == 0)
+	if (input == true)
 	{
-		state = PLAYER_JUMP;
-	}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
+		{
+			state = PLAYER_JUMP;
+		}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		state = PLAYER_RUN_RIGHT;
-	}
+		else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+		{
+			state = PLAYER_DASH;
+		}
 
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		state = PLAYER_RUN_LEFT;
-	}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			state = PLAYER_RUN_RIGHT;
+		}
 
-	else
-	{
-		state = PLAYER_IDLE;
+		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			state = PLAYER_RUN_LEFT;
+		}
+
+		else
+		{
+			state = PLAYER_IDLE;
+		}
 	}
 }
 
@@ -299,9 +333,19 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//Map Change
-	if ((c2->type == COLLIDER_FINISH && c1->type == COLLIDER_PLAYER) || (c2->type == COLLIDER_PLAYER && c1->type == COLLIDER_FINISH))
+	if (c1 == colPlayerBody && c2->type == COLLIDER_FINISH)
 	{
-		App->scene->StartSecondLevel();
+		if (App->scene->scene_change == true && App->scene->scene_changed == false)
+		{
+			App->scene->StartFirstLevel();
+			App->scene->scene_changed = true;
+		}
+		if (App->scene->scene_change == false && App->scene->scene_changed == false)
+		{
+			App->scene->StartSecondLevel();
+			App->scene->scene_changed = true;
+		}
+		App->scene->scene_changed = false;
 	}
 }
 

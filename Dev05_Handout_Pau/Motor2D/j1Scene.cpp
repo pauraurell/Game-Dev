@@ -146,6 +146,7 @@ void j1Scene::StartFirstLevel()
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
+	scene_change = false;
 }
 
 void j1Scene::StartSecondLevel()
@@ -155,5 +156,6 @@ void j1Scene::StartSecondLevel()
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
+	scene_change = true;
 }
 

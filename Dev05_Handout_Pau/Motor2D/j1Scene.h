@@ -36,6 +36,9 @@ public:
 	void StartFirstLevel();
 	void StartSecondLevel();
 
+	bool scene_change = false;
+	bool scene_changed = false;
+
 private:
 
 	p2List<p2SString> MapList;
