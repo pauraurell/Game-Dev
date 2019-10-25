@@ -36,6 +36,7 @@ void j1Map::Draw()
 
 	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	uint tile_id;
+	int tile_width = 32;
 
 	while (item_layer != NULL)
 	{
@@ -54,10 +55,19 @@ void j1Map::Draw()
 
 						if (tile_id != 0)
 						{
+							//Just Blit what is on camera
+
 							SDL_Texture* texture = data.tilesets.start->data->texture;
 							iPoint position = MapToWorld(i, j);
-							SDL_Rect* sect = &data.tilesets.start->data->getTileRect(tile_id);
-							App->render->Blit(texture, position.x, position.y, sect, SDL_FLIP_NONE, l->speed);
+							SDL_Rect* rect = &data.tilesets.start->data->getTileRect(tile_id);
+
+							if (position.x*SCALE + tile_width > -((App->render->camera.x))*l->speed  && position.y*SCALE > -(App->render->camera.y + tile_width)) //Top Right and Up
+							{
+								if (position.x*SCALE - tile_width < -(App->render->camera.x)* l->speed + App->win->width && position.y*SCALE < -(App->render->camera.y - tile_width) + App->win->height) //Top Left and Down
+								{
+									App->render->Blit(texture, position.x, position.y, rect, SDL_FLIP_NONE, l->speed); //Blit
+								}
+							}
 						}
 					}
 				}
@@ -136,22 +146,19 @@ bool j1Map::CleanUp()
 	}
 	data.tilesets.clear();
 
-	// Remove all layers
-	p2List_item<MapLayer*>* item2;
-	item2 = data.layers.start;
 
-	while (item2 != NULL)
+	p2List_item<MapLayer*>* itemMap;
+
+	itemMap = data.layers.start;
+	while (itemMap != NULL)
 	{
-		RELEASE(item2->data);
-		item2 = item2->next;
+		RELEASE(itemMap->data);
+		itemMap = itemMap->next;
 	}
 	data.layers.clear();
 
 	// Clean up the pugui tree
 	map_file.reset();
-
-
-
 
 	return true;
 }
