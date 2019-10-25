@@ -67,7 +67,8 @@ public:
 	bool			dead = false;
 
 	//SPEED
-	int				maxSpeed;
+	float			maxSpeedY;
+	int				maxSpeedX;
 	float			SpeedX;
 	float			SpeedY;
 	float			gravity;

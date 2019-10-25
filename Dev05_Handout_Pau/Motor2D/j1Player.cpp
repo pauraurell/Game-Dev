@@ -54,9 +54,9 @@ bool j1Player::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	colPlayerHead = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 5, current_animation->GetCurrentFrame().h/3 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h-12 }, COLLIDER_PLAYER, this);
-	colPlayerLegs = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 8, current_animation->GetCurrentFrame().h / 3 + 3}, COLLIDER_PLAYER, this);
+	colPlayerHead = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 5, current_animation->GetCurrentFrame().h / 3 }, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h - 12 }, COLLIDER_PLAYER, this);
+	colPlayerLegs = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 8, current_animation->GetCurrentFrame().h / 3 + 3 }, COLLIDER_PLAYER, this);
 
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
@@ -66,18 +66,18 @@ bool j1Player::Start()
 bool j1Player::PreUpdate()
 {
 	colPlayerHead->SetPos(position.x + 3, position.y);
-	colPlayerBody->SetPos(position.x , position.y + colPlayerHead->rect.h-10);
-	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerHead->rect.h );
+	colPlayerBody->SetPos(position.x, position.y + colPlayerHead->rect.h - 10);
+	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerHead->rect.h);
 
 	return true;
 }
 
 bool j1Player::Update(float dt)
 {
-	if (godMode == false) 
+	if (godMode == false)
 	{
-	GetPlayerState();
-	switch (state) {
+		GetPlayerState();
+		switch (state) {
 		case PLAYER_JUMP:
 			while (vel.y > -5)
 			{
@@ -124,7 +124,7 @@ bool j1Player::Update(float dt)
 				input = false;
 			}
 			break;
-			
+
 		case PLAYER_IDLE:
 			//Slowing down velocity
 			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
@@ -135,21 +135,21 @@ bool j1Player::Update(float dt)
 				current_animation = &idle;
 			}
 			break;
-	}
+		}
 
-	//Controlling the maximum speed that the player can go
-	if (state != PLAYER_DASH) {
-		if (vel.x > maxSpeedX) { vel.x = maxSpeedX; }
-		if (vel.x < -maxSpeedX) { vel.x = -maxSpeedX; }
-	}
-	if (vel.y > maxSpeedY) { vel.y = maxSpeedY; }
+		//Controlling the maximum speed that the player can go
+		if (state != PLAYER_DASH) {
+			if (vel.x > maxSpeedX) { vel.x = maxSpeedX; }
+			if (vel.x < -maxSpeedX) { vel.x = -maxSpeedX; }
+		}
+		if (vel.y > maxSpeedY) { vel.y = maxSpeedY; }
 
-	GetPlayerPosition();
+		GetPlayerPosition();
 
-	if (dead == true)
-	{
-		Respawn();
-	}
+		if (dead == true)
+		{
+			Respawn();
+		}
 
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -166,7 +166,7 @@ bool j1Player::Update(float dt)
 
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			position.x= position.x + 3;
+			position.x = position.x + 3;
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
@@ -381,8 +381,6 @@ void j1Player::Respawn()
 		orientation = "right";
 		dead = false;
 		input = true;
-		respawnTimer =  false;
+		respawnTimer = false;
 	}
 }
-
-
