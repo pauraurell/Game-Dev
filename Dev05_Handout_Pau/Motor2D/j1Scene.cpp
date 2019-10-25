@@ -173,7 +173,7 @@ void j1Scene::StartFirstLevel()
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
 		RestartCurrentLevel();
-		scene_change = true;
+		scene_change = false;
 		manualFirstLevel = false;
 	}
 	

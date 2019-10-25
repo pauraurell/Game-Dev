@@ -67,9 +67,10 @@ public:
 	bool			dead = false;
 
 	//SPEED
-	int				maxSpeed;
+	int				maxSpeedX;
 	float			SpeedX;
 	float			SpeedY;
+	float			maxSpeedY;
 	float			gravity;
 	fPoint		    vel;
 
