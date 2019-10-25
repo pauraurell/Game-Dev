@@ -32,7 +32,8 @@ bool j1Player::Awake(pugi::xml_node& config)
 	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
 	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	maxSpeed = config.child("speed").attribute("MaxSpeed").as_int();
+	maxSpeedX = config.child("speed").attribute("MaxSpeedX").as_int();
+	maxSpeedY = config.child("speed").attribute("MaxSpeedY").as_float();
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
 	dashSpeed = config.child("speed").attribute("DashSpeed").as_float();
@@ -138,9 +139,10 @@ bool j1Player::Update(float dt)
 
 	//Controlling the maximum speed that the player can go
 	if (state != PLAYER_DASH) {
-		if (vel.x > maxSpeed) { vel.x = maxSpeed; }
-		if (vel.x < -maxSpeed) { vel.x = -maxSpeed; }
+		if (vel.x > maxSpeedX) { vel.x = maxSpeedX; }
+		if (vel.x < -maxSpeedX) { vel.x = -maxSpeedX; }
 	}
+	if (vel.y > maxSpeedY) { vel.y = maxSpeedY; }
 
 	GetPlayerPosition();
 
@@ -243,7 +245,7 @@ void j1Player::GetPlayerState()
 			state = PLAYER_JUMP;
 		}
 
-		else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		{
 			state = PLAYER_DASH;
 		}
