@@ -62,8 +62,8 @@ public:
 	Animation		ground_dash;
 	SDL_Texture*	Character_tex;
 	p2SString		orientation = "right";
-	bool input = true;
-	bool dead = false;
+	bool			input = true;
+	bool			dead = false;
 
 	//SPEED
 	int				maxSpeed;
@@ -74,7 +74,9 @@ public:
 
 	//TIMERS
 	Uint32	dash_timer;
-	bool dashTimer = false;
+	bool	dashTimer = false;
+	Uint32	respawn_timer;
+	bool	respawnTimer = false;
 
 	//COLLIDERS
 	Collider* colPlayerHead;

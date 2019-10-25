@@ -360,13 +360,23 @@ void j1Player::GetPlayerPosition()
 
 void j1Player::Respawn()
 {
-	App->fade->FadeToBlack(1.5);
+	if (respawnTimer == false)
+	{
+		respawn_timer = SDL_GetTicks();
+		App->fade->FadeToBlack(1.2);
+		input = false;
+		respawnTimer = true;
+	}
 
-	position.x = SpawnPointX;
-	position.y = SpawnPointY;
-	vel.y = 0;
-	orientation = "right";
-	dead = false;
+	if (SDL_GetTicks() - respawn_timer > 615) {
+		position.x = SpawnPointX;
+		position.y = SpawnPointY;
+		vel.y = 0;
+		orientation = "right";
+		dead = false;
+		input = true;
+		respawnTimer =  false;
+	}
 }
 
 
