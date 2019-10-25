@@ -77,6 +77,8 @@ public:
 	int		  ColOffsset = 5;
 	bool	  ColOffssetON = false;
 
+	//GOD MODE
+	bool godMode = false;
 
 	void Pushbacks();
 

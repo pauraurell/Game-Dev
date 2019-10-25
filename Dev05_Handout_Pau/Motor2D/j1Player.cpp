@@ -72,8 +72,10 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
+	if (godMode == false) 
+	{
 	GetPlayerState();
-	
+
 	if (state == PLAYER_JUMP)
 	{
 		while (vel.y > -5)
@@ -107,7 +109,6 @@ bool j1Player::Update(float dt)
 		{
 			current_animation = &idle;
 		}
-			
 	}
 
 	//Controlling the maximum speed that the player can go
@@ -119,6 +120,40 @@ bool j1Player::Update(float dt)
 	if (dead == true)
 	{
 		Respawn();
+	}
+
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		godMode = !godMode;
+	}
+
+	if (godMode)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			position.y = position.y - 3;
+		}
+
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			position.x= position.x + 3;
+		}
+
+		else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			position.y = position.y + 3;
+		}
+
+		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			position.x = position.x - 3;
+		}
+
+		else
+		{
+			current_animation = &idle;
+		}
 	}
 
 	return true;
@@ -194,6 +229,8 @@ void j1Player::GetPlayerState()
 		state = PLAYER_IDLE;
 	}
 }
+
+
 
 void j1Player::Pushbacks()
 {
@@ -274,7 +311,7 @@ void j1Player::GetPlayerPosition()
 	position.x = position.x + vel.x;
 	position.y = position.y + vel.y;
 
-	if (position.y > 800) { dead = true; }
+	if (position.y > 800 && godMode == false) { dead = true; }
 }
 
 void j1Player::Respawn()
