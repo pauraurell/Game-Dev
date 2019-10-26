@@ -174,7 +174,7 @@ bool j1Collision::MapCleanUp()
 	{
 		if (colliders[i] != nullptr)
 		{
-			if (colliders[i]->type == COLLIDER_WALL || colliders[i]->type == COLLIDER_FINISH)
+			if (colliders[i]->type == COLLIDER_WALL || colliders[i]->type == COLLIDER_FINISH || colliders[i]->type == COLLIDER_SECRET)
 			{
 				delete colliders[i];
 				colliders[i] = nullptr;
