@@ -97,10 +97,22 @@ bool j1Player::Update(float dt)
 			current_animation = &running;
 			break;
 
+		case PLAYER_JUMP_LEFT:
+			orientation = "left";
+			vel.x -= SpeedX;
+			current_animation = &jump;
+			break;
+
 		case PLAYER_RUN_RIGHT:
 			orientation = "right";
 			vel.x += SpeedX;
 			current_animation = &running;
+			break;
+
+		case PLAYER_JUMP_RIGHT:
+			orientation = "right";
+			vel.x += SpeedX;
+			current_animation = &jump;
 			break;
 
 		case PLAYER_DASH:
@@ -245,6 +257,7 @@ void j1Player::GetPlayerState()
 {
 	if (input == true)
 	{
+		
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
 		{
 			state = PLAYER_JUMP;
@@ -259,12 +272,26 @@ void j1Player::GetPlayerState()
 
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			state = PLAYER_RUN_RIGHT;
+			if (state == PLAYER_JUMP)
+			{
+				state = PLAYER_JUMP_RIGHT;
+			}
+			if (state != PLAYER_JUMP)
+			{
+				state = PLAYER_RUN_RIGHT;
+			}
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			state = PLAYER_RUN_LEFT;
+			if (state == PLAYER_JUMP)
+			{
+				state = PLAYER_JUMP_LEFT;
+			}
+			if (state != PLAYER_JUMP)
+			{
+				state = PLAYER_RUN_LEFT;
+			}
 		}
 
 		else

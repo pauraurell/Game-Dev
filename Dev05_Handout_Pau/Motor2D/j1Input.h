@@ -24,16 +24,15 @@ enum player_states
 enum player_inputs
 {
 	IN_LEFT_LEFT,
-	IN_LEFT_UP,
+	IN_LEFT_JUMP,
 	IN_LEFT,
 	IN_RIGHT_RIGHT,
-	IN_RIGHT_UP,
+	IN_RIGHT_JUMP,
 	IN_RIGHT,
 	IN_LEFT_RIGHT,
-	IN_UP,
-	IN_UP_FINISH,
-	IN_UP_RIGHT_RIGHT,
-	IN_UP_LEFT_LEFT,
+	IN_JUMP,
+	IN_JUMP_FINISH,
+	IN_JUMP_DASH,
 	IN_DASH,
 	IN_DASH_FINISH,
 };
@@ -116,7 +115,6 @@ public:
 	bool left = false;
 	bool right = false;
 	bool up = false;
-	bool playerinput = false;
 };
 
 #endif // __j1INPUT_H__

@@ -3,6 +3,8 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Window.h"
+#include "j1Player.h"
+#include "j1Particles.h"
 #include "SDL/include/SDL.h"
 
 #define MAX_KEYS 300
@@ -59,15 +61,15 @@ bool j1Input::external_input()
 				return false;
 				break;
 			case SDLK_SPACE:
-				if (playerinput == true)
+				if (App->player->input == true)
 					up = false;
 				break;
-			case SDLK_LEFT:
-				if (playerinput == true)
+			case SDLK_a:
+				if (App->player->input == true)
 					left = false;
 				break;
-			case SDLK_RIGHT:
-				if (playerinput == true)
+			case SDLK_d:
+				if (App->player->input == true)
 					right = false;
 				break;
 			}
@@ -77,20 +79,20 @@ bool j1Input::external_input()
 		{
 			switch (event.key.keysym.sym)
 			{
-			case SDLK_z:
-				if (playerinput == true)
+			case SDLK_m:
+				if (App->player->input == true)
 					App->input->inputs.Push(IN_DASH);
 				break;
 			case SDLK_SPACE:
-				if (playerinput == true)
+				if (App->player->input == true)
 					up = true;
 				break;
-			case SDLK_LEFT:
-				if (playerinput == true)
+			case SDLK_a:
+				if (App->player->input == true)
 					left = true;
 				break;
-			case SDLK_RIGHT:
-				if (playerinput == true)
+			case SDLK_d:
+				if (App->player->input == true)
 					right = true;
 				break;
 			}
@@ -108,12 +110,12 @@ bool j1Input::external_input()
 			}
 
 			if (!left)
-				App->input->inputs.Push(IN_LEFT_UP);
+				App->input->inputs.Push(IN_LEFT_JUMP);
 			if (!right)
-				App->input->inputs.Push(IN_RIGHT_UP);
+				App->input->inputs.Push(IN_RIGHT_JUMP);
 
 			if (up)
-				App->input->inputs.Push(IN_UP);
+				App->input->inputs.Push(IN_JUMP);
 		}
 	}
 	return true;
@@ -125,7 +127,7 @@ void j1Input::internal_input(p2List<player_inputs>& inputs)
 	{
 		if (SDL_GetTicks() - jump_timer > JUMP_TIME)
 		{
-			inputs.Push(IN_UP_FINISH);
+			inputs.Push(IN_JUMP_FINISH);
 			jump_timer = 0;
 		}
 	}
