@@ -180,6 +180,7 @@ void j1Scene::StartFirstLevel()
 		App->map->CleanUp();
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
+		App->player->orientation = "right";
 		RestartCurrentLevel();
 		scene_change = false;
 		manualFirstLevel = false;
@@ -201,6 +202,7 @@ void j1Scene::StartFirstLevel()
 			App->map->CleanUp();
 			CurrentMap.create("FirstLevel.tmx");
 			App->map->Load(CurrentMap.GetString());
+			App->player->orientation = "right";
 			RestartCurrentLevel();
 			scene_change = false;
 			sceneChangeTimer = false;
@@ -214,6 +216,7 @@ void j1Scene::StartSecondLevel()
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
+	App->player->orientation = "right";
 	RestartCurrentLevel();
 	scene_change = true;
 	secret_map = false;
