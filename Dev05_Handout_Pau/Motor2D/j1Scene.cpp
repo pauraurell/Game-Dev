@@ -153,6 +153,7 @@ bool j1Scene::Load(pugi::xml_node& data)
 		manualFirstLevel = true;
 		App->scene->StartFirstLevel();
 	}
+	App->scene->secret_map = data.child("map").attribute("secretMap").as_bool();
 	return true;
 }
 
@@ -162,6 +163,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	LOG("Saving scene state");
 	pugi::xml_node sceneNode = data.append_child("map");
 	sceneNode.append_attribute("currentMap") = App->scene->CurrentMap.GetString();
+	sceneNode.append_attribute("secretMap") = App->scene->secret_map;
 	return true;
 }
 

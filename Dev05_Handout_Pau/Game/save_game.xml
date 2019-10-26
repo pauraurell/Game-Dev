@@ -6,11 +6,12 @@
 	<audio />
 	<map />
 	<scene>
-		<map currentMap="FirstLevel.tmx" />
+		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
 	<player>
 		<position posX="20" posY="486" />
 	</player>
+	<:anonymous />
 	<:anonymous />
 	<:anonymous />
 	<renderer>

@@ -399,5 +399,6 @@ void j1Player::Respawn()
 		dead = false;
 		input = true;
 		respawnTimer = false;
+		App->scene->secret_map = false;
 	}
 }
