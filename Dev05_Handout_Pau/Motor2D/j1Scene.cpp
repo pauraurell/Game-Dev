@@ -46,6 +46,7 @@ bool j1Scene::Start()
 	CurrentMap = MapList.start->data;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
+	App->audio->PlayMusic("audio/music.ogg");
 
 	return true;
 }
