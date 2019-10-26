@@ -98,7 +98,7 @@ bool j1Input::external_input()
 			}
 		}
 
-		if (playerinput == true) {
+		if (App->player->input == true) {
 			if (left && right)
 				App->input->inputs.Push(IN_LEFT_RIGHT);
 			else
