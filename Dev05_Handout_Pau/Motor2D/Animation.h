@@ -53,6 +53,14 @@ public:
 		return frames[(int)current_frame];
 	}
 
+	int returnCurrentFrame() {
+		return (int)current_frame;
+	}
+
+	bool AnimationEnd() {
+		return animend;
+	}
+
 	bool Finished() const
 	{
 		return loops > 0;

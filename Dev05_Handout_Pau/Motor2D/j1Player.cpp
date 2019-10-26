@@ -201,12 +201,12 @@ void j1Player::Draw()
 {
 	if (orientation == "right")
 	{
-		App->render->Blit(Character_tex, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(Character_tex, position.x + current_animation->pivotx[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame()), SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
 	}
 
 	else if (orientation == "left")
 	{
-		App->render->Blit(Character_tex, position.x, position.y, &(current_animation->GetCurrentFrame()), SDL_FLIP_HORIZONTAL);
+		App->render->Blit(Character_tex, position.x + current_animation->pivotx2[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty2[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame()), SDL_FLIP_HORIZONTAL, 1.0f, 1.0f, 0.0);
 	}
 
 }
