@@ -65,6 +65,7 @@ public:
 	p2SString		orientation = "right";
 	bool			input = true;
 	bool			dead = false;
+	bool			dash = false;
 
 	//SPEED
 	float			maxSpeedY;

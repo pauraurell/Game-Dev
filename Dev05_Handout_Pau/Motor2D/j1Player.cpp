@@ -245,9 +245,10 @@ void j1Player::GetPlayerState()
 			state = PLAYER_JUMP;
 		}
 
-		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
 		{
 			state = PLAYER_DASH;
+			dash = true;
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -311,6 +312,10 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
+			if (dash == true)
+			{
+				dash = false;
+			}
 			//position.y += 2;
 		} //if the collider is under the player
 	}
