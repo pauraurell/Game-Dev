@@ -50,6 +50,8 @@ bool j1Player::Start()
 	vel.x = 0;
 	vel.y = 0;
 
+	JumpFx = App->audio->LoadFx("audio/jumping.wav");
+
 	position.x = SpawnPointX;
 	position.y = SpawnPointY;
 
@@ -74,11 +76,13 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
+	
 	if (godMode == false)
 	{
 		GetPlayerState();
 		switch (state) {
 		case PLAYER_JUMP:
+			App->audio->PlayFx(JumpFx, 0);
 			while (vel.y > -5)
 			{
 				current_animation = &jump;
