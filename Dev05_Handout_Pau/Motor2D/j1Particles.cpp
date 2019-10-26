@@ -24,18 +24,13 @@ bool j1Particles::Start()
 {
 	graphics = App->tex->Load("textures/particles.png");
 
-	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.24f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.22f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.22f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.24f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.3f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.3f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.3f, 1, 1, 1, 1);
-
-	runParticle.anim.PushBack({ 0, 1, 13, 7 }, 0.24f, 1, 1, 1, 1);
-	runParticle.anim.PushBack({ 15, 2, 10, 6 }, 0.3f, 1, 1, 1, 1);
-	runParticle.anim.PushBack({ 27, 2, 8, 6 }, 0.3f, 1, 1, 1, 1);
-	runParticle.anim.PushBack({ 38, 2, 8, 6 }, 0.3f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.22f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.4f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.4f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.4f, 1, 1, 1, 1);
 
 	return true;
 }
