@@ -5,6 +5,7 @@
 #include "j1Textures.h"
 #include "j1Input.h"
 #include "j1Scene.h"
+#include "j1Particles.h"
 #include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Window.h"
@@ -247,6 +248,7 @@ void j1Player::GetPlayerState()
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
 		{
 			state = PLAYER_JUMP;
+			App->particles->AddParticle(App->particles->dustParticle, position.x - 10, position.y + 17, 0, 350, 0, 0);
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
