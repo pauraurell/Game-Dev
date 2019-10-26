@@ -72,9 +72,6 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		App->render->camera.x += 2;
 
-	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
-		App->fade->FadeToBlack(3.5f);
-
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		App->LoadGame();
@@ -110,12 +107,8 @@ bool j1Scene::Update(float dt)
 	App->player->Draw();
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
 
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d MouseCoordinates:%d,%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count());
+	p2SString title("Platformer");
 				
-
 	App->win->SetTitle(title.GetString());
 
 	return true;

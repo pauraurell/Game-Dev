@@ -17,6 +17,7 @@ The maps have been done with Tiled.
 -M -> Dash.
 
 Debug functionality:
+
 F1 -> Start the first level.
 
 F2 -> Start the second level.
@@ -31,6 +32,17 @@ F9 -> Show the colliders and logic.
 
 F10 -> Activate/Deactivate the god mode.
 
+### Disclosure
+
+We don't own the art and none of the sprites, audio fx or tilesets have been created by ourselves. 
+
+-Character Sprites: https://rvros.itch.io/animated-pixel-hero
+
+-Tileset: https://aamatniekss.itch.io/free-pixelart-platformer-tileset
+
+-Music: https://freesound.org/people/Sirkoto51/sounds/339833/
+
+-SFX: 
 
 
 ### Autors

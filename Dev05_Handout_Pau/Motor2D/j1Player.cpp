@@ -377,7 +377,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//Map Change
-	if (c1 == colPlayerBody && c2->type == COLLIDER_FINISH)
+	if (c1 == colPlayerBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colPlayerBody)
 	{
 		if (App->scene->scene_change == true && App->scene->scene_changed == false)
 		{
