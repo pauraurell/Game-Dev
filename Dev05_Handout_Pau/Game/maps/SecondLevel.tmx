@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="34" nextobjectid="347">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="34" nextobjectid="348">
  <tileset firstgid="1" name="Tilesets" tilewidth="16" tileheight="16" tilecount="1664" columns="32">
   <image source="Tilesets.png" width="512" height="840"/>
   <terraintypes>
@@ -55717,9 +55717,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="97"/>
+   <tile gid="98"/>
+   <tile gid="99"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56067,9 +56067,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="98"/>
-   <tile gid="98"/>
-   <tile gid="98"/>
+   <tile gid="133"/>
+   <tile gid="130"/>
+   <tile gid="132"/>
    <tile gid="99"/>
    <tile/>
    <tile/>
@@ -57121,9 +57121,9 @@
    <tile gid="130"/>
    <tile gid="130"/>
    <tile gid="130"/>
-   <tile gid="132"/>
-   <tile gid="99"/>
-   <tile/>
+   <tile gid="131"/>
+   <tile gid="12"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -57471,9 +57471,9 @@
    <tile gid="130"/>
    <tile gid="130"/>
    <tile gid="130"/>
-   <tile gid="130"/>
-   <tile gid="132"/>
-   <tile gid="99"/>
+   <tile gid="131"/>
+   <tile gid="44"/>
+   <tile gid="45"/>
    <tile/>
    <tile/>
    <tile/>
@@ -57818,12 +57818,12 @@
    <tile/>
    <tile/>
    <tile gid="161"/>
-   <tile gid="162"/>
    <tile gid="101"/>
    <tile gid="130"/>
    <tile gid="130"/>
-   <tile gid="130"/>
    <tile gid="132"/>
+   <tile gid="98"/>
+   <tile gid="98"/>
    <tile gid="98"/>
    <tile gid="99"/>
    <tile/>
@@ -58168,8 +58168,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="161"/>
+   <tile gid="162"/>
    <tile gid="101"/>
    <tile gid="130"/>
    <tile gid="130"/>
@@ -140326,6 +140326,7 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="30" name="Finish">
   <object id="269" x="2989.11" y="306.941" width="13.3333" height="140.667"/>
+  <object id="347" x="67.3523" y="132.564" width="13.3333" height="112"/>
  </objectgroup>
  <objectgroup color="#aa00ff" id="32" name="SecretCol">
   <object id="345" x="1077.83" y="214.166" width="12.0833" height="61.667"/>
