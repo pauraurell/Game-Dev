@@ -16,6 +16,8 @@ class j1Player;
 class j1Map;
 class j1FadeToBlack;
 class j1Collision;
+class j1Particles;
+
 
 class j1App
 {
@@ -89,6 +91,7 @@ public:
 	j1Map*				map;
 	j1FadeToBlack*		fade;
 	j1Collision*		col;
+	j1Particles*		particles;
 
 	#define SCALE 2
 
