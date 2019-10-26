@@ -7,6 +7,7 @@
 #include "j1Collision.h"
 #include "j1Player.h"
 #include "j1Window.h"
+#include "j1Scene.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -43,7 +44,34 @@ void j1Map::Draw()
 		MapLayer* l = item_layer->data;
 		item_layer = item_layer->next;
 		
-		if (colliders == false)
+		if (App->scene->secret_map == true)
+		{
+			for (int i = 0; i < l->width; i++)
+			{
+				for (int j = 0; j < l->height; j++)
+				{
+					tile_id = l->gid[l->Get(i, j)];
+
+					if (tile_id != 0)
+					{
+						//Just Blit what is on camera
+
+						SDL_Texture* texture = data.tilesets.start->data->texture;
+						iPoint position = MapToWorld(i, j);
+						SDL_Rect* rect = &data.tilesets.start->data->getTileRect(tile_id);
+
+						if (position.x*SCALE + tile_width > -((App->render->camera.x))*l->speed  && position.y*SCALE > -(App->render->camera.y + tile_width)) //Top Right and Up
+						{
+							if (position.x*SCALE - tile_width < -(App->render->camera.x)* l->speed + App->win->width && position.y*SCALE < -(App->render->camera.y - tile_width) + App->win->height) //Top Left and Down
+							{
+								App->render->Blit(texture, position.x, position.y, rect, SDL_FLIP_NONE, l->speed); //Blit
+							}
+						}
+					}
+				}
+			}
+		}
+		else
 		{
 			if (l->draw == true)
 			{
@@ -425,13 +453,13 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
-void j1Map::drawColliders() {
-	switch (colliders) {
+void j1Map::drawSecretMap() {
+	switch (App->scene->secret_map) {
 	case true:
-		colliders = false;
+		App->scene->secret_map = false;
 		break;
 	case false:
-		colliders = true;
+		App->scene->secret_map = true;
 		break;
 	}
 }
@@ -465,6 +493,22 @@ bool j1Map::LoadColliders(pugi::xml_node& node, p2SString object_name)
 		for (object = node.child("object"); object; object = object.next_sibling("object"))
 		{
 			collider_type = COLLIDER_FINISH;
+
+			SDL_Rect shape;
+			shape.x = object.attribute("x").as_int();
+			shape.y = object.attribute("y").as_int();
+			shape.w = object.attribute("width").as_int();
+			shape.h = object.attribute("height").as_int();
+
+			App->col->AddCollider(shape, collider_type);
+		}
+	}
+
+	if (object_name == "SecretCol")
+	{
+		for (object = node.child("object"); object; object = object.next_sibling("object"))
+		{
+			collider_type = COLLIDER_SECRET;
 
 			SDL_Rect shape;
 			shape.x = object.attribute("x").as_int();

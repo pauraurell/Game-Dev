@@ -101,6 +101,11 @@ bool j1Scene::Update(float dt)
 		RestartCurrentLevel();
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		App->map->drawSecretMap();
+	}
+
 	App->map->Draw();
 	App->player->Draw();
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
@@ -209,5 +214,6 @@ void j1Scene::StartSecondLevel()
 	App->map->Load(CurrentMap.GetString());
 	RestartCurrentLevel();
 	scene_change = true;
+	secret_map = false;
 }
 

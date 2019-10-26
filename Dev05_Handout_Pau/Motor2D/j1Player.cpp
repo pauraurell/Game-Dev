@@ -362,6 +362,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		App->scene->scene_changed = false;
 	}
+
+	//Secret path activation
+	if (c1 == colPlayerBody && c2->type == COLLIDER_SECRET)
+	{
+		App->scene->secret_map = true;
+	}
 }
 
 void j1Player::GetPlayerPosition()

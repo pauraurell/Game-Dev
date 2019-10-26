@@ -96,7 +96,7 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 
-	void drawColliders();
+	void drawSecretMap();
 	bool colliders = false;
 
 private:

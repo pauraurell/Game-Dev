@@ -42,6 +42,7 @@ public:
 	bool scene_change = false;
 	bool scene_changed = false;
 	bool manualFirstLevel = false;
+	bool secret_map = false;
 
 	Uint32 scene_change_timer;
 	bool sceneChangeTimer = false;
