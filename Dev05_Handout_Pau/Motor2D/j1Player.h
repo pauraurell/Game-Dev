@@ -92,6 +92,9 @@ public:
 	//GOD MODE
 	bool godMode = false;
 
+	//AUDIO
+	uint			JumpFx;
+
 	void Pushbacks();
 
 	playerStates state;
