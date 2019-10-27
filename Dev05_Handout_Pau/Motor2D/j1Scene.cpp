@@ -141,6 +141,7 @@ bool j1Scene::CleanUp()
 bool j1Scene::Load(pugi::xml_node& data)
 {
 	LOG("Loading scene state");
+	//Loading the map the player was on
 	App->scene->CurrentMap = data.child("map").attribute("currentMap").as_string();
 	if (App->scene->CurrentMap == "SecondLevel.tmx")
 	{
@@ -151,6 +152,7 @@ bool j1Scene::Load(pugi::xml_node& data)
 		manualFirstLevel = true;
 		App->scene->StartFirstLevel();
 	}
+	//Loading whether or not the secret map was visible for the player when he saved
 	App->scene->secret_map = data.child("map").attribute("secretMap").as_bool();
 	return true;
 }
@@ -160,21 +162,24 @@ bool j1Scene::Save(pugi::xml_node& data) const
 {
 	LOG("Saving scene state");
 	pugi::xml_node sceneNode = data.append_child("map");
+	//Saving the map where the player is
 	sceneNode.append_attribute("currentMap") = App->scene->CurrentMap.GetString();
+	//Saving whether or not the secret map is visible for the player
 	sceneNode.append_attribute("secretMap") = App->scene->secret_map;
 	return true;
 }
 
+//Restartint current level
 void j1Scene::RestartCurrentLevel()
 {
 	App->player->position.x = App->player->SpawnPointX;
 	App->player->position.y = App->player->SpawnPointY;
 }
 
+//Restarting the first level
 void j1Scene::StartFirstLevel()
 {
-	//Restarting the first level
-
+	//If the level was restarted by pressing F1
 	if (manualFirstLevel == true)
 	{
 		App->map->CleanUp();
@@ -186,6 +191,7 @@ void j1Scene::StartFirstLevel()
 		manualFirstLevel = false;
 	}
 	
+	//If the level was restarted by getting there while playing
 	else if (manualFirstLevel == false)
 	{
 		if (sceneChangeTimer == false)
@@ -211,6 +217,7 @@ void j1Scene::StartFirstLevel()
 	}
 }
 
+//Restarting the second level
 void j1Scene::StartSecondLevel()
 {
 	App->map->CleanUp();
