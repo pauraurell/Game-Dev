@@ -58,7 +58,7 @@ bool j1Player::Start()
 
 	current_animation = &idle;
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 5, current_animation->GetCurrentFrame().h / 3 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h - 12 }, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h - 15 }, COLLIDER_PLAYER, this);
 	colPlayerLegs = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 8, current_animation->GetCurrentFrame().h / 3 + 3 }, COLLIDER_PLAYER, this);
 
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
@@ -349,7 +349,10 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				dash = false;
 			}
-			//position.y += 2;
+			if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h - 3) > (c2->rect.y))
+			{
+				position.y -= 2;
+			}
 		} //if the collider is under the player
 	}
 
