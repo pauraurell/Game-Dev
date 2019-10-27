@@ -32,6 +32,13 @@ bool j1Particles::Start()
 	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.4f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.4f, 1, 1, 1, 1);
 
+	DashParticle.anim.PushBack({ 40, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);
+	DashParticle.anim.PushBack({ 2, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);
+
+	runParticle.anim.PushBack({ 68, 23, 8, 5 }, 0.3f, 1, 1, 1, 1);
+	runParticle.anim.PushBack({ 85, 24, 8, 5 }, 0.3f, 1, 1, 1, 1);
+	runParticle.anim.PushBack({ 98, 25, 8, 5 }, 0.3f, 1, 1, 1, 1);
+
 	return true;
 }
 
@@ -78,13 +85,14 @@ bool j1Particles::Update(float dt)
 	return true;
 }
 
-void j1Particles::AddParticle(const Particle& particle, int x, int y, Uint32 delay, Uint32 lifeVar, float speedX, float speedY)
+void j1Particles::AddParticle(const Particle& particle, int x, int y, Uint32 delay, Uint32 lifeVar, float speedX, float speedY, SDL_RendererFlip flip_texture)
 {
 	Particle* p = new Particle(particle);
 	p->born = SDL_GetTicks() + delay;
 	p->position.x = x;
 	p->position.y = y;
 	p->life = lifeVar;
+	p->flip = flip_texture;
 
 	p->speed.x = speedX;
 	p->speed.y = speedY;

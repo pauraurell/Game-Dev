@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "SDL/include/SDL.h"
 
 #define MAX_ACTIVE_PARTICLES 300
 
@@ -16,6 +17,7 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
+	SDL_RendererFlip flip;
 
 	Particle();
 	Particle(const Particle& p);
@@ -32,7 +34,7 @@ public:
 	bool Update(float) override;
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0, Uint32 lifeVar = 0, float speedX = 0, float speedY = 0);
+	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0, Uint32 lifeVar = 0, float speedX = 0, float speedY = 0, SDL_RendererFlip flip_texture = SDL_FLIP_NONE);
 
 private:
 
@@ -45,6 +47,7 @@ public:
 
 	Particle runParticle;
 	Particle dustParticle;
+	Particle DashParticle;
 };
 
 #endif // __MODULEPARTICLES_H__

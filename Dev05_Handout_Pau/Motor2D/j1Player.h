@@ -68,6 +68,7 @@ public:
 	bool			input = true;
 	bool			dead = false;
 	bool			dash = false;
+	bool			OnGround = true;
 
 	//SPEED
 	float			maxSpeedY;

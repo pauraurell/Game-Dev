@@ -83,6 +83,7 @@ bool j1Player::Update(float dt)
 		GetPlayerState();
 		switch (state) {
 		case PLAYER_JUMP:
+			OnGround = false;
 			App->audio->PlayFx(JumpFx, 0);
 			while (vel.y > -5)
 			{
@@ -95,6 +96,13 @@ bool j1Player::Update(float dt)
 			orientation = "left";
 			vel.x -= SpeedX;
 			current_animation = &running;
+			if (OnGround)
+			{
+				if (position.x % 5 == 0)
+				{
+					App->particles->AddParticle(App->particles->runParticle, position.x + 5, position.y + 23, 0, 125, 0, 0);
+				}
+			}
 			break;
 
 		case PLAYER_JUMP_LEFT:
@@ -107,6 +115,14 @@ bool j1Player::Update(float dt)
 			orientation = "right";
 			vel.x += SpeedX;
 			current_animation = &running;
+			if (OnGround) 
+			{
+				if (position.x % 5 == 0)
+				{
+					App->particles->AddParticle(App->particles->runParticle, position.x, position.y + 23, 0, 125, 0, 0);
+				}
+			}
+		
 			break;
 
 		case PLAYER_JUMP_RIGHT:
@@ -116,6 +132,7 @@ bool j1Player::Update(float dt)
 			break;
 
 		case PLAYER_DASH:
+			App->audio->PlayFx(JumpFx, 0);
 			if (dashTimer == false)
 			{
 				dash_timer = SDL_GetTicks();
@@ -201,6 +218,7 @@ bool j1Player::Update(float dt)
 			current_animation = &idle;
 		}
 	}
+	OnGround = false;
 
 	return true;
 }
@@ -266,6 +284,9 @@ void j1Player::GetPlayerState()
 
 		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
 		{
+			if (orientation == "left") {App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0);}
+			if (orientation == "right") { App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0, SDL_FLIP_HORIZONTAL); }
+			
 			state = PLAYER_DASH;
 			dash = true;
 		}
@@ -353,6 +374,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			{
 				position.y -= 2;
 			}
+
+			OnGround = true;
 		} //if the collider is under the player
 	}
 
