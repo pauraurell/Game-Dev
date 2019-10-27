@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<scene>
+		<map currentMap="FirstLevel.tmx" secretMap="false" />
+	</scene>
+	<player>
+		<position posX="20" posY="486" />
+	</player>
+	<:anonymous />
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="0" y="-512" />
+	</renderer>
+</game_state>
