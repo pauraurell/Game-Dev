@@ -39,6 +39,9 @@ bool j1Player::Awake(pugi::xml_node& config)
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
 	dashSpeed = config.child("speed").attribute("DashSpeed").as_float();
 	gravity = config.child("gravity").attribute("value").as_float();
+	maxJumpSpeed = config.child("speed").attribute("jumpMaxSpeed").as_int();
+	speedDecrease = config.child("speed").attribute("SpeedDecrease").as_float();
+	dashTime = config.child("Dash").attribute("dashTime").as_int();
 	node = config;
 
 	return ret;
@@ -151,7 +154,7 @@ bool j1Player::Update(float dt)
 			}
 			vel.y = 0;
 			current_animation = &ground_dash;
-			if (SDL_GetTicks() - dash_timer > 300)
+			if (SDL_GetTicks() - dash_timer > dashTime)
 			{
 				input = true;
 				dashTimer = false;
@@ -164,8 +167,8 @@ bool j1Player::Update(float dt)
 
 		case PLAYER_IDLE:
 			//Slowing down velocity
-			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
-			if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
+			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - speedDecrease; }
+			if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + speedDecrease; }
 			
 	
 			if (vel.y == 0 && vel.x == 0)

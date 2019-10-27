@@ -73,6 +73,8 @@ public:
 	//SPEED
 	float			maxSpeedY;
 	int				maxSpeedX;
+	int				maxJumpSpeed;
+	float			speedDecrease;
 	float			SpeedX;
 	float			SpeedY;
 	float			gravity;
@@ -81,6 +83,7 @@ public:
 
 	//TIMERS
 	Uint32		dash_timer;
+	int		    dashTime;
 	bool		dashTimer = false;
 	Uint32		respawn_timer;
 	bool		respawnTimer = false;
