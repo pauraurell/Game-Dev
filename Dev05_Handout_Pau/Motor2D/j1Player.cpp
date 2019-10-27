@@ -52,6 +52,7 @@ bool j1Player::Start()
 	vel.y = 0;
 
 	JumpFx = App->audio->LoadFx("audio/jumping.wav");
+	RunFx = App->audio->LoadFx("audio/running.wav");
 
 	position.x = SpawnPointX;
 	position.y = SpawnPointY;
@@ -84,7 +85,7 @@ bool j1Player::Update(float dt)
 		switch (state) {
 		case PLAYER_JUMP:
 			OnGround = false;
-			App->audio->PlayFx(JumpFx, 0);
+			App->audio->PlayFx(JumpFx, 0, 2);
 			while (vel.y > -5)
 			{
 				current_animation = &jump;
@@ -100,7 +101,8 @@ bool j1Player::Update(float dt)
 			{
 				if (position.x % 5 == 0)
 				{
-					App->particles->AddParticle(App->particles->runParticle, position.x + 5, position.y + 23, 0, 125, 0, 0);
+					App->particles->AddParticle(App->particles->runParticle, position.x + 6, position.y + 23, 0, 125, 0, 0);
+					//App->audio->PlayFx(RunFx, 0, 4);
 				}
 			}
 			break;
@@ -119,11 +121,13 @@ bool j1Player::Update(float dt)
 			{
 				if (position.x % 5 == 0)
 				{
+					//App->audio->PlayFx(RunFx, 0, 4);
 					App->particles->AddParticle(App->particles->runParticle, position.x, position.y + 23, 0, 125, 0, 0);
 				}
 			}
-		
 			break;
+
+			
 
 		case PLAYER_JUMP_RIGHT:
 			orientation = "right";
@@ -132,7 +136,6 @@ bool j1Player::Update(float dt)
 			break;
 
 		case PLAYER_DASH:
-			App->audio->PlayFx(JumpFx, 0);
 			if (dashTimer == false)
 			{
 				dash_timer = SDL_GetTicks();
@@ -163,13 +166,17 @@ bool j1Player::Update(float dt)
 			//Slowing down velocity
 			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - 0.25; }
 			if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + 0.25; }
-
+			
+	
 			if (vel.y == 0 && vel.x == 0)
 			{
 				current_animation = &idle;
 			}
 			break;
 		}
+
+		//if (state != PLAYER_RUN_RIGHT || state != PLAYER_RUN_LEFT) { Mix_HaltChannel(5); }
+		
 
 		//Controlling the maximum speed that the player can go
 		if (state != PLAYER_DASH) {
@@ -284,6 +291,7 @@ void j1Player::GetPlayerState()
 
 		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
 		{
+			App->audio->PlayFx(JumpFx, 0, 3);
 			if (orientation == "left") {App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0);}
 			if (orientation == "right") { App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0, SDL_FLIP_HORIZONTAL); }
 			

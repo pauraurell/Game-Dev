@@ -57,7 +57,7 @@ public:
 	void Respawn();
 
 	iPoint			position;
-	int SpawnPointX, SpawnPointY;
+	int		SpawnPointX, SpawnPointY;
 	Animation*		current_animation = nullptr;
 	Animation		idle;
 	Animation		running;
@@ -80,23 +80,25 @@ public:
 	fPoint		    vel;
 
 	//TIMERS
-	Uint32	dash_timer;
-	bool	dashTimer = false;
-	Uint32	respawn_timer;
-	bool	respawnTimer = false;
-
+	Uint32		dash_timer;
+	bool		dashTimer = false;
+	Uint32		respawn_timer;
+	bool		respawnTimer = false;
+		
 	//COLLIDERS
-	Collider* colPlayerHead;
-	Collider* colPlayerBody;
-	Collider* colPlayerLegs;
-	int		  ColOffsset = 5;
-	bool	  ColOffssetON = false;
+	Collider*	 colPlayerHead;
+	Collider*	colPlayerBody;
+	Collider*	colPlayerLegs;
+	int			ColOffsset = 5;
+	bool		ColOffssetON = false;
 
 	//GOD MODE
 	bool godMode = false;
 
 	//AUDIO
 	uint			JumpFx;
+	uint			RunFx;
+	float			step_time;
 
 	void Pushbacks();
 
