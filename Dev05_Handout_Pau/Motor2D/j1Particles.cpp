@@ -24,19 +24,21 @@ bool j1Particles::Start()
 {
 	graphics = App->tex->Load("textures/particles.png");
 
-	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.22f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.2f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.2f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.2f, 1, 1, 1, 1);
+	//Particle that appeares when the player jumps
+	dustParticle.anim.PushBack({ 2, 6, 14, 7 }, 0.22f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 40, 6, 26, 8 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 89, 0, 47, 15 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 154, 0, 60, 18 }, 0.2f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.2f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 154, 21, 65, 16 }, 0.18f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 154, 38, 67, 13 }, 0.15f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 224, 6, 72, 9 }, 0.1f, 1, 1, 1, 1);
-	
 
+	//Particle that appeares when the player dash
 	DashParticle.anim.PushBack({ 40, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);
 	DashParticle.anim.PushBack({ 2, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);
 
+	//Dirt particle that appeares when the player runs
 	runParticle.anim.PushBack({ 68, 23, 8, 5 }, 0.3f, 1, 1, 1, 1);
 	runParticle.anim.PushBack({ 85, 24, 8, 5 }, 0.3f, 1, 1, 1, 1);
 	runParticle.anim.PushBack({ 98, 25, 8, 5 }, 0.3f, 1, 1, 1, 1);

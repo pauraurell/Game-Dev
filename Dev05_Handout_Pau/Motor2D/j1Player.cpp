@@ -337,11 +337,13 @@ void j1Player::SetPlayerState(playerStates stateP)
 
 void j1Player::Pushbacks()
 {
+	//idle
 	idle.PushBack({ 14, 7, 19, 29 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 66, 6, 17, 30 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 115, 6, 19, 30 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 163, 7, 20, 29 }, 0.12f, 1, 1, 1, 1);
 
+	//run
 	running.PushBack({ 67, 45, 20, 28 }, 0.16f, 1, 1, 1, 1);
 	running.PushBack({ 116, 46, 20, 27 }, 0.16f, 1, 1, 1, 1);
 	running.PushBack({ 166, 48, 20, 25 }, 0.16f, 1, 1, 1, 1);
@@ -349,6 +351,7 @@ void j1Player::Pushbacks()
 	running.PushBack({ 266, 46, 20, 27 }, 0.16f, 1, 1, 1, 1);
 	running.PushBack({ 316, 48, 20, 25 }, 0.16f, 1, 1, 1, 1);
 
+	//jump
 	jump.PushBack({ 15, 86, 20, 24 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 65, 88, 20, 22 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 117, 81, 19, 27 }, 0.25f, 1, 1, 1, 1);
@@ -360,12 +363,14 @@ void j1Player::Pushbacks()
 	jump.PushBack({ 68, 112, 17, 31 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 118, 113, 17, 30 }, 0.25f, 1, 1, 1, 1);
 
+	//dash
 	ground_dash.PushBack({ 155, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 205, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 255, 131, 34, 16 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 309, 130, 30, 17 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 15, 167, 22, 17 }, 0.25f, 1, 1, 1, 1);
 }
+
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
@@ -384,7 +389,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			}
 
 			OnGround = true;
-		} //if the collider is under the player
+		} 
+		//if the collider is under the player
 	}
 
 	if (c1 == colPlayerHead && c2->type == COLLIDER_WALL)
@@ -400,12 +406,10 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
 			position.x = position.x - 2;
-			//LOG("COLISION POR LA DERECHA");
 			//vel.x = 0;
 		}
 		if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 		{
-			//LOG("COLISION POR LA IZQUIERDA");
 			position.x = position.x + 2;
 		}
 	}
