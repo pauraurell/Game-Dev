@@ -33,7 +33,7 @@ F9 -> Show the colliders and logic.
 
 F10 -> Activate/Deactivate the god mode.
 
-### Disclosure
+### Credits
 
 We don't own the art and none of the sprites, audio fx or tilesets have been created by ourselves. 
 
@@ -43,9 +43,9 @@ We don't own the art and none of the sprites, audio fx or tilesets have been cre
 
 -Music: https://freesound.org/people/Sirkoto51/sounds/339833/
 
--SFX: 
+-SFX: https://freesound.org/people/dave.des/sounds/127197/
 
-### Innovation: Coliders made in Tiled and Particles.
+### Innovation: Coliders made in Tiled, Particles, secret platforms in 2nd Map and Running dust and Dash particles made by us.
 
 ### Autors
 -Pol Galán i Morales
