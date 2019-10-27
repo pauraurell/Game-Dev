@@ -170,7 +170,8 @@ bool j1Player::Update(float dt)
 			if (vel.x != 0 && vel.x > 0) { vel.x = vel.x - speedDecrease; }
 			if (vel.x != 0 && vel.x < 0) { vel.x = vel.x + speedDecrease; }
 			
-	
+			if (OnGround == false) { current_animation = &jump; }
+
 			if (vel.y == 0 && vel.x == 0)
 			{
 				current_animation = &idle;
@@ -201,32 +202,51 @@ bool j1Player::Update(float dt)
 		godMode = !godMode;
 	}
 
+	//God Mode Input, State & Movement
 	if (godMode)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) { godModeUp = true; }
+		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP) { godModeUp = false; }
+
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) { godModeDown = true; }
+		else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_UP) { godModeDown = false; }
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) { godModeRight = true; }
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP) { godModeRight = false; }
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) { godModeLeft = true; }
+		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP) { godModeLeft = false; }
+
+		if (godModeUp == true)
 		{
 			position.y = position.y - 3;
-			current_animation = &godModeUp;
+			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
+			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
+			if (godModeDown == true) { position.y = position.y + 3; current_animation = &idle; }
+			else { current_animation = &god_mode_up; }
+		}
+		
+		else if (godModeDown == true)
+		{
+			position.y = position.y + 3;
+			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
+			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
+			else { current_animation = &god_mode_down; }
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		else if (godModeRight == true)
 		{
 			position.x = position.x + 3;
 			orientation = "right";
-			current_animation = &godModeRun;
+			if (godModeLeft == true) { position.x = position.x - 3; current_animation = &god_mode_run; }
+			else { current_animation = &god_mode_run; }
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-			position.y = position.y + 3;
-			current_animation = &godModeDown;
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		else if (godModeLeft == true)
 		{
 			position.x = position.x - 3;
 			orientation = "left";
-			current_animation = &godModeRun;
+			current_animation = &god_mode_run;
 		}
 
 		else
@@ -381,16 +401,16 @@ void j1Player::Pushbacks()
 	ground_dash.PushBack({ 15, 167, 22, 17 }, 0.25f, 1, 1, 1, 1);
 
 	//God Mode Animations
-	godModeUp.PushBack({70, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
-	godModeUp.PushBack({120, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
-	godModeUp.PushBack({169, 150, 15, 34}, 0.25f, 1, 1, 1, 1);
-	godModeUp.PushBack({220, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+	god_mode_up.PushBack({70, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+	god_mode_up.PushBack({120, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+	god_mode_up.PushBack({169, 150, 15, 34}, 0.25f, 1, 1, 1, 1);
+	god_mode_up.PushBack({220, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
 
-	godModeRun.PushBack({16, 413, 23, 29}, 0.25f, 1, 1, 1, 1);
-	godModeRun.PushBack({67, 413, 22, 29}, 0.25f, 1, 1, 1, 1);
+	god_mode_run.PushBack({16, 413, 23, 29}, 0.25f, 1, 1, 1, 1);
+	god_mode_run.PushBack({67, 413, 22, 29}, 0.25f, 1, 1, 1, 1);
 
-	godModeDown.PushBack({67, 111, 17, 31}, 0.25f, 1, 1, 1, 1);
-	godModeDown.PushBack({117, 112, 17, 30}, 0.25f, 1, 1, 1, 1);
+	god_mode_down.PushBack({67, 111, 17, 31}, 0.25f, 1, 1, 1, 1);
+	god_mode_down.PushBack({117, 112, 17, 30}, 0.25f, 1, 1, 1, 1);
 }
 
 

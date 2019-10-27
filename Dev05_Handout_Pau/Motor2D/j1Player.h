@@ -71,9 +71,9 @@ public:
 	Animation		running;
 	Animation		jump;
 	Animation		ground_dash;
-	Animation		godModeUp;
-	Animation		godModeRun;
-	Animation		godModeDown;
+	Animation		god_mode_up;
+	Animation		god_mode_run;
+	Animation		god_mode_down;
 
 	//SPEED
 	float			maxSpeedY;
@@ -102,6 +102,10 @@ public:
 
 	//GOD MODE
 	bool godMode = false;
+	bool godModeRight = false;
+	bool godModeLeft = false;
+	bool godModeUp = false;
+	bool godModeDown = false;
 
 	//AUDIO
 	uint			JumpFx;
