@@ -2,7 +2,7 @@
 
 ## No Name
 
-2d Platformer made using the SDL (-https://www.libsdl.org/) and pugi libraries done by Pol Gal·n and Pau Raurell for Videogame Development subject.
+2d Platformer made using the SDL (-https://www.libsdl.org/) and pugi libraries done by Pol Gal√°n and Pau Raurell for Videogame Development subject.
 In this version, the player can move in left and right directions, jump, and do a dash.
 
 The maps have been done with Tiled.
@@ -45,10 +45,11 @@ We don't own the art and none of the sprites, audio fx or tilesets have been cre
 
 -SFX: https://freesound.org/people/dave.des/sounds/127197/
 
-### Innovation: Coliders made in Tiled, Particles, secret platforms in 2nd Map and Running dust and Dash particles made by us.
+### Innovation: 
+Coliders made in Tiled, Particles, secret platforms in 2nd Map and Running dust and Dash particles made by us.
 
 ### Autors
--Pol Gal·n i Morales
+-Pol Gal√°n i Morales
 https://github.com/pgalmor
 -State Machine, Dash, Secret Map, Respawn.
 

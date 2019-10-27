@@ -108,6 +108,7 @@ bool j1Player::Update(float dt)
 					//App->audio->PlayFx(RunFx, 0, 4);
 				}
 			}
+			if (OnGround == false) { current_animation = &jump; }
 			break;
 
 		case PLAYER_JUMP_LEFT:
@@ -128,9 +129,8 @@ bool j1Player::Update(float dt)
 					App->particles->AddParticle(App->particles->runParticle, position.x, position.y + 23, 0, 125, 0, 0);
 				}
 			}
+			if (OnGround == false) { current_animation = &jump; }
 			break;
-
-			
 
 		case PLAYER_JUMP_RIGHT:
 			orientation = "right";
@@ -295,6 +295,7 @@ void j1Player::GetPlayerState()
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
 		{
 			state = PLAYER_JUMP;
+			jump.Reset();
 			App->particles->AddParticle(App->particles->dustParticle, position.x - 8, position.y + 16, 0, 500, 0, 0);
 		}
 
@@ -369,8 +370,8 @@ void j1Player::Pushbacks()
 	jump.PushBack({ 264, 84, 24, 17 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 320, 81, 19, 21 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 11, 124, 26, 17 }, 0.25f, 1, 1, 1, 1);
-	jump.PushBack({ 68, 112, 17, 31 }, 0.25f, 1, 1, 1, 1);
-	jump.PushBack({ 118, 113, 17, 30 }, 0.25f, 1, 1, 1, 1);
+	jump.PushBack({ 68, 112, 17, 31 }, 0.05f, 1, 1, 1, 1);
+	jump.PushBack({ 118, 113, 17, 30 }, 0.05f, 1, 1, 1, 1);
 
 	//dash
 	ground_dash.PushBack({ 155, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
