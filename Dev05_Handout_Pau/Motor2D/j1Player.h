@@ -58,17 +58,22 @@ public:
 
 	iPoint			position;
 	int		SpawnPointX, SpawnPointY;
-	Animation*		current_animation = nullptr;
-	Animation		idle;
-	Animation		running;
-	Animation		jump;
-	Animation		ground_dash;
 	SDL_Texture*	Character_tex;
 	p2SString		orientation = "right";
 	bool			input = true;
 	bool			dead = false;
 	bool			dash = false;
 	bool			OnGround = true;
+
+	//ANIMATIONS
+	Animation*		current_animation = nullptr;
+	Animation		idle;
+	Animation		running;
+	Animation		jump;
+	Animation		ground_dash;
+	Animation		godModeUp;
+	Animation		godModeRun;
+	Animation		godModeDown;
 
 	//SPEED
 	float			maxSpeedY;

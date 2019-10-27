@@ -206,21 +206,27 @@ bool j1Player::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
 			position.y = position.y - 3;
+			current_animation = &godModeUp;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			position.x = position.x + 3;
+			orientation = "right";
+			current_animation = &godModeRun;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			position.y = position.y + 3;
+			current_animation = &godModeDown;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			position.x = position.x - 3;
+			orientation = "left";
+			current_animation = &godModeRun;
 		}
 
 		else
@@ -283,7 +289,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::GetPlayerState()
 {
-	if (input == true)
+	if (input == true && godMode == false)
 	{
 		
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
@@ -372,6 +378,18 @@ void j1Player::Pushbacks()
 	ground_dash.PushBack({ 255, 131, 34, 16 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 309, 130, 30, 17 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 15, 167, 22, 17 }, 0.25f, 1, 1, 1, 1);
+
+	//God Mode Animations
+	godModeUp.PushBack({70, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+	godModeUp.PushBack({120, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+	godModeUp.PushBack({169, 150, 15, 34}, 0.25f, 1, 1, 1, 1);
+	godModeUp.PushBack({220, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
+
+	godModeRun.PushBack({16, 413, 23, 29}, 0.25f, 1, 1, 1, 1);
+	godModeRun.PushBack({67, 413, 22, 29}, 0.25f, 1, 1, 1, 1);
+
+	godModeDown.PushBack({67, 111, 17, 31}, 0.25f, 1, 1, 1, 1);
+	godModeDown.PushBack({117, 112, 17, 30}, 0.25f, 1, 1, 1, 1);
 }
 
 
