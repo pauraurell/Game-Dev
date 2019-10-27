@@ -140389,7 +140389,7 @@
   <object id="468" x="162.909" y="174.727" width="14.9091" height="32.9091"/>
   <object id="469" x="150.909" y="164.727" width="32.1818" height="10"/>
   <object id="470" x="148" y="148.727" width="85.7046" height="15.2727"/>
-  <object id="471" x="48" y="196.667" width="21.2424" height="43.5455"/>
+  <object id="471" x="41.6667" y="196.667" width="16.5757" height="43.5455"/>
   <object id="474" x="27" y="163.333" width="18.3333" height="33.6667"/>
   <object id="475" x="177.667" y="291" width="12" height="19.3333"/>
   <object id="476" x="150.833" y="256.083" width="16" height="13"/>
@@ -140466,7 +140466,7 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="30" name="Finish">
   <object id="269" x="2989.11" y="306.941" width="13.3333" height="140.667"/>
-  <object id="347" x="71.1629" y="128.172" width="13.3333" height="112"/>
+  <object id="347" x="71.1629" y="47.5053" width="13.3333" height="192.667"/>
  </objectgroup>
  <objectgroup color="#aa00ff" id="32" name="SecretCol">
   <object id="345" x="1077.83" y="214.166" width="3.08333" height="61.667"/>
