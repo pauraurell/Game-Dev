@@ -112,7 +112,7 @@ bool j1Scene::Update(float dt)
 	App->player->Draw();
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
 
-	p2SString title("Platformer");
+	p2SString title("The Legend of The Boy");
 				
 	App->win->SetTitle(title.GetString());
 
