@@ -2,12 +2,13 @@
 
 ## No Name
 
-2d Platformer made using the SDL and pugi libraries done by Pol Galán and Pau Raurell for Videogame Development subject.
+2d Platformer made using the SDL (-https://www.libsdl.org/) and pugi libraries done by Pol Galán and Pau Raurell for Videogame Development subject.
 In this version, the player can move in left and right directions, jump, and do a dash.
 
 The maps have been done with Tiled.
 
 ### Controls
+
 -A -> Move to the left.
 
 -D -> Move to the right.
@@ -44,13 +45,38 @@ We don't own the art and none of the sprites, audio fx or tilesets have been cre
 
 -SFX: 
 
+### Innovation: Coliders made in Tiled and Particles.
 
 ### Autors
 -Pol Galán i Morales
 https://github.com/pgalmor
+-State Machine, Dash, Secret Map, Respawn.
 
 -Pau Raurell Gomis
 https://github.com/pauraurell
+-1rst Map, Audio, Particles, God Mode, Save/Load.
+
+Things done by both of us: Collisions, 2nd Map, Parallax, Camera Limit
+
 
 ### Our Github Repository
 https://github.com/pauraurell/Game-Dev
+
+### MIT License
+
+Copyright <2019> <pauraurell, pgalmor>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ and associated documentation files (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
