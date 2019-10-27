@@ -1,6 +1,6 @@
-# Game-Dev
+﻿# Game-Dev
 
-## No Name
+## The Legend of The Boy
 
 2d Platformer made using the SDL (-https://www.libsdl.org/) and pugi libraries done by Pol Galán and Pau Raurell for Videogame Development subject.
 In this version, the player can move in left and right directions, jump, and do a dash.
