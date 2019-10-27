@@ -6,7 +6,7 @@
 #include "p2Point.h"
 #include "SDL/include/SDL.h"
 
-#define MAX_ACTIVE_PARTICLES 300
+#define MAX_ACTIVE_PARTICLES 150
 
 struct SDL_Texture;
 

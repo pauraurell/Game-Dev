@@ -45,6 +45,7 @@ bool j1Particles::Start()
 // Unload assets
 bool j1Particles::CleanUp()
 {
+	LOG("Unloading particles");
 	App->tex->UnLoad(graphics);
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -76,10 +77,10 @@ bool j1Particles::Update(float dt)
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), SDL_FLIP_NONE);
 		}
-		//LOG("Particles: %d", active[i]);
 	}
+
 
 
 	return true;
@@ -98,7 +99,27 @@ void j1Particles::AddParticle(const Particle& particle, int x, int y, Uint32 del
 	p->speed.y = speedY;
 	
 	dustParticle.anim.Reset();
-	active[last_particle++] = p;
+
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks() + delay;
+			p->position.x = x;
+			p->position.y = y;
+			p->life = lifeVar;
+			p->flip = flip_texture;
+
+			p->speed.x = speedX;
+			p->speed.y = speedY;
+
+			dustParticle.anim.Reset();
+			
+			active[i] = p;
+			break;
+		}
+	}
 }
 
 // -------------------------------------------------------------
@@ -121,16 +142,12 @@ bool Particle::Update()
 
 	if (life > 0)
 	{
-		if ((SDL_GetTicks() - born) > life)
+		if (((int)SDL_GetTicks() - born) > life)
 			ret = false;
-		//LOG("deleting particle");
 	}
 	else
 		if (anim.Finished())
 			ret = false;
 
-	position.x += speed.x;
-	position.y += speed.y;
-	
 	return ret;
 }
