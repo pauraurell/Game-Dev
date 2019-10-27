@@ -60,7 +60,7 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	/*if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y -= 1;
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -70,7 +70,10 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= 2;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 2;
+		App->render->camera.x += 2;*/
+
+
+	//Save and load:
 
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
@@ -81,6 +84,8 @@ bool j1Scene::Update(float dt)
 	{
 		App->SaveGame();
 	}
+
+	//Debug keys:
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -168,6 +173,8 @@ void j1Scene::RestartCurrentLevel()
 
 void j1Scene::StartFirstLevel()
 {
+	//Restarting the first level
+
 	if (manualFirstLevel == true)
 	{
 		App->map->CleanUp();

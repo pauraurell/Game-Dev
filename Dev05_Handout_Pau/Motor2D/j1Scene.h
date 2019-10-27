@@ -32,9 +32,10 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void RestartCurrentLevel();
-	void StartFirstLevel();
-	void StartSecondLevel();
+	//Debug
+	void RestartCurrentLevel(); //F3
+	void StartFirstLevel(); //F1
+	void StartSecondLevel(); //F2
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
