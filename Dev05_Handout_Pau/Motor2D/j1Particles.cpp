@@ -28,9 +28,11 @@ bool j1Particles::Start()
 	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.2f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.2f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.2f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 89, 4, 47, 15 }, 0.4f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 40, 10, 26, 8 }, 0.4f, 1, 1, 1, 1);
-	dustParticle.anim.PushBack({ 2, 10, 14, 7 }, 0.4f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 154, 1, 60, 18 }, 0.2f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 154, 21, 65, 16 }, 0.18f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 154, 38, 67, 13 }, 0.15f, 1, 1, 1, 1);
+	dustParticle.anim.PushBack({ 224, 6, 72, 9 }, 0.1f, 1, 1, 1, 1);
+	
 
 	DashParticle.anim.PushBack({ 40, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);
 	DashParticle.anim.PushBack({ 2, 21, 14, 12 }, 0.1f, 1, 1, 1, 1);

@@ -286,7 +286,7 @@ void j1Player::GetPlayerState()
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
 		{
 			state = PLAYER_JUMP;
-			App->particles->AddParticle(App->particles->dustParticle, position.x - 8, position.y + 16, 0, 350, 0, 0);
+			App->particles->AddParticle(App->particles->dustParticle, position.x - 8, position.y + 16, 0, 500, 0, 0);
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
