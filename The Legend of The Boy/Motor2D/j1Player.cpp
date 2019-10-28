@@ -392,6 +392,7 @@ void j1Player::Pushbacks()
 	jump.PushBack({ 11, 124, 26, 17 }, 0.25f, 1, 1, 1, 1);
 	jump.PushBack({ 68, 112, 17, 31 }, 0.05f, 1, 1, 1, 1);
 	jump.PushBack({ 118, 113, 17, 30 }, 0.05f, 1, 1, 1, 1);
+	jump.loop = false;
 
 	//dash
 	ground_dash.PushBack({ 155, 132, 34, 15 }, 0.25f, 1, 1, 1, 1);
@@ -446,13 +447,27 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1 == colPlayerBody && c2->type == COLLIDER_WALL)
 	{
-		if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
-			position.x = position.x - 2;
-			//vel.x = 0;
-		}
-		if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
+		if (state == PLAYER_DASH)
 		{
-			position.x = position.x + 2;
+			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
+				position.x = position.x - 3;
+				//vel.x = 0;
+			}
+			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
+			{
+				position.x = position.x + 3;
+			}
+		}
+		else
+		{
+			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
+				position.x = position.x - 2;
+				//vel.x = 0;
+			}
+			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
+			{
+				position.x = position.x + 2;
+			}
 		}
 	}
 
