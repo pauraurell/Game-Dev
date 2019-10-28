@@ -455,7 +455,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			}
 			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
-				position.x = position.x + 3;
+				position.x = position.x + 4;
 			}
 		}
 		else
