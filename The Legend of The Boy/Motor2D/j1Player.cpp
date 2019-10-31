@@ -441,7 +441,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if ((colPlayerHead->rect.y) < (c2->rect.y + c2->rect.h))
 		{
 			position.y = position.y + 2;
-			//vel.y = 0;
+			vel.y = 0;
 		}
 	}
 
