@@ -33,6 +33,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
 	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
+	yLimit = config.child("initialPosition").attribute("yLimit").as_int();
 	maxSpeedX = config.child("speed").attribute("MaxSpeedX").as_int();
 	maxSpeedY = config.child("speed").attribute("MaxSpeedY").as_float();
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
@@ -500,7 +501,7 @@ void j1Player::GetPlayerPosition()
 	position.x = position.x + vel.x;
 	position.y = position.y + vel.y;
 
-	if (position.y > 800 && godMode == false) { dead = true; }
+	if (position.y > yLimit && godMode == false) { dead = true; }
 }
 
 void j1Player::Respawn()

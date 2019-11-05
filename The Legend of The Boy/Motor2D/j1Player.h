@@ -57,8 +57,8 @@ public:
 	void Respawn();
 
 	iPoint			position;
-	int		SpawnPointX, SpawnPointY;
-	SDL_Texture*	Character_tex;
+	int		SpawnPointX, SpawnPointY, yLimit;
+	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation = "right";
 	bool			input = true;
 	bool			dead = false;
@@ -70,6 +70,7 @@ public:
 	Animation		idle;
 	Animation		running;
 	Animation		jump;
+	Animation		attack;
 	Animation		ground_dash;
 	Animation		god_mode_up;
 	Animation		god_mode_run;
@@ -94,9 +95,9 @@ public:
 	bool		respawnTimer = false;
 		
 	//COLLIDERS
-	Collider*	 colPlayerHead;
-	Collider*	colPlayerBody;
-	Collider*	colPlayerLegs;
+	Collider*	colPlayerHead = nullptr;
+	Collider*	colPlayerBody = nullptr;
+	Collider*	colPlayerLegs = nullptr;
 	int			ColOffsset = 5;
 	bool		ColOffssetON = false;
 
