@@ -13,6 +13,7 @@
 #include "j1Collision.h"
 #include "SDL_image/include/SDL_image.h"
 #include "j1Map.h"
+#include "Brofiler/Brofiler.h"
 
 j1Player::j1Player() : j1Module()
 {
@@ -84,6 +85,8 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	
+	BROFILER_CATEGORY("Update_Player", Profiler::Color::MediumSlateBlue)
+
 	if (godMode == false)
 	{
 		GetPlayerState();
@@ -287,6 +290,8 @@ bool j1Player::PostUpdate()
 
 void j1Player::Draw()
 {
+	BROFILER_CATEGORY("Draw_Player", Profiler::Color::Crimson)
+
 	if (orientation == "right")
 	{
 		App->render->Blit(Character_tex, position.x + current_animation->pivotx[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame()), SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);

@@ -10,6 +10,7 @@
 #include "j1Scene.h"
 #include "j1Player.h"
 #include "j1FadeToBlack.h"
+#include "Brofiler/Brofiler.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -60,6 +61,9 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+
+	BROFILER_CATEGORY("Update_Scene", Profiler::Color::CornflowerBlue)
+
 	/*if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y -= 1;
 

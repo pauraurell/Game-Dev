@@ -2,6 +2,7 @@
 #include "J1Render.h"
 #include "j1Collision.h"
 #include "j1Input.h"
+#include "Brofiler/Brofiler.h"
 
 j1Collision::j1Collision()
 {
@@ -31,6 +32,9 @@ j1Collision::~j1Collision()
 
 bool j1Collision::PreUpdate()
 {
+
+	BROFILER_CATEGORY("PreUpdate_Collisions", Profiler::Color::Orange)
+
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
