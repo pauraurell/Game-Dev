@@ -19,6 +19,7 @@ enum playerStates
 	PLAYER_JUMP_RIGHT,
 	PLAYER_JUMP_LEFT,
 	PLAYER_DASH,
+	PLAYER_ATTACK
 };
 
 class j1Player : public j1Module
@@ -91,6 +92,9 @@ public:
 	Uint32		dash_timer;
 	int		    dashTime;
 	bool		dashTimer = false;
+	Uint32		attack_timer;
+	int		    attackTime;
+	bool		attackTimer = false;
 	Uint32		respawn_timer;
 	bool		respawnTimer = false;
 		

@@ -43,6 +43,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 	maxJumpSpeed = config.child("speed").attribute("jumpMaxSpeed").as_int();
 	speedDecrease = config.child("speed").attribute("SpeedDecrease").as_float();
 	dashTime = config.child("Dash").attribute("dashTime").as_int();
+	attackTime = config.child("Attacking").attribute("attackTime").as_int();
 	node = config;
 
 	return ret;
@@ -163,6 +164,25 @@ bool j1Player::Update(float dt)
 			else
 			{
 				input = false;
+			}
+			break;
+
+		case PLAYER_ATTACK:
+			if (attackTimer == false)
+			{
+				attack_timer = SDL_GetTicks();
+				attackTimer = true;
+			}
+			
+			if (SDL_GetTicks() - attack_timer > attackTime)
+			{
+				input = true;
+				attackTimer = false;
+			}
+			else
+			{
+				input = false;
+				current_animation = &attack;
 			}
 			break;
 
@@ -330,6 +350,13 @@ void j1Player::GetPlayerState()
 			dash = true;
 		}
 
+		else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && dash == false)
+		{
+			attack.Reset();
+			state = PLAYER_ATTACK;
+			input = false;
+		}
+
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			if (state == PLAYER_JUMP)
@@ -357,6 +384,7 @@ void j1Player::GetPlayerState()
 		else
 		{
 			state = PLAYER_IDLE;
+			input = true;
 		}
 	}
 }
@@ -402,6 +430,11 @@ void j1Player::Pushbacks()
 	ground_dash.PushBack({ 309, 130, 30, 17 }, 0.25f, 1, 1, 1, 1);
 	ground_dash.PushBack({ 15, 167, 22, 17 }, 0.25f, 1, 1, 1, 1);
 
+	//attack
+	attack.PushBack({ 60, 266, 37, 29 }, 0.14f, 1, 1, 1, 1);
+	attack.PushBack({ 102, 274, 32, 21 }, 0.14f, 1, 1, 1, 1);
+	attack.PushBack({ 152, 273, 31, 22 }, 0.14f, 1, 1, 1, 1);
+	
 	//God Mode Animations
 	god_mode_up.PushBack({70, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
 	god_mode_up.PushBack({120, 150, 14, 34}, 0.25f, 1, 1, 1, 1);
