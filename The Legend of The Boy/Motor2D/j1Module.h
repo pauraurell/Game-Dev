@@ -1,3 +1,4 @@
+
 // ----------------------------------------------------
 // j1Module.h
 // Interface for all engine modules
@@ -43,7 +44,7 @@ public:
 	}
 
 	// Called each loop iteration
-	virtual bool Update(float dt)
+	virtual bool Update(float dt = 0)
 	{
 		return true;
 	}
@@ -70,9 +71,9 @@ public:
 		return true;
 	}
 
+	virtual void OnCollision(Collider*, Collider*) {}
 public:
 
-	virtual void OnCollision(Collider*, Collider*) {}
 	p2SString	name;
 	bool		active;
 
