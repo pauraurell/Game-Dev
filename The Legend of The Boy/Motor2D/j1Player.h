@@ -49,7 +49,7 @@ public:
 
 	void GetPlayerState();
 	void SetPlayerState(playerStates state);
-	void GetPlayerPosition();
+	void GetPlayerPosition(float dt);
 
 	// Called before quitting
 	bool CleanUp();

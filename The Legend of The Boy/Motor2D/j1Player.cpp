@@ -118,13 +118,13 @@ bool j1Player::Update(float dt)
 
 		case PLAYER_JUMP_LEFT:
 			orientation = "left";
-			vel.x -= SpeedX;
+			vel.x -= SpeedX * dt * 60;;
 			current_animation = &jump;
 			break;
 
 		case PLAYER_RUN_RIGHT:
 			orientation = "right";
-			vel.x += SpeedX;
+			vel.x += int(SpeedX * dt * 60);
 			current_animation = &running;
 			if (OnGround) 
 			{
@@ -225,7 +225,7 @@ bool j1Player::Update(float dt)
 		}
 		if (vel.y > maxSpeedY) { vel.y = maxSpeedY; }
 
-		GetPlayerPosition();
+		GetPlayerPosition(dt);
 
 		if (dead == true)
 		{
@@ -466,7 +466,7 @@ void j1Player::Pushbacks()
 }
 
 
-void j1Player::OnCollision(Collider* c1, Collider* c2)
+void j1Player::OnCollision(Collider* c1, Collider* c2, float dt)
 {
 	if (c1 == colPlayerLegs && c2->type == COLLIDER_WALL)
 	{
@@ -545,11 +545,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
-void j1Player::GetPlayerPosition()
+void j1Player::GetPlayerPosition(float dt)
 {
-	vel.y += gravity;
-	position.x = position.x + vel.x;
-	position.y = position.y + vel.y;
+	vel.y += gravity * dt * 60;
+	position.x = position.x + vel.x * dt * 60;
+	position.y = position.y + vel.y * dt * 60;
 
 	if (position.y > yLimit && godMode == false) { dead = true; }
 }
