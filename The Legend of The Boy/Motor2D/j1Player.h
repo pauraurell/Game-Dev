@@ -42,7 +42,7 @@ public:
 
 
 	// Called each loop iteration
-	void Draw();
+	void Draw(float dt);
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;

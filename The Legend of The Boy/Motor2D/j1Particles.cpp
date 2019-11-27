@@ -82,11 +82,11 @@ bool j1Particles::Update(float dt)
 		{
 			if (p->flip == SDL_FLIP_NONE)
 			{
-				App->render->Blit(graphics, p->position.x + p->anim.pivotx[p->anim.returnCurrentFrame()], p->position.y + p->anim.pivoty[p->anim.returnCurrentFrame()], &(p->anim.GetCurrentFrame()), SDL_FLIP_NONE);
+				App->render->Blit(graphics, p->position.x + p->anim.pivotx[p->anim.returnCurrentFrame()], p->position.y + p->anim.pivoty[p->anim.returnCurrentFrame()], &(p->anim.GetCurrentFrame(dt)), SDL_FLIP_NONE);
 			}
 			else
 			{
-				App->render->Blit(graphics, p->position.x + p->anim.pivotx2[p->anim.returnCurrentFrame()], p->position.y + p->anim.pivoty2[p->anim.returnCurrentFrame()], &(p->anim.GetCurrentFrame()), SDL_FLIP_HORIZONTAL);
+				App->render->Blit(graphics, p->position.x + p->anim.pivotx2[p->anim.returnCurrentFrame()], p->position.y + p->anim.pivoty2[p->anim.returnCurrentFrame()], &(p->anim.GetCurrentFrame(dt)), SDL_FLIP_HORIZONTAL);
 			}
 		}
 	}

@@ -55,6 +55,7 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	
 	return true;
 }
 
@@ -113,12 +114,14 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
-	App->player->Draw();
+	App->player->Draw(dt);
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
 
 	p2SString title("The Legend of The Boy");
 				
 	App->win->SetTitle(title.GetString());
+
+
 
 	return true;
 }

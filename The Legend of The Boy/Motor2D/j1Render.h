@@ -44,6 +44,8 @@ public:
 	int offSetCameraX;
 	int offSetCameraY;
 
+	iPoint ScreenToWorld(int x, int y) const;
+
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 

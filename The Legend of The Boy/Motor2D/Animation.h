@@ -37,11 +37,11 @@ public:
 		speed[speeddelay++] = delay;
 	}
 
-	SDL_Rect& GetCurrentFrame()
+	SDL_Rect& GetCurrentFrame(float dt)
 	{
 		animend = false;
 		speeddelay = 0;
-		current_frame += speed[(int)current_frame];
+		current_frame += speed[(int)current_frame] * dt * 60;
 		if (current_frame >= last_frame)
 		{
 			animend = true;

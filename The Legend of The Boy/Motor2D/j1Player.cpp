@@ -64,10 +64,9 @@ bool j1Player::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	colPlayerHead = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 5, current_animation->GetCurrentFrame().h / 3 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w, current_animation->GetCurrentFrame().h - 15 }, COLLIDER_PLAYER, this);
-	colPlayerLegs = App->col->AddCollider({ position.x, position.y, current_animation->GetCurrentFrame().w - 8, current_animation->GetCurrentFrame().h / 3 + 3 }, COLLIDER_PLAYER, this);
-
+	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 10 }, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 12}, COLLIDER_PLAYER, this);
+	colPlayerLegs = App->col->AddCollider({ position.x, position.y,16, 11 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -94,7 +93,7 @@ bool j1Player::Update(float dt)
 		case PLAYER_JUMP:
 			OnGround = false;
 			App->audio->PlayFx(JumpFx, 0, 2);
-			while (vel.y > -5)
+			while (vel.y > -4.5)
 			{
 				current_animation = &jump;
 				vel.y -= SpeedY;
@@ -118,13 +117,13 @@ bool j1Player::Update(float dt)
 
 		case PLAYER_JUMP_LEFT:
 			orientation = "left";
-			vel.x -= SpeedX * dt * 60;;
+			vel.x -= SpeedX;
 			current_animation = &jump;
 			break;
 
 		case PLAYER_RUN_RIGHT:
 			orientation = "right";
-			vel.x += int(SpeedX * dt * 60);
+			vel.x += SpeedX;
 			current_animation = &running;
 			if (OnGround) 
 			{
@@ -300,18 +299,18 @@ bool j1Player::PostUpdate()
 	return true;
 }
 
-void j1Player::Draw()
+void j1Player::Draw(float dt)
 {
 	BROFILER_CATEGORY("Draw_Player", Profiler::Color::Crimson)
 
 	if (orientation == "right")
 	{
-		App->render->Blit(Character_tex, position.x + current_animation->pivotx[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame()), SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(Character_tex, position.x + current_animation->pivotx[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame(dt)), SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
 	}
 
 	else if (orientation == "left")
 	{
-		App->render->Blit(Character_tex, position.x + current_animation->pivotx2[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty2[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame()), SDL_FLIP_HORIZONTAL, 1.0f, 1.0f, 0.0);
+		App->render->Blit(Character_tex, position.x + current_animation->pivotx2[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty2[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame(dt)), SDL_FLIP_HORIZONTAL, 1.0f, 1.0f, 0.0);
 	}
 
 }
@@ -466,7 +465,7 @@ void j1Player::Pushbacks()
 }
 
 
-void j1Player::OnCollision(Collider* c1, Collider* c2, float dt)
+void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == colPlayerLegs && c2->type == COLLIDER_WALL)
 	{
@@ -547,9 +546,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2, float dt)
 
 void j1Player::GetPlayerPosition(float dt)
 {
-	vel.y += gravity * dt * 60;
-	position.x = position.x + vel.x * dt * 60;
-	position.y = position.y + vel.y * dt * 60;
+	vel.y += (gravity * dt * 60);
+	position.x = position.x + (vel.x * dt * 60);
+	position.y = position.y + (vel.y * dt * 60);
 
 	if (position.y > yLimit && godMode == false) { dead = true; }
 }
