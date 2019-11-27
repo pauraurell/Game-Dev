@@ -102,6 +102,9 @@ public:
 	Collider*	colPlayerHead = nullptr;
 	Collider*	colPlayerBody = nullptr;
 	Collider*	colPlayerLegs = nullptr;
+	Collider*	attackCollider = nullptr;
+	Collider*   dashAttackCollider = nullptr;
+	
 	int			ColOffsset = 5;
 	bool		ColOffssetON = false;
 
