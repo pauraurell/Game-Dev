@@ -148,21 +148,27 @@ bool j1Player::Update(float dt)
 			{
 				dash_timer = SDL_GetTicks();
 				dashTimer = true;
+				if (orientation == "right") { dashAttackCollider = App->col->AddCollider({ position.x + 15, position.y + 10, 15, 10 }, COLLIDER_PLAYER_ATTACK); }
+				if (orientation == "left") { dashAttackCollider = App->col->AddCollider({ position.x - 10, position.y + 10, 15, 10 }, COLLIDER_PLAYER_ATTACK); }
 			}
 			if (orientation == "right")
 			{
 				vel.x = dashSpeed;
+				dashAttackCollider->SetPos(position.x + 15, position.y + 10);
 			}
 			else
 			{
 				vel.x = -dashSpeed;
+				dashAttackCollider->SetPos(position.x - 10, position.y + 10);
 			}
+			
 			vel.y = 0;
 			current_animation = &ground_dash;
 			if (SDL_GetTicks() - dash_timer > dashTime)
 			{
 				input = true;
 				dashTimer = false;
+				dashAttackCollider->to_delete = true;
 			}
 			else
 			{
@@ -175,12 +181,21 @@ bool j1Player::Update(float dt)
 			{
 				attack_timer = SDL_GetTicks();
 				attackTimer = true;
+				if (orientation == "right") 
+				{
+					attackCollider= App->col->AddCollider({ position.x + 15, position.y +4, 20, 20 }, COLLIDER_PLAYER_ATTACK);
+				}
+				else 
+				{
+					attackCollider = App->col->AddCollider({ position.x - 10, position.y + 4, 20, 20 }, COLLIDER_PLAYER_ATTACK);
+				}
 			}
 			
 			if (SDL_GetTicks() - attack_timer > attackTime)
 			{
 				input = true;
 				attackTimer = false;
+				attackCollider->to_delete = true;
 			}
 			else
 			{
@@ -202,9 +217,6 @@ bool j1Player::Update(float dt)
 			}
 			break;
 		}
-
-		//if (state != PLAYER_RUN_RIGHT || state != PLAYER_RUN_LEFT) { Mix_HaltChannel(5); }
-		
 
 		//Controlling the maximum speed that the player can go
 		if (state != PLAYER_DASH) {
