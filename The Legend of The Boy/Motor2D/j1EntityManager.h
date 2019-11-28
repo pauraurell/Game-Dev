@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "j1Entities.h"
 #include "PugiXml/src/pugixml.hpp"
+#include "p2List.h"
 
 struct SDL_Texture;
 
@@ -19,7 +20,10 @@ public:
 	bool CleanUp();
 
 	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&)const;
+	bool Save(pugi::xml_node&) const;
+
+	pugi::xml_node node;
+	p2List<j1Entities*> entities;
 };
 
 
