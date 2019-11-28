@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "Animation.h"
 #include "j1Module.h"
+#include "j1Entities.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -22,7 +23,7 @@ enum playerStates
 	PLAYER_ATTACK
 };
 
-class j1Player : public j1Module
+class j1Player : public j1Entities
 {
 public:
 
@@ -58,7 +59,7 @@ public:
 	void Respawn();
 
 	iPoint			position;
-	int		SpawnPointX, SpawnPointY, yLimit;
+	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation = "right";
 	bool			input = true;

@@ -7,6 +7,9 @@
 #include "Animation.h"
 #include "j1Module.h"
 
+struct SDL_Texture;
+struct Collider;
+
 class j1Entities : public j1Module
 {
 public:
@@ -16,6 +19,7 @@ public:
 		player,
 		minotaur,
 		el_otro,
+		unknown
 	};
 
 	Types entity_type;
@@ -24,17 +28,26 @@ public:
 
 	virtual ~j1Entities();
 
-	virtual bool CleanUp();
 	bool Load(pugi::xml_node& data);
 	bool Save(pugi::xml_node& data);
 
 	virtual void Pushbacks();
-	virtual void OnCollision();
+	virtual void OnCollision(Collider* c1, Collider* c2);
 	virtual void Draw();
 
-	void GetState();
 	virtual void SetState();
-	void GetPosition();
+	virtual void GetPosition();
+
+	iPoint			position;
+	int				SpawnPointX, SpawnPointY, yLimit;
+	SDL_Texture* Character_tex = nullptr;
+	p2SString		orientation = "right";
+	bool			input = true;
+	bool			dead = false;
+	bool			dash = false;
+	bool			OnGround = true;
+
+	p2SString		entity_name;
 	
 };
 

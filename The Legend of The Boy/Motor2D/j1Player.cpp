@@ -11,11 +11,12 @@
 #include "j1Window.h"
 #include "j1FadeToBlack.h"
 #include "j1Collision.h"
+#include "j1Entities.h"
 #include "SDL_image/include/SDL_image.h"
 #include "j1Map.h"
 #include "Brofiler/Brofiler.h"
 
-j1Player::j1Player() : j1Module()
+j1Player::j1Player() : j1Entities(Types::player)
 {
 	name.create("player");
 }
