@@ -18,7 +18,7 @@ public:
 	{
 		player,
 		minotaur,
-		el_otro,
+		bat,
 		unknown
 	};
 
