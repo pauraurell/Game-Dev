@@ -39,6 +39,7 @@ bool j1Skeleton::Awake(pugi::xml_node& config)
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
 	node = config;
 
 	return ret;
@@ -57,7 +58,7 @@ bool j1Skeleton::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	skeletonCollider = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
+	skeletonCollider = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 25 }, COLLIDER_ENEMY, this);
 	skeletonTex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -65,7 +66,7 @@ bool j1Skeleton::Start()
 // Called each loop iteration
 bool j1Skeleton::PreUpdate()
 {
-	skeletonCollider->SetPos(position.x, position.y);
+	skeletonCollider->SetPos(position.x + 1, position.y + 8);
 
 	return true;
 }
@@ -155,7 +156,17 @@ void j1Skeleton::SkeletonState(skeletonStates stateS)
 void j1Skeleton::Pushbacks()
 {
 	//Skeleton animations 
-	//idle.PushBack({ 7, 49, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 0, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 24, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 48, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 72, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 97, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 122, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 146, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 169, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 192, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 216, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	idle.PushBack({ 240, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 }
 
 
@@ -219,6 +230,8 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 
 void j1Skeleton::SetSkeletonPosition(float dt)
 {
+	//vel.y += (gravity * dt * 70);
 	position.x = position.x + (vel.x * dt * 70);
 	position.y = position.y + (vel.y * dt * 70);
+
 }

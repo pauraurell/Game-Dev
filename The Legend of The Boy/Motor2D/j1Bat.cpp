@@ -57,7 +57,7 @@ bool j1Bat::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &flying;
-	batCollider = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
+	batCollider = App->col->AddCollider({ position.x, position.y, 15, 14 }, COLLIDER_ENEMY, this);
 	batTex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -76,14 +76,14 @@ bool j1Bat::Update(float dt)
 		{
 			case BAT_FLIYING_LEFT:
 				orientation = "left";
-				vel.x -= SpeedX;
-				if (position.x >= SpawnPointX - 50) { state = BAT_FLIYING_RIGHT; }
+				position.x--;
+				if (position.x <= SpawnPointX) { state = BAT_FLIYING_RIGHT; }
 				break;
 
 			case BAT_FLIYING_RIGHT:
 				orientation = "right";
-				vel.x += SpeedX;
-				if (position.x < SpawnPointX) { state = BAT_FLIYING_LEFT; }
+				position.x++;
+				if (position.x >= SpawnPointX + 100) { state = BAT_FLIYING_LEFT; }
 				break;
 		}
 

@@ -77,7 +77,7 @@ public:
 
 	void Pushbacks();
 
-	batStates state;
+	batStates state = BAT_FLIYING_RIGHT;
 
 
 private:

@@ -45,8 +45,16 @@
   <bat>
     <folder>textures/</folder>
     <sprite_sheet source="bat_spritesheet.png"/>
-    <initialPosition x="20" y="450" orientation="right"/>
+    <initialPosition x="150" y="400" orientation="right"/>
     <speed Speedx= "0.5" Speedy= "0.6"/>
   </bat>
+
+  <skeleton>
+    <folder>textures/</folder>
+    <sprite_sheet source="skeleton_spritesheet.png"/>
+    <initialPosition x="210" y="445" orientation="right"/>
+    <speed Speedx= "0.5" Speedy= "0.6"/>
+    <gravity value= "0.19"/>
+  </skeleton>
 
 </config>

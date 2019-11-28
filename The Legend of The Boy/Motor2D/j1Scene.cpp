@@ -9,6 +9,8 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Player.h"
+#include "j1Skeleton.h"
+#include "j1Bat.h"
 #include "j1FadeToBlack.h"
 #include "Brofiler/Brofiler.h"
 
@@ -122,7 +124,12 @@ bool j1Scene::Update(float dt)
 
 
 	App->map->Draw();
+
+	//Entities
 	App->player->Draw(dt);
+	App->bat->Draw(dt);
+	App->skeleton->Draw(dt);
+
 	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
 
 

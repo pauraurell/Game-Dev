@@ -80,7 +80,7 @@ public:
 
 	void Pushbacks();
 
-	skeletonStates state;
+	skeletonStates state = SKELETON_IDLE;
 
 
 private:

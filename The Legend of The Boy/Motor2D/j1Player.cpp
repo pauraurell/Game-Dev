@@ -72,7 +72,7 @@ bool j1Player::Start()
 
 	current_animation = &idle;
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 13}, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
 	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
