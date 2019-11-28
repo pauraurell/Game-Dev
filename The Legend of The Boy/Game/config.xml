@@ -42,4 +42,11 @@
     <Attacking attackTime= "300"/>
   </player>
 
+  <bat>
+    <folder>textures/</folder>
+    <sprite_sheet source="bat_spritesheet.png"/>
+    <initialPosition x="20" y="450" orientation="right"/>
+    <speed Speedx= "0.5" Speedy= "0.6"/>
+  </bat>
+
 </config>
