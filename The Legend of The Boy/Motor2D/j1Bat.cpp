@@ -17,6 +17,12 @@ j1Bat::j1Bat() : j1Entities(Types::bat)
 	name.create("bat");
 }
 
+j1Bat::j1Bat(iPoint pos) : j1Entities(Types::bat)
+{
+	name.create("bat");
+	position = pos;
+}
+
 // Destructor
 j1Bat::~j1Bat()
 {}

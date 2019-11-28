@@ -15,12 +15,15 @@ public:
 	~j1EntityManager();
 	bool Awake(pugi::xml_node& config);
 	bool Start();
+	bool PreUpdate();
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
+
+	j1Entities* CreateEntity(j1Entities::Types type, iPoint pos);
 
 	pugi::xml_node node;
 	p2List<j1Entities*> entities;

@@ -28,6 +28,7 @@ class j1Player : public j1Entities
 public:
 
 	j1Player();
+	j1Player(iPoint pos);
 
 	// Destructor
 	virtual ~j1Player();
