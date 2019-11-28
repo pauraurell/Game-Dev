@@ -89,12 +89,12 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 	return ret;
 }
 
-void DestroyEntity(j1Entities* entity)
+void j1EntityManager::DestroyEntity(j1Entities* entity)
 {
 	delete entity;
 }
 
-void DestroyEntities()
+void j1EntityManager::DestroyEntities()
 {
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList)
