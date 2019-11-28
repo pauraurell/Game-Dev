@@ -21,6 +21,12 @@ j1Player::j1Player() : j1Entities(Types::player)
 	name.create("player");
 }
 
+j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
+{
+	name.create("player");
+	position = pos;
+}
+
 // Destructor
 j1Player::~j1Player()
 {}

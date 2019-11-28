@@ -15,6 +15,7 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 class j1Player;
+class j1Bat;
 class j1Map;
 class j1FadeToBlack;
 class j1Collision;

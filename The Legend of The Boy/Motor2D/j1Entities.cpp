@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "j1App.h"
 #include "j1Player.h"
+#include "j1Bat.h"
 #include "j1Textures.h"
 #include "j1Scene.h"
 #include "j1Audio.h"
@@ -23,7 +24,7 @@ bool j1Entities::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool j1Entities::Save(pugi::xml_node& data)
+bool j1Entities::Save(pugi::xml_node& data) const
 {
 	
 	return true;

@@ -23,6 +23,7 @@ class j1Bat : public j1Entities
 public:
 
 	j1Bat();
+	j1Bat(iPoint pos);
 
 	// Destructor
 	virtual ~j1Bat();
