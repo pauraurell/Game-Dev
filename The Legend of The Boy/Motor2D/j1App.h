@@ -16,6 +16,7 @@ class j1Audio;
 class j1Scene;
 class j1Player;
 class j1Bat;
+class j1Skeleton;
 class j1Map;
 class j1FadeToBlack;
 class j1Collision;
@@ -93,6 +94,7 @@ public:
 	j1Scene*			scene;
 	j1Player*			player;
 	j1Bat*				bat;
+	j1Skeleton*			skeleton;
 	j1Map*				map;
 	j1FadeToBlack*		fade;
 	j1Collision*		col;

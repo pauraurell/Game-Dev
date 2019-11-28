@@ -2,6 +2,7 @@
 #include "j1Entities.h"
 #include "j1Player.h"
 #include "j1Bat.h"
+#include "j1Skeleton.h"
 #include "j1Scene.h"
 #include "Animation.h"
 #include "j1App.h"
@@ -71,8 +72,8 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 	case j1Entities::Types::player:
 		ret = new j1Player(pos);
 		break;
-	case j1Entities::Types::minotaur:
-		ret = new j1Bat(pos);
+	case j1Entities::Types::skeleton:
+		ret = new j1Skeleton(pos);
 		break;
 	case j1Entities::Types::bat:
 		ret = new j1Bat(pos);

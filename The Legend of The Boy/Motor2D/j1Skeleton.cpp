@@ -17,6 +17,12 @@ j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 	name.create("skeleton");
 }
 
+j1Skeleton::j1Skeleton(iPoint pos) : j1Entities(Types::skeleton)
+{
+	name.create("skeleton");
+	position = pos;
+}
+
 // Destructor
 j1Skeleton::~j1Skeleton()
 {}

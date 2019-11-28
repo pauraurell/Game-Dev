@@ -24,6 +24,7 @@ class j1Skeleton : public j1Entities
 public:
 
 	j1Skeleton();
+	j1Skeleton(iPoint pos);
 
 	// Destructor
 	virtual ~j1Skeleton();
@@ -89,6 +90,6 @@ private:
 	pugi::xml_node	node;
 };
 
-#endif // __j1MAP_H__
+#endif
 
 
