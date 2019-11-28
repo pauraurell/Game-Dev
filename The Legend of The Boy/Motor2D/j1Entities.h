@@ -17,7 +17,7 @@ public:
 	enum class Types
 	{
 		player,
-		minotaur,
+		skeleton,
 		bat,
 		unknown
 	};
