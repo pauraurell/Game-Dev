@@ -50,6 +50,7 @@ public:
 
 	p2SString CurrentMap;
 
+
 private:
 
 	p2List<p2SString> MapList;

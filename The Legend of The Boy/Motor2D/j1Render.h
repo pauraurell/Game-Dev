@@ -51,6 +51,7 @@ public:
 
 public:
 
+	bool			vsyncActive = false;
 	SDL_Renderer*	renderer;
 	SDL_Rect		camera;
 	SDL_Rect		viewport;

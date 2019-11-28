@@ -98,9 +98,6 @@ bool j1App::Awake()
 		organization.create(app_config.child("organization").child_value());
 	}
 
-	//max frames
-	framerate = 30;
-
 	if(ret == true)
 	{
 		p2List_item<j1Module*>* item;
@@ -176,9 +173,9 @@ void j1App::PrepareUpdate()
 	frame_count++;
 	last_sec_frame_count++;
 
-	//Calculate the dt: differential time since last frame
 	dt = frame_time.ReadSec();
-
+	if (dt > (float)framerate / 1000)
+		dt = (float)framerate / 1000;
 	frame_time.Start();
 }
 
@@ -206,18 +203,24 @@ void j1App::FinishUpdate()
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	if (framecapEnabled == true)
+	{
+		sprintf_s(title, 256,"The Legend of The Boy || Last frame Ms: %02u || Last fps: %i || Average fps: %.2f || Framerate Cap: Enabled || Vsync: Disabled", last_frame_ms, frames_on_last_update, avg_fps);
+		if (App->render->vsyncActive) { sprintf_s(title, 256, "The Legend of The Boy || Last frame Ms: %02u || Last fps: %i || Average fps: %.2f || Framerate Cap: Enabled || Vsync: Enabled" , last_frame_ms, frames_on_last_update, avg_fps); }
+	}
+	else
+	{
+		sprintf_s(title, 256, "The Legend of The Boy || Last frame Ms: %02u || Last fps: %i || Average fps: %.2f || Framerate Cap: Disabled || Vsync: Disabled", last_frame_ms, frames_on_last_update, avg_fps);
+	}
+
 	App->win->SetTitle(title);
 
-	delaytimer.Start();
+	float delay = (1000 / framerate) - last_frame_ms;
+	if (delay > (1000 / framerate))
+		delay = (1000 / framerate);
 
-	int delay = 1 * 1000 / framerate - last_frame_ms;
-
-	if (delay > 0) {
-		SDL_Delay(1 * 1000 / framerate - last_frame_ms);
-	}
-	
+	if (framecapEnabled)
+		SDL_Delay(delay);
 }
 
 // Call modules before each loop iteration

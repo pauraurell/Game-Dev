@@ -64,9 +64,9 @@ bool j1Player::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 10 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 12}, COLLIDER_PLAYER, this);
-	colPlayerLegs = App->col->AddCollider({ position.x, position.y,16, 11 }, COLLIDER_PLAYER, this);
+	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
+	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 13}, COLLIDER_PLAYER, this);
+	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -75,8 +75,8 @@ bool j1Player::Start()
 bool j1Player::PreUpdate()
 {
 	colPlayerHead->SetPos(position.x + 3, position.y);
-	colPlayerBody->SetPos(position.x, position.y + colPlayerHead->rect.h - 10);
-	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerHead->rect.h);
+	colPlayerBody->SetPos(position.x, position.y + colPlayerHead->rect.h - 12);
+	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerHead->rect.h + 2);
 
 	return true;
 }
@@ -512,11 +512,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
 				position.x = position.x - 2;
-				//vel.x = 0;
+				if (vel.y > 0) { vel.x = 0; }
 			}
 			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
 				position.x = position.x + 2;
+				if (vel.y > 0) { vel.x = 0; }
 			}
 		}
 	}
@@ -546,9 +547,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 void j1Player::GetPlayerPosition(float dt)
 {
-	vel.y += (gravity * dt * 60);
-	position.x = position.x + (vel.x * dt * 60);
-	position.y = position.y + (vel.y * dt * 60);
+	vel.y += (gravity * dt * 70);
+	position.x = position.x + (vel.x * dt * 70);
+	position.y = position.y + (vel.y * dt * 70);
 
 	if (position.y > yLimit && godMode == false) { dead = true; }
 }

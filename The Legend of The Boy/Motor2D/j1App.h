@@ -97,6 +97,9 @@ public:
 
 	#define SCALE 2
 
+	bool				framecapEnabled = true;
+	uint32				framerate = 30;
+
 private:
 
 	p2List<j1Module*>	modules;
@@ -120,8 +123,9 @@ private:
 	j1Timer				last_sec_frame_time;
 	uint32				last_sec_frame_count = 0u;
 	uint32				prev_last_sec_frame_count = 0u;
-	uint32				framerate = 0u;
+
 	float				dt;
+
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

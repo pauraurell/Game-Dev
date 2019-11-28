@@ -7,7 +7,7 @@
   </app>
 	
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
     <camera offsetx="198" offsety="128"/>
   </renderer>
 
