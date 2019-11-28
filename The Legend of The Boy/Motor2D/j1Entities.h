@@ -46,6 +46,7 @@ public:
 	bool			dead = false;
 	bool			dash = false;
 	bool			OnGround = true;
+	p2SString		texture_path;
 
 	p2SString		entity_name;
 	

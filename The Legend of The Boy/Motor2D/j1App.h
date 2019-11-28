@@ -92,6 +92,7 @@ public:
 	j1Audio*			audio;
 	j1Scene*			scene;
 	j1Player*			player;
+	j1Bat*				bat;
 	j1Map*				map;
 	j1FadeToBlack*		fade;
 	j1Collision*		col;

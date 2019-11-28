@@ -67,8 +67,8 @@ bool j1Player::Start()
 	JumpFx = App->audio->LoadFx("audio/jumping.wav");
 	RunFx = App->audio->LoadFx("audio/running.wav");
 
-	position.x = SpawnPointX;
-	position.y = SpawnPointY;
+	//position.x = SpawnPointX;
+	//position.y = SpawnPointY;
 
 	current_animation = &idle;
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);

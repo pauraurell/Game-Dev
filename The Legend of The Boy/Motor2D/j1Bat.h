@@ -1,5 +1,5 @@
-#ifndef __j1PLAYER_H__
-#define __j1PLAYER_H__
+#ifndef __j1BAT_H__
+#define __j1BAT_H__
 
 #include "PugiXml/src/pugixml.hpp"
 #include "p2List.h"
@@ -87,6 +87,6 @@ private:
 	pugi::xml_node	node;
 };
 
-#endif // __j1MAP_H__
+#endif // __j1BAT_H__
 
 

@@ -82,6 +82,8 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 	if (ret != nullptr)
 	{
 		entities.add(ret);
+		entities.end->data->Awake(node);
+		entities.end->data->Start();
 	}
 	return ret;
 }
