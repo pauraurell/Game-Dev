@@ -1,5 +1,5 @@
-#ifndef __j1BAT_H__
-#define __j1BAT_H__
+#ifndef __j1SKELETON_H__
+#define __j1SKELETON_H__
 
 #include "PugiXml/src/pugixml.hpp"
 #include "p2List.h"
@@ -11,21 +11,22 @@
 struct SDL_Texture;
 struct Collider;
 
-enum batStates
-{
-	BAT_FLIYING_LEFT,
-	BAT_FLIYING_RIGHT,
-	BAT_DEAD,	
+enum skeletonStates
+{	
+	SKELETON_IDLE,
+	SKELETON_MOVING_LEFT,
+	SKELETON_MOVING_RIGHT,
+	SKELETON_DEAD,
 };
 
-class j1Bat : public j1Entities
+class j1Skeleton : public j1Entities
 {
 public:
 
-	j1Bat();
+	j1Skeleton();
 
 	// Destructor
-	virtual ~j1Bat();
+	virtual ~j1Skeleton();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
@@ -43,8 +44,8 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
-	void BatState(batStates state);
-	void SetBatPosition(float dt);
+	void SkeletonState(skeletonStates state);
+	void SetSkeletonPosition(float dt);
 
 	// Called before quitting
 	bool CleanUp();
@@ -53,14 +54,16 @@ public:
 
 	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
-	SDL_Texture*	batTex = nullptr;
+	SDL_Texture*	skeletonTex = nullptr;
 	p2SString		orientation = "right";
 	bool			dead = false;
 	bool			OnGround = true;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;
-	Animation		flying;
+	Animation		idle;
+	Animation		walking;
+	Animation		deadAnim;
 
 	//SPEED
 	float			SpeedX;
@@ -69,14 +72,14 @@ public:
 	fPoint		    vel;
 
 	//COLLIDERS
-	Collider*	batCollider = nullptr;
+	Collider*	skeletonCollider = nullptr;
 
 	//AUDIO
-	uint			BatFx;
+	uint			SkeletonFx;
 
 	void Pushbacks();
 
-	batStates state;
+	skeletonStates state;
 
 
 private:
@@ -86,6 +89,6 @@ private:
 	pugi::xml_node	node;
 };
 
-#endif 
+#endif // __j1MAP_H__
 
 
