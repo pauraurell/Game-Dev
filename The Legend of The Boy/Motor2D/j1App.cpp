@@ -50,9 +50,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene);
 	AddModule(entManager);
-	AddModule(player);
-	AddModule(bat);
-	AddModule(skeleton);
+	//AddModule(player);
+	//AddModule(bat);
+	//AddModule(skeleton);
 	AddModule(particles);
 	AddModule(col);
 	AddModule(fade);

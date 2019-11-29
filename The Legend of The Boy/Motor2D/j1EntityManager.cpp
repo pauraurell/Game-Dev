@@ -23,38 +23,86 @@ j1EntityManager::j1EntityManager()
 j1EntityManager::~j1EntityManager()
 {}
 
-bool j1EntityManager::Awake(pugi::xml_node& config) {
-	node = config;
+bool j1EntityManager::Awake(pugi::xml_node& config)
+{
 	return true;
 }
 
 bool j1EntityManager::Start()
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->Start();
+		entityList = entityList->next;
+	}
 	return true;
 }
 
 bool j1EntityManager::PreUpdate()
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->PreUpdate();
+		entityList = entityList->next;
+	}
 	return true;
 }
 
 bool j1EntityManager::Update(float dt)
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->Update(dt);
+		entityList = entityList->next;
+	}
 	return true;
 }
 
 bool j1EntityManager::PostUpdate()
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->PostUpdate();
+		entityList = entityList->next;
+	}
 	return true;
 }
 
 bool j1EntityManager::CleanUp()
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->CleanUp();
+		entityList = entityList->next;
+	}
+	DestroyEntities();
 	return true;
 }
 
 bool j1EntityManager::Load(pugi::xml_node& data)
 {
+	DestroyEntities();
+	pugi::xml_node entity;
+	j1Entities::Types type;
+
+	for (entity = data.child("Entity"); entity; entity = entity.next_sibling("Entity"))
+	{
+		p2SString entType(entity.attribute("type").as_string());
+		if (entType == "player")
+		{
+			type = j1Entities::Types::player;
+		}
+		if (entType == "skeleton")
+		{
+			type = j1Entities::Types::skeleton;
+		}
+		if (entType == "bat")
+		{
+			type = j1Entities::Types::bat;
+		}
+
+		CreateEntity(type, { entity.child("position").attribute("posX").as_int(), entity.child("position").attribute("posY").as_int() });
+	}
 	return true;
 }
 

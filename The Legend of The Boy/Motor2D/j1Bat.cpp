@@ -121,19 +121,22 @@ bool j1Bat::CleanUp()
 }
 
 // Load Game State
-bool j1Bat::Load(pugi::xml_node& data)
+/*bool j1Bat::Load(pugi::xml_node& data)
 {
 	position.x = data.child("position").attribute("posX").as_int();
 	position.y = data.child("position").attribute("posY").as_int();
 	return true;
-}
+}*/
 
 // Save Game State
 bool j1Bat::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node playerNode = data.append_child("position");
+	pugi::xml_node playerNode = data;
+	playerNode.append_attribute("type") = name.GetString();
+	playerNode = data.append_child("position");
 	playerNode.append_attribute("posX") = position.x;
 	playerNode.append_attribute("posY") = position.y;
+	
 	return true;
 }
 

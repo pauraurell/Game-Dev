@@ -8,9 +8,16 @@
 	<scene>
 		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
-	<player>
-		<position posX="20" posY="486" />
+	<:anonymous />
+	<player type="player">
+		<position posX="92" posY="483" />
 	</player>
+	<bat type="bat">
+		<position posX="168" posY="400" />
+	</bat>
+	<skeleton type="skeleton">
+		<position posX="210" posY="445" />
+	</skeleton>
 	<:anonymous />
 	<:anonymous />
 	<:anonymous />
