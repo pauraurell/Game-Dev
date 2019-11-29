@@ -87,7 +87,10 @@ bool j1Skeleton::Update(float dt)
 		state = SKELETON_MOVING_RIGHT;
 	}
 
-	else state = SKELETON_IDLE;
+	else 
+	{
+		if (state != SKELETON_DEAD) { state = SKELETON_IDLE; }
+	} 
 
 	switch (state)
 	{
@@ -105,6 +108,7 @@ bool j1Skeleton::Update(float dt)
 
 	case SKELETON_DEAD:
 		current_animation = &deadAnim;
+		
 		break;
 
 	case SKELETON_IDLE:
@@ -142,6 +146,8 @@ void j1Skeleton::Draw(float dt)
 bool j1Skeleton::CleanUp()
 {
 	App->tex->UnLoad(skeletonTex);
+	skeletonColliderBody->to_delete = true;
+	skeletonColliderLegs->to_delete = true;
 
 	return true;
 }
@@ -183,6 +189,22 @@ void j1Skeleton::Pushbacks()
 	idle.PushBack({ 192, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 216, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 240, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
+
+	deadAnim.PushBack({ 0, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 30, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 62, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 93, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 126, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 159, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 192, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 225, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 258, 83, 23, 31 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 287, 86, 23, 28 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 323, 82, 24, 25 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 356, 82, 25, 16 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.PushBack({ 385, 82, 30, 7 }, 0.12f, 1, 1, 1, 1);
+	deadAnim.loop = false;
+	
 }
 
 
@@ -231,11 +253,17 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 	*/
+
+	if (c1 == skeletonColliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
+	{
+		//LOG("coliding hehehe");
+		state = SKELETON_DEAD;
+	}
 }
 
 void j1Skeleton::SetSkeletonPosition(float dt)
 {
-	vel.y += (gravity);
+	vel.y += gravity;
 	position.x = position.x + (vel.x * dt * 60);
 	position.y = position.y + (vel.y * dt * 60);
 }

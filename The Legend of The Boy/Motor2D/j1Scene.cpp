@@ -8,10 +8,12 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Entities.h"
 #include "j1Player.h"
 #include "j1Skeleton.h"
 #include "j1Bat.h"
 #include "j1FadeToBlack.h"
+#include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
 
 

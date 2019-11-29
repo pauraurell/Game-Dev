@@ -56,7 +56,7 @@ public:
 	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	skeletonTex = nullptr;
-	p2SString		orientation = "right";
+	p2SString		orientation = "left";
 	bool			dead = false;
 	bool			OnGround = true;
 
