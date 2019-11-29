@@ -27,8 +27,14 @@ bool j1Entities::Load(pugi::xml_node& data)
 
 bool j1Entities::Save(pugi::xml_node& data) const
 {
-	
+	data.append_attribute("position");
+
+	data.append_attribute("type") = name.GetString();
+	data.child("position").append_attribute("posX") = position.x;
+	data.child("position").append_attribute("posY") = position.y;
+
 	return true;
+
 }
 
 void j1Entities::Pushbacks() {}
