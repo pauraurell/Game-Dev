@@ -73,7 +73,8 @@ public:
 	fPoint		    vel;
 
 	//COLLIDERS
-	Collider*	skeletonCollider = nullptr;
+	Collider*	skeletonColliderBody = nullptr;
+	Collider*	skeletonColliderLegs = nullptr;
 
 	//AUDIO
 	uint			SkeletonFx;

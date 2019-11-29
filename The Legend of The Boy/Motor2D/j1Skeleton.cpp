@@ -8,6 +8,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Collision.h"
+#include "j1Input.h"
 #include "j1Entities.h"
 #include "SDL_image/include/SDL_image.h"
 #include "Brofiler/Brofiler.h"
@@ -58,7 +59,8 @@ bool j1Skeleton::Start()
 	position.y = SpawnPointY;
 
 	current_animation = &idle;
-	skeletonCollider = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 25 }, COLLIDER_ENEMY, this);
+	skeletonColliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
+	skeletonColliderLegs = App->col->AddCollider({ position.x + 3, position.y + 21, 11, 12 }, COLLIDER_ENEMY, this);
 	skeletonTex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
 	return true;
 }
@@ -66,25 +68,39 @@ bool j1Skeleton::Start()
 // Called each loop iteration
 bool j1Skeleton::PreUpdate()
 {
-	skeletonCollider->SetPos(position.x + 1, position.y + 8);
+	skeletonColliderBody->SetPos(position.x + 1, position.y + 8);
+	skeletonColliderLegs->SetPos(position.x + 3, position.y + 21);
 
 	return true;
 }
 
 bool j1Skeleton::Update(float dt)
 {
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		state = SKELETON_MOVING_LEFT;
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		state = SKELETON_MOVING_RIGHT;
+	}
+
+	else state = SKELETON_IDLE;
+
 	switch (state)
 	{
 	case SKELETON_MOVING_LEFT:
 		orientation = "left";
-		vel.x -= SpeedX;
-		current_animation = &walking;
+		position.x = position.x - 2;
+		current_animation = &idle;
 		break;
 
 	case SKELETON_MOVING_RIGHT:
 		orientation = "right";
-		vel.x += SpeedX;
-		current_animation = &walking;
+		position.x = position.x + 2;
+		current_animation = &idle;
 		break;
 
 	case SKELETON_DEAD:
@@ -173,67 +189,55 @@ void j1Skeleton::Pushbacks()
 
 
 void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
-{/*
-	if (c1 == colPlayerLegs && c2->type == COLLIDER_WALL)
+{
+	if (c1 == skeletonColliderLegs && c2->type == COLLIDER_WALL)
 	{
-		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h) > (c2->rect.y))
+		if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
 			if (dash == true)
 			{
 				dash = false;
 			}
-			if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h - 3) > (c2->rect.y))
+			if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h - 3) > (c2->rect.y))
 			{
 				position.y -= 2;
 			}
 
 			OnGround = true;
 		}
-		//if the collider is under the player
 	}
 
-	if (c1 == colPlayerHead && c2->type == COLLIDER_WALL)
+	/*
+	if (c1 == skeletonColliderLegs && c2->type == COLLIDER_WALL)
 	{
-		if ((colPlayerHead->rect.y) < (c2->rect.y + c2->rect.h))
+		if ((skeletonColliderLegs->rect.y) < (c2->rect.y + c2->rect.h))
 		{
 			position.y = position.y + 2;
 			vel.y = 0;
 		}
 	}
+	*/
 
-	if (c1 == colPlayerBody && c2->type == COLLIDER_WALL)
+	/*
+	if (c1 == skeletonColliderBody && c2->type == COLLIDER_WALL)
 	{
-		if (state == PLAYER_DASH)
-		{
-			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
-				position.x = position.x - 3;
-				//vel.x = 0;
-			}
-			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
-			{
-				position.x = position.x + 4;
-			}
+		if (skeletonColliderBody->rect.x + skeletonColliderBody->rect.w > c2->rect.x && skeletonColliderBody->rect.x < c2->rect.x) {
+			position.x = position.x - 2;
+			if (vel.y > 0) { vel.x = 0; }
 		}
-		else
+		if (skeletonColliderBody->rect.x < c2->rect.x + c2->rect.w && skeletonColliderBody->rect.x > c2->rect.x)
 		{
-			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
-				position.x = position.x - 2;
-				if (vel.y > 0) { vel.x = 0; }
-			}
-			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
-			{
-				position.x = position.x + 2;
-				if (vel.y > 0) { vel.x = 0; }
-			}
+			position.x = position.x + 2;
+			if (vel.y > 0) { vel.x = 0; }
 		}
-	}*/
+	}
+	*/
 }
 
 void j1Skeleton::SetSkeletonPosition(float dt)
 {
-	//vel.y += (gravity * dt * 70);
-	position.x = position.x + (vel.x * dt * 70);
-	position.y = position.y + (vel.y * dt * 70);
-
+	vel.y += (gravity);
+	position.x = position.x + (vel.x * dt * 60);
+	position.y = position.y + (vel.y * dt * 60);
 }
