@@ -22,6 +22,7 @@ class j1FadeToBlack;
 class j1Collision;
 class j1Particles;
 class j1EntityManager;
+class j1PathFinding;
 
 
 class j1App
@@ -100,6 +101,7 @@ public:
 	j1Collision*		col;
 	j1Particles*		particles;
 	j1EntityManager*	entManager;
+	j1PathFinding*	    pathfinding;
 
 	#define SCALE 2
 
