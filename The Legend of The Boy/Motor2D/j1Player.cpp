@@ -261,7 +261,7 @@ bool j1Player::Update(float dt)
 
 		if (godModeUp == true)
 		{
-			position.y = position.y - 3;
+			position.y = position.y - 3 * dt * 60;
 			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
 			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
 			if (godModeDown == true) { position.y = position.y + 3; current_animation = &idle; }
@@ -270,7 +270,7 @@ bool j1Player::Update(float dt)
 		
 		else if (godModeDown == true)
 		{
-			position.y = position.y + 3;
+			position.y = position.y + 3 * dt * 60;
 			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
 			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
 			else { current_animation = &god_mode_down; }
@@ -278,7 +278,7 @@ bool j1Player::Update(float dt)
 
 		else if (godModeRight == true)
 		{
-			position.x = position.x + 3;
+			position.x = position.x + 3 * dt * 60;
 			orientation = "right";
 			if (godModeLeft == true) { position.x = position.x - 3; current_animation = &god_mode_run; }
 			else { current_animation = &god_mode_run; }
@@ -286,7 +286,7 @@ bool j1Player::Update(float dt)
 
 		else if (godModeLeft == true)
 		{
-			position.x = position.x - 3;
+			position.x = position.x - 3 * dt * 60;
 			orientation = "left";
 			current_animation = &god_mode_run;
 		}
@@ -373,7 +373,7 @@ void j1Player::GetPlayerState()
 			dash = true;
 		}
 
-		else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && dash == false)
+		else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && dash == false)
 		{
 			attack.Reset();
 			state = PLAYER_ATTACK;
