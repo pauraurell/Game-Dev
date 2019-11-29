@@ -519,12 +519,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
 				position.x = position.x - 2;
-				if (vel.y > 0) { vel.x = 0; }
+				vel.x = 0;
 			}
 			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
 				position.x = position.x + 2;
-				if (vel.y > 0) { vel.x = 0; }
+				vel.x = 0;
 			}
 		}
 	}
