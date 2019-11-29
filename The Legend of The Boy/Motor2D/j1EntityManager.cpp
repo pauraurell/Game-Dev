@@ -60,6 +60,14 @@ bool j1EntityManager::Load(pugi::xml_node& data)
 
 bool j1EntityManager::Save(pugi::xml_node& data) const
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList)
+	{
+		pugi::xml_node ent = data.append_child("Entity");
+		entityList->data->Save(ent);
+
+		entityList = entityList->next;
+	}
 	return true;
 }
 
@@ -91,6 +99,15 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 
 void j1EntityManager::DestroyEntity(j1Entities* entity)
 {
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList)
+	{
+		if (entityList->data = entity)
+		{
+			entities.del(entityList);
+		}
+		entityList = entityList->next;
+	}
 	delete entity;
 }
 
@@ -99,7 +116,10 @@ void j1EntityManager::DestroyEntities()
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList)
 	{
+		entityList->data->CleanUp();
+		RELEASE(entityList->data);
 		entities.del(entityList);
 		entityList = entityList->next;
 	}
+	entities.clear();
 }
