@@ -554,9 +554,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 void j1Player::GetPlayerPosition(float dt)
 {
-	vel.y += (gravity * dt * 70);
-	position.x = position.x + (vel.x * dt * 70);
-	position.y = position.y + (vel.y * dt * 70);
+	vel.y += (gravity * dt * 60);
+	position.x = position.x + (vel.x * dt * 60);
+	position.y = position.y + (vel.y * dt * 60);
 
 	if (position.y > yLimit && godMode == false) { dead = true; }
 }

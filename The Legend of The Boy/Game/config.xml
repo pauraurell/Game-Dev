@@ -2,8 +2,9 @@
 
 <config>
   <app>
-    <title>Game Development Testbed</title>
+    <title>The Legend of The Boy</title>
     <organization>UPC</organization>
+    <framerateCap fps="30"/>
   </app>
 	
   <renderer>

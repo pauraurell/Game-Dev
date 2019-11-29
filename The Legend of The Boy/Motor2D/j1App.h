@@ -103,8 +103,8 @@ public:
 
 	#define SCALE 2
 
-	bool				framecapEnabled = true;
-	uint32				framerate = 30;
+	bool FrameCapEnabled = false;
+	uint framerate = 0u;
 
 private:
 
@@ -121,16 +121,21 @@ private:
 	p2SString			load_game;
 	mutable p2SString	save_game;
 
-	j1PerfTimer			ptimer;
-	j1PerfTimer			delaytimer;
-	uint64				frame_count = 0;
-	j1Timer				startup_time;
-	j1Timer				frame_time;
-	j1Timer				last_sec_frame_time;
-	uint32				last_sec_frame_count = 0u;
-	uint32				prev_last_sec_frame_count = 0u;
+	bool pause = false;
 
-	float				dt;
+	j1Timer* mainTimer = nullptr;
+	j1PerfTimer* PerfTimer = nullptr;
+	j1Timer* lastSecFrames = nullptr;
+	j1Timer lastFrameTimer;
+	float avg_fps = 0.0f;
+
+	uint64 frame_count = 0u;
+	uint last_second_frame_count = 0u;
+	uint32 last_frame_ms = 0u;
+	uint32 frames_on_last_update = 0u;
+	
+	float	dt = 0.0f;
+	p2SString capStr;
 
 };
 
