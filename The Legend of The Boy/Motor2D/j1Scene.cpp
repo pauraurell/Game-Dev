@@ -59,9 +59,9 @@ bool j1Scene::Start()
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
 
-	App->entManager->CreateEntity(j1Entities::Types::player, playerPos);
-	App->entManager->CreateEntity(j1Entities::Types::bat, bat1Pos);
 	App->entManager->CreateEntity(j1Entities::Types::skeleton, skeleton1Pos);
+	App->entManager->CreateEntity(j1Entities::Types::bat, bat1Pos);
+	App->entManager->CreateEntity(j1Entities::Types::player, playerPos);
 
 	return true;
 }
