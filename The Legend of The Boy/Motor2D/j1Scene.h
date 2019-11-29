@@ -49,6 +49,9 @@ public:
 	bool sceneChangeTimer = false;
 
 	p2SString CurrentMap;
+	iPoint playerPos;
+	iPoint bat1Pos;
+	iPoint skeleton1Pos;
 
 
 private:

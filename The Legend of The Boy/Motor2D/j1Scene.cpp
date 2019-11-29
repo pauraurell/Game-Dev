@@ -41,6 +41,12 @@ bool j1Scene::Awake(pugi::xml_node& config)
 		level->create(map.attribute("name").as_string());
 		MapList.add(level->GetString());
 	}
+	playerPos.x = config.child("player").attribute("iPosX").as_int();
+	playerPos.y = config.child("player").attribute("iPosY").as_int();
+	bat1Pos.x = config.child("bat1").attribute("iPosX").as_int();
+	bat1Pos.y = config.child("bat1").attribute("iPosY").as_int();
+	skeleton1Pos.x = config.child("skeleton1").attribute("iPosX").as_int();
+	skeleton1Pos.y = config.child("skeleton1").attribute("iPosY").as_int();
 
 	return ret;
 }
@@ -52,6 +58,10 @@ bool j1Scene::Start()
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
+
+	App->entManager->CreateEntity(j1Entities::Types::player, playerPos);
+	App->entManager->CreateEntity(j1Entities::Types::bat, bat1Pos);
+	App->entManager->CreateEntity(j1Entities::Types::skeleton, skeleton1Pos);
 
 	return true;
 }

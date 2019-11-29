@@ -31,6 +31,9 @@
   <scene>
     <map name="FirstLevel.tmx" />
     <map name="SecondLevel.tmx" />
+    <player iPosX="20" iPosY="450" />
+    <bat1 iPosX="150" iPosY="400" />
+    <skeleton1 iPosX="210" iPosY="445" />
   </scene>
 
   <player>
