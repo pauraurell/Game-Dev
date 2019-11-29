@@ -298,8 +298,6 @@ bool j1Player::Update(float dt)
 	}
 	OnGround = false;
 
-	vel.x = oldVelX;
-
 	return true;
 }
 
@@ -478,14 +476,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == colPlayerLegs && c2->type == COLLIDER_WALL)
 	{
-		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h + vel.y) > (c2->rect.y))
+		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
 			if (dash == true)
 			{
 				dash = false;
 			}
-			if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h - 5 - vel.y) > (c2->rect.y))
+			if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h - 3) > (c2->rect.y))
 			{
 				position.y -= 2;
 			}
@@ -509,24 +507,23 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if (state == PLAYER_DASH)
 		{
 			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
-				position.x = position.x - 6;
-				vel.x = 0;
+				position.x = position.x - 3;
+				//vel.x = 0;
 			}
 			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
-				position.x = position.x + 6;
-				vel.x = 0;
+				position.x = position.x + 4;
 			}
 		}
 		else
 		{
-			if (colPlayerBody->rect.x + colPlayerBody->rect.w + oldVelX > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
-				position.x = position.x - oldVelX;
+			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
+				position.x = position.x - 2;
 				vel.x = 0;
 			}
-			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x - oldVelX> c2->rect.x)
+			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
-				position.x = position.x + oldVelX;
+				position.x = position.x + 2;
 				vel.x = 0;
 			}
 		}
