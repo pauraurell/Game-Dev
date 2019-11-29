@@ -115,7 +115,7 @@ bool j1Scene::Update(float dt)
 		App->map->drawSecretMap();
 	}
 
-	//if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {App->FrameCapEnabled = !App->FrameCapEnabled;}
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {App->FrameCapEnabled = !App->FrameCapEnabled;}
 	/*if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) 
 	{ 
 		if (App->framerate == 30) { App->framerate = 60; }

@@ -508,11 +508,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
 				position.x = position.x - 6;
-				//vel.x = 0;
+				vel.x = 0;
 			}
 			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
 			{
 				position.x = position.x + 6;
+				vel.x = 0;
 			}
 		}
 		else
@@ -550,6 +551,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->scene->secret_map = true;
 	}
+
 }
 
 void j1Player::GetPlayerPosition(float dt)
