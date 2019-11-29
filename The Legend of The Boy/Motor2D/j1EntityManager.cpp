@@ -30,11 +30,6 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 
 bool j1EntityManager::Start()
 {
-	p2List_item<j1Entities*>* entityList = entities.start;
-	while (entityList) {
-		entityList->data->Start();
-		entityList = entityList->next;
-	}
 	return true;
 }
 
