@@ -47,7 +47,7 @@ bool j1Input::Start()
 	return true;
 }
 
-bool j1Input::external_input()
+/*bool j1Input::external_input()
 {
 	SDL_Event event;
 
@@ -140,7 +140,7 @@ void j1Input::internal_input(p2List<player_inputs>& inputs)
 			dash_timer = 0;
 		}
 	}
-}
+}*/
 
 // Called each loop iteration
 bool j1Input::PreUpdate()
@@ -176,10 +176,10 @@ bool j1Input::PreUpdate()
 			mouse_buttons[i] = KEY_IDLE;
 	}
 
-	if (external_input() == false) { return false; }
+	/*if (external_input() == false) { return false; }
 	else {
 		internal_input(inputs);
-	}
+	}*/
 
 	while(SDL_PollEvent(&event) != 0)
 	{

@@ -166,3 +166,67 @@ void j1EntityManager::DestroyEntities()
 	}
 	entities.clear();
 }
+
+void j1EntityManager::DrawEntities(float dt)
+{
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList) {
+		entityList->data->Draw(dt);
+		entityList = entityList->next;
+	}
+}
+
+void j1EntityManager::RestartEntities()
+{
+	j1Entities::Types type;
+	p2List_item<j1Entities*>* entityList = entities.start;
+
+	if (App->scene->CurrentMap.GetString() == "SecondLevel.tmx")
+	{
+		while (entityList) {
+			type = entityList->data->entity_type;
+			switch (type)
+			{
+			case j1Entities::Types::player:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "right";
+				break;
+			case j1Entities::Types::skeleton:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "left";
+				break;
+			case j1Entities::Types::bat:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "left";
+				break;
+			}
+		}
+	}
+	else
+	{
+		while (entityList) {
+			type = entityList->data->entity_type;
+			switch (type)
+			{
+			case j1Entities::Types::player:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "right";
+				break;
+			case j1Entities::Types::skeleton:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "left";
+				break;
+			case j1Entities::Types::bat:
+				entityList->data->position.x = entityList->data->SpawnPointX;
+				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->orientation = "left";
+				break;
+			}
+		}
+	}
+}

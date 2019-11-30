@@ -58,7 +58,7 @@ bool j1Bat::Start()
 
 	current_animation = &flying;
 	batCollider = App->col->AddCollider({ position.x, position.y, 15, 14 }, COLLIDER_ENEMY, this);
-	batTex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
+	batTex = App->tex->Load("textures/bat_spritesheet.png");
 	return true;
 }
 

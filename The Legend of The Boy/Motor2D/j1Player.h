@@ -11,21 +11,21 @@
 struct SDL_Texture;
 struct Collider;
 
-enum playerStates
-{
-	PLAYER_IDLE,
-	PLAYER_RUN_LEFT,
-	PLAYER_RUN_RIGHT,
-	PLAYER_JUMP,
-	PLAYER_JUMP_RIGHT,
-	PLAYER_JUMP_LEFT,
-	PLAYER_DASH,
-	PLAYER_ATTACK
-};
-
 class j1Player : public j1Entities
 {
 public:
+
+	enum playerStates
+	{
+		PLAYER_IDLE,
+		PLAYER_RUN_LEFT,
+		PLAYER_RUN_RIGHT,
+		PLAYER_JUMP,
+		PLAYER_JUMP_RIGHT,
+		PLAYER_JUMP_LEFT,
+		PLAYER_DASH,
+		PLAYER_ATTACK
+	};
 
 	j1Player();
 	j1Player(iPoint pos);
@@ -63,7 +63,6 @@ public:
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation = "right";
-	bool			input = true;
 	bool			dead = false;
 	bool			dash = false;
 	bool			OnGround = true;

@@ -41,8 +41,8 @@ void j1Entities::Pushbacks() {}
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2) {}
 
-void j1Entities::Draw() {}
+void j1Entities::Draw(float dt) {}
 
-void j1Entities::SetState() {}
+void j1Entities::SetPlayerState(playerStates state) {}
 
 void j1Entities::GetPosition() {}

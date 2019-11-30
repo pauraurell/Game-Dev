@@ -22,6 +22,8 @@ public:
 		unknown
 	};
 
+	enum class playerStates {};
+
 	Types entity_type;
 
 	j1Entities(Types entity_type);
@@ -33,16 +35,15 @@ public:
 
 	virtual void Pushbacks();
 	virtual void OnCollision(Collider* c1, Collider* c2);
-	virtual void Draw();
+	virtual void Draw(float dt);
 
-	virtual void SetState();
+	virtual void SetPlayerState(playerStates state);
 	virtual void GetPosition();
 
 	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture* Character_tex = nullptr;
 	p2SString		orientation = "right";
-	bool			input = true;
 	bool			dead = false;
 	bool			dash = false;
 	bool			OnGround = true;

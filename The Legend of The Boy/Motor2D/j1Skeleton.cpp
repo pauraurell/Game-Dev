@@ -61,7 +61,7 @@ bool j1Skeleton::Start()
 	current_animation = &idle;
 	skeletonColliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
 	skeletonColliderLegs = App->col->AddCollider({ position.x + 3, position.y + 21, 11, 12 }, COLLIDER_ENEMY, this);
-	skeletonTex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
+	skeletonTex = App->tex->Load("textures/skeleton_spritesheet.png");
 	return true;
 }
 

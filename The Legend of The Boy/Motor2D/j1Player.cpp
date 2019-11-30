@@ -74,7 +74,7 @@ bool j1Player::Start()
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
 	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
-	Character_tex = App->tex->Load(PATH(folder.GetString(), texture_path.GetString()));
+	Character_tex = App->tex->Load("textures/adventurer-v1.5-Sheet.png");
 	return true;
 }
 
@@ -172,13 +172,13 @@ bool j1Player::Update(float dt)
 			current_animation = &ground_dash;
 			if (SDL_GetTicks() - dash_timer > dashTime)
 			{
-				input = true;
+				App->scene->input = true;
 				dashTimer = false;
 				dashAttackCollider->to_delete = true;
 			}
 			else
 			{
-				input = false;
+				App->scene->input = false;
 			}
 			break;
 
@@ -199,13 +199,13 @@ bool j1Player::Update(float dt)
 			
 			if (SDL_GetTicks() - attack_timer > attackTime)
 			{
-				input = true;
+				App->scene->input = true;
 				attackTimer = false;
 				attackCollider->to_delete = true;
 			}
 			else
 			{
-				input = false;
+				App->scene->input = false;
 				current_animation = &attack;
 			}
 			break;
@@ -298,6 +298,8 @@ bool j1Player::Update(float dt)
 	}
 	OnGround = false;
 
+	App->render->cameraPos = position;
+
 	return true;
 }
 
@@ -356,7 +358,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 
 void j1Player::GetPlayerState()
 {
-	if (input == true && godMode == false)
+	if (App->scene->input == true && godMode == false)
 	{
 		
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && vel.y == 0)
@@ -380,7 +382,7 @@ void j1Player::GetPlayerState()
 		{
 			attack.Reset();
 			state = PLAYER_ATTACK;
-			input = false;
+			App->scene->input = false;
 		}
 
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -410,7 +412,7 @@ void j1Player::GetPlayerState()
 		else
 		{
 			state = PLAYER_IDLE;
-			input = true;
+			App->scene->input = true;
 		}
 	}
 }
@@ -572,7 +574,7 @@ void j1Player::Respawn()
 	{
 		respawn_timer = SDL_GetTicks();
 		App->fade->FadeToBlack(1.2);
-		input = false;
+		App->scene->input = false;
 		respawnTimer = true;
 	}
 
@@ -582,7 +584,7 @@ void j1Player::Respawn()
 		vel.y = 0;
 		orientation = "right";
 		dead = false;
-		input = true;
+		App->scene->input = true;
 		respawnTimer = false;
 		App->scene->secret_map = false;
 	}

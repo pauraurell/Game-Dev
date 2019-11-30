@@ -75,8 +75,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool external_input();
-	void internal_input(p2List<player_inputs>& inputs);
+	/*bool external_input();
+	void internal_input(p2List<player_inputs>& inputs);*/
 
 	// Gather relevant win events
 	bool GetWindowEvent(j1EventWindow ev);

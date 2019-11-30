@@ -138,11 +138,12 @@ bool j1Scene::Update(float dt)
 	App->map->Draw();
 
 	//Entities
-	App->player->Draw(dt);
+	/*App->player->Draw(dt);
 	App->bat->Draw(dt);
-	App->skeleton->Draw(dt);
+	App->skeleton->Draw(dt);*/
+	App->entManager->DrawEntities(dt);
 
-	App->render->cameraFollowingPlayer(App->player->position.x, App->player->position.y);
+	App->render->cameraFollowingPlayer(App->render->cameraPos.x, App->render->cameraPos.y);
 
 
 	return true;
@@ -201,8 +202,9 @@ bool j1Scene::Save(pugi::xml_node& data) const
 //Restartint current level
 void j1Scene::RestartCurrentLevel()
 {
-	App->player->position.x = App->player->SpawnPointX;
-	App->player->position.y = App->player->SpawnPointY;
+	/*App->player->position.x = App->player->SpawnPointX;
+	App->player->position.y = App->player->SpawnPointY;*/
+	App->entManager->RestartEntities();
 }
 
 //Restarting the first level
@@ -214,8 +216,7 @@ void j1Scene::StartFirstLevel()
 		App->map->CleanUp();
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
-		App->player->orientation = "right";
-		RestartCurrentLevel();
+		App->entManager->RestartEntities();
 		scene_change = false;
 		manualFirstLevel = false;
 	}
@@ -228,8 +229,14 @@ void j1Scene::StartFirstLevel()
 			scene_change_timer = SDL_GetTicks();
 			App->fade->FadeToBlack(2);
 			sceneChangeTimer = true;
-			App->player->SetPlayerState(PLAYER_IDLE);
-			App->player->input = false;
+			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
+			while (entityList) {
+				if (entityList->data->entity_type == j1Entities::Types::player) {
+					entityList->data->SetPlayerState(j1Player::playerStates::PLAYER_IDLE);
+				}
+				entityList = entityList->next;
+			}
+			input = false;
 		}
 
 		if (SDL_GetTicks() - scene_change_timer > 1040)
@@ -237,11 +244,10 @@ void j1Scene::StartFirstLevel()
 			App->map->CleanUp();
 			CurrentMap.create("FirstLevel.tmx");
 			App->map->Load(CurrentMap.GetString());
-			App->player->orientation = "right";
-			RestartCurrentLevel();
+			App->entManager->RestartEntities();
 			scene_change = false;
 			sceneChangeTimer = false;
-			App->player->input = true;
+			input = true;
 		}
 	}
 }
@@ -252,8 +258,7 @@ void j1Scene::StartSecondLevel()
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
-	App->player->orientation = "right";
-	RestartCurrentLevel();
+	App->entManager->RestartEntities();
 	scene_change = true;
 	secret_map = false;
 }

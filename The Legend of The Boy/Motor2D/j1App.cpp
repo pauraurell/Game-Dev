@@ -33,9 +33,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new j1Textures();
 	audio = new j1Audio();
 	scene = new j1Scene();
-	player = new j1Player();
+	/*player = new j1Player();
 	bat = new j1Bat();
-	skeleton = new j1Skeleton();
+	skeleton = new j1Skeleton();*/
 	map = new j1Map();
 	fade = new j1FadeToBlack();
 	col = new j1Collision();
