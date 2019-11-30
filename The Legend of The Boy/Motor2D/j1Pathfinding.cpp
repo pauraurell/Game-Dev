@@ -106,7 +106,7 @@ p2List_item<PathNode>* PathList::GetNodeLowestScore() const
 PathNode::PathNode() : g(-1), h(-1), pos(-1, -1), parent(NULL)
 {}
 
-PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
+PathNode::PathNode(int g, int h, const iPoint& pos, PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
 {}
 
 PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), parent(node.parent)
@@ -115,7 +115,7 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
+uint PathNode::FindWalkableAdjacents(PathList& list_to_fill)
 {
 	iPoint cell;
 	uint before = list_to_fill.list.count();
@@ -178,4 +178,61 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	PathList closed;
 
 	open.list.add(PathNode(0, origin.DistanceTo(destination), origin, NULL));
+
+	PathNode* node;
+
+	while (open.GetNodeLowestScore() != NULL)
+	{
+		node = new PathNode(open.GetNodeLowestScore()->data);
+		
+		closed.list.add(*node);
+		open.list.del(open.Find(node->pos));
+	
+		// TODO 4: If we just added the destination, we are done!
+		// Backtrack to create the final path
+		// Use the Pathnode::parent and Flip() the path when you are finish... ¿ed?
+		if (node->pos == destination) {
+
+			PathNode* iterator = node;
+
+			for (iterator; iterator->pos != origin; iterator = iterator->parent) {
+				last_path.PushBack(iterator->pos);
+			}
+			last_path.PushBack(origin);
+
+			last_path.Flip();
+			return 0;
+
+		}
+	
+		PathList Adjacent_list;  //list of adjacent nodes
+
+		uint adjacents = node->FindWalkableAdjacents(Adjacent_list);
+
+		for (uint i = 0; i < adjacents; i++) 
+		{
+			if ((closed.Find(Adjacent_list.list[i].pos)) == NULL) //ignore closed
+			{	
+
+				if ((open.Find(Adjacent_list.list[i].pos)) == NULL) 
+				{
+					Adjacent_list.list[i].CalculateF(destination);
+					open.list.add(Adjacent_list.list[i]); //adding to the adjacent list
+				}
+				else { // If it is already in the open list, check if it is a better path (compare G)
+					if (Adjacent_list.list[i].g < open.Find(Adjacent_list.list[i].pos)->data.g)
+					{
+						// If it is a better path, Update the parent
+						//open.Find(Adjacent_list.list[i].pos)->data.parent = Adjacent_list.list[i].parent;
+						Adjacent_list.list[i].CalculateF(destination);
+						open.list.del(open.Find(Adjacent_list.list[i].pos));
+						open.list.add(Adjacent_list.list[i]);
+
+					}
+				}
+			}
+		}
+
+
+	}
 }
