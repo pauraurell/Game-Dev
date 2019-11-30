@@ -16,6 +16,7 @@ enum batStates
 	BAT_FLIYING_LEFT,
 	BAT_FLIYING_RIGHT,
 	BAT_DEAD,	
+	FLYING_TO_THE_PLAYER
 };
 
 class j1Bat : public j1Entities
@@ -37,6 +38,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	bool BatPathfinding(float dt);
 
 	// Called each loop iteration
 	void Draw(float dt);

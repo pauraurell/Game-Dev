@@ -6,11 +6,15 @@
 #include "j1Scene.h"
 #include "j1Audio.h"
 #include "j1Render.h"
+#include "j1Input.h"
 #include "j1Window.h"
 #include "j1Collision.h"
 #include "j1Entities.h"
 #include "SDL_image/include/SDL_image.h"
 #include "Brofiler/Brofiler.h"
+#include "j1PathFinding.h"
+#include "j1Map.h"
+#include "j1EntityManager.h"
 
 j1Bat::j1Bat() : j1Entities(Types::bat)
 {
@@ -84,6 +88,10 @@ bool j1Bat::Update(float dt)
 				orientation = "right";
 				position.x++;
 				if (position.x >= SpawnPointX + 100) { state = BAT_FLIYING_LEFT; }
+				break;
+
+			case FLYING_TO_THE_PLAYER:
+				current_animation = &flying;
 				break;
 		}
 
@@ -218,4 +226,53 @@ void j1Bat::SetBatPosition(float dt)
 {
 	position.x = position.x + (vel.x * dt * 70);
 	position.y = position.y + (vel.y * dt * 70);
+}
+
+bool j1Bat::BatPathfinding(float dt) {
+
+	static iPoint InicialEntityPosition;
+
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	iPoint p = App->entManager->GetPlayerEntity()->position;
+	p = App->map->WorldToMap(p.x + 30, p.y + 30);
+
+	InicialEntityPosition = App->map->WorldToMap(position.x + 30, position.y + 30);
+	App->pathfinding->CreatePath(InicialEntityPosition, p);
+
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+
+	if (path->At(1) != NULL)
+	{
+		state = FLYING_TO_THE_PLAYER;
+
+		if (path->At(1)->x < InicialEntityPosition.x) 
+		{
+			orientation = "right";
+			position.x -= 2 * 60 * dt;
+		}
+
+		if (path->At(1)->x > InicialEntityPosition.x) 
+		{
+			orientation = "left";
+			position.x += 2* 60 * dt;
+		}
+
+		if (path->At(1)->y < InicialEntityPosition.y)
+		{
+			position.y -= 2 * 60 * dt;
+		}
+
+		if (path->At(1)->y > InicialEntityPosition.y) 
+		{
+			position.y += 2 * 60 * dt;
+		}
+	}
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint nextPathPosition = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+	}
+
+	return true;
 }

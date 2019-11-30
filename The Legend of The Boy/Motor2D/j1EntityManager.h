@@ -27,6 +27,7 @@ public:
 	void DestroyEntity(j1Entities* entity);
 	void DestroyEntities();
 	void ClearEntitiyList();
+	j1Entities* GetPlayerEntity();
 
 	pugi::xml_node node;
 	p2List<j1Entities*> entities;
