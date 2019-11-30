@@ -97,13 +97,13 @@ bool j1Skeleton::Update(float dt)
 	case SKELETON_MOVING_LEFT:
 		orientation = "left";
 		position.x = position.x - 2;
-		current_animation = &idle;
+		current_animation = &walking;
 		break;
 
 	case SKELETON_MOVING_RIGHT:
 		orientation = "right";
 		position.x = position.x + 2;
-		current_animation = &idle;
+		current_animation = &walking;
 		break;
 
 	case SKELETON_DEAD:
@@ -118,12 +118,12 @@ bool j1Skeleton::Update(float dt)
 	}
 
 	SetSkeletonPosition(dt);
-
 	return true;
 }
 
 bool j1Skeleton::PostUpdate()
 {
+	
 	return true;
 }
 
@@ -179,7 +179,8 @@ void j1Skeleton::SkeletonState(skeletonStates stateS)
 
 void j1Skeleton::Pushbacks()
 {
-	//Skeleton animations 
+	//Skeleton animations
+
 	idle.PushBack({ 0, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 24, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 48, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
@@ -206,6 +207,17 @@ void j1Skeleton::Pushbacks()
 	deadAnim.PushBack({ 356, 82, 25, 16 }, 0.12f, 1, 1, 1, 1);
 	deadAnim.PushBack({ 385, 82, 30, 7 }, 0.12f, 1, 1, 1, 1);
 	deadAnim.loop = false;
+
+	walking.PushBack({ 0, 42, 20, 33 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 22, 42, 21, 33 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 44, 42, 22, 33 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 66, 43, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 88, 43, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 110, 43, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 132, 43, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 155, 43, 20, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 178, 43, 18, 32 }, 0.12f, 1, 1, 1, 1);
+	walking.PushBack({ 200, 43, 17, 32 }, 0.12f, 1, 1, 1, 1);
 	
 }
 

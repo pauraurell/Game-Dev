@@ -167,9 +167,15 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
-	int ret = -1;
 
-	// Nice try :)
+	if (IsWalkable(origin) == false || IsWalkable(destination) == false) {
+		return -1;
+	}
 
-	return ret;
+	last_path.Clear();
+
+	PathList open; 
+	PathList closed;
+
+	open.list.add(PathNode(0, origin.DistanceTo(destination), origin, NULL));
 }
