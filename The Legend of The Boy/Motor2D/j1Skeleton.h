@@ -38,6 +38,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	bool SkeletonPathFinding(float dt);
 
 	// Called each loop iteration
 	void Draw(float dt);

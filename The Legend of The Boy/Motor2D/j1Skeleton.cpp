@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Skeleton.h"
 #include "j1Textures.h"
+#include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Audio.h"
 #include "j1Render.h"
@@ -10,8 +11,10 @@
 #include "j1Collision.h"
 #include "j1Input.h"
 #include "j1Entities.h"
+#include "j1EntityManager.h"
 #include "SDL_image/include/SDL_image.h"
 #include "Brofiler/Brofiler.h"
+#include "j1Pathfinding.h"
 
 j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 {
@@ -280,4 +283,46 @@ void j1Skeleton::SetSkeletonPosition(float dt)
 	vel.y += gravity;
 	position.x = position.x + (vel.x * dt * 60);
 	position.y = position.y + (vel.y * dt * 60);
+}
+
+bool j1Skeleton::SkeletonPathFinding(float dt) {
+
+	static iPoint InicialEntityPosition;
+
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	iPoint rightCell(position.x, position.y);iPoint upCell(position.x, position.y);
+	iPoint leftCell(position.x, position.y);iPoint DownCell(position.x, position.y);
+
+	iPoint playerPos = App->entManager->GetPlayerEntity()->position;
+	playerPos = App->map->WorldToMap(playerPos.x + 30, playerPos.y + 30);
+
+	InicialEntityPosition = App->map->WorldToMap(position.x, position.y);
+	App->pathfinding->CreatePath(InicialEntityPosition, playerPos);
+
+
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	if (path->At(1) != NULL)
+	{
+		if (state != SKELETON_DEAD)
+		{
+			if (path->At(1)->x < InicialEntityPosition.x && !App->pathfinding->IsWalkable(DownCell))
+			{
+				position.x -= 2 * 60 * dt;
+				orientation = "left";
+			}
+			if (path->At(1)->x > InicialEntityPosition.x && !App->pathfinding->IsWalkable(rightCell))
+			{
+				position.x += 2 * 60 * dt;
+				orientation = "right";
+			}
+		}
+	}
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint nextPathPosition = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+	}
+
+	return true;
 }
