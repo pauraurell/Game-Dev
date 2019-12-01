@@ -41,13 +41,16 @@ bool j1Scene::Awake(pugi::xml_node& config)
 		level->create(map.attribute("name").as_string());
 		MapList.add(level->GetString());
 	}
-	playerPos.x = config.child("player").attribute("iPosX").as_int();
-	playerPos.y = config.child("player").attribute("iPosY").as_int();
-	bat1Pos.x = config.child("bat1").attribute("iPosX").as_int();
-	bat1Pos.y = config.child("bat1").attribute("iPosY").as_int();
-	skeleton1Pos.x = config.child("skeleton1").attribute("iPosX").as_int();
-	skeleton1Pos.y = config.child("skeleton1").attribute("iPosY").as_int();
-
+	PlayerSpawnPointX = config.child("player").attribute("PosX").as_int();
+	PlayerSpawnPointY = config.child("player").attribute("PosY").as_int();
+	BatSpawnPointX = config.child("bat").attribute("PosX").as_int();
+	BatSpawnPointY = config.child("bat").attribute("PosY").as_int();
+	BatSpawnPointX2 = config.child("bat").attribute("PosX2").as_int();
+	BatSpawnPointY2 = config.child("bat").attribute("PosY2").as_int();
+	SkeletonSpawnPointX = config.child("skeleton").attribute("PosX").as_int();
+	SkeletonSpawnPointY = config.child("skeleton").attribute("PosY").as_int();
+	SkeletonSpawnPointX2 = config.child("skeleton").attribute("PosX2").as_int();
+	SkeletonSpawnPointY2 = config.child("skeleton").attribute("PosY2").as_int();
 	return ret;
 }
 
@@ -216,7 +219,7 @@ void j1Scene::StartFirstLevel()
 		App->map->CleanUp();
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
-		//App->entManager->RestartEntities();
+		App->entManager->RestartEntities();
 		scene_change = false;
 		manualFirstLevel = false;
 	}
@@ -232,7 +235,7 @@ void j1Scene::StartFirstLevel()
 			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
 			while (entityList) {
 				if (entityList->data->entity_type == j1Entities::Types::player) {
-				//	entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
+					//entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
 				}
 				entityList = entityList->next;
 				
@@ -245,7 +248,7 @@ void j1Scene::StartFirstLevel()
 			App->map->CleanUp();
 			CurrentMap.create("FirstLevel.tmx");
 			App->map->Load(CurrentMap.GetString());
-		//	App->entManager->RestartEntities();
+			App->entManager->RestartEntities();
 			scene_change = false;
 			sceneChangeTimer = false;
 			input = true;
@@ -266,20 +269,20 @@ void j1Scene::StartSecondLevel()
 
 void j1Scene::CreateEnt()
 {
-	
+
 	iPoint playerSpawnPoint1;
-	playerSpawnPoint1.x = 20;
-	playerSpawnPoint1.y = 350;
+	playerSpawnPoint1.x = PlayerSpawnPointX;
+	playerSpawnPoint1.y = PlayerSpawnPointY;
 	App->entManager->CreateEntity(j1Entities::Types::player, playerSpawnPoint1);
 
 	iPoint BatSpawnPoint1;
-	BatSpawnPoint1.x = 50;
-	BatSpawnPoint1.y = 350;
+	BatSpawnPoint1.x = BatSpawnPointX2;
+	BatSpawnPoint1.y = BatSpawnPointY;
 	App->entManager->CreateEntity(j1Entities::Types::bat, BatSpawnPoint1);
 
 	iPoint skSpawnPoint1;
-	skSpawnPoint1.x = 50;
-	skSpawnPoint1.y = 350;
+	skSpawnPoint1.x = SkeletonSpawnPointX;
+	skSpawnPoint1.y = SkeletonSpawnPointY;
 	App->entManager->CreateEntity(j1Entities::Types::skeleton, skSpawnPoint1);
 	
 }

@@ -41,6 +41,7 @@ public:
 	bool			dead = false;
 	bool			OnGround = true;
 	p2SString		orientation = "right";
+	int				SpawnPointX, SpawnPointY;
 
 	p2SString		entity_name;
 };
