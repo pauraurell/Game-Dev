@@ -70,12 +70,16 @@ bool j1Player::Start()
 	//position.x = SpawnPointX;
 	//position.y = SpawnPointY;
 
-	current_animation = &idle;
+	state = PLAYER_IDLE;
+	dead = false;
+
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
 	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load("textures/adventurer-v1.5-Sheet.png");
 	return true;
+
+
 }
 
 // Called each loop iteration
@@ -333,14 +337,7 @@ bool j1Player::CleanUp()
 	return true;
 }
 
-// Load Game State
-/*bool j1Player::Load(pugi::xml_node& data)
-{
-	LOG("Loading player state");
-	position.x = data.child("position").attribute("posX").as_int();
-	position.y = data.child("position").attribute("posY").as_int();
-	return true;
-}*/
+
 
 // Save Game State
 bool j1Player::Save(pugi::xml_node& data) const

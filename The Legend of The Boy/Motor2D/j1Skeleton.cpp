@@ -232,10 +232,6 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 		if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
-			if (dash == true)
-			{
-				dash = false;
-			}
 			if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h - 3) > (c2->rect.y))
 			{
 				position.y -= 2;

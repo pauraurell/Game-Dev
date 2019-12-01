@@ -22,8 +22,6 @@ public:
 		unknown
 	};
 
-	enum class playerStates {};
-
 	Types entity_type;
 
 	j1Entities(Types entity_type);
@@ -31,26 +29,14 @@ public:
 	virtual ~j1Entities();
 
 	bool Load(pugi::xml_node& data);
-	bool Save(pugi::xml_node& data) const;
 
-	virtual void Pushbacks();
-	virtual void OnCollision(Collider* c1, Collider* c2);
 	virtual void Draw(float dt);
 
-	virtual void SetPlayerState(playerStates state);
-	virtual void GetPosition();
+	bool Save(pugi::xml_node& data) const;
 
 	iPoint			position;
-	int				SpawnPointX, SpawnPointY, yLimit;
-	SDL_Texture* Character_tex = nullptr;
-	p2SString		orientation = "right";
-	bool			dead = false;
-	bool			dash = false;
-	bool			OnGround = true;
-	p2SString		texture_path;
 
 	p2SString		entity_name;
-	
 };
 
 #endif

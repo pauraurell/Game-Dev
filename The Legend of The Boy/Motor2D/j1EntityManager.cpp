@@ -129,6 +129,7 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 	case j1Entities::Types::bat:
 		ret = new j1Bat(pos);
 		break;
+
 	}
 
 	if (ret != nullptr)
@@ -176,7 +177,7 @@ void j1EntityManager::DrawEntities(float dt)
 	}
 }
 
-void j1EntityManager::RestartEntities()
+/*void j1EntityManager::RestartEntities()
 {
 	j1Entities::Types type;
 	p2List_item<j1Entities*>* entityList = entities.start;
@@ -229,7 +230,7 @@ void j1EntityManager::RestartEntities()
 			}
 		}
 	}
-}
+}*/
 
 j1Entities* j1EntityManager::GetPlayerEntity()
 {

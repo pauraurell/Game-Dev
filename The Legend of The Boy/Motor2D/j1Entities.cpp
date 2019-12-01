@@ -37,12 +37,5 @@ bool j1Entities::Save(pugi::xml_node& data) const
 
 }
 
-void j1Entities::Pushbacks() {}
-
-void j1Entities::OnCollision(Collider* c1, Collider* c2) {}
-
-void j1Entities::Draw(float dt) {}
-
-void j1Entities::SetPlayerState(playerStates state) {}
-
-void j1Entities::GetPosition() {}
+void j1Entities::Draw(float dt)
+{}

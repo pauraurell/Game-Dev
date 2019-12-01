@@ -202,9 +202,9 @@ bool j1Scene::Save(pugi::xml_node& data) const
 //Restartint current level
 void j1Scene::RestartCurrentLevel()
 {
-	/*App->player->position.x = App->player->SpawnPointX;
-	App->player->position.y = App->player->SpawnPointY;*/
-	App->entManager->RestartEntities();
+	//App->entManager->GetPlayerEntity()->position.x = App->entManager->GetPlayerEntity()->SpawnPointX;
+	//App->entManager->GetPlayerEntity()->position.y = App->entManager->GetPlayerEntity()->SpawnPointY;
+	//App->entManager->RestartEntities();
 }
 
 //Restarting the first level
@@ -216,7 +216,7 @@ void j1Scene::StartFirstLevel()
 		App->map->CleanUp();
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
-		App->entManager->RestartEntities();
+		//App->entManager->RestartEntities();
 		scene_change = false;
 		manualFirstLevel = false;
 	}
@@ -232,9 +232,10 @@ void j1Scene::StartFirstLevel()
 			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
 			while (entityList) {
 				if (entityList->data->entity_type == j1Entities::Types::player) {
-					entityList->data->SetPlayerState(j1Player::playerStates::PLAYER_IDLE);
+				//	entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
 				}
 				entityList = entityList->next;
+				
 			}
 			input = false;
 		}
@@ -244,7 +245,7 @@ void j1Scene::StartFirstLevel()
 			App->map->CleanUp();
 			CurrentMap.create("FirstLevel.tmx");
 			App->map->Load(CurrentMap.GetString());
-			App->entManager->RestartEntities();
+		//	App->entManager->RestartEntities();
 			scene_change = false;
 			sceneChangeTimer = false;
 			input = true;
@@ -258,7 +259,7 @@ void j1Scene::StartSecondLevel()
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
-	App->entManager->RestartEntities();
+	//App->entManager->RestartEntities();
 	scene_change = true;
 	secret_map = false;
 }
