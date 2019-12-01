@@ -144,8 +144,8 @@ bool j1Player::Update(float dt)
 			{
 				dash_timer = SDL_GetTicks();
 				dashTimer = true;
-				if (orientation == "right") { dashAttackCollider = App->col->AddCollider({ position.x + 15, position.y + 10, 15, 10 }, COLLIDER_PLAYER_ATTACK); }
-				if (orientation == "left") { dashAttackCollider = App->col->AddCollider({ position.x - 10, position.y + 10, 15, 10 }, COLLIDER_PLAYER_ATTACK); }
+				if (orientation == "right") { dashAttackCollider = App->col->AddCollider({ position.x + 15, position.y + 10, 25, 10 }, COLLIDER_PLAYER_ATTACK); }
+				if (orientation == "left") { dashAttackCollider = App->col->AddCollider({ position.x - 10, position.y + 10, 25, 10 }, COLLIDER_PLAYER_ATTACK); }
 			}
 			if (orientation == "right")
 			{
@@ -179,11 +179,11 @@ bool j1Player::Update(float dt)
 				attackTimer = true;
 				if (orientation == "right") 
 				{
-					attackCollider= App->col->AddCollider({ position.x + 15, position.y +4, 20, 20 }, COLLIDER_PLAYER_ATTACK);
+					attackCollider= App->col->AddCollider({ position.x + 15, position.y +4, 22, 22 }, COLLIDER_PLAYER_ATTACK);
 				}
 				else 
 				{
-					attackCollider = App->col->AddCollider({ position.x - 10, position.y + 4, 20, 20 }, COLLIDER_PLAYER_ATTACK);
+					attackCollider = App->col->AddCollider({ position.x - 10, position.y + 4, 22, 22 }, COLLIDER_PLAYER_ATTACK);
 				}
 			}
 			

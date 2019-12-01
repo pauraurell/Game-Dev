@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1PathFinding.h"
+#include "Brofiler/Brofiler.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
 {
@@ -31,8 +32,8 @@ void j1PathFinding::SetMap(uint width, uint height, uchar* data)
 	this->height = height;
 
 	RELEASE_ARRAY(map);
-	map = new uchar[width*height];
-	memcpy(map, data, width*height);
+	map = new uchar[width * height];
+	memcpy(map, data, width * height);
 }
 
 // Utility: return true if pos is inside the map boundaries
@@ -53,7 +54,7 @@ bool j1PathFinding::IsWalkable(const iPoint& pos) const
 uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 {
 	if (CheckBoundaries(pos))
-		return map[(pos.y*width) + pos.x];
+		return map[(pos.y * width) + pos.x];
 
 	return INVALID_WALK_CODE;
 }
@@ -167,33 +168,35 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
+	BROFILER_CATEGORY("Pathfinding", Profiler::Color::Gold);
 
+	// TODO 1: if origin or destination are not walkable, return -1
 	if (IsWalkable(origin) == false || IsWalkable(destination) == false) {
 		return -1;
 	}
+	// TODO 2: Create two lists: open, close
 
 	last_path.Clear();
 
-	PathList open; 
-	PathList closed;
-
+	PathList open; PathList closed;
+	// Add the origin tile to open
 	open.list.add(PathNode(0, origin.DistanceTo(destination), origin, NULL));
+	// Iterate while we have tile in the open list
 
-	PathNode* node;
+	PathNode* current_node;
 
 	while (open.GetNodeLowestScore() != NULL)
 	{
-		node = new PathNode(open.GetNodeLowestScore()->data);
-		
-		closed.list.add(*node);
-		open.list.del(open.Find(node->pos));
-	
+		current_node = new PathNode(open.GetNodeLowestScore()->data);
+		// TODO 3: Move the lowest score cell from open list to the closed list
+		closed.list.add(*current_node);
+		open.list.del(open.Find(current_node->pos));
 		// TODO 4: If we just added the destination, we are done!
 		// Backtrack to create the final path
 		// Use the Pathnode::parent and Flip() the path when you are finish... ¿ed?
-		if (node->pos == destination) {
+		if (current_node->pos == destination) {
 
-			PathNode* iterator = node;
+			PathNode* iterator = current_node;
 
 			for (iterator; iterator->pos != origin; iterator = iterator->parent) {
 				last_path.PushBack(iterator->pos);
@@ -204,27 +207,24 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			return 0;
 
 		}
-	
-		PathList Adjacent_list;  //list of adjacent nodes
 
-		uint adjacents = node->FindWalkableAdjacents(Adjacent_list);
-
-		for (uint i = 0; i < adjacents; i++) 
-		{
-			if ((closed.Find(Adjacent_list.list[i].pos)) == NULL) //ignore closed
-			{	
-
-				if ((open.Find(Adjacent_list.list[i].pos)) == NULL) 
-				{
+		// TODO 5: Fill a list of all adjancent nodes
+		PathList Adjacent_list;
+		uint limit = current_node->FindWalkableAdjacents(Adjacent_list);
+		// TODO 6: Iterate adjancent nodes:
+		for (uint i = 0; i < limit; i++) {
+			// ignore nodes in the closed list <======> do things only if we didnt find them
+			if ((closed.Find(Adjacent_list.list[i].pos)) == NULL) {
+				// If it is NOT found, calculate its F and add it to the open list
+				if ((open.Find(Adjacent_list.list[i].pos)) == NULL) {
 					Adjacent_list.list[i].CalculateF(destination);
-					open.list.add(Adjacent_list.list[i]); //adding to the adjacent list
+					open.list.add(Adjacent_list.list[i]);
 				}
 				else { // If it is already in the open list, check if it is a better path (compare G)
-					if (Adjacent_list.list[i].g < open.Find(Adjacent_list.list[i].pos)->data.g)
-					{
+					Adjacent_list.list[i].CalculateF(destination);
+					if (Adjacent_list.list[i].g < open.Find(Adjacent_list.list[i].pos)->data.g) {
 						// If it is a better path, Update the parent
 						//open.Find(Adjacent_list.list[i].pos)->data.parent = Adjacent_list.list[i].parent;
-						Adjacent_list.list[i].CalculateF(destination);
 						open.list.del(open.Find(Adjacent_list.list[i].pos));
 						open.list.add(Adjacent_list.list[i]);
 
@@ -235,4 +235,5 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 
 	}
+
 }

@@ -79,7 +79,7 @@ struct PathNode
 	int g;
 	int h;
 	iPoint pos;
-	PathNode* parent; // needed to reconstruct the path in the end
+	PathNode* parent; // needed to reconstruct sthe path in the end
 };
 
 // ---------------------------------------------------------------------

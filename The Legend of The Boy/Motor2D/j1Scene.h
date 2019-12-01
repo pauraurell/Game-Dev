@@ -57,6 +57,8 @@ public:
 	j1Entities* player;
 	j1Entities* bat1;
 	j1Entities* skeleton1;
+	j1Entities* bat2;
+	j1Entities* skeleton2;
 
 	iPoint playerSpawnPoint;
 
@@ -67,11 +69,19 @@ public:
 	int BatSpawnPointY;
 	int BatSpawnPointX2;
 	int BatSpawnPointY2;
+	int Bat2SpawnPointX;
+	int Bat2SpawnPointY;
+	int Bat2SpawnPointX2;
+	int Bat2SpawnPointY2;
 
 	int SkeletonSpawnPointX;
 	int SkeletonSpawnPointY;
 	int SkeletonSpawnPointX2;
 	int SkeletonSpawnPointY2;
+	int Skeleton2SpawnPointX;
+	int Skeleton2SpawnPointY;
+	int Skeleton2SpawnPointX2;
+	int Skeleton2SpawnPointY2;
 
 private:
 

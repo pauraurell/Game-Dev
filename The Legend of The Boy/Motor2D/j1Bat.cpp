@@ -72,13 +72,19 @@ bool j1Bat::Update(float dt)
 			case BAT_FLYING_LEFT_IDLE:
 				orientation = "left";
 				position.x--;
-				if (position.x <= SpawnPointX) { state = BAT_FLYING_RIGHT_IDLE; }
+				if (this == App->scene->bat1 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->BatSpawnPointX) { state = BAT_FLYING_RIGHT_IDLE; } }
+				if (this == App->scene->bat2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->Bat2SpawnPointX) { state = BAT_FLYING_RIGHT_IDLE; } }
+				if (this == App->scene->bat1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x <= App->scene->BatSpawnPointX2) { state = BAT_FLYING_RIGHT_IDLE; } }
+				if (this == App->scene->bat2 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x <= App->scene->Bat2SpawnPointX2) { state = BAT_FLYING_RIGHT_IDLE; } }
 				break;
 
 			case BAT_FLYING_RIGHT_IDLE:
 				orientation = "right";
 				position.x++;
-				if (position.x >= SpawnPointX + 100) { state = BAT_FLYING_LEFT_IDLE; }
+				if (this == App->scene->bat1 && App->scene->CurrentMap == "FirstLevel.tmx") {if (position.x >= App->scene->BatSpawnPointX + 100) { state = BAT_FLYING_LEFT_IDLE; } }
+				if (this == App->scene->bat2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x >= App->scene->Bat2SpawnPointX + 100) { state = BAT_FLYING_LEFT_IDLE; } }
+				if (this == App->scene->bat1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x >= App->scene->BatSpawnPointX2 + 100) { state = BAT_FLYING_LEFT_IDLE; } }
+				if (this == App->scene->bat2 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x >= App->scene->Bat2SpawnPointX2 + 100) { state = BAT_FLYING_LEFT_IDLE; } }
 				break;
 
 			case BAT_FLYING_RIGHT:
