@@ -1,4 +1,5 @@
 #include "j1EntityManager.h"
+#include "p2Log.h"
 #include "j1Entities.h"
 #include "j1Player.h"
 #include "j1Bat.h"

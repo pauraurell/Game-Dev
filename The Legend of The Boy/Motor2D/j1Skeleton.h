@@ -55,7 +55,6 @@ public:
 	void ConfigLoading();
 
 
-	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	skeletonTex = nullptr;
 	p2SString		orientation = "left";

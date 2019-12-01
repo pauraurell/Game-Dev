@@ -59,7 +59,6 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 	void ConfigLoading();
 
-	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	batTex = nullptr;
 	p2SString		orientation = "right";

@@ -60,7 +60,6 @@ public:
 
 	void Respawn();
 
-	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation = "right";
