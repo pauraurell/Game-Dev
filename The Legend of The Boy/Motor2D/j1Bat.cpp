@@ -98,12 +98,16 @@ bool j1Bat::Update(float dt)
 			case BAT_FLYING_DOWN:
 				position.y++;
 				break;
+
+			case BAT_DEAD:
+				current_animation = &die;
+				break;
 		}
 
 		if (dead == true) { EntityDeath(); }
 
 		SetBatPosition(dt);
-		Pathfinding(dt);
+		//Pathfinding(dt);
 
 	return true;
 }
@@ -170,6 +174,12 @@ void j1Bat::Pushbacks()
 	flying.PushBack({ 41, 33, 17, 21 }, 0.12f, 1, 1, 1, 1);
 	flying.PushBack({ 73, 38, 17, 15 }, 0.12f, 1, 1, 1, 1);
 	flying.PushBack({ 107, 38, 15, 21 }, 0.12f, 1, 1, 1, 1);
+
+	die.PushBack({ 7, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	die.PushBack({ 27, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	die.PushBack({ 48, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	die.PushBack({ 68, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	die.loop = false;
 }
 
 

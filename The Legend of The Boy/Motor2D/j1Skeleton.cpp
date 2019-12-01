@@ -53,6 +53,7 @@ bool j1Skeleton::Start()
 	colliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
 	colliderLegs = App->col->AddCollider({ position.x + 3, position.y + 21, 11, 12 }, COLLIDER_ENEMY, this);
 	skeletonTex = App->tex->Load("textures/skeleton_spritesheet.png");
+	dTex = App->tex->Load("textures/x.png");
 	return true;
 }
 
@@ -112,7 +113,7 @@ bool j1Skeleton::Update(float dt)
 	else { gravity = 0.19f; }
 
 	SetSkeletonPosition(dt);
-	Pathfinding(dt);
+	//Pathfinding(dt);
 	return true;
 }
 
@@ -282,6 +283,7 @@ void j1Skeleton::Pathfinding(float dt)
 	pPos = App->render->ScreenToWorld(x, y);
 	pPos = App->entManager->GetPlayerEntity()->position;
 	pPos = App->map->WorldToMap(pPos.x, pPos.y);
+	App->render->Blit(dTex, pos.x, pos.y);
 
 	//Coords of the enemy
 	origin = App->map->WorldToMap(position.x, position.y);
@@ -299,16 +301,16 @@ void j1Skeleton::Pathfinding(float dt)
 
 
 	//Draw pathfinding
-	/*if (App->col->debug == true) {
+	if (App->col->debug == true) {
 
 		lastpath = App->pathfinding->GetLastPath();
 
 		for (uint i = 0; i < lastpath->Count(); ++i)
 		{
 			pos = App->map->MapToWorld(lastpath->At(i)->x, lastpath->At(i)->y);
-			App->render->Blit(debugTex, pos.x, pos.y);
+			App->render->Blit(dTex, pos.x, pos.y);
 		}
-	}*/
+	}
 }
 
 void j1Skeleton::SkeletonToPlayer(float dt)

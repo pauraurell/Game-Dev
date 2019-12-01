@@ -91,7 +91,7 @@ public:
 	iPoint pos;
 	const p2DynArray<iPoint>* lastpath;
 	const p2DynArray<iPoint>* path;
-	//SDL_Texture* debugTex = nullptr;
+	SDL_Texture* dTex = nullptr;
 
 private:
 

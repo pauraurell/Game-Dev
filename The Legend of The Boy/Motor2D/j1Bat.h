@@ -69,6 +69,7 @@ public:
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;
 	Animation		flying;
+	Animation		die;
 
 	//SPEED
 	float			SpeedX;
