@@ -221,12 +221,23 @@ void j1App::FinishUpdate()
 
 	if (App->FrameCapEnabled)
 		capStr.create("Enabled");
-	else
-		capStr.create("Disabled");
 
-	p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: %s  " ,
-	GetTitle(),  avg_fps, frames_on_last_update, last_frame_ms,  capStr.GetString());
-	App->win->SetTitle(title.GetString());
+	if (framerate == 30) 
+	{
+		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: %s   || Vsync: Disabled",
+		GetTitle(),  avg_fps, frames_on_last_update, last_frame_ms,  capStr.GetString());
+		App->win->SetTitle(title.GetString());
+		App->render->vsyncActive = false;
+	}
+
+	else if (framerate == 60)
+	{
+		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: Disabled   || Vsync: Enabled",
+			GetTitle(), avg_fps, frames_on_last_update, last_frame_ms);
+		App->win->SetTitle(title.GetString());
+		App->render->vsyncActive = true;
+	}
+	
 
 	if (FrameCapEnabled)
 		if (last_frame_ms < 1000 / framerate)
