@@ -24,6 +24,7 @@ class j1Particles;
 class j1EntityManager;
 class j1PathFinding;
 
+#define DTCOEFICIENT 60
 
 class j1App
 {

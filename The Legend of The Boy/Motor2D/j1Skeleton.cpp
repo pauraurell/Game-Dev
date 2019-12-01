@@ -265,8 +265,8 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 void j1Skeleton::SetSkeletonPosition(float dt)
 {
 	vel.y += gravity;
-	position.x = position.x + (vel.x * dt * 60);
-	position.y = position.y + (vel.y * dt * 60);
+	position.x = position.x + (vel.x * dt * DTCOEFICIENT);
+	position.y = position.y + (vel.y * dt * DTCOEFICIENT);
 }
 
 bool j1Skeleton::SkeletonPathFinding(float dt) {
@@ -293,12 +293,12 @@ bool j1Skeleton::SkeletonPathFinding(float dt) {
 		{
 			if (path->At(1)->x < InicialEntityPosition.x && !App->pathfinding->IsWalkable(DownCell))
 			{
-				position.x -= 2 * 60 * dt;
+				position.x -= 2 * DTCOEFICIENT * dt;
 				orientation = "left";
 			}
 			if (path->At(1)->x > InicialEntityPosition.x && !App->pathfinding->IsWalkable(rightCell))
 			{
-				position.x += 2 * 60 * dt;
+				position.x += 2 * DTCOEFICIENT * dt;
 				orientation = "right";
 			}
 		}

@@ -26,6 +26,8 @@ public:
 
 	j1Entities(Types entity_type);
 
+	void OnCollision(Collider* c1, Collider* c2);
+
 	virtual ~j1Entities();
 
 	bool Load(pugi::xml_node& data);
@@ -35,6 +37,9 @@ public:
 	bool Save(pugi::xml_node& data) const;
 
 	iPoint			position;
+	bool			dead = false;
+	bool			OnGround = true;
+	p2SString		orientation = "right";
 
 	p2SString		entity_name;
 };

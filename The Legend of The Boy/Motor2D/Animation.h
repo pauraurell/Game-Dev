@@ -41,7 +41,7 @@ public:
 	{
 		animend = false;
 		speeddelay = 0;
-		current_frame += speed[(int)current_frame] * dt * 60;
+		current_frame += speed[(int)current_frame] * dt * DTCOEFICIENT;
 		if (current_frame >= last_frame)
 		{
 			animend = true;

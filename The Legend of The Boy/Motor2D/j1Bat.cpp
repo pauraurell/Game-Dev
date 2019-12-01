@@ -241,23 +241,23 @@ bool j1Bat::BatPathfinding(float dt) {
 		if (path->At(1)->x < InicialEntityPosition.x) 
 		{
 			orientation = "right";
-			position.x -= 2 * 60 * dt;
+			position.x -= 2 * DTCOEFICIENT * dt;
 		}
 
 		if (path->At(1)->x > InicialEntityPosition.x) 
 		{
 			orientation = "left";
-			position.x += 2* 60 * dt;
+			position.x += 2* DTCOEFICIENT * dt;
 		}
 
 		if (path->At(1)->y < InicialEntityPosition.y)
 		{
-			position.y -= 2 * 60 * dt;
+			position.y -= 2 * DTCOEFICIENT * dt;
 		}
 
 		if (path->At(1)->y > InicialEntityPosition.y) 
 		{
-			position.y += 2 * 60 * dt;
+			position.y += 2 * DTCOEFICIENT * dt;
 		}
 	}
 	for (uint i = 0; i < path->Count(); ++i)

@@ -251,7 +251,7 @@ bool j1Player::Update(float dt)
 
 		if (godModeUp == true)
 		{
-			position.y = position.y - 3 * dt * 60;
+			position.y = position.y - 3 * dt * DTCOEFICIENT;
 			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
 			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
 			if (godModeDown == true) { position.y = position.y + 3; current_animation = &idle; }
@@ -260,7 +260,7 @@ bool j1Player::Update(float dt)
 		
 		else if (godModeDown == true)
 		{
-			position.y = position.y + 3 * dt * 60;
+			position.y = position.y + 3 * dt * DTCOEFICIENT;
 			if (godModeRight == true) { position.x = position.x + 3; orientation = "right"; current_animation = &god_mode_run; }
 			if (godModeLeft == true) { position.x = position.x - 3; orientation = "left"; current_animation = &god_mode_run; }
 			else { current_animation = &god_mode_down; }
@@ -268,7 +268,7 @@ bool j1Player::Update(float dt)
 
 		else if (godModeRight == true)
 		{
-			position.x = position.x + 3 * dt * 60;
+			position.x = position.x + 3 * dt * DTCOEFICIENT;
 			orientation = "right";
 			if (godModeLeft == true) { position.x = position.x - 3; current_animation = &god_mode_run; }
 			else { current_animation = &god_mode_run; }
@@ -276,7 +276,7 @@ bool j1Player::Update(float dt)
 
 		else if (godModeLeft == true)
 		{
-			position.x = position.x - 3 * dt * 60;
+			position.x = position.x - 3 * dt * DTCOEFICIENT;
 			orientation = "left";
 			current_animation = &god_mode_run;
 		}
@@ -544,9 +544,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 
 void j1Player::GetPlayerPosition(float dt)
 {
-	vel.y += (gravity * dt * 60);
-	position.x = position.x + (vel.x * dt * 60);
-	position.y = position.y + (vel.y * dt * 60);
+	vel.y += (gravity * dt * DTCOEFICIENT);
+	position.x = position.x + (vel.x * dt * DTCOEFICIENT);
+	position.y = position.y + (vel.y * dt * DTCOEFICIENT);
 
 	if (position.y > yLimit && godMode == false) { dead = true; }
 }

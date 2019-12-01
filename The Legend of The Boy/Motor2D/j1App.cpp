@@ -20,6 +20,7 @@
 #include "j1EntityManager.h"
 #include "j1Pathfinding.h"
 
+
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
