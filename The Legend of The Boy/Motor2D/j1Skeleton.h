@@ -39,7 +39,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-	bool SkeletonPathFinding(float dt);
+	void Pathfinding(float dt);
+	void SkeletonToPlayer(float dt);
 
 	// Called each loop iteration
 	void Draw(float dt);
@@ -83,6 +84,14 @@ public:
 
 	skeletonStates state = SKELETON_IDLE;
 
+	int x;
+	int y;
+	iPoint pPos;
+	iPoint origin;
+	iPoint pos;
+	const p2DynArray<iPoint>* lastpath;
+	const p2DynArray<iPoint>* path;
+	//SDL_Texture* debugTex = nullptr;
 
 private:
 

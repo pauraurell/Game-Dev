@@ -112,6 +112,7 @@ bool j1Skeleton::Update(float dt)
 	else { gravity = 0.19f; }
 
 	SetSkeletonPosition(dt);
+	Pathfinding(dt);
 	return true;
 }
 
@@ -274,46 +275,57 @@ void j1Skeleton::SetSkeletonPosition(float dt)
 	position.y = position.y + (vel.y * dt * DTCOEFICIENT);
 }
 
-bool j1Skeleton::SkeletonPathFinding(float dt) {
+void j1Skeleton::Pathfinding(float dt)
+{
+	//Coords of the player
+	pPos = App->render->ScreenToWorld(x, y);
+	pPos = App->entManager->GetPlayerEntity()->position;
+	pPos = App->map->WorldToMap(pPos.x, pPos.y);
 
-	static iPoint InicialEntityPosition;
+	//Coords of the enemy
+	origin = App->map->WorldToMap(position.x, position.y);
 
-	int x, y;
-	App->input->GetMousePosition(x, y);
+	if (origin != pPos && App->entManager->GetPlayerEntity()->position.x - 300 < position.x && App->entManager->GetPlayerEntity()->position.x + 300 > position.x&& App->entManager->GetPlayerEntity()->position.y - 400 < position.y && App->entManager->GetPlayerEntity()->position.y + 400 > position.y && dead == false)
+	{
 
-	iPoint rightCell(position.x, position.y);iPoint upCell(position.x, position.y);
-	iPoint leftCell(position.x, position.y);iPoint DownCell(position.x, position.y);
+		App->pathfinding->CreatePath(origin, pPos);
+		SkeletonToPlayer(dt);
+	}
+	else
+	{
+		state = SKELETON_IDLE;
+	}
 
-	iPoint playerPos = App->entManager->GetPlayerEntity()->position;
-	playerPos = App->map->WorldToMap(playerPos.x + 30, playerPos.y + 30);
 
-	InicialEntityPosition = App->map->WorldToMap(position.x, position.y);
-	App->pathfinding->CreatePath(InicialEntityPosition, playerPos);
+	//Draw pathfinding
+	/*if (App->col->debug == true) {
 
+		lastpath = App->pathfinding->GetLastPath();
 
-	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+		for (uint i = 0; i < lastpath->Count(); ++i)
+		{
+			pos = App->map->MapToWorld(lastpath->At(i)->x, lastpath->At(i)->y);
+			App->render->Blit(debugTex, pos.x, pos.y);
+		}
+	}*/
+}
+
+void j1Skeleton::SkeletonToPlayer(float dt)
+{
+	path = App->pathfinding->GetLastPath();
+	pos = App->map->MapToWorld(path->At(1)->x, path->At(1)->y);
+
 	if (path->At(1) != NULL)
 	{
-		if (state != SKELETON_DEATH && state != SKELETON_DEAD)
+		if (pos.x < position.x)
 		{
-			if (path->At(1)->x < InicialEntityPosition.x && !App->pathfinding->IsWalkable(DownCell))
-			{
-				position.x -= 2 * DTCOEFICIENT * dt;
-				orientation = "left";
-			}
-			if (path->At(1)->x > InicialEntityPosition.x && !App->pathfinding->IsWalkable(rightCell))
-			{
-				position.x += 2 * DTCOEFICIENT * dt;
-				orientation = "right";
-			}
+			state = SKELETON_MOVING_RIGHT;
+		}
+		if (pos.x > position.x)
+		{
+			state = SKELETON_MOVING_LEFT;
 		}
 	}
-	for (uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint nextPathPosition = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-	}
-
-	return true;
 }
 
 void j1Skeleton::ConfigLoading()

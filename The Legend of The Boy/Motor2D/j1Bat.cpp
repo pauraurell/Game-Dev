@@ -103,7 +103,7 @@ bool j1Bat::Update(float dt)
 		if (dead == true) { EntityDeath(); }
 
 		SetBatPosition(dt);
-		//Pathfinding(dt);
+		Pathfinding(dt);
 
 	return true;
 }
