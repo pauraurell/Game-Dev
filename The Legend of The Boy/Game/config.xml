@@ -35,7 +35,7 @@
     <bat PosX="150" PosY="400" PosX2="150" PosY2="450" />
     <skeleton PosX="410" PosY="450" PosX2="140" PosY2="420"/>
     <bat2 PosX="505" PosY="105" PosX2="150" PosY2="450" />
-    <skeleton2 PosX="700" PosY="200" PosX2="170" PosY2="420"/>
+    <skeleton2 PosX="1100" PosY="0" PosX2="1900" PosY2="340"/>
   </scene>
 
   <player>

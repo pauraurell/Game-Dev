@@ -81,7 +81,7 @@ public:
 
 	void Pushbacks();
 
-	skeletonStates state = SKELETON_IDLE;
+	skeletonStates state = SKELETON_MOVING_RIGHT;
 
 	int x;
 	int y;

@@ -69,32 +69,25 @@ bool j1Skeleton::PreUpdate()
 bool j1Skeleton::Update(float dt)
 {
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		state = SKELETON_MOVING_LEFT;
-	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		state = SKELETON_MOVING_RIGHT;
-	}
-
-	else 
-	{
-		if (state != SKELETON_DEATH) { state = SKELETON_IDLE; }
-	} 
-
 	switch (state)
 	{
 	case SKELETON_MOVING_LEFT:
 		orientation = "left";
 		position.x = position.x - 2;
+		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->SkeletonSpawnPointX) { state = SKELETON_MOVING_RIGHT; } }
+		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->Skeleton2SpawnPointX) { state = SKELETON_MOVING_RIGHT; } }
+		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x <= App->scene->SkeletonSpawnPointX2) { state = SKELETON_MOVING_RIGHT; } }
+		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x <= App->scene->Skeleton2SpawnPointX2) { state = SKELETON_MOVING_RIGHT; } }
 		current_animation = &walking;
 		break;
 
 	case SKELETON_MOVING_RIGHT:
 		orientation = "right";
 		position.x = position.x + 2;
+		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x >= App->scene->SkeletonSpawnPointX + 70) { state = SKELETON_MOVING_LEFT; } }
+		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x >= App->scene->Skeleton2SpawnPointX + 70) { state = SKELETON_MOVING_LEFT; } }
+		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x >= App->scene->SkeletonSpawnPointX2 + 70) { state = SKELETON_MOVING_LEFT; } }
+		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x >= App->scene->Skeleton2SpawnPointX2 + 70) { state = SKELETON_MOVING_LEFT; } }
 		current_animation = &walking;
 		break;
 
