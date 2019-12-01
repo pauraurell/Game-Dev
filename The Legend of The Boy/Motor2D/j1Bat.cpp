@@ -101,6 +101,7 @@ bool j1Bat::Update(float dt)
 
 			case BAT_DEAD:
 				current_animation = &die;
+				EntityDeath();
 				break;
 		}
 
@@ -175,10 +176,10 @@ void j1Bat::Pushbacks()
 	flying.PushBack({ 73, 38, 17, 15 }, 0.12f, 1, 1, 1, 1);
 	flying.PushBack({ 107, 38, 15, 21 }, 0.12f, 1, 1, 1, 1);
 
-	die.PushBack({ 7, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
-	die.PushBack({ 27, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
-	die.PushBack({ 48, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
-	die.PushBack({ 68, 71, 19, 15 }, 0.12f, 1, 1, 1, 1);
+	die.PushBack({ 7, 71, 19, 15 }, 0.08f, 1, 1, 1, 1);
+	die.PushBack({ 27, 71, 19, 15 }, 0.08f, 1, 1, 1, 1);
+	die.PushBack({ 48, 71, 19, 15 }, 0.08f, 1, 1, 1, 1);
+	die.PushBack({ 68, 71, 19, 15 }, 0.08f, 1, 1, 1, 1);
 	die.loop = false;
 }
 
@@ -250,8 +251,10 @@ void j1Bat::OnCollision(Collider* c1, Collider* c2)
 
 void j1Bat::SetBatPosition(float dt)
 {
-	position.x = position.x + (vel.x * dt * 70);
-	position.y = position.y + (vel.y * dt * 70);
+	if (state == BAT_DEAD) { position.y = position.y + 3; }
+	
+	position.x = position.x + (vel.x * dt);
+	position.y = position.y + (vel.y * dt);
 }
 
 void j1Bat::ConfigLoading()
@@ -267,6 +270,7 @@ void j1Bat::ConfigLoading()
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
 	node = config;
 }
 

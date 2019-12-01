@@ -84,7 +84,6 @@ public:
 	float			speedDecrease;
 	float			SpeedX;
 	float			SpeedY;
-	float			gravity;
 	float			dashSpeed;
 	fPoint		    vel;
 

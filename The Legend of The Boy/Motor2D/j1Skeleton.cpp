@@ -132,6 +132,7 @@ void j1Skeleton::Draw(float dt)
 
 	else if (orientation == "left")
 	{
+
 		App->render->Blit(skeletonTex, position.x + current_animation->pivotx2[current_animation->returnCurrentFrame()], position.y + current_animation->pivoty2[current_animation->returnCurrentFrame()], &(current_animation->GetCurrentFrame(dt)), SDL_FLIP_HORIZONTAL, 1.0f, 1.0f, 0.0);
 	}
 

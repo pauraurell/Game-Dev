@@ -74,7 +74,6 @@ public:
 	//SPEED
 	float			SpeedX;
 	float			SpeedY;
-	float			gravity;
 	fPoint		    vel;
 
 	//AUDIO

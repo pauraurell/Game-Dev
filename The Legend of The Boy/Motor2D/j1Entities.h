@@ -25,6 +25,8 @@ public:
 
 	Types entity_type;
 
+
+
 	j1Entities(Types entity_type);
 
 	void OnCollision(Collider* c1, Collider* c2);
@@ -45,6 +47,7 @@ public:
 	bool			OnGround = true;
 	p2SString		orientation = "right";
 	int				SpawnPointX, SpawnPointY;
+	float			gravity;
 	
 	//COLLIDERS
 	Collider*		colliderHead = nullptr;

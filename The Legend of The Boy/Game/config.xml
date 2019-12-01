@@ -34,7 +34,6 @@
     <player PosX="20" PosY="450" />
     <bat PosX="150" PosY="400" PosX2="150" PosY2="450" />
     <skeleton PosX="210" PosY="445" PosX2="140" PosY2="420"/>
-    
   </scene>
 
   <player>
@@ -52,6 +51,7 @@
     <sprite_sheet source="bat_spritesheet.png"/>
     <initialPosition x="150" y="400" orientation="right"/>
     <speed Speedx= "0.5" Speedy= "0.6"/>
+    <gravity value= "0.19"/>
   </bat>
 
   <skeleton>
