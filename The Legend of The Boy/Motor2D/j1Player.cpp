@@ -12,6 +12,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Collision.h"
 #include "j1Entities.h"
+#include "j1EntityManager.h"
 #include "SDL_image/include/SDL_image.h"
 #include "j1Map.h"
 #include "Brofiler/Brofiler.h"
@@ -576,6 +577,8 @@ void j1Player::Respawn()
 		App->scene->input = true;
 		respawnTimer = false;
 		App->scene->secret_map = false;
+		if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); }
+		if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); }
 	}
 }
 

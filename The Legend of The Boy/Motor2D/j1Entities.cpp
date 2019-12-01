@@ -38,6 +38,9 @@ bool j1Entities::Save(pugi::xml_node& data) const
 
 }
 
+void j1Entities::Pushbacks()
+{}
+
 void j1Entities::Draw(float dt)
 {}
 

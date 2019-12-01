@@ -13,6 +13,7 @@
 #include "j1Textures.h"
 #include "j1Input.h"
 #include "j1Audio.h"
+#include "j1Collision.h"
 #include "PugiXml/src/pugixml.hpp"
 #include "Brofiler/Brofiler.h"
 
@@ -150,6 +151,9 @@ void j1EntityManager::DestroyEntity(j1Entities* entity)
 	{
 		if (entityList->data = entity)
 		{
+			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
+			if (entityList->data->colliderLegs != nullptr) { entityList->data->colliderLegs->to_delete = true; }
+			if (entityList->data->colliderHead != nullptr) { entityList->data->colliderHead->to_delete = true; }
 			entities.del(entityList);
 		}
 		entityList = entityList->next;
@@ -162,6 +166,9 @@ void j1EntityManager::DestroyEntities()
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList)
 	{
+		if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
+		if (entityList->data->colliderLegs != nullptr) { entityList->data->colliderLegs->to_delete = true; }
+		if (entityList->data->colliderHead != nullptr) { entityList->data->colliderHead->to_delete = true; }
 		entityList->data->CleanUp();
 		RELEASE(entityList->data);
 		entities.del(entityList);
@@ -257,6 +264,8 @@ void j1EntityManager::DestroyEnemies()
 	{
 		if (entityList->data->entity_type != j1Entities::Types::player)
 		{
+			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
+			if (entityList->data->colliderLegs != nullptr) { entityList->data->colliderLegs->to_delete = true; }
 			entityList->data->CleanUp();
 			RELEASE(entityList->data);
 			entities.del(entityList);

@@ -33,6 +33,7 @@ public:
 
 	//bool Load(pugi::xml_node& data);
 
+	virtual void Pushbacks();
 	virtual void Draw(float dt);
 
 	bool Save(pugi::xml_node& data) const;
