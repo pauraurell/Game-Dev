@@ -333,5 +333,6 @@ void j1Bat::BatFlyingToThePlayer(float dt)
 
 void j1Bat::EntityDeath()
 {
+	state = BAT_DEAD;
 	colliderBody->to_delete = true;
 }
