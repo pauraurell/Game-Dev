@@ -300,8 +300,8 @@ void j1Scene::Create2MapEnemies()
 {
 	App->entManager->DestroyEnemies();
 	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX2, BatSpawnPointY2 }, false);
-	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX2, SkeletonSpawnPointY2 }, false);
-	bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX2, Bat2SpawnPointY2 }, false);
+	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX2, SkeletonSpawnPointY2 + 50}, false);
+	//bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX2, Bat2SpawnPointY2 }, false);
 	skeleton2 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { Skeleton2SpawnPointX2, Skeleton2SpawnPointY2 }, false);
 }
 

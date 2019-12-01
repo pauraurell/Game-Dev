@@ -3,7 +3,7 @@
 ## The Legend of The Boy
 
 2d Platformer made using the SDL (-https://www.libsdl.org/) and pugi libraries done by Pol Galán and Pau Raurell for Videogame Development subject.
-In this version, the player can move in left and right directions, jump, and do a dash.
+In this version, the player can move in left and right directions, jump, and do a dash and attack enemies.
 
 The maps have been done with Tiled.
 
@@ -12,6 +12,8 @@ The maps have been done with Tiled.
 -A -> Move to the left.
 
 -D -> Move to the right.
+
+-N -> Attack.
 
 -SPACE -> Jump.
 
@@ -33,6 +35,8 @@ F9 -> Show the colliders and logic.
 
 F10 -> Activate/Deactivate the god mode.
 
+F11 -> Toggle 30fps/60fps.
+
 ### Credits
 
 We don't own the art and none of the sprites, audio fx or tilesets have been created by ourselves. 
@@ -51,13 +55,13 @@ Coliders made in Tiled, Particles, secret platforms in 2nd Map and Running dust 
 ### Autors
 -Pol Galán i Morales
 https://github.com/pgalmor
--State Machine, Dash, Secret Map, Respawn.
+-State Machine, Dash, Secret Map, Respawn, Entity System,.
 
 -Pau Raurell Gomis
 https://github.com/pauraurell
--1rst Map, Audio, Particles, God Mode, Save/Load.
+-1rst Map, Audio, Particles, God Mode, Save/Load, Framerate control, player attacks, enemies movements.
 
-Things done by both of us: Collisions, 2nd Map, Parallax, Camera Limit
+Things done by both of us: Collisions, 2nd Map, Parallax, Camera Limit.
 
 
 ### Our Github Repository
