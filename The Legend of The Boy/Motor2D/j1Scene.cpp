@@ -272,21 +272,21 @@ void j1Scene::StartSecondLevel()
 
 void j1Scene::CreateEnt()
 {
-	player = App->entManager->CreateEntity(j1Entities::Types::player, { PlayerSpawnPointX, PlayerSpawnPointY });
-	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY });
-	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY });
+	player = App->entManager->CreateEntity(j1Entities::Types::player, { PlayerSpawnPointX, PlayerSpawnPointY }, false);
+	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY }, false);
+	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY }, false);
 }
 
 void j1Scene::Create1MapEnemies()
 {
 	App->entManager->DestroyEnemies();
-	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY });
-	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY });
+	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY }, false);
+	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY }, false);
 }
 
 void j1Scene::Create2MapEnemies()
 {
 	App->entManager->DestroyEnemies();
-	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX2, BatSpawnPointY2 });
-	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX2, SkeletonSpawnPointY2 });
+	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX2, BatSpawnPointY2 }, false);
+	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX2, SkeletonSpawnPointY2 }, false);
 }

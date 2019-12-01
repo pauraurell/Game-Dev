@@ -97,7 +97,7 @@ bool j1EntityManager::Load(pugi::xml_node& data)
 			type = j1Entities::Types::bat;
 		}
 
-		CreateEntity(type, { entity.child("position").attribute("posX").as_int(), entity.child("position").attribute("posY").as_int() });
+		CreateEntity(type, { entity.child("position").attribute("posX").as_int(), entity.child("position").attribute("posY").as_int() }, entity.attribute("dead"));
 	}
 	return true;
 }
@@ -116,7 +116,7 @@ bool j1EntityManager::Save(pugi::xml_node& data) const
 	return true;
 }
 
-j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
+j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos, bool isDead)
 {
 	j1Entities* ret = nullptr;
 
@@ -126,10 +126,10 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos)
 		ret = new j1Player(pos);
 		break;
 	case j1Entities::Types::skeleton:
-		ret = new j1Skeleton(pos);
+		ret = new j1Skeleton(pos, isDead);
 		break;
 	case j1Entities::Types::bat:
-		ret = new j1Bat(pos);
+		ret = new j1Bat(pos, isDead);
 		break;
 
 	}

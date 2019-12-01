@@ -21,11 +21,11 @@ j1Bat::j1Bat() : j1Entities(Types::bat)
 	name.create("bat");
 }
 
-j1Bat::j1Bat(iPoint pos) : j1Entities(Types::bat)
+j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
 {
 	name.create("bat");
 	position = pos;
-
+	dead = isDead;
 }
 
 // Destructor
@@ -147,11 +147,12 @@ bool j1Bat::CleanUp()
 // Save Game State
 bool j1Bat::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node playerNode = data;
-	playerNode.append_attribute("type") = name.GetString();
-	playerNode = data.append_child("position");
-	playerNode.append_attribute("posX") = position.x;
-	playerNode.append_attribute("posY") = position.y;
+	pugi::xml_node batNode = data;
+	batNode.append_attribute("type") = name.GetString();
+	batNode.append_attribute("dead") = dead;
+	batNode = data.append_child("position");
+	batNode.append_attribute("posX") = position.x;
+	batNode.append_attribute("posY") = position.y;
 	
 	return true;
 }

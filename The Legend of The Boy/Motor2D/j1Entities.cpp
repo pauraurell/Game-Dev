@@ -30,6 +30,7 @@ bool j1Entities::Save(pugi::xml_node& data) const
 	data.append_attribute("position");
 
 	data.append_attribute("type") = name.GetString();
+	data.append_attribute("dead") = dead;
 	data.child("position").append_attribute("posX") = position.x;
 	data.child("position").append_attribute("posY") = position.y;
 

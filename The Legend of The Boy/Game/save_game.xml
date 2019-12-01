@@ -9,14 +9,14 @@
 		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
 	<entManager>
-		<Entity type="player">
-			<position posX="193" posY="451" />
+		<Entity type="player" dead="false">
+			<position posX="158" posY="467" />
 		</Entity>
-		<Entity type="bat">
-			<position posX="164" posY="350" />
+		<Entity type="bat" dead="false">
+			<position posX="237" posY="400" />
 		</Entity>
-		<Entity type="skeleton">
-			<position posX="50" posY="480" />
+		<Entity type="skeleton" dead="true">
+			<position posX="210" posY="448" />
 		</Entity>
 	</entManager>
 	<particles />

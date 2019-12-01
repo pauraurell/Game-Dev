@@ -25,7 +25,7 @@ class j1Skeleton : public j1Entities
 public:
 
 	j1Skeleton();
-	j1Skeleton(iPoint pos);
+	j1Skeleton(iPoint pos, bool isDead);
 
 	// Destructor
 	virtual ~j1Skeleton();
