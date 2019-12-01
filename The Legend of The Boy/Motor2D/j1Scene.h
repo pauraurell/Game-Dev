@@ -50,13 +50,26 @@ public:
 	bool sceneChangeTimer = false;
 
 	p2SString CurrentMap;
-	iPoint playerPos;
-	iPoint bat1Pos;
-	iPoint skeleton1Pos;
+	//iPoint playerPos;
+	//iPoint bat1Pos;
+	//iPoint skeleton1Pos;
 
 	void CreateEnt();
 
 	iPoint playerSpawnPoint;
+
+	int PlayerSpawnPointX;
+	int PlayerSpawnPointY;
+
+	int BatSpawnPointX;
+	int BatSpawnPointY;
+	int BatSpawnPointX2;
+	int BatSpawnPointY2;
+
+	int SkeletonSpawnPointX;
+	int SkeletonSpawnPointY;
+	int SkeletonSpawnPointX2;
+	int SkeletonSpawnPointY2;
 
 private:
 

@@ -178,7 +178,7 @@ void j1EntityManager::DrawEntities(float dt)
 	}
 }
 
-/*void j1EntityManager::RestartEntities()
+void j1EntityManager::RestartEntities()
 {
 	j1Entities::Types type;
 	p2List_item<j1Entities*>* entityList = entities.start;
@@ -190,18 +190,18 @@ void j1EntityManager::DrawEntities(float dt)
 			switch (type)
 			{
 			case j1Entities::Types::player:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->PlayerSpawnPointX;
+				entityList->data->position.y = App->scene->PlayerSpawnPointY;
 				entityList->data->orientation = "right";
 				break;
 			case j1Entities::Types::skeleton:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->SkeletonSpawnPointX2;
+				entityList->data->position.y = App->scene->SkeletonSpawnPointY2;
 				entityList->data->orientation = "left";
 				break;
 			case j1Entities::Types::bat:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->BatSpawnPointX2;
+				entityList->data->position.y = App->scene->BatSpawnPointY2;
 				entityList->data->orientation = "left";
 				break;
 			}
@@ -214,28 +214,27 @@ void j1EntityManager::DrawEntities(float dt)
 			switch (type)
 			{
 			case j1Entities::Types::player:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->PlayerSpawnPointX;
+				entityList->data->position.y = App->scene->PlayerSpawnPointY;
 				entityList->data->orientation = "right";
 				break;
 			case j1Entities::Types::skeleton:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->SkeletonSpawnPointX;
+				entityList->data->position.y = App->scene->SkeletonSpawnPointY;
 				entityList->data->orientation = "left";
 				break;
 			case j1Entities::Types::bat:
-				entityList->data->position.x = entityList->data->SpawnPointX;
-				entityList->data->position.y = entityList->data->SpawnPointY;
+				entityList->data->position.x = App->scene->BatSpawnPointX;
+				entityList->data->position.y = App->scene->BatSpawnPointY;
 				entityList->data->orientation = "left";
 				break;
 			}
 		}
 	}
-}*/
+}
 
 j1Entities* j1EntityManager::GetPlayerEntity()
 {
-
 	p2List_item<j1Entities*>* entities_list = entities.start;
 	while (entities_list) {
 		if (entities_list->data->name == "player") {
