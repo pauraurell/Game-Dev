@@ -494,12 +494,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if (state == PLAYER_DASH)
 		{
 			if (colliderBody->rect.x + colliderBody->rect.w > c2->rect.x && colliderBody->rect.x < c2->rect.x) {
-				position.x = position.x - 6;
+				position.x = position.x - 7;
 				vel.x = 0;
 			}
 			if (colliderBody->rect.x < c2->rect.x + c2->rect.w && colliderBody->rect.x > c2->rect.x)
 			{
-				position.x = position.x + 6;
+				position.x = position.x + 8;
 				vel.x = 0;
 			}
 		}

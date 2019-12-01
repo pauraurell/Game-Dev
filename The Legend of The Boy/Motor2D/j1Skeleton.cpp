@@ -73,7 +73,7 @@ bool j1Skeleton::Update(float dt)
 	{
 	case SKELETON_MOVING_LEFT:
 		orientation = "left";
-		position.x = position.x - 2;
+		position.x = position.x - 1;
 		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->SkeletonSpawnPointX) { state = SKELETON_MOVING_RIGHT; } }
 		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x <= App->scene->Skeleton2SpawnPointX) { state = SKELETON_MOVING_RIGHT; } }
 		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x <= App->scene->SkeletonSpawnPointX2) { state = SKELETON_MOVING_RIGHT; } }
@@ -83,7 +83,7 @@ bool j1Skeleton::Update(float dt)
 
 	case SKELETON_MOVING_RIGHT:
 		orientation = "right";
-		position.x = position.x + 2;
+		position.x = position.x + 1;
 		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x >= App->scene->SkeletonSpawnPointX + 70) { state = SKELETON_MOVING_LEFT; } }
 		if (this == App->scene->skeleton2 && App->scene->CurrentMap == "FirstLevel.tmx") { if (position.x >= App->scene->Skeleton2SpawnPointX + 70) { state = SKELETON_MOVING_LEFT; } }
 		if (this == App->scene->skeleton1 && App->scene->CurrentMap == "SecondLevel.tmx") { if (position.x >= App->scene->SkeletonSpawnPointX2 + 70) { state = SKELETON_MOVING_LEFT; } }
