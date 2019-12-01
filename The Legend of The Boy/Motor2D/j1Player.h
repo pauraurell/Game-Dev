@@ -63,7 +63,6 @@ public:
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation = "right";
-	bool			dead = false;
 	bool			dash = false;
 	bool			OnGround = true;
 
@@ -100,9 +99,6 @@ public:
 	bool		respawnTimer = false;
 		
 	//COLLIDERS
-	Collider*	colPlayerHead = nullptr;
-	Collider*	colPlayerBody = nullptr;
-	Collider*	colPlayerLegs = nullptr;
 	Collider*	attackCollider = nullptr;
 	Collider*   dashAttackCollider = nullptr;
 	

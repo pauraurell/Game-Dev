@@ -37,11 +37,18 @@ public:
 
 	bool Save(pugi::xml_node& data) const;
 
+	void EntityDeath();
+
 	iPoint			position;
 	bool			dead = false;
 	bool			OnGround = true;
 	p2SString		orientation = "right";
 	int				SpawnPointX, SpawnPointY;
+	
+	//COLLIDERS
+	Collider*		colliderHead = nullptr;
+	Collider*		colliderBody = nullptr;
+	Collider*		colliderLegs = nullptr;
 
 	p2SString		entity_name;
 };

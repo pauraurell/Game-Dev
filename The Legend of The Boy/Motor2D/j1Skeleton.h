@@ -49,6 +49,8 @@ public:
 	void SkeletonState(skeletonStates state);
 	void SetSkeletonPosition(float dt);
 
+	void EntityDeath();
+
 	// Called before quitting
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
@@ -58,7 +60,6 @@ public:
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	skeletonTex = nullptr;
 	p2SString		orientation = "left";
-	bool			dead = false;
 	bool			OnGround = true;
 
 	//ANIMATIONS
@@ -72,10 +73,6 @@ public:
 	float			SpeedY;
 	float			gravity;
 	fPoint		    vel;
-
-	//COLLIDERS
-	Collider*	skeletonColliderBody = nullptr;
-	Collider*	skeletonColliderLegs = nullptr;
 
 	//AUDIO
 	uint			SkeletonFx;

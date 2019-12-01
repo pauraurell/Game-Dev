@@ -206,6 +206,8 @@ void j1EntityManager::RestartEntities()
 				entityList->data->orientation = "left";
 				break;
 			}
+			entityList->data->dead = false;
+
 			entityList = entityList->next;
 		}
 	}

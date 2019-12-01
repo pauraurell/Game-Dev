@@ -4,6 +4,7 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+class j1Entities;
 
 class j1Scene : public j1Module
 {
@@ -50,9 +51,9 @@ public:
 	bool sceneChangeTimer = false;
 
 	p2SString CurrentMap;
-	//iPoint playerPos;
-	//iPoint bat1Pos;
-	//iPoint skeleton1Pos;
+	j1Entities* player;
+	j1Entities* bat1;
+	j1Entities* skeleton1;
 
 	void CreateEnt();
 

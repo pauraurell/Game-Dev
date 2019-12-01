@@ -59,9 +59,9 @@ bool j1Player::Start()
 	current_animation = &idle;
 	dead = false;
 
-	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
-	colPlayerBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
-	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
+	colliderHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
+	colliderBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
+	colliderLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load("textures/adventurer-v1.5-Sheet.png");
 	return true;
 
@@ -70,9 +70,9 @@ bool j1Player::Start()
 // Called each loop iteration
 bool j1Player::PreUpdate()
 {
-	colPlayerHead->SetPos(position.x + 3, position.y);
-	colPlayerBody->SetPos(position.x, position.y + colPlayerHead->rect.h - 12);
-	colPlayerLegs->SetPos(position.x + 4, position.y + colPlayerHead->rect.h + 2);
+	colliderHead->SetPos(position.x + 3, position.y);
+	colliderBody->SetPos(position.x, position.y + colliderHead->rect.h - 12);
+	colliderLegs->SetPos(position.x + 4, position.y + colliderHead->rect.h + 2);
 
 	return true;
 }
@@ -223,10 +223,7 @@ bool j1Player::Update(float dt)
 
 		GetPlayerPosition(dt);
 
-		if (dead == true)
-		{
-			Respawn();
-		}
+		if (dead == true) { Respawn(); }
 
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -462,16 +459,16 @@ void j1Player::Pushbacks()
 
 void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == colPlayerLegs && c2->type == COLLIDER_WALL)
+	if (c1 == colliderLegs && c2->type == COLLIDER_WALL)
 	{
-		if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h) > (c2->rect.y))
+		if ((colliderLegs->rect.y + colliderLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
 			if (dash == true)
 			{
 				dash = false;
 			}
-			if ((colPlayerLegs->rect.y + colPlayerLegs->rect.h - 3) > (c2->rect.y))
+			if ((colliderLegs->rect.y + colliderLegs->rect.h - 3) > (c2->rect.y))
 			{
 				position.y -= 2;
 			}
@@ -481,24 +478,24 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		//if the collider is under the player
 	}
 
-	if (c1 == colPlayerHead && c2->type == COLLIDER_WALL)
+	if (c1 == colliderHead && c2->type == COLLIDER_WALL)
 	{
-		if ((colPlayerHead->rect.y) < (c2->rect.y + c2->rect.h))
+		if ((colliderHead->rect.y) < (c2->rect.y + c2->rect.h))
 		{
 			position.y = position.y + 2;
 			vel.y = 0;
 		}
 	}
 
-	if (c1 == colPlayerBody && c2->type == COLLIDER_WALL)
+	if (c1 == colliderBody && c2->type == COLLIDER_WALL)
 	{
 		if (state == PLAYER_DASH)
 		{
-			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
+			if (colliderBody->rect.x + colliderBody->rect.w > c2->rect.x && colliderBody->rect.x < c2->rect.x) {
 				position.x = position.x - 6;
 				vel.x = 0;
 			}
-			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
+			if (colliderBody->rect.x < c2->rect.x + c2->rect.w && colliderBody->rect.x > c2->rect.x)
 			{
 				position.x = position.x + 6;
 				vel.x = 0;
@@ -506,11 +503,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 		else
 		{
-			if (colPlayerBody->rect.x + colPlayerBody->rect.w > c2->rect.x && colPlayerBody->rect.x < c2->rect.x) {
+			if (colliderBody->rect.x + colliderBody->rect.w > c2->rect.x && colliderBody->rect.x < c2->rect.x) {
 				position.x = position.x - 2;
 				vel.x = 0;
 			}
-			if (colPlayerBody->rect.x < c2->rect.x + c2->rect.w && colPlayerBody->rect.x > c2->rect.x)
+			if (colliderBody->rect.x < c2->rect.x + c2->rect.w && colliderBody->rect.x > c2->rect.x)
 			{
 				position.x = position.x + 2;
 				vel.x = 0;
@@ -519,7 +516,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//Map Change
-	if (c1 == colPlayerBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colPlayerBody)
+	if (c1 == colliderBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colliderBody)
 	{
 		if (App->scene->scene_change == true && App->scene->scene_changed == false)
 		{
@@ -535,11 +532,30 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//Secret path activation
-	if (c1 == colPlayerBody && c2->type == COLLIDER_SECRET)
+	if (c1 == colliderBody && c2->type == COLLIDER_SECRET)
 	{
 		App->scene->secret_map = true;
 	}
 
+	//Collision with enemies
+	if (c1 == colliderBody || c1 == colliderHead || c1 == colliderLegs && c2->type == COLLIDER_ENEMY)
+	{
+		if(godMode==false) { dead = true; }
+	}
+
+	//Attack enemies
+	if (c1 == attackCollider || c1 == dashAttackCollider && c2->type == COLLIDER_ENEMY)
+	{
+		if (c2 == App->scene->bat1->colliderBody)
+		{
+			App->scene->bat1->dead = true;
+		}
+		
+		if (c2 == App->scene->skeleton1->colliderBody || c2 == App->scene->skeleton1->colliderLegs)
+		{
+			App->scene->skeleton1->dead = true;
+		}
+	}
 }
 
 void j1Player::GetPlayerPosition(float dt)
@@ -558,6 +574,7 @@ void j1Player::Respawn()
 		respawn_timer = SDL_GetTicks();
 		App->fade->FadeToBlack(1.2);
 		App->scene->input = false;
+		SetPlayerState(PLAYER_IDLE);
 		respawnTimer = true;
 	}
 

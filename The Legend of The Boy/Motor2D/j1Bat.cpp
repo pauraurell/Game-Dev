@@ -52,7 +52,7 @@ bool j1Bat::Start()
 	//BatFx = App->audio->LoadFx("audio/jumping.wav");
 
 	current_animation = &flying;
-	batCollider = App->col->AddCollider({ position.x, position.y, 15, 14 }, COLLIDER_ENEMY, this);
+	colliderBody = App->col->AddCollider({ position.x, position.y, 15, 14 }, COLLIDER_ENEMY, this);
 	batTex = App->tex->Load("textures/bat_spritesheet.png");
 	return true;
 }
@@ -60,7 +60,7 @@ bool j1Bat::Start()
 // Called each loop iteration
 bool j1Bat::PreUpdate()
 {
-	batCollider->SetPos(position.x, position.y);
+	colliderBody->SetPos(position.x, position.y);
 
 	return true;
 }
@@ -99,6 +99,8 @@ bool j1Bat::Update(float dt)
 				position.y++;
 				break;
 		}
+
+		if (dead = true) { EntityDeath(); }
 
 		SetBatPosition(dt);
 		//Pathfinding(dt);
@@ -309,4 +311,10 @@ void j1Bat::BatFlyingToThePlayer(float dt)
 			state = BAT_FLYING_DOWN;
 		}
 	}
+}
+
+void j1Bat::EntityDeath()
+{
+	
+	dead = false;
 }

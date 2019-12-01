@@ -50,8 +50,8 @@ bool j1Skeleton::Start()
 	//SkeletonFx = App->audio->LoadFx("audio/jumping.wav");
 
 	current_animation = &idle;
-	skeletonColliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
-	skeletonColliderLegs = App->col->AddCollider({ position.x + 3, position.y + 21, 11, 12 }, COLLIDER_ENEMY, this);
+	colliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
+	colliderLegs = App->col->AddCollider({ position.x + 3, position.y + 21, 11, 12 }, COLLIDER_ENEMY, this);
 	skeletonTex = App->tex->Load("textures/skeleton_spritesheet.png");
 	return true;
 }
@@ -59,8 +59,8 @@ bool j1Skeleton::Start()
 // Called each loop iteration
 bool j1Skeleton::PreUpdate()
 {
-	skeletonColliderBody->SetPos(position.x + 1, position.y + 8);
-	skeletonColliderLegs->SetPos(position.x + 3, position.y + 21);
+	colliderBody->SetPos(position.x + 1, position.y + 8);
+	colliderLegs->SetPos(position.x + 3, position.y + 21);
 
 	return true;
 }
@@ -108,6 +108,8 @@ bool j1Skeleton::Update(float dt)
 		
 	}
 
+	if (dead = true) { EntityDeath(); }
+
 	SetSkeletonPosition(dt);
 	return true;
 }
@@ -137,8 +139,8 @@ void j1Skeleton::Draw(float dt)
 bool j1Skeleton::CleanUp()
 {
 	App->tex->UnLoad(skeletonTex);
-	skeletonColliderBody->to_delete = true;
-	skeletonColliderLegs->to_delete = true;
+	colliderBody->to_delete = true;
+	colliderLegs->to_delete = true;
 
 	return true;
 }
@@ -215,12 +217,12 @@ void j1Skeleton::Pushbacks()
 
 void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == skeletonColliderLegs && c2->type == COLLIDER_WALL)
+	if (c1 == colliderLegs && c2->type == COLLIDER_WALL)
 	{
-		if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h) > (c2->rect.y))
+		if ((colliderLegs->rect.y + colliderLegs->rect.h) > (c2->rect.y))
 		{
 			vel.y = 0;
-			if ((skeletonColliderLegs->rect.y + skeletonColliderLegs->rect.h - 3) > (c2->rect.y))
+			if ((colliderLegs->rect.y + colliderLegs->rect.h - 3) > (c2->rect.y))
 			{
 				position.y -= 2;
 			}
@@ -255,7 +257,7 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 	}
 	*/
 
-	if (c1 == skeletonColliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
+	if (c1 == colliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
 	{
 		//LOG("coliding hehehe");
 		state = SKELETON_DEAD;
@@ -326,4 +328,10 @@ void j1Skeleton::ConfigLoading()
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
 	gravity = config.child("gravity").attribute("value").as_float();
 	node = config;
+}
+
+void j1Skeleton::EntityDeath()
+{
+
+	dead = false;
 }

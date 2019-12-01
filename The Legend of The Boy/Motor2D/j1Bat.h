@@ -54,6 +54,8 @@ public:
 	void BatState(batStates state);
 	void SetBatPosition(float dt);
 
+	void EntityDeath();
+
 	// Called before quitting
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
@@ -62,7 +64,6 @@ public:
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	batTex = nullptr;
 	p2SString		orientation = "right";
-	bool			dead = false;
 	bool			OnGround = true;
 
 	//ANIMATIONS
@@ -74,9 +75,6 @@ public:
 	float			SpeedY;
 	float			gravity;
 	fPoint		    vel;
-
-	//COLLIDERS
-	Collider*	batCollider = nullptr;
 
 	//AUDIO
 	uint			BatFx;

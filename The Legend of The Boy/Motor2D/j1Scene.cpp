@@ -205,9 +205,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 //Restartint current level
 void j1Scene::RestartCurrentLevel()
 {
-	//App->entManager->GetPlayerEntity()->position.x = App->entManager->GetPlayerEntity()->SpawnPointX;
-	//App->entManager->GetPlayerEntity()->position.y = App->entManager->GetPlayerEntity()->SpawnPointY;
-	//App->entManager->RestartEntities();
+	App->entManager->RestartEntities();
 }
 
 //Restarting the first level
@@ -273,16 +271,16 @@ void j1Scene::CreateEnt()
 	iPoint playerSpawnPoint1;
 	playerSpawnPoint1.x = PlayerSpawnPointX;
 	playerSpawnPoint1.y = PlayerSpawnPointY;
-	App->entManager->CreateEntity(j1Entities::Types::player, playerSpawnPoint1);
+	player = App->entManager->CreateEntity(j1Entities::Types::player, playerSpawnPoint1);
 
 	iPoint BatSpawnPoint1;
 	BatSpawnPoint1.x = BatSpawnPointX2;
 	BatSpawnPoint1.y = BatSpawnPointY;
-	App->entManager->CreateEntity(j1Entities::Types::bat, BatSpawnPoint1);
+	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, BatSpawnPoint1);
 
 	iPoint skSpawnPoint1;
 	skSpawnPoint1.x = SkeletonSpawnPointX;
 	skSpawnPoint1.y = SkeletonSpawnPointY;
-	App->entManager->CreateEntity(j1Entities::Types::skeleton, skSpawnPoint1);
+	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, skSpawnPoint1);
 	
 }
