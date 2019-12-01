@@ -25,6 +25,7 @@ j1Bat::j1Bat(iPoint pos) : j1Entities(Types::bat)
 {
 	name.create("bat");
 	position = pos;
+
 }
 
 // Destructor
@@ -36,14 +37,7 @@ bool j1Bat::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
 
-	folder.create(config.child("folder").child_value());
-	texture_path = config.child("sprite_sheet").attribute("source").as_string();
-	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
-	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
-	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	SpeedX = config.child("speed").attribute("Speedx").as_float();
-	SpeedY = config.child("speed").attribute("Speedy").as_float();
-	node = config;
+	ConfigLoading();
 
 	return ret;
 }
@@ -56,9 +50,6 @@ bool j1Bat::Start()
 	vel.y = 0;
 
 	//BatFx = App->audio->LoadFx("audio/jumping.wav");
-
-	position.x = SpawnPointX;
-	position.y = SpawnPointY;
 
 	current_animation = &flying;
 	batCollider = App->col->AddCollider({ position.x, position.y, 15, 14 }, COLLIDER_ENEMY, this);
@@ -275,4 +266,20 @@ bool j1Bat::BatPathfinding(float dt) {
 	}
 
 	return true;
+}
+
+void j1Bat::ConfigLoading()
+{
+	pugi::xml_document	config_file;
+	pugi::xml_node		config;
+	config = App->LoadConfig(config_file);
+	config = config.child("bat");
+	folder.create(config.child("folder").child_value());
+	texture_path = config.child("sprite_sheet").attribute("source").as_string();
+	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
+	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
+	orientation = config.child("initialPosition").attribute("orientation").as_string();
+	SpeedX = config.child("speed").attribute("Speedx").as_float();
+	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	node = config;
 }

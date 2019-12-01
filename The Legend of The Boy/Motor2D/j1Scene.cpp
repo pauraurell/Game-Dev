@@ -59,9 +59,9 @@ bool j1Scene::Start()
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
 
-	App->entManager->CreateEntity(j1Entities::Types::skeleton, skeleton1Pos);
-	App->entManager->CreateEntity(j1Entities::Types::bat, bat1Pos);
-	App->entManager->CreateEntity(j1Entities::Types::player, playerPos);
+	CreateEnt();
+
+
 
 	return true;
 }
@@ -264,3 +264,22 @@ void j1Scene::StartSecondLevel()
 	secret_map = false;
 }
 
+void j1Scene::CreateEnt()
+{
+	
+	iPoint playerSpawnPoint1;
+	playerSpawnPoint1.x = 20;
+	playerSpawnPoint1.y = 350;
+	App->entManager->CreateEntity(j1Entities::Types::player, playerSpawnPoint1);
+
+	iPoint BatSpawnPoint1;
+	BatSpawnPoint1.x = 50;
+	BatSpawnPoint1.y = 350;
+	App->entManager->CreateEntity(j1Entities::Types::bat, BatSpawnPoint1);
+
+	iPoint skSpawnPoint1;
+	skSpawnPoint1.x = 50;
+	skSpawnPoint1.y = 350;
+	App->entManager->CreateEntity(j1Entities::Types::skeleton, skSpawnPoint1);
+	
+}

@@ -25,6 +25,7 @@ j1Skeleton::j1Skeleton(iPoint pos) : j1Entities(Types::skeleton)
 {
 	name.create("skeleton");
 	position = pos;
+	
 }
 
 // Destructor
@@ -35,17 +36,7 @@ j1Skeleton::~j1Skeleton()
 bool j1Skeleton::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-
-	folder.create(config.child("folder").child_value());
-	texture_path = config.child("sprite_sheet").attribute("source").as_string();
-	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
-	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
-	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	SpeedX = config.child("speed").attribute("Speedx").as_float();
-	SpeedY = config.child("speed").attribute("Speedy").as_float();
-	gravity = config.child("gravity").attribute("value").as_float();
-	node = config;
-
+	ConfigLoading();
 	return ret;
 }
 
@@ -57,9 +48,6 @@ bool j1Skeleton::Start()
 	vel.y = 0;
 
 	//SkeletonFx = App->audio->LoadFx("audio/jumping.wav");
-
-	position.x = SpawnPointX;
-	position.y = SpawnPointY;
 
 	current_animation = &idle;
 	skeletonColliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);
@@ -321,4 +309,21 @@ bool j1Skeleton::SkeletonPathFinding(float dt) {
 	}
 
 	return true;
+}
+
+void j1Skeleton::ConfigLoading()
+{
+	pugi::xml_document	config_file;
+	pugi::xml_node		config;
+	config = App->LoadConfig(config_file);
+	config = config.child("skeleton");
+	folder.create(config.child("folder").child_value());
+	texture_path = config.child("sprite_sheet").attribute("source").as_string();
+	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
+	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
+	orientation = config.child("initialPosition").attribute("orientation").as_string();
+	SpeedX = config.child("speed").attribute("Speedx").as_float();
+	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
+	node = config;
 }

@@ -54,6 +54,9 @@ public:
 	iPoint bat1Pos;
 	iPoint skeleton1Pos;
 
+	void CreateEnt();
+
+	iPoint playerSpawnPoint;
 
 private:
 

@@ -52,7 +52,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
-
+	void ConfigLoading();
 
 	iPoint			position;
 	int				SpawnPointX, SpawnPointY, yLimit;

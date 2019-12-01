@@ -25,6 +25,7 @@ j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
 {
 	name.create("player");
 	position = pos;
+
 }
 
 // Destructor
@@ -36,23 +37,7 @@ bool j1Player::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
 
-	folder.create(config.child("folder").child_value());
-	texture_path = config.child("sprite_sheet").attribute("source").as_string();
-	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
-	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
-	orientation = config.child("initialPosition").attribute("orientation").as_string();
-	yLimit = config.child("initialPosition").attribute("yLimit").as_int();
-	maxSpeedX = config.child("speed").attribute("MaxSpeedX").as_int();
-	maxSpeedY = config.child("speed").attribute("MaxSpeedY").as_float();
-	SpeedX = config.child("speed").attribute("Speedx").as_float();
-	SpeedY = config.child("speed").attribute("Speedy").as_float();
-	dashSpeed = config.child("speed").attribute("DashSpeed").as_float();
-	gravity = config.child("gravity").attribute("value").as_float();
-	maxJumpSpeed = config.child("speed").attribute("jumpMaxSpeed").as_int();
-	speedDecrease = config.child("speed").attribute("SpeedDecrease").as_float();
-	dashTime = config.child("Dash").attribute("dashTime").as_int();
-	attackTime = config.child("Attacking").attribute("attackTime").as_int();
-	node = config;
+	ConfigLoading();
 
 	return ret;
 }
@@ -71,6 +56,7 @@ bool j1Player::Start()
 	//position.y = SpawnPointY;
 
 	state = PLAYER_IDLE;
+	current_animation = &idle;
 	dead = false;
 
 	colPlayerHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
@@ -78,7 +64,6 @@ bool j1Player::Start()
 	colPlayerLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
 	Character_tex = App->tex->Load("textures/adventurer-v1.5-Sheet.png");
 	return true;
-
 
 }
 
@@ -227,6 +212,7 @@ bool j1Player::Update(float dt)
 			}
 			break;
 		}
+
 
 		//Controlling the maximum speed that the player can go
 		if (state != PLAYER_DASH) {
@@ -585,4 +571,29 @@ void j1Player::Respawn()
 		respawnTimer = false;
 		App->scene->secret_map = false;
 	}
+}
+
+void j1Player::ConfigLoading()
+{
+	pugi::xml_document	config_file;
+	pugi::xml_node		config;
+	config = App->LoadConfig(config_file);
+	config = config.child("player");
+	folder.create(config.child("folder").child_value());
+	texture_path = config.child("sprite_sheet").attribute("source").as_string();
+	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
+	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
+	orientation = config.child("initialPosition").attribute("orientation").as_string();
+	yLimit = config.child("initialPosition").attribute("yLimit").as_int();
+	maxSpeedX = config.child("speed").attribute("MaxSpeedX").as_int();
+	maxSpeedY = config.child("speed").attribute("MaxSpeedY").as_float();
+	SpeedX = config.child("speed").attribute("Speedx").as_float();
+	SpeedY = config.child("speed").attribute("Speedy").as_float();
+	dashSpeed = config.child("speed").attribute("DashSpeed").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
+	maxJumpSpeed = config.child("speed").attribute("jumpMaxSpeed").as_int();
+	speedDecrease = config.child("speed").attribute("SpeedDecrease").as_float();
+	dashTime = config.child("Dash").attribute("dashTime").as_int();
+	attackTime = config.child("Attacking").attribute("attackTime").as_int();
+	node = config;
 }
