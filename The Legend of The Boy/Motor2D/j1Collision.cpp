@@ -44,6 +44,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_ATTACK] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
 
+	name.create("collision");
 }
 
 

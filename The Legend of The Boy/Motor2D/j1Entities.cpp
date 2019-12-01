@@ -18,12 +18,12 @@ j1Entities::j1Entities(Types type)
 j1Entities::~j1Entities()
 {}
 
-bool j1Entities::Load(pugi::xml_node& data)
+/*bool j1Entities::Load(pugi::xml_node& data)
 {
 	position.x = data.child("position").attribute("posX").as_int();
 	position.y = data.child("position").attribute("posY").as_int();
 	return true;
-}
+}*/
 
 bool j1Entities::Save(pugi::xml_node& data) const
 {

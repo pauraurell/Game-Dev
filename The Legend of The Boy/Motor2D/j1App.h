@@ -84,7 +84,7 @@ private:
 
 	// Load / Save
 	bool LoadGameNow();
-	bool SavegameNow() const;
+	bool SaveGameNow() const;
 
 public:
 

@@ -17,7 +17,7 @@
 
 j1EntityManager::j1EntityManager()
 {
-	
+	name.create("entManager");
 }
 
 j1EntityManager::~j1EntityManager()
@@ -87,11 +87,11 @@ bool j1EntityManager::Load(pugi::xml_node& data)
 		{
 			type = j1Entities::Types::player;
 		}
-		if (entType == "skeleton")
+		else if (entType == "skeleton")
 		{
 			type = j1Entities::Types::skeleton;
 		}
-		if (entType == "bat")
+		else if (entType == "bat")
 		{
 			type = j1Entities::Types::bat;
 		}
@@ -111,6 +111,7 @@ bool j1EntityManager::Save(pugi::xml_node& data) const
 
 		entityList = entityList->next;
 	}
+
 	return true;
 }
 

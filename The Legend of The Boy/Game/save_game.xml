@@ -8,19 +8,21 @@
 	<scene>
 		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
-	<:anonymous />
-	<player type="player">
-		<position posX="92" posY="483" />
-	</player>
-	<bat type="bat">
-		<position posX="168" posY="400" />
-	</bat>
-	<skeleton type="skeleton">
-		<position posX="210" posY="445" />
-	</skeleton>
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
+	<entManager>
+		<Entity type="player">
+			<position posX="193" posY="451" />
+		</Entity>
+		<Entity type="bat">
+			<position posX="164" posY="350" />
+		</Entity>
+		<Entity type="skeleton">
+			<position posX="50" posY="480" />
+		</Entity>
+	</entManager>
+	<particles />
+	<collision />
+	<fade />
+	<pathfinding />
 	<renderer>
 		<camera x="0" y="-512" />
 	</renderer>

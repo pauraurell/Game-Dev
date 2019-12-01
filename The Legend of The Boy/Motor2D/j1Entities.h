@@ -31,7 +31,7 @@ public:
 
 	virtual ~j1Entities();
 
-	bool Load(pugi::xml_node& data);
+	//bool Load(pugi::xml_node& data);
 
 	virtual void Draw(float dt);
 
