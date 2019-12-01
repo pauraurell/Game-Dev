@@ -80,7 +80,7 @@ bool j1Skeleton::Update(float dt)
 
 	else 
 	{
-		if (state != SKELETON_DEAD) { state = SKELETON_IDLE; }
+		if (state != SKELETON_DEATH) { state = SKELETON_IDLE; }
 	} 
 
 	switch (state)
@@ -97,8 +97,8 @@ bool j1Skeleton::Update(float dt)
 		current_animation = &walking;
 		break;
 
-	case SKELETON_DEAD:
-		current_animation = &deadAnim;
+	case SKELETON_DEATH:
+		current_animation = &deathAnim;
 		
 		break;
 
@@ -108,7 +108,8 @@ bool j1Skeleton::Update(float dt)
 		
 	}
 
-	if (dead = true) { EntityDeath(); }
+	if (dead == true) { EntityDeath(); }
+	else { gravity = 0.19f; }
 
 	SetSkeletonPosition(dt);
 	return true;
@@ -186,20 +187,22 @@ void j1Skeleton::Pushbacks()
 	idle.PushBack({ 216, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 	idle.PushBack({ 240, 118, 22, 32 }, 0.12f, 1, 1, 1, 1);
 
-	deadAnim.PushBack({ 0, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 30, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 62, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 93, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 126, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 159, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 192, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 225, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 258, 83, 23, 31 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 287, 86, 23, 28 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 323, 82, 24, 25 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.PushBack({ 356, 82, 25, 16 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 0, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 30, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 62, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 93, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 126, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 159, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 192, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 225, 82, 22, 32 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 258, 83, 23, 31 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 287, 86, 23, 28 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 323, 82, 24, 25 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 356, 82, 25, 16 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.PushBack({ 385, 82, 30, 7 }, 0.12f, 1, 1, 1, 1);
+	deathAnim.loop = false;
+
 	deadAnim.PushBack({ 385, 82, 30, 7 }, 0.12f, 1, 1, 1, 1);
-	deadAnim.loop = false;
 
 	walking.PushBack({ 0, 42, 20, 33 }, 0.12f, 1, 1, 1, 1);
 	walking.PushBack({ 22, 42, 21, 33 }, 0.12f, 1, 1, 1, 1);
@@ -260,7 +263,7 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == colliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
 	{
 		//LOG("coliding hehehe");
-		state = SKELETON_DEAD;
+		dead = true;
 	}
 }
 
@@ -291,7 +294,7 @@ bool j1Skeleton::SkeletonPathFinding(float dt) {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 	if (path->At(1) != NULL)
 	{
-		if (state != SKELETON_DEAD)
+		if (state != SKELETON_DEATH && state != SKELETON_DEAD)
 		{
 			if (path->At(1)->x < InicialEntityPosition.x && !App->pathfinding->IsWalkable(DownCell))
 			{
@@ -332,6 +335,8 @@ void j1Skeleton::ConfigLoading()
 
 void j1Skeleton::EntityDeath()
 {
-
-	dead = false;
+	gravity = 0;
+	colliderBody->to_delete = true;
+	colliderLegs->to_delete = true;
+	state = SKELETON_DEATH;
 }

@@ -538,23 +538,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	//Collision with enemies
-	if (c1 == colliderBody || c1 == colliderHead || c1 == colliderLegs && c2->type == COLLIDER_ENEMY)
+	if ((c1 == colliderBody || c1 == colliderHead || c1 == colliderLegs) && c2->type == COLLIDER_ENEMY)
 	{
 		if(godMode==false) { dead = true; }
-	}
-
-	//Attack enemies
-	if (c1 == attackCollider || c1 == dashAttackCollider && c2->type == COLLIDER_ENEMY)
-	{
-		if (c2 == App->scene->bat1->colliderBody)
-		{
-			App->scene->bat1->dead = true;
-		}
-		
-		if (c2 == App->scene->skeleton1->colliderBody || c2 == App->scene->skeleton1->colliderLegs)
-		{
-			App->scene->skeleton1->dead = true;
-		}
 	}
 }
 
@@ -576,6 +562,8 @@ void j1Player::Respawn()
 		App->scene->input = false;
 		SetPlayerState(PLAYER_IDLE);
 		respawnTimer = true;
+		if (attackCollider != nullptr) { attackCollider->to_delete = true; }
+		if (dashAttackCollider != nullptr) { dashAttackCollider->to_delete = true; }
 	}
 
 	if (SDL_GetTicks() - respawn_timer > 615) {

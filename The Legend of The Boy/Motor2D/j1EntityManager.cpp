@@ -249,3 +249,18 @@ j1Entities* j1EntityManager::GetPlayerEntity()
 	}
 	return NULL;
 }
+
+void j1EntityManager::DestroyEnemies()
+{
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList)
+	{
+		if (entityList->data->entity_type != j1Entities::Types::player)
+		{
+			entityList->data->CleanUp();
+			RELEASE(entityList->data);
+			entities.del(entityList);
+		}
+		entityList = entityList->next;
+	}
+}

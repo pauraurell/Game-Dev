@@ -37,6 +37,9 @@ public:
 	void RestartCurrentLevel(); //F3
 	void StartFirstLevel(); //F1
 	void StartSecondLevel(); //F2
+	void CreateEnt();
+	void Create1MapEnemies();
+	void Create2MapEnemies();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
@@ -54,8 +57,6 @@ public:
 	j1Entities* player;
 	j1Entities* bat1;
 	j1Entities* skeleton1;
-
-	void CreateEnt();
 
 	iPoint playerSpawnPoint;
 

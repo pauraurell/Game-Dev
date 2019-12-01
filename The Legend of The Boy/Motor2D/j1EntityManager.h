@@ -26,9 +26,9 @@ public:
 	j1Entities* CreateEntity(j1Entities::Types type, iPoint pos);
 	void DestroyEntity(j1Entities* entity);
 	void DestroyEntities();
+	void DestroyEnemies();
 	void RestartEntities();
 	void DrawEntities(float dt);
-	void ClearEntitiyList();
 	j1Entities* GetPlayerEntity();
 
 	pugi::xml_node node;

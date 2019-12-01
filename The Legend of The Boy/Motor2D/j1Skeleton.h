@@ -16,6 +16,7 @@ enum skeletonStates
 	SKELETON_IDLE,
 	SKELETON_MOVING_LEFT,
 	SKELETON_MOVING_RIGHT,
+	SKELETON_DEATH,
 	SKELETON_DEAD,
 };
 
@@ -66,6 +67,7 @@ public:
 	Animation*		current_animation = nullptr;
 	Animation		idle;
 	Animation		walking;
+	Animation		deathAnim;
 	Animation		deadAnim;
 
 	//SPEED

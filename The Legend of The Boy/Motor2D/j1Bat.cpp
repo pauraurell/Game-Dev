@@ -100,7 +100,7 @@ bool j1Bat::Update(float dt)
 				break;
 		}
 
-		if (dead = true) { EntityDeath(); }
+		if (dead == true) { EntityDeath(); }
 
 		SetBatPosition(dt);
 		//Pathfinding(dt);
@@ -228,6 +228,13 @@ void j1Bat::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 	}*/
+
+	if (c1 == colliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
+	{
+		//LOG("coliding hehehe");
+		dead = true;
+	}
+
 }
 
 void j1Bat::SetBatPosition(float dt)
@@ -315,6 +322,5 @@ void j1Bat::BatFlyingToThePlayer(float dt)
 
 void j1Bat::EntityDeath()
 {
-	
-	dead = false;
+	colliderBody->to_delete = true;
 }
