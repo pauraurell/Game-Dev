@@ -13,10 +13,14 @@ struct Collider;
 
 enum batStates
 {
-	BAT_FLIYING_LEFT,
-	BAT_FLIYING_RIGHT,
+	BAT_FLYING_LEFT,
+	BAT_FLYING_RIGHT,
+	BAT_FLYING_LEFT_IDLE,
+	BAT_FLYING_RIGHT_IDLE,
+	BAT_FLYING_UP,
+	BAT_FLYING_DOWN,
 	BAT_DEAD,	
-	FLYING_TO_THE_PLAYER
+
 };
 
 class j1Bat : public j1Entities
@@ -38,7 +42,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-	bool BatPathfinding(float dt);
+	void Pathfinding(float dt);
+	void BatFlyingToThePlayer(float dt);
 
 	// Called each loop iteration
 	void Draw(float dt);
@@ -79,8 +84,16 @@ public:
 
 	void Pushbacks();
 
-	batStates state = BAT_FLIYING_RIGHT;
+	batStates state = BAT_FLYING_RIGHT_IDLE;
 
+	int x;
+	int y;
+	iPoint pPos;
+	iPoint origin;
+	iPoint pos;
+	const p2DynArray<iPoint>* lastpath;
+	const p2DynArray<iPoint>* path;
+	//SDL_Texture* debugTex = nullptr;
 
 private:
 

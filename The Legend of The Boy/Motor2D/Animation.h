@@ -4,7 +4,7 @@
 #include "SDL/include/SDL_rect.h"
 
 #define MAX_FRAMES 30
-
+#define DTCOEFICIENTANIM 60
 class Animation
 {
 public:
@@ -41,7 +41,7 @@ public:
 	{
 		animend = false;
 		speeddelay = 0;
-		current_frame += speed[(int)current_frame] * dt * DTCOEFICIENT;
+		current_frame += speed[(int)current_frame] * dt * DTCOEFICIENTANIM;
 		if (current_frame >= last_frame)
 		{
 			animend = true;

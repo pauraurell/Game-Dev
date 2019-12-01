@@ -69,24 +69,39 @@ bool j1Bat::Update(float dt)
 {
 		switch (state) 
 		{
-			case BAT_FLIYING_LEFT:
+			case BAT_FLYING_LEFT_IDLE:
 				orientation = "left";
 				position.x--;
-				if (position.x <= SpawnPointX) { state = BAT_FLIYING_RIGHT; }
+				if (position.x <= SpawnPointX) { state = BAT_FLYING_RIGHT_IDLE; }
 				break;
 
-			case BAT_FLIYING_RIGHT:
+			case BAT_FLYING_RIGHT_IDLE:
 				orientation = "right";
 				position.x++;
-				if (position.x >= SpawnPointX + 100) { state = BAT_FLIYING_LEFT; }
+				if (position.x >= SpawnPointX + 100) { state = BAT_FLYING_LEFT_IDLE; }
 				break;
 
-			case FLYING_TO_THE_PLAYER:
-				current_animation = &flying;
+			case BAT_FLYING_RIGHT:
+				orientation = "right";
+				position.x++;
+				break;
+
+			case BAT_FLYING_LEFT:
+				orientation = "left";
+				position.x--;
+				break;
+
+			case BAT_FLYING_UP:
+				position.x--;
+				break;
+
+			case BAT_FLYING_DOWN:
+				position.y++;
 				break;
 		}
 
 		SetBatPosition(dt);
+		//Pathfinding(dt);
 
 	return true;
 }
@@ -219,55 +234,6 @@ void j1Bat::SetBatPosition(float dt)
 	position.y = position.y + (vel.y * dt * 70);
 }
 
-bool j1Bat::BatPathfinding(float dt) {
-
-	static iPoint InicialEntityPosition;
-
-	int x, y;
-	App->input->GetMousePosition(x, y);
-
-	iPoint p = App->entManager->GetPlayerEntity()->position;
-	p = App->map->WorldToMap(p.x + 30, p.y + 30);
-
-	InicialEntityPosition = App->map->WorldToMap(position.x + 30, position.y + 30);
-	App->pathfinding->CreatePath(InicialEntityPosition, p);
-
-	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-
-	if (path->At(1) != NULL)
-	{
-		state = FLYING_TO_THE_PLAYER;
-
-		if (path->At(1)->x < InicialEntityPosition.x) 
-		{
-			orientation = "right";
-			position.x -= 2 * DTCOEFICIENT * dt;
-		}
-
-		if (path->At(1)->x > InicialEntityPosition.x) 
-		{
-			orientation = "left";
-			position.x += 2* DTCOEFICIENT * dt;
-		}
-
-		if (path->At(1)->y < InicialEntityPosition.y)
-		{
-			position.y -= 2 * DTCOEFICIENT * dt;
-		}
-
-		if (path->At(1)->y > InicialEntityPosition.y) 
-		{
-			position.y += 2 * DTCOEFICIENT * dt;
-		}
-	}
-	for (uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint nextPathPosition = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-	}
-
-	return true;
-}
-
 void j1Bat::ConfigLoading()
 {
 	pugi::xml_document	config_file;
@@ -282,4 +248,65 @@ void j1Bat::ConfigLoading()
 	SpeedX = config.child("speed").attribute("Speedx").as_float();
 	SpeedY = config.child("speed").attribute("Speedy").as_float();
 	node = config;
+}
+
+void j1Bat::Pathfinding(float dt)
+{
+	//Coords of the player
+	pPos = App->render->ScreenToWorld(x, y);
+	pPos = App->entManager->GetPlayerEntity()->position;
+	pPos = App->map->WorldToMap(pPos.x, pPos.y);
+
+	//Coords of the enemy
+	origin = App->map->WorldToMap(position.x, position.y);
+
+	if (origin != pPos && App->entManager->GetPlayerEntity()->position.x - 300 < position.x && App->entManager->GetPlayerEntity()->position.x + 300 > position.x&& App->entManager->GetPlayerEntity()->position.y - 400 < position.y && App->entManager->GetPlayerEntity()->position.y + 400 > position.y && dead == false)
+	{
+
+		App->pathfinding->CreatePath(origin, pPos);
+		BatFlyingToThePlayer(dt);
+	}
+	else
+	{
+		state = BAT_FLYING_RIGHT_IDLE;
+	}
+
+
+	//Draw pathfinding
+	/*if (App->col->debug == true) {
+
+		lastpath = App->pathfinding->GetLastPath();
+
+		for (uint i = 0; i < lastpath->Count(); ++i)
+		{
+			pos = App->map->MapToWorld(lastpath->At(i)->x, lastpath->At(i)->y);
+			App->render->Blit(debugTex, pos.x, pos.y);
+		}
+	}*/
+}
+
+void j1Bat::BatFlyingToThePlayer(float dt)
+{
+	path = App->pathfinding->GetLastPath();
+	pos = App->map->MapToWorld(path->At(1)->x, path->At(1)->y);
+
+	if (path->At(1) != NULL)
+	{
+		if (pos.x < position.x)
+		{
+			state = BAT_FLYING_LEFT;
+		}
+		if (pos.x > position.x)
+		{
+			state = BAT_FLYING_RIGHT;
+		}
+		if (pos.y > position.y)
+		{
+			state = BAT_FLYING_UP;
+		}
+		if (pos.y < position.y)
+		{
+			state = BAT_FLYING_DOWN;
+		}
+	}
 }
