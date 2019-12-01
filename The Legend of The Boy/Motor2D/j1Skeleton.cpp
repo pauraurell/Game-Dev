@@ -112,7 +112,7 @@ bool j1Skeleton::Update(float dt)
 	else { gravity = 0.19f; }
 
 	SetSkeletonPosition(dt);
-	Pathfinding(dt);
+	//Pathfinding(dt);
 	return true;
 }
 
