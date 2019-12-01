@@ -21,11 +21,11 @@ j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 	name.create("skeleton");
 }
 
-j1Skeleton::j1Skeleton(iPoint pos) : j1Entities(Types::skeleton)
+j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
 {
 	name.create("skeleton");
 	position = pos;
-	
+	dead = isDead;
 }
 
 // Destructor
@@ -158,11 +158,12 @@ bool j1Skeleton::CleanUp()
 // Save Game State
 bool j1Skeleton::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node playerNode = data;
-	playerNode.append_attribute("type") = name.GetString();
-	playerNode = data.append_child("position");
-	playerNode.append_attribute("posX") = position.x;
-	playerNode.append_attribute("posY") = position.y;
+	pugi::xml_node skeletonNode = data;
+	skeletonNode.append_attribute("type") = name.GetString();
+	skeletonNode.append_attribute("dead") = dead;
+	skeletonNode = data.append_child("position");
+	skeletonNode.append_attribute("posX") = position.x;
+	skeletonNode.append_attribute("posY") = position.y;
 	return true;
 }
 
