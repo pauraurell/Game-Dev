@@ -262,7 +262,7 @@ void j1Scene::StartSecondLevel()
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
-	//App->entManager->RestartEntities();
+	App->entManager->RestartEntities();
 	scene_change = true;
 	secret_map = false;
 }
