@@ -30,11 +30,7 @@ struct Collider
 		callback(callback)
 	{}
 
-	void SetPos(int x, int y)
-	{
-		rect.x = x * SCALE;
-		rect.y = y * SCALE;
-	}
+	void SetPos(int x, int y);
 
 	bool CheckCollision(const SDL_Rect& r) const;
 };
@@ -54,7 +50,7 @@ public:
 	void DebugDraw();
 	bool MapCleanUp();
 	SDL_Rect rect;	
-	bool debug = false;
+	bool debug;
 
 private:
 

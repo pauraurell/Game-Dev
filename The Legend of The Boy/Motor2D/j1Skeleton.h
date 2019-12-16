@@ -61,8 +61,8 @@ public:
 
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	skeletonTex = nullptr;
-	p2SString		orientation = "left";
-	bool			OnGround = true;
+	p2SString		orientation;
+	bool			OnGround;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;

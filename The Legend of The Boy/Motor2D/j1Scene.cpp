@@ -65,6 +65,13 @@ bool j1Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Scene::Start()
 {
+	scene_change = false;
+	scene_changed = false;
+	manualFirstLevel = false;
+	secret_map = false;
+	input = true;
+	sceneChangeTimer = false;
+	
 	CurrentMap = MapList.start->data;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map

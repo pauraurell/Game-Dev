@@ -62,9 +62,9 @@ public:
 
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	Character_tex = nullptr;
-	p2SString		orientation = "right";
-	bool			dash = false;
-	bool			OnGround = true;
+	p2SString		orientation;
+	bool			dash;
+	bool			OnGround;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;
@@ -90,26 +90,26 @@ public:
 	//TIMERS
 	Uint32		dash_timer;
 	int		    dashTime;
-	bool		dashTimer = false;
+	bool		dashTimer;
 	Uint32		attack_timer;
 	int		    attackTime;
-	bool		attackTimer = false;
+	bool		attackTimer;
 	Uint32		respawn_timer;
-	bool		respawnTimer = false;
+	bool		respawnTimer;
 		
 	//COLLIDERS
 	Collider*	attackCollider = nullptr;
 	Collider*   dashAttackCollider = nullptr;
 	
-	int			ColOffsset = 5;
-	bool		ColOffssetON = false;
+	int			ColOffsset;
+	bool		ColOffssetON;
 
 	//GOD MODE
-	bool godMode = false;
-	bool godModeRight = false;
-	bool godModeLeft = false;
-	bool godModeUp = false;
-	bool godModeDown = false;
+	bool godMode;
+	bool godModeRight;
+	bool godModeLeft;
+	bool godModeUp;
+	bool godModeDown;
 
 	//AUDIO
 	uint			JumpFx;

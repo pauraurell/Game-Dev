@@ -15,8 +15,8 @@ struct Particle
 	Animation anim;
 	iPoint position;
 	iPoint speed;
-	Uint32 born = 0;
-	Uint32 life = 0;
+	Uint32 born;
+	Uint32 life;
 	SDL_RendererFlip flip;
 
 	Particle();
@@ -41,7 +41,7 @@ private:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
-	uint last_particle = 0;
+	uint last_particle;
 
 public:
 

@@ -45,6 +45,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_ENEMY] = true;
 
 	name.create("collision");
+	debug = false;
 }
 
 
@@ -217,4 +218,10 @@ bool j1Collision::MapCleanUp()
 	}
 
 	return true;
+}
+
+void Collider::SetPos(int x, int y)
+{
+	rect.x = x * SCALE;
+	rect.y = y * SCALE;
 }

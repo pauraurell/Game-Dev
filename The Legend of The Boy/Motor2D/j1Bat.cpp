@@ -49,6 +49,9 @@ bool j1Bat::Start()
 	vel.x = 0;
 	vel.y = 0;
 
+	orientation = "right";
+	OnGround = true;
+
 	//BatFx = App->audio->LoadFx("audio/jumping.wav");
 
 	current_animation = &flying;

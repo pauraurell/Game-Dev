@@ -44,14 +44,14 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
-	bool scene_change = false;
-	bool scene_changed = false;
-	bool manualFirstLevel = false;
-	bool secret_map = false;
-	bool input = true;
+	bool scene_change;
+	bool scene_changed;
+	bool manualFirstLevel;
+	bool secret_map;
+	bool input;
 
 	Uint32 scene_change_timer;
-	bool sceneChangeTimer = false;
+	bool sceneChangeTimer;
 
 	p2SString CurrentMap;
 	j1Entities* player;

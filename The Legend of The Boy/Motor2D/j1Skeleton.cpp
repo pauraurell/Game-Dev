@@ -48,6 +48,8 @@ bool j1Skeleton::Start()
 	vel.y = 0;
 
 	//SkeletonFx = App->audio->LoadFx("audio/jumping.wav");
+	orientation = "left";
+	OnGround = true;
 
 	current_animation = &idle;
 	colliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);

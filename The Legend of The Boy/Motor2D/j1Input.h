@@ -110,11 +110,11 @@ private:
 
 public:
 	p2List<player_inputs> inputs;
-	int jump_timer = 0;
-	int dash_timer = 0;
-	bool left = false;
-	bool right = false;
-	bool up = false;
+	int jump_timer;
+	int dash_timer;
+	bool left;
+	bool right;
+	bool up;
 };
 
 #endif // __j1INPUT_H__

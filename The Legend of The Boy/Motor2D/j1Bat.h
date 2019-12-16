@@ -63,8 +63,8 @@ public:
 
 	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	batTex = nullptr;
-	p2SString		orientation = "right";
-	bool			OnGround = true;
+	p2SString		orientation;
+	bool			OnGround;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;

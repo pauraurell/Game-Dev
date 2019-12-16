@@ -58,7 +58,20 @@ bool j1Player::Start()
 
 	state = PLAYER_IDLE;
 	current_animation = &idle;
+	orientation = "right";
+	dash = false;
+	OnGround = true;
 	dead = false;
+	dashTimer = false;
+	attackTimer = false;
+	respawnTimer = false;
+	ColOffsset = 5;
+	ColOffssetON = false;
+	godMode = false;
+	godModeRight = false;
+	godModeLeft = false;
+	godModeUp = false;
+	godModeDown = false;
 
 	colliderHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colliderBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);

@@ -43,9 +43,9 @@ public:
 	void EntityDeath();
 
 	iPoint			position;
-	bool			dead = false;
-	bool			OnGround = true;
-	p2SString		orientation = "right";
+	bool			dead;
+	bool			OnGround;
+	p2SString		orientation;
 	int				SpawnPointX, SpawnPointY;
 	float			gravity;
 	

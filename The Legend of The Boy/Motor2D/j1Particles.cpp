@@ -26,6 +26,8 @@ bool j1Particles::Start()
 {
 	graphics = App->tex->Load("textures/particles.png");
 
+	last_particle = 0;
+
 	//Particle that appeares when the player jumps
 	dustParticle.anim.PushBack({ 1, 6, 10, 6 }, 0.22f, 1, 1, 1, 1);
 	dustParticle.anim.PushBack({ 30, 5, 19, 6 }, 0.2f, 1, 1, 1, 1);
@@ -141,6 +143,9 @@ Particle::Particle()
 {
 	position.SetToZero();
 	speed.SetToZero();
+
+	born = 0;
+	life = 0;
 }
 
 Particle::Particle(const Particle& p) :
