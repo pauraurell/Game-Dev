@@ -20,13 +20,44 @@
 j1Player::j1Player() : j1Entities(Types::player)
 {
 	name.create("player");
+	state = PLAYER_IDLE;
+	current_animation = &idle;
+	orientation = "right";
+	dash = false;
+	OnGround = true;
+	dead = false;
+	dashTimer = false;
+	attackTimer = false;
+	respawnTimer = false;
+	ColOffsset = 5;
+	ColOffssetON = false;
+	godMode = false;
+	godModeRight = false;
+	godModeLeft = false;
+	godModeUp = false;
+	godModeDown = false;
 }
 
 j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
 {
 	name.create("player");
 	position = pos;
-
+	state = PLAYER_IDLE;
+	current_animation = &idle;
+	orientation = "right";
+	dash = false;
+	OnGround = true;
+	dead = false;
+	dashTimer = false;
+	attackTimer = false;
+	respawnTimer = false;
+	ColOffsset = 5;
+	ColOffssetON = false;
+	godMode = false;
+	godModeRight = false;
+	godModeLeft = false;
+	godModeUp = false;
+	godModeDown = false;
 }
 
 // Destructor
@@ -55,23 +86,6 @@ bool j1Player::Start()
 
 	//position.x = SpawnPointX;
 	//position.y = SpawnPointY;
-
-	state = PLAYER_IDLE;
-	current_animation = &idle;
-	orientation = "right";
-	dash = false;
-	OnGround = true;
-	dead = false;
-	dashTimer = false;
-	attackTimer = false;
-	respawnTimer = false;
-	ColOffsset = 5;
-	ColOffssetON = false;
-	godMode = false;
-	godModeRight = false;
-	godModeLeft = false;
-	godModeUp = false;
-	godModeDown = false;
 
 	colliderHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colliderBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);

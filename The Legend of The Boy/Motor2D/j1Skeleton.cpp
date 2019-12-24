@@ -19,6 +19,8 @@
 j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 {
 	name.create("skeleton");
+	orientation = "left";
+	OnGround = true;
 }
 
 j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
@@ -26,6 +28,8 @@ j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
 	name.create("skeleton");
 	position = pos;
 	dead = isDead;
+	orientation = "left";
+	OnGround = true;
 }
 
 // Destructor
@@ -48,8 +52,6 @@ bool j1Skeleton::Start()
 	vel.y = 0;
 
 	//SkeletonFx = App->audio->LoadFx("audio/jumping.wav");
-	orientation = "left";
-	OnGround = true;
 
 	current_animation = &idle;
 	colliderBody = App->col->AddCollider({ position.x + 1, position.y + 8, 15, 14 }, COLLIDER_ENEMY, this);

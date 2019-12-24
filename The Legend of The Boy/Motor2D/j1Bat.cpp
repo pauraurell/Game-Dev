@@ -19,6 +19,8 @@
 j1Bat::j1Bat() : j1Entities(Types::bat)
 {
 	name.create("bat");
+	orientation = "right";
+	OnGround = true;
 }
 
 j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
@@ -26,6 +28,8 @@ j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
 	name.create("bat");
 	position = pos;
 	dead = isDead;
+	orientation = "right";
+	OnGround = true;
 }
 
 // Destructor
@@ -48,9 +52,6 @@ bool j1Bat::Start()
 	Pushbacks();
 	vel.x = 0;
 	vel.y = 0;
-
-	orientation = "right";
-	OnGround = true;
 
 	//BatFx = App->audio->LoadFx("audio/jumping.wav");
 
