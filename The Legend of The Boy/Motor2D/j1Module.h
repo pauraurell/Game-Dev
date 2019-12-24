@@ -7,6 +7,8 @@
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
 
+#include "p2Defs.h"
+#include "p2Point.h"
 #include "p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
 

@@ -15,6 +15,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_WALL][COLLIDER_SECRET] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_ATTACK] = false;
 	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_WALL][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
@@ -22,6 +23,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_ENEMY][COLLIDER_SECRET] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_ATTACK] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
@@ -29,6 +31,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_SECRET] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_ATTACK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
 
 	matrix[COLLIDER_FINISH][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_FINISH][COLLIDER_WALL] = false;
@@ -36,6 +39,7 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_FINISH][COLLIDER_SECRET] = false;
 	matrix[COLLIDER_FINISH][COLLIDER_PLAYER_ATTACK] = false;
 	matrix[COLLIDER_FINISH][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_FINISH][COLLIDER_COIN] = false;
 
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_WALL] = false;
@@ -43,6 +47,17 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_SECRET] = false;
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER_ATTACK] = false;
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_COIN] = false;
+
+	matrix[COLLIDER_COIN][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_COIN][COLLIDER_WALL] = false;
+	matrix[COLLIDER_COIN][COLLIDER_FINISH] = false;
+	matrix[COLLIDER_COIN][COLLIDER_SECRET] = false;
+	matrix[COLLIDER_COIN][COLLIDER_PLAYER_ATTACK] = false;
+	matrix[COLLIDER_COIN][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_COIN][COLLIDER_COIN] = false;
+
+
 
 	name.create("collision");
 	debug = false;
@@ -151,6 +166,10 @@ void j1Collision::DebugDraw()
 
 		case COLLIDER_ENEMY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 5, 5, alpha);
+			break;
+
+		case COLLIDER_COIN: // grey
+			App->render->DrawQuad(colliders[i]->rect, 200, 200, 200, alpha);
 			break;
 		}
 	}

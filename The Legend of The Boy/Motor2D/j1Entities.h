@@ -20,6 +20,7 @@ public:
 		player,
 		skeleton,
 		bat,
+		coin,
 		unknown
 	};
 

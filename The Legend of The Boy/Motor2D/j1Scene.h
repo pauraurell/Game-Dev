@@ -50,7 +50,7 @@ public:
 	bool secret_map;
 	bool input;
 
-	Uint32 scene_change_timer;
+	int scene_change_timer;
 	bool sceneChangeTimer;
 
 	p2SString CurrentMap;
