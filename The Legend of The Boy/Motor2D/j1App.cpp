@@ -19,6 +19,7 @@
 #include "j1Particles.h"
 #include "j1EntityManager.h"
 #include "j1Pathfinding.h"
+#include "j1Fonts.h"
 
 
 // Constructor
@@ -34,15 +35,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new j1Textures();
 	audio = new j1Audio();
 	scene = new j1Scene();
-	/*player = new j1Player();
-	bat = new j1Bat();
-	skeleton = new j1Skeleton();*/
 	map = new j1Map();
 	fade = new j1FadeToBlack();
 	col = new j1Collision();
 	particles = new j1Particles();
 	entManager = new j1EntityManager();
 	pathfinding = new j1PathFinding();
+	fonts = new j1Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -53,17 +52,14 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene);
 	AddModule(entManager);
-	//AddModule(player);
-	//AddModule(bat);
-	//AddModule(skeleton);
 	AddModule(particles);
 	AddModule(col);
 	AddModule(fade);
 	AddModule(pathfinding);
+	AddModule(fonts);
 
 	// render last to swap buffer
 	AddModule(render);
-
 
 	mainTimer = new j1Timer();
 	PerfTimer = new j1PerfTimer();
