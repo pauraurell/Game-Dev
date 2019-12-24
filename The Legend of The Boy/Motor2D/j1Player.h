@@ -10,6 +10,7 @@
 
 struct SDL_Texture;
 struct Collider;
+class j1Timer;
 
 class j1Player : public j1Entities
 {
@@ -65,6 +66,9 @@ public:
 	p2SString		orientation;
 	bool			dash;
 	bool			OnGround;
+	bool			hit;
+	bool			cantGetHit;
+	j1Timer*		hitTimer = nullptr;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;
