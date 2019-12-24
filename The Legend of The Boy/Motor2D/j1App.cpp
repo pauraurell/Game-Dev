@@ -20,6 +20,7 @@
 #include "j1EntityManager.h"
 #include "j1Pathfinding.h"
 #include "j1Fonts.h"
+#include "j1UI.h"
 
 
 // Constructor
@@ -42,6 +43,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entManager = new j1EntityManager();
 	pathfinding = new j1PathFinding();
 	fonts = new j1Fonts();
+	ui = new j1UI();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,6 +56,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entManager);
 	AddModule(particles);
 	AddModule(col);
+	AddModule(ui);
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(fonts);

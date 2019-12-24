@@ -24,6 +24,7 @@ class j1Particles;
 class j1EntityManager;
 class j1PathFinding;
 class j1Fonts;
+class j1UI;
 
 #define DTCOEFICIENT 60
 
@@ -106,6 +107,7 @@ public:
 	j1EntityManager*	entManager;
 	j1PathFinding*	    pathfinding;
 	j1Fonts*			fonts;
+	j1UI*				ui;
 
 	#define SCALE 2
 

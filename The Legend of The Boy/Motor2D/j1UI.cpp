@@ -2,12 +2,11 @@
 
 j1UI::j1UI()
 {
-	
+	pLife = 3;
 }
-j1UI::~j1UI()
-{
 
-}
+j1UI::~j1UI()
+{}
 
 bool j1UI::Start()
 {

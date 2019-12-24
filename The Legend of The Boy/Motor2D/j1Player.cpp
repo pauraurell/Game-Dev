@@ -15,6 +15,8 @@
 #include "j1EntityManager.h"
 #include "SDL_image/include/SDL_image.h"
 #include "j1Map.h"
+#include "j1UI.h"
+#include "j1Timer.h"
 #include "Brofiler/Brofiler.h"
 
 j1Player::j1Player() : j1Entities(Types::player)
@@ -36,6 +38,8 @@ j1Player::j1Player() : j1Entities(Types::player)
 	godModeLeft = false;
 	godModeUp = false;
 	godModeDown = false;
+	hit = false;
+	cantGetHit = false;
 }
 
 j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
@@ -80,6 +84,8 @@ bool j1Player::Start()
 	Pushbacks();
 	vel.x = 0;
 	vel.y = 0;
+
+	hitTimer = new j1Timer;
 
 	JumpFx = App->audio->LoadFx("audio/jumping.wav");
 	RunFx = App->audio->LoadFx("audio/running.wav");
@@ -312,6 +318,15 @@ bool j1Player::Update(float dt)
 		}
 	}
 	OnGround = false;
+
+	if (hit == true)
+	{
+		cantGetHit = true;
+		hit = false;
+		//hitTimer = new j1Timer();
+		hitTimer->Start();
+	}
+	if (hitTimer->ReadSec() > 3 && cantGetHit == true) { cantGetHit = false; }
 
 	App->render->cameraPos = position;
 
@@ -569,7 +584,13 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	//Collision with enemies
 	if ((c1 == colliderBody || c1 == colliderHead || c1 == colliderLegs) && c2->type == COLLIDER_ENEMY)
 	{
-		if(godMode==false) { dead = true; }
+		if (godMode == false && cantGetHit == false)
+		{
+			//dead = true;
+			App->ui->pLife -= 1;
+			LOG("Player Lifes: %i", App->ui->pLife);
+			hit = true;
+		}
 	}
 }
 
