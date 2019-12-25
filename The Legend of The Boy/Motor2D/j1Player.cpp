@@ -636,13 +636,16 @@ void j1Player::Respawn()
 		vel.y = 0;
 		orientation = "right";
 		dead = false;
-		if (App->ui->pLife == 0 || App->ui->pLife - 1 == 0) { App->ui->pLife = 3; }
-		else { App->ui->pLife -= 1; }
 		App->scene->input = true;
 		respawnTimer = false;
 		App->scene->secret_map = false;
-		if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); }
-		if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); }
+		if (App->ui->pLife == 0 || App->ui->pLife - 1 == 0)
+		{ 
+			App->ui->pLife = 3;
+			if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); }
+			if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); }
+		}
+		else { App->ui->pLife -= 1; }
 		LOG("Player Lifes: %i", App->ui->pLife);
 	}
 }
