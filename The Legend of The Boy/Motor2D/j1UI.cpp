@@ -11,13 +11,13 @@ j1UI::j1UI()
 	
 	heart.x = 0;
 	heart.y = 0;
-	heart.w = 39;
-	heart.h = 36;
+	heart.w = 26;
+	heart.h = 24;
 
-	emptHeart.x = 0;
-	emptHeart.y = 41;
-	emptHeart.w = 39;
-	emptHeart.h = 36;
+	emptHeart.x = 27;
+	emptHeart.y = 0;
+	emptHeart.w = 26;
+	emptHeart.h = 24;
 }
 
 j1UI::~j1UI()
@@ -58,5 +58,28 @@ void j1UI::Draw()
 {
 	BROFILER_CATEGORY("Draw_UI", Profiler::Color::PowderBlue)
 	
-	App->render->Blit(ui_tex, App->render->camera.x, App->render->camera.y, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+	if (pLife == 3)
+	{
+		App->render->Blit(ui_tex, App->render->camera.x + 4, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 32, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 60, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+	}
+	else if (pLife == 2)
+	{
+		App->render->Blit(ui_tex, App->render->camera.x + 4, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 32, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 60, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+	}
+	else if (pLife == 1)
+	{
+		App->render->Blit(ui_tex, App->render->camera.x + 4, App->render->camera.y + 4, &heart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 32, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 60, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+	}
+	else
+	{
+		App->render->Blit(ui_tex, App->render->camera.x + 4, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 32, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+		App->render->Blit(ui_tex, App->render->camera.x + 60, App->render->camera.y + 4, &emptHeart, SDL_FLIP_NONE, 1.0f, 1.0f, 0.0);
+	}
 }

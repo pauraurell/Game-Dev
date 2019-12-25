@@ -14,6 +14,7 @@
 #include "j1Bat.h"
 #include "j1FadeToBlack.h"
 #include "j1EntityManager.h"
+#include "j1UI.h"
 #include "Brofiler/Brofiler.h"
 
 
@@ -221,6 +222,7 @@ void j1Scene::RestartCurrentLevel()
 	if (CurrentMap == "SecondLevel.tmx") { Create2MapEnemies(); }
 	player->position.x = PlayerSpawnPointX;
 	player->position.y = PlayerSpawnPointY;
+	App->ui->pLife = 3;
 }
 
 //Restarting the first level
@@ -235,6 +237,7 @@ void j1Scene::StartFirstLevel()
 		App->entManager->RestartEntities();
 		scene_change = false;
 		manualFirstLevel = false;
+		App->ui->pLife = 3;
 	}
 	
 	//If the level was restarted by getting there while playing
@@ -248,7 +251,7 @@ void j1Scene::StartFirstLevel()
 			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
 			while (entityList) {
 				if (entityList->data->entity_type == j1Entities::Types::player) {
-					//entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
+					entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
 				}
 				entityList = entityList->next;
 				
@@ -266,6 +269,7 @@ void j1Scene::StartFirstLevel()
 			scene_change = false;
 			sceneChangeTimer = false;
 			input = true;
+			App->ui->pLife = 3;
 		}
 	}
 }
@@ -280,6 +284,7 @@ void j1Scene::StartSecondLevel()
 	Create2MapEnemies();
 	scene_change = true;
 	secret_map = false;
+	App->ui->pLife = 3;
 }
 
 void j1Scene::CreateEnt()

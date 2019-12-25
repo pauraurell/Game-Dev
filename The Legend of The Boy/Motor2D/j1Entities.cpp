@@ -49,3 +49,6 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2)
 
 void j1Entities::EntityDeath()
 {}
+
+void j1Entities::SetPlayerState(playerStates state)
+{}

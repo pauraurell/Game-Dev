@@ -16,7 +16,7 @@ class j1Player : public j1Entities
 {
 public:
 
-	enum playerStates
+	/*enum playerStates
 	{
 		PLAYER_IDLE,
 		PLAYER_RUN_LEFT,
@@ -26,7 +26,7 @@ public:
 		PLAYER_JUMP_LEFT,
 		PLAYER_DASH,
 		PLAYER_ATTACK
-	};
+	};*/
 
 	j1Player();
 	j1Player(iPoint pos);

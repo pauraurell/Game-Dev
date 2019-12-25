@@ -24,6 +24,18 @@ public:
 		unknown
 	};
 
+	enum playerStates
+	{
+		PLAYER_IDLE,
+		PLAYER_RUN_LEFT,
+		PLAYER_RUN_RIGHT,
+		PLAYER_JUMP,
+		PLAYER_JUMP_RIGHT,
+		PLAYER_JUMP_LEFT,
+		PLAYER_DASH,
+		PLAYER_ATTACK
+	};
+
 	Types entity_type;
 
 
@@ -38,6 +50,7 @@ public:
 
 	virtual void Pushbacks();
 	virtual void Draw(float dt);
+	virtual void SetPlayerState(playerStates);
 
 	bool Save(pugi::xml_node& data) const;
 

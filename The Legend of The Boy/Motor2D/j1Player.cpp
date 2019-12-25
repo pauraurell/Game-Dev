@@ -317,7 +317,8 @@ bool j1Player::Update(float dt)
 			current_animation = &idle;
 		}
 	}
-	OnGround = false;
+
+	if (OnGround == true && cantGetHit == true) { App->scene->input = true; }
 
 	if (hit == true)
 	{
@@ -326,7 +327,12 @@ bool j1Player::Update(float dt)
 		//hitTimer = new j1Timer();
 		hitTimer->Start();
 	}
+
 	if (hitTimer->ReadSec() > 3 && cantGetHit == true) { cantGetHit = false; }
+
+	if (App->ui->pLife == 0) { dead = true; }
+
+	OnGround = false;
 
 	App->render->cameraPos = position;
 
@@ -587,9 +593,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if (godMode == false && cantGetHit == false)
 		{
 			//dead = true;
-			App->ui->pLife -= 1;
-			LOG("Player Lifes: %i", App->ui->pLife);
-			hit = true;
+			if (App->ui->pLife > 0)
+			{
+				App->ui->pLife -= 1;
+				LOG("Player Lifes: %i", App->ui->pLife);
+				hit = true;
+				App->scene->input = false;
+				vel.y = -4;
+				if (orientation == "right") { vel.x = -40; }
+				else if (orientation == "left") { vel.x = 40; }
+				state = PLAYER_IDLE;
+			}
 		}
 	}
 }
@@ -600,7 +614,7 @@ void j1Player::GetPlayerPosition(float dt)
 	position.x = position.x + (vel.x * dt * DTCOEFICIENT);
 	position.y = position.y + (vel.y * dt * DTCOEFICIENT);
 
-	if (position.y > yLimit && godMode == false) { dead = true; }
+	if (position.y > yLimit && godMode == false) { Respawn(); }
 }
 
 void j1Player::Respawn()
@@ -622,11 +636,14 @@ void j1Player::Respawn()
 		vel.y = 0;
 		orientation = "right";
 		dead = false;
+		if (App->ui->pLife == 0 || App->ui->pLife - 1 == 0) { App->ui->pLife = 3; }
+		else { App->ui->pLife -= 1; }
 		App->scene->input = true;
 		respawnTimer = false;
 		App->scene->secret_map = false;
 		if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); }
 		if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); }
+		LOG("Player Lifes: %i", App->ui->pLife);
 	}
 }
 
