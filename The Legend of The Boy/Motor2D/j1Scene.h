@@ -42,13 +42,13 @@ public:
 	void Create2MapEnemies();
 
 	bool Load(pugi::xml_node&);
-	bool Save(pugi::xml_node&) const;
-
+	bool Save(pugi::xml_node&) const; 
 	bool scene_change;
 	bool scene_changed;
 	bool manualFirstLevel;
 	bool secret_map;
 	bool input;
+	bool cameraTracking;
 
 	int scene_change_timer;
 	bool sceneChangeTimer;
@@ -63,6 +63,7 @@ public:
 	iPoint playerSpawnPoint;
 
 	int PlayerSpawnPointX;
+	int PlayerSpawnPointX2;
 	int PlayerSpawnPointY;
 
 	int BatSpawnPointX;

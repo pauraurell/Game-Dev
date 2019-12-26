@@ -61,7 +61,7 @@ public:
 
 	void Respawn();
 
-	int				SpawnPointX, SpawnPointY, yLimit;
+	int				yLimit;
 	SDL_Texture*	Character_tex = nullptr;
 	p2SString		orientation;
 	bool			dash;

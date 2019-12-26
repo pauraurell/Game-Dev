@@ -90,9 +90,6 @@ bool j1Player::Start()
 	JumpFx = App->audio->LoadFx("audio/jumping.wav");
 	RunFx = App->audio->LoadFx("audio/running.wav");
 
-	//position.x = SpawnPointX;
-	//position.y = SpawnPointY;
-
 	colliderHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colliderBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
 	colliderLegs = App->col->AddCollider({ position.x, position.y, 14, 12 }, COLLIDER_PLAYER, this);
@@ -631,8 +628,7 @@ void j1Player::Respawn()
 	}
 
 	if (SDL_GetTicks() - respawn_timer > 615) {
-		position.x = SpawnPointX;
-		position.y = SpawnPointY;
+		position.y = App->scene->PlayerSpawnPointY;
 		vel.y = 0;
 		orientation = "right";
 		dead = false;
@@ -642,8 +638,10 @@ void j1Player::Respawn()
 		if (App->ui->pLife == 0 || App->ui->pLife - 1 == 0)
 		{ 
 			App->ui->pLife = 3;
-			if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); }
-			if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); }
+			if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); position.x = App->scene->PlayerSpawnPointX;
+			}
+			if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); position.x = 20;
+			}
 		}
 		else { App->ui->pLife -= 1; }
 		LOG("Player Lifes: %i", App->ui->pLife);
@@ -658,8 +656,6 @@ void j1Player::ConfigLoading()
 	config = config.child("player");
 	folder.create(config.child("folder").child_value());
 	texture_path = config.child("sprite_sheet").attribute("source").as_string();
-	SpawnPointX = config.child("initialPosition").attribute("x").as_int();
-	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	yLimit = config.child("initialPosition").attribute("yLimit").as_int();
 	maxSpeedX = config.child("speed").attribute("MaxSpeedX").as_int();

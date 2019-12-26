@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Scene.h"
 #include "j1Window.h"
 #include "j1Render.h"
 #include "j1Player.h"
@@ -274,10 +275,22 @@ void j1Render::cameraFollowingPlayer(int x, int y)
 	camera.y = (-y * SCALE) + App->win->height / 2;
 
 	//camera limits
-	if (camera.x > 0)
+	if (App->scene->CurrentMap == "FirstLevel.tmx")
 	{
-		camera.x = 0;
+		if (camera.x > -1010)
+		{
+			camera.x = -1010;
+		}
 	}
+
+	else 
+	{
+		if (camera.x > 0)
+		{
+			camera.x = 0;
+		}
+	}
+
 
 	if (camera.x < -App->map->data.width*App->map->data.tile_width + offSetCameraX)
 	{

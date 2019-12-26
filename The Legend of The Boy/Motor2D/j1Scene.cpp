@@ -27,6 +27,7 @@ j1Scene::j1Scene() : j1Module()
 	secret_map = false;
 	input = true;
 	sceneChangeTimer = false;
+	cameraTracking = false;
 }
 
 // Destructor
@@ -49,6 +50,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 		MapList.add(level->GetString());
 	}
 	PlayerSpawnPointX = config.child("player").attribute("PosX").as_int();
+	PlayerSpawnPointX2 = config.child("player").attribute("PosX2").as_int();
 	PlayerSpawnPointY = config.child("player").attribute("PosY").as_int();
 	BatSpawnPointX = config.child("bat").attribute("PosX").as_int();
 	BatSpawnPointY = config.child("bat").attribute("PosY").as_int();
@@ -78,7 +80,7 @@ bool j1Scene::Start()
 	App->audio->PlayMusic("audio/music.ogg");
 
 	CreateEnt();
-
+	App->render->camera.y = -400;
 	return true;
 }
 
@@ -158,7 +160,14 @@ bool j1Scene::Update(float dt)
 	App->skeleton->Draw(dt);*/
 	App->entManager->DrawEntities(dt);
 
-	App->render->cameraFollowingPlayer(App->render->cameraPos.x, App->render->cameraPos.y);
+	if (cameraTracking) { App->render->cameraFollowingPlayer(App->render->cameraPos.x, App->render->cameraPos.y); }
+	else 
+	{
+		if(App->render->camera.x <= -550) App->render->camera.y --;
+		App->render->camera.x -= 4;
+
+		if (App->render->camera.x <= -1000) { cameraTracking = true; }
+	}
 
 
 	return true;

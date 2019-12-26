@@ -198,7 +198,7 @@ void j1EntityManager::RestartEntities()
 			switch (type)
 			{
 			case j1Entities::Types::player:
-				entityList->data->position.x = App->scene->PlayerSpawnPointX;
+				entityList->data->position.x = App->scene->PlayerSpawnPointX2;
 				entityList->data->position.y = App->scene->PlayerSpawnPointY;
 				entityList->data->orientation = "right";
 				break;

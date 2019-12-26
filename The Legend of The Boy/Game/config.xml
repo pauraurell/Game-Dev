@@ -9,7 +9,7 @@
 	
   <renderer>
     <vsync value="false"/>
-    <camera offsetx="198" offsety="128"/>
+    <camera offsetx="-330" offsety="128"/>
   </renderer>
 
   <window>
@@ -31,17 +31,17 @@
   <scene>
     <map name="FirstLevel.tmx" />
     <map name="SecondLevel.tmx" />
-    <player PosX="20" PosY="450" />
-    <bat PosX="150" PosY="400" PosX2="150" PosY2="450" />
-    <skeleton PosX="410" PosY="450" PosX2="140" PosY2="450"/>
-    <bat2 PosX="505" PosY="105" PosX2="150" PosY2="450" />
-    <skeleton2 PosX="1100" PosY="0" PosX2="1900" PosY2="340"/>
+    <player PosX="540" PosY="450" PosX2="20" />
+    <bat PosX="670" PosY="400" PosX2="150" PosY2="450" />
+    <skeleton PosX="930" PosY="450" PosX2="140" PosY2="450"/>
+    <bat2 PosX="1025" PosY="105" PosX2="150" PosY2="450" />
+    <skeleton2 PosX="1520" PosY="0" PosX2="1900" PosY2="340"/>
   </scene>
 
   <player>
     <folder>textures/</folder>
     <sprite_sheet source="adventurer-v1.5-Sheet.png"/>
-    <initialPosition x="20" y="450" orientation="right" yLimit = "800"/>
+    <initialPosition orientation="right" yLimit = "800"/>
     <speed MaxSpeedX= "2" MaxSpeedY= "8" Speedx= "0.5" Speedy= "0.6" DashSpeed= "3.5" SpeedDecrease= "0.25"  jumpMaxSpeed= "5"/>
     <gravity value= "0.19"/>
     <Dash dashTime= "300"/>
