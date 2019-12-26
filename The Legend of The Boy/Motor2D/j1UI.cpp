@@ -25,7 +25,7 @@ j1UI::~j1UI()
 
 bool j1UI::Start()
 {
-	ui_tex = App->tex->Load("textures/ui.png");
+	ui_tex = App->tex->Load("textures/UI/atlas.png");
 
 	return true;
 }
