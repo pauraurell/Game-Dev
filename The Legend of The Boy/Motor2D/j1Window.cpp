@@ -21,12 +21,12 @@ j1Window::~j1Window()
 // Called before render is available
 bool j1Window::Awake(pugi::xml_node& config)
 {
-	LOG("Init SDL window & surface");
+	LOG(true, "Init SDL window & surface");
 	bool ret = true;
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
+		LOG(true, "SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -66,7 +66,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 
 		if(window == NULL)
 		{
-			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			LOG(true, "Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
 		else
@@ -82,7 +82,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 // Called before quitting
 bool j1Window::CleanUp()
 {
-	LOG("Destroying SDL window and quitting all SDL systems");
+	LOG(true, "Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
 	if(window != NULL)

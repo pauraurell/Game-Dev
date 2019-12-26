@@ -23,7 +23,7 @@ j1Map::~j1Map()
 // Called before render is available
 bool j1Map::Awake(pugi::xml_node& config)
 {
-	LOG("Loading Map Parser");
+	LOG(true, "Loading Map Parser");
 	bool ret = true;
 
 	folder.create(config.child("folder").child_value());
@@ -162,7 +162,7 @@ SDL_Rect TileSet::getTileRect(int id) const
 bool j1Map::CleanUp()
 {
 
-	LOG("Unloading map");
+	LOG(true, "Unloading map");
 
 	// Remove all tilesets
 	p2List_item<TileSet*>* item;
@@ -205,7 +205,7 @@ bool j1Map::Load(const char* file_name)
 
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file %s. pugi error: %s", file_name, result.description());
+		LOG(true, "Could not load map xml file %s. pugi error: %s", file_name, result.description());
 		ret = false;
 	}
 
@@ -264,18 +264,18 @@ bool j1Map::Load(const char* file_name)
 
 	if (ret == true)
 	{
-		LOG("Successfully parsed map XML file: %s", file_name);
-		LOG("width: %d height: %d", data.width, data.height);
-		LOG("tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
+		LOG(true, "Successfully parsed map XML file: %s", file_name);
+		LOG(true, "width: %d height: %d", data.width, data.height);
+		LOG(true, "tile_width: %d tile_height: %d", data.tile_width, data.tile_height);
 
 		p2List_item<TileSet*>* item = data.tilesets.start;
 		while (item != NULL)
 		{
 			TileSet* s = item->data;
-			LOG("Tileset ----");
-			LOG("name: %s firstgid: %d", s->name.GetString(), s->firstgid);
-			LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
-			LOG("spacing: %d margin: %d", s->spacing, s->margin);
+			LOG(true, "Tileset ----");
+			LOG(true, "name: %s firstgid: %d", s->name.GetString(), s->firstgid);
+			LOG(true, "tile width: %d tile height: %d", s->tile_width, s->tile_height);
+			LOG(true, "spacing: %d margin: %d", s->spacing, s->margin);
 			item = item->next;
 		}
 
@@ -285,9 +285,9 @@ bool j1Map::Load(const char* file_name)
 		while (item_layer != NULL)
 		{
 			MapLayer* l = item_layer->data;
-			LOG("Layer ----");
-			LOG("name: %s", l->name.GetString());
-			LOG("tile width: %d tile height: %d layer speed: %f layer draw: %i collisions: %i", l->width, l->height, l->speed, l->draw, l->collision);
+			LOG(true, "Layer ----");
+			LOG(true, "name: %s", l->name.GetString());
+			LOG(true, "tile width: %d tile height: %d layer speed: %f layer draw: %i collisions: %i", l->width, l->height, l->speed, l->draw, l->collision);
 			item_layer = item_layer->next;
 		}
 	}
@@ -305,7 +305,7 @@ bool j1Map::LoadMap()
 
 	if (map == NULL)
 	{
-		LOG("Error parsing map xml file: Cannot find 'map' tag.");
+		LOG(true, "Error parsing map xml file: Cannot find 'map' tag.");
 		ret = false;
 	}
 	else
@@ -395,7 +395,7 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 
 	if (image == NULL)
 	{
-		LOG("Error parsing tileset xml file: Cannot find 'image' tag.");
+		LOG(true, "Error parsing tileset xml file: Cannot find 'image' tag.");
 		ret = false;
 	}
 	else

@@ -28,7 +28,7 @@ j1App* App = NULL;
 
 int main(int argc, char* args[])
 {
-	LOG("Engine starting ... %d");
+	LOG(false, "Engine starting ... %d");
 
 	MainState state = MainState::CREATE;
 	int result = EXIT_FAILURE;
@@ -40,7 +40,7 @@ int main(int argc, char* args[])
 
 			// Allocate the engine --------------------------------------------
 			case CREATE:
-			LOG("CREATION PHASE ===============================");
+			LOG(false, "CREATION PHASE ===============================");
 
 			App = new j1App(argc, args);
 
@@ -53,12 +53,12 @@ int main(int argc, char* args[])
 
 			// Awake all modules -----------------------------------------------
 			case AWAKE:
-			LOG("AWAKE PHASE ===============================");
+			LOG(true, "AWAKE PHASE ===============================");
 			if(App->Awake() == true)
 				state = START;
 			else
 			{
-				LOG("ERROR: Awake failed");
+				LOG(true, "ERROR: Awake failed");
 				state = FAIL;
 			}
 
@@ -66,16 +66,16 @@ int main(int argc, char* args[])
 
 			// Call all modules before first frame  ----------------------------
 			case START:
-			LOG("START PHASE ===============================");
+			LOG(true, "START PHASE ===============================");
 			if(App->Start() == true)
 			{
 				state = LOOP;
-				LOG("UPDATE PHASE ===============================");
+				LOG(true, "UPDATE PHASE ===============================");
 			}
 			else
 			{
 				state = FAIL;
-				LOG("ERROR: Start failed");
+				LOG(true, "ERROR: Start failed");
 			}
 			break;
 
@@ -90,7 +90,7 @@ int main(int argc, char* args[])
 
 			// Cleanup allocated memory -----------------------------------------
 			case CLEAN:
-			LOG("CLEANUP PHASE ===============================");
+			LOG(false, "CLEANUP PHASE ===============================");
 			if(App->CleanUp() == true)
 			{
 				RELEASE(App);
@@ -104,14 +104,14 @@ int main(int argc, char* args[])
 
 			// Exit with errors and shame ---------------------------------------
 			case FAIL:
-			LOG("Exiting with errors :(");
+			LOG(true, "Exiting with errors :(");
 			result = EXIT_FAILURE;
 			state = EXIT;
 			break;
 		}
 	}
 
-	LOG("... Bye! :)\n");
+	LOG(false, "... Bye! :)\n");
 
 	// Dump memory leaks
 	return result;

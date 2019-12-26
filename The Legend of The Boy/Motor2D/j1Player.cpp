@@ -371,7 +371,7 @@ bool j1Player::CleanUp()
 // Save Game State
 bool j1Player::Save(pugi::xml_node& data) const
 {
-	LOG("Saving player state");
+	LOG(true, "Saving player state");
 
 	pugi::xml_node playerNode = data;
 	playerNode.append_attribute("type") = name.GetString();
@@ -593,7 +593,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			if (App->ui->pLife > 0)
 			{
 				App->ui->pLife -= 1;
-				LOG("Player Lifes: %i", App->ui->pLife);
+				LOG(true, "Player Lifes: %i", App->ui->pLife);
 				hit = true;
 				App->scene->input = false;
 				vel.y = -4;
@@ -647,7 +647,7 @@ void j1Player::Respawn()
 			if (App->scene->CurrentMap == "FirstLevel.tmx") { position.x = App->scene->PlayerSpawnPointX; }
 			if (App->scene->CurrentMap == "SecondLevel.tmx") { position.x = 20; }
 		}
-		LOG("Player Lifes: %i", App->ui->pLife);
+		LOG(true, "Player Lifes: %i", App->ui->pLife);
 	}
 }
 

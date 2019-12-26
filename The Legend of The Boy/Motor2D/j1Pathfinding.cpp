@@ -18,7 +18,7 @@ j1PathFinding::~j1PathFinding()
 // Called before quitting
 bool j1PathFinding::CleanUp()
 {
-	LOG("Freeing pathfinding library");
+	LOG(true, "Freeing pathfinding library");
 
 	last_path.Clear();
 	RELEASE_ARRAY(map);

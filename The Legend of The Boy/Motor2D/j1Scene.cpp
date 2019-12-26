@@ -15,6 +15,7 @@
 #include "j1FadeToBlack.h"
 #include "j1EntityManager.h"
 #include "j1UI.h"
+#include "j1Console.h"
 #include "Brofiler/Brofiler.h"
 
 
@@ -40,7 +41,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 	pugi::xml_node map;
 
-	LOG("Loading Scene");
+	LOG(true, "Loading Scene");
 
 	for (map = config.child("map"); map; map = map.next_sibling("map"))
 	{
@@ -151,6 +152,12 @@ bool j1Scene::Update(float dt)
 		else if (App->framerate == 60) { App->framerate = 30; }
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN)
+	{
+		if (App->cons->active == true) { App->cons->active = false; input = true; }
+		else if (App->cons->active == false) { App->cons->active = true; input = false; }
+	}
+
 
 	App->map->Draw();
 
@@ -178,8 +185,7 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) { App->cons->active = false; ret = false; }
 
 	return ret;
 }
@@ -187,14 +193,14 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	LOG("Freeing scene");
+	LOG(true, "Freeing scene");
 
 	return true;
 }
 
 bool j1Scene::Load(pugi::xml_node& data)
 {
-	LOG("Loading scene state");
+	LOG(true, "Loading scene state");
 	//Loading the map the player was on
 	App->scene->CurrentMap = data.child("map").attribute("currentMap").as_string();
 	if (App->scene->CurrentMap == "SecondLevel.tmx")
@@ -214,7 +220,7 @@ bool j1Scene::Load(pugi::xml_node& data)
 // Save Game State
 bool j1Scene::Save(pugi::xml_node& data) const
 {
-	LOG("Saving scene state");
+	LOG(true, "Saving scene state");
 	pugi::xml_node sceneNode = data.append_child("map");
 	//Saving the map where the player is
 	sceneNode.append_attribute("currentMap") = App->scene->CurrentMap.GetString();

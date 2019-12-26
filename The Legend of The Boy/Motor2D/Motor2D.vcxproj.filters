@@ -79,6 +79,9 @@
     <ClCompile Include="UI_Element.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Console.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="UI_Element.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Console.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
