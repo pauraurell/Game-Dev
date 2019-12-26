@@ -64,4 +64,8 @@
     <gravity value= "0.19"/>
   </skeleton>
 
+  <font>
+    <default_font file="fonts/Triforce.ttf"/>
+  </font>
+
 </config>

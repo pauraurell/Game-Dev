@@ -5,8 +5,7 @@
 #include "SDL\include\SDL_pixels.h"
 #include "p2List.h"
 
-#define DEFAULT_FONT "fonts/Munro.ttf"
-#define DEFAULT_FONT_SIZE 20
+#define DEFAULT_FONT "fonts/Triforce.ttf"
 
 struct SDL_Texture;
 struct _TTF_Font;
