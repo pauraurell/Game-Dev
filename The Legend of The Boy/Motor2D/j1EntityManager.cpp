@@ -191,7 +191,7 @@ void j1EntityManager::RestartEntities()
 	j1Entities::Types type;
 	p2List_item<j1Entities*>* entityList = entities.start;
 
-	if (App->scene->CurrentMap.GetString() == "SecondLevel.tmx")
+	if (App->scene->CurrentMap == "SecondLevel.tmx")
 	{
 		while (entityList) {
 			type = entityList->data->entity_type;
