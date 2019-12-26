@@ -76,6 +76,9 @@
     <ClCompile Include="j1Coin.cpp">
       <Filter>Desenvolupament  ========\Modules\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Element.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -174,6 +177,9 @@
     <ClInclude Include="j1Coin.h">
       <Filter>Desenvolupament  ========\Modules\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Element.h">
+      <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -196,6 +202,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Modules\Entities">
       <UniqueIdentifier>{8c55a842-30cd-4007-b1a7-75a2bb8d84c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Modules\UI Elements">
+      <UniqueIdentifier>{7fc81553-d080-45fb-b8c8-3fd6c1097380}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
