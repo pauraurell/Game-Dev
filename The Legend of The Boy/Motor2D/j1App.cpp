@@ -58,7 +58,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	AddModule(scene, false);
+	AddModule(scene,false);
 	AddModule(entManager);
 	AddModule(particles);
 	AddModule(col);
@@ -76,8 +76,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	mainTimer = new j1Timer();
 	PerfTimer = new j1PerfTimer();
 	lastSecFrames = new j1Timer();
-
-
 }
 
 // Destructor

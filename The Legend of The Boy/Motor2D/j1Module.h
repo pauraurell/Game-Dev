@@ -14,6 +14,15 @@
 class j1App;
 struct Collider;
 
+enum class uiEvent
+{
+	EVENT_UNKOWNN = -1,
+	EVENT_ONCLICK,
+	EVENT_HOVER
+};
+
+class UIelement;
+
 class j1Module
 {
 public:
@@ -93,6 +102,7 @@ public:
 	}
 
 	virtual void OnCollision(Collider*, Collider*) {}
+	virtual void UIevents(uiEvent type, UIelement* element) {}
 
 public:
 

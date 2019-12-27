@@ -29,6 +29,9 @@ public:
 
 	SDL_Texture* texture = nullptr;
 	UIelement* testLabel = nullptr;
+	UIelement* testButton = nullptr;
+
+	void UIevents(uiEvent type, UIelement* element);
 
 };
 
