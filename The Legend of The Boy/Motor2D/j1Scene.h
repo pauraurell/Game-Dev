@@ -5,6 +5,7 @@
 
 struct SDL_Texture;
 class j1Entities;
+class UIelement;
 
 class j1Scene : public j1Module
 {
@@ -83,6 +84,7 @@ public:
 	int Skeleton2SpawnPointY;
 	int Skeleton2SpawnPointX2;
 	int Skeleton2SpawnPointY2;
+
 
 private:
 

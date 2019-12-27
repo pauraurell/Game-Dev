@@ -619,7 +619,7 @@ void j1Player::Respawn()
 	if (respawnTimer == false)
 	{
 		respawn_timer = SDL_GetTicks();
-		App->fade->FadeToBlack(1.2);
+		App->fade->FadeToBlackVisualEffect(1.2);
 		App->scene->input = false;
 		SetPlayerState(PLAYER_IDLE);
 		respawnTimer = true;

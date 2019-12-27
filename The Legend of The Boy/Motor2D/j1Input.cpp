@@ -264,7 +264,7 @@ void j1Input::GetMouseMotion(int& x, int& y)
 	y = mouse_motion_y;
 }
 
-p2SString j1Input::GetTextString()
+p2SString j1Input::GetText()
 {
 	return text;
 }

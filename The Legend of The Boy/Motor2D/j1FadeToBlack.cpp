@@ -5,6 +5,8 @@
 #include "j1Window.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
+#include "j1MainMenu.h"
+#include "j1Scene.h"
 
 j1FadeToBlack::j1FadeToBlack()
 {
@@ -57,12 +59,11 @@ bool j1FadeToBlack::Update(float dt)
 	// Finally render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screen);
-
 	return true;
 }
 
 
-bool j1FadeToBlack::FadeToBlack(float time)
+bool j1FadeToBlack::FadeToBlackVisualEffect(float time)
 {
 	bool ret = false;
 
@@ -74,5 +75,24 @@ bool j1FadeToBlack::FadeToBlack(float time)
 		ret = true;
 	}
 
+	return ret;
+}
+
+bool j1FadeToBlack::FadeToBlack(j1Module* module_in, j1Module* module_out, float time)
+{
+	bool ret = false;
+
+	if (current_step == fade_step::none)
+	{
+		current_step = fade_step::fade_to_black;
+		start_time = SDL_GetTicks();
+		total_time = (Uint32)(time * 0.5f * 1000.0f);
+		to_enable = module_in;
+		to_disable = module_out;
+		to_enable->Init(true);
+		to_disable->Init(false);
+		ret = true;
+	}
+	
 	return ret;
 }

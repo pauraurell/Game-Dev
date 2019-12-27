@@ -98,7 +98,7 @@ public:
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
-	p2SString GetTextString();
+	p2SString GetText();
 
 private:
 	bool		windowEvents[WE_COUNT];

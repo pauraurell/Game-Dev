@@ -22,6 +22,7 @@
 #include "j1Fonts.h"
 #include "j1UI.h"
 #include "j1Console.h"
+#include "j1MainMenu.h"
 
 
 // Constructor
@@ -46,6 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new j1Fonts();
 	ui = new j1UI();
 	cons = new j1Console();
+	main_menu = new j1MainMenu();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,7 +56,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
-	AddModule(scene);
+	AddModule(scene, false);
 	AddModule(entManager);
 	AddModule(particles);
 	AddModule(col);
@@ -63,6 +65,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(fonts);
+	AddModule(main_menu);
 
 	// render last to swap buffer
 	AddModule(render);
@@ -70,6 +73,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	mainTimer = new j1Timer();
 	PerfTimer = new j1PerfTimer();
 	lastSecFrames = new j1Timer();
+
+
 }
 
 // Destructor
@@ -87,9 +92,9 @@ j1App::~j1App()
 	modules.clear();
 }
 
-void j1App::AddModule(j1Module* module)
+void j1App::AddModule(j1Module* module, bool init)
 {
-	module->Init();
+	module->Init(init);
 	modules.add(module);
 }
 

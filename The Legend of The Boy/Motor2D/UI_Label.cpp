@@ -30,7 +30,7 @@ bool Label::Start()
 bool Label::PreUpdate()
 {
 	CleanUp();
-//	App->fonts->CalcSize(App->input->GetTextString().GetString, rect.w, rect.h);
+	App->fonts->CalcSize(App->input->GetText().GetString(), rect.w, rect.h);
 	return true;
 }
 

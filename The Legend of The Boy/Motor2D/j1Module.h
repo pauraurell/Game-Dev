@@ -17,14 +17,17 @@ struct Collider;
 
 class j1Module
 {
+private:
+	bool enabled = true;
+
 public:
 
 	j1Module() : active(false)
 	{}
 
-	void Init()
+	void Init(bool init)
 	{
-		active = true;
+		active = init;
 	}
 
 	// Called before render is available
@@ -61,6 +64,26 @@ public:
 	virtual bool CleanUp()
 	{
 		return true;
+	}
+
+	bool IsEnabled() const { return active; }
+
+	void Enable()
+	{
+		if (enabled == false)
+		{
+			enabled = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (enabled == true)
+		{
+			enabled = false;
+			CleanUp();
+		}
 	}
 
 	virtual bool Load(pugi::xml_node&)
