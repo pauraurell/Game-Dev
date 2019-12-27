@@ -28,7 +28,7 @@ public:
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
 
-	UIelement* AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPosition, iPoint localPosition, bool interactable, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr, bool X_drag = false, bool Y_drag = false);
+	UIelement* AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPosition, iPoint localPosition, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
 	SDL_Texture* j1UI::GetAtlasTexture() const;
 
 	p2List<UIelement*>	UIelements;

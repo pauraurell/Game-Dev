@@ -5,6 +5,7 @@
 #include "j1Scene.h"
 #include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
+#include "UI_Button.h"
 #include "UI_Label.h"
 
 j1UI::j1UI()
@@ -131,41 +132,34 @@ SDL_Texture* j1UI::GetAtlasTexture() const
 	return ui_tex;
 }
 
-UIelement* j1UI::AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPosition, iPoint localPosition, bool interactable, bool enabled, SDL_Rect section, char* text, j1Module* listener, bool X_drag, bool Y_drag)
+UIelement* j1UI::AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPosition, iPoint localPosition, bool enabled, SDL_Rect section, char* text, j1Module* listener)
 {
-	UIelement* tmp = nullptr;
+	UIelement* ui_element = nullptr;
 
 	switch (type)
 	{
 
-	/*case TYPE_UI::UI_BUTTON:
-		tmp = new Button();
-		break;*/
+	case TYPE_UI::UI_BUTTON:
+		ui_element = new Button();
+		break;
 
 	case TYPE_UI::UI_LABEL:
-		tmp = new Label();
+		ui_element = new Label();
 		break;
 
 	}
 
-	if (tmp)
+	if (ui_element !=nullptr)
 	{
-		tmp->parent = parent;
-		tmp->globalPosition = globalPosition;
-		tmp->localPosition = localPosition;
-		tmp->listener = listener;
-		tmp->interactable = interactable;
+		ui_element->parent = parent;		ui_element->globalPosition = globalPosition;
+		ui_element->listener = listener;	ui_element->localPosition = localPosition;
 
-		tmp->X_drag = X_drag;
-		tmp->Y_drag = Y_drag;
+		ui_element->enabled = enabled;
+		ui_element->rect = section;
+		ui_element->text = text;
 
-		tmp->enabled = enabled;
-		tmp->rect = section;
-		tmp->text = text;
-
-		UIelements.add(tmp)->data->Start();
+		UIelements.add(ui_element)->data->Start();
 	}
 
-
-	return tmp;
+	return ui_element;
 }
