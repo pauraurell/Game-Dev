@@ -72,38 +72,41 @@ void UIelement::Draw()
 
 	App->render->Blit(texture, globalPosition.x, globalPosition.y, &rect);
 
-	App->render->DrawQuad({ globalPosition.x, globalPosition.y, rect.w, rect.h }, 0, 255, 255, 255, false, false);
-	
+	App->render->DrawQuad({ globalPosition.x*SCALE, globalPosition.y*SCALE, rect.w*SCALE, rect.h*SCALE }, 255, 0, 255, 255, false, false);
 }
 
 
 bool UIelement::Is_above()
 {
 	bool ret = false;
-	/*
+	
 	SDL_Point mouse;
+	SDL_Point mousePos;
 	App->input->GetMousePosition(mouse.x, mouse.y);
+	mouse.x = mouse.x / SCALE;
+	mouse.y = mouse.y / SCALE;
 
 	SDL_Rect intersect = { globalPosition.x , globalPosition.y, rect.w, rect.h };
+	//LOG(true, "%i, %i, %i, %i", intersect.x, intersect.y, intersect.w, intersect.h);
 
 	if (SDL_PointInRect(&mouse, &intersect) && this->enabled && this->interactable) {
 		if (listener != nullptr)
 		{
-			this->listener->GuiObserver(GUI_Event::EVENT_HOVER, this);
+			this->listener->UIevents(uiEvent::EVENT_HOVER, this);
 		}
 		ret = true;
 	}
-	*/
+	//LOG(true, "%i, %i", mouse.x, mouse.y);
+	
 	return ret;
 }
 
 
 void UIelement::Click()
 {
-	/*
+	
 	if (listener != nullptr)
 	{
-		this->listener->GuiObserver(GUI_Event::EVENT_ONCLICK, this);
+		this->listener->UIevents(uiEvent::EVENT_ONCLICK, this);
 	}
-	*/
 }

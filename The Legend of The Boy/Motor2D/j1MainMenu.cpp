@@ -14,6 +14,7 @@
 #include "j1Scene.h"
 #include "j1Map.h"
 
+
 j1MainMenu::j1MainMenu() : j1Module()
 {
 	name.create("intro");
@@ -36,7 +37,8 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, false, { 0,0,0,0 }, "Press Space to Continue", this);
+	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, true, { 0,0,0,0 }, "Press Space to Continue", this);
+	testButton = App->ui->AddGUIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 300 }, { 0,0 }, true, { 1,38,153,53 }, "Press here", this);
 
 	return true;
 }
@@ -84,4 +86,20 @@ bool j1MainMenu::Draw()
 {
 	App->render->Blit(texture, 0, 0);
 	return true;
+}
+
+void j1MainMenu::UIevents(uiEvent type, UIelement* element)
+{
+
+	switch (type)
+	{
+		case uiEvent::EVENT_ONCLICK:
+		{
+			if (element == testButton) 
+			{ 
+				LOG(true,"HOLA ESTOY APRETANDO EL Pword BOTON DE LOS Hword");
+			}
+		}
+	}
+
 }

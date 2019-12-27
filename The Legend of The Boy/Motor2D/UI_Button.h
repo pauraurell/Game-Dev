@@ -1,8 +1,9 @@
-#ifndef __BUTTON__
-#define __BUTTON__
+#ifndef __J1GUIBUTTON__
+#define __J1GUIBUTTON__
 
 #include "j1Module.h"
-#include"UI_Element.h"
+#include "UI_Element.h"
+
 
 class Button : public UIelement
 {
@@ -10,6 +11,7 @@ public:
 
 	Button();
 	~Button();
+
 
 	bool Awake(pugi::xml_node&);
 	bool Start();
@@ -20,6 +22,20 @@ public:
 
 	bool CleanUp();
 
+	bool Load(pugi::xml_node&) { return true; };
+	bool Save(pugi::xml_node&) const  const { return true; };
+
+private:
+
+	UIelement* label = nullptr;
+	iPoint accuratedDrag = { 0,0 };
+
+	bool dragging;
 };
 
-#endif 
+
+
+
+
+
+#endif // !__J1GUIBUTTON__
