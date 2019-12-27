@@ -35,6 +35,7 @@ public:
 	//LICENSE
 	p2List<UIelement*> license;
 	SDL_Texture*	licTex;
+	UIelement*	Label = nullptr;
 
 	//GITHUBS
 	UIelement*	githubLabel1 = nullptr;
