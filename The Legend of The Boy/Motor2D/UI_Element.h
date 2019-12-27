@@ -1,30 +1,62 @@
+#ifndef __UI_ELEMENT__
+#define __UI_ELEMENT__
+
+#include "j1Module.h"
 #include "p2Point.h"
-#include "j1UI.h"
-#include "SDL/include/SDL.h"
+#include "p2Log.h"
+#include "SDL/include/SDL_render.h"
 
-struct SDL_Texture;
-struct SDL_Rect;
-
-enum UI_TYPE	
+enum class TYPE_UI
 {
-	UNDEFINED = -1,
-	BUTTON,
-	LABEL,
-	IMAGE,
-	SLIDER
+	UI_BUTTON,
+	UI_LABEL,
+	UI_UNKNOWN
 };
 
-class UIElement
+
+class UIelement
 {
-	UIElement();
-	virtual ~UIElement();
 
-	virtual void Update();
-	virtual void Draw(SDL_Texture* texture);
+public:
 
-	iPoint position;
+	UIelement();
+	~UIelement();
 
-	bool is_interactive;
-	UI_TYPE UIelementType;
+	virtual bool Awake(pugi::xml_node& config) { return true; };
+	virtual bool Start();
+	virtual bool PreUpdate();
+	virtual bool Update(float dt);
+	virtual bool PostUpdate();
+
+	virtual bool CleanUp();
+
+	bool Is_above();
+	virtual void Click();
+
+	void Draw();
+
+
+public:
+
+	UIelement* parent = nullptr;
+	j1Module* listener = nullptr;
+	TYPE_UI type;
+	iPoint globalPosition;
+	iPoint localPosition;
+
+	char* text = nullptr;
+	bool enabled;
+	bool interactable;
+
+	bool X_drag;
+	bool Y_drag;
+
+	bool above;
+	bool focus;
+
+	SDL_Rect rect;
+	SDL_Texture* texture = nullptr;
 
 };
+
+#endif
