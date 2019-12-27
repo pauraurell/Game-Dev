@@ -25,6 +25,8 @@ public:
 
 	bool CleanUp();
 
+	bool Draw();
+
 	SDL_Texture* texture = nullptr;
 	UIelement* testLabel = nullptr;
 

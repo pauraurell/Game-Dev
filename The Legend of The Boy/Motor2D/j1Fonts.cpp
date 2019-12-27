@@ -32,7 +32,7 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 	else
 	{
 		path = conf.child("default_font").attribute("file").as_string(TRI_FONT);
-		int size = 30;
+		int size = 25;
 		default = Load(path, size);
 	}
 

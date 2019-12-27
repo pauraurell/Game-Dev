@@ -34,9 +34,9 @@ bool j1MainMenu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1MainMenu::Start()
 {
-	texture = App->tex->Load("textures/UI/atlas.png");
+	texture = App->tex->Load("textures/Background.png");
 
-	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 230, 250 }, { 0,0 }, false, false, { 0,0,1000,1000 }, "MUSIC", this);
+	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, false, true, { 0,0,0,0 }, "Press Space to Continue", this);
 
 	return true;
 }
@@ -44,13 +44,15 @@ bool j1MainMenu::Start()
 // Called each loop iteration
 bool j1MainMenu::PreUpdate()
 {
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	return true;
 }
 
 // Called each loop iteration
 bool j1MainMenu::Update(float dt)
 {
-	App->render->Blit(texture, 0, 0);
+	Draw();
 	return true;
 }
 
@@ -62,6 +64,7 @@ bool j1MainMenu::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
 	{
 		App->fade->FadeToBlack(App->scene, this, 2.f);
+		testLabel->enabled = false;
 	}
 
 	return ret;
@@ -71,5 +74,11 @@ bool j1MainMenu::PostUpdate()
 bool j1MainMenu::CleanUp()
 {
 	App->tex->UnLoad(texture);
+	return true;
+}
+
+bool j1MainMenu::Draw()
+{
+	App->render->Blit(texture, 0, 0);
 	return true;
 }

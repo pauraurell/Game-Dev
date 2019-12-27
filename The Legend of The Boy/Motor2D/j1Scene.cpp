@@ -81,7 +81,6 @@ bool j1Scene::Start()
 	App->audio->PlayMusic("audio/music.ogg");
 
 	CreateEnt();
-	App->render->camera.y = -400;
 	return true;
 }
 
@@ -170,6 +169,7 @@ bool j1Scene::Update(float dt)
 	if (cameraTracking) { App->render->cameraFollowingPlayer(App->render->cameraPos.x, App->render->cameraPos.y); }
 	else 
 	{
+		if (App->render->camera.x > -550)App->render->camera.y = -400;
 		if(App->render->camera.x <= -550) App->render->camera.y --;
 		App->render->camera.x -= 4;
 

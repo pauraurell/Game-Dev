@@ -1,4 +1,3 @@
-
 // ----------------------------------------------------
 // j1Module.h
 // Interface for all engine modules
@@ -17,9 +16,6 @@ struct Collider;
 
 class j1Module
 {
-private:
-	bool enabled = true;
-
 public:
 
 	j1Module() : active(false)
@@ -49,7 +45,7 @@ public:
 	}
 
 	// Called each loop iteration
-	virtual bool Update(float dt = 0)
+	virtual bool Update(float dt)
 	{
 		return true;
 	}
@@ -66,26 +62,6 @@ public:
 		return true;
 	}
 
-	bool IsEnabled() const { return active; }
-
-	void Enable()
-	{
-		if (enabled == false)
-		{
-			enabled = true;
-			Start();
-		}
-	}
-
-	void Disable()
-	{
-		if (enabled == true)
-		{
-			enabled = false;
-			CleanUp();
-		}
-	}
-
 	virtual bool Load(pugi::xml_node&)
 	{
 		return true;
@@ -96,7 +72,28 @@ public:
 		return true;
 	}
 
+	bool IsEnabled() const { return active; }
+
+	void Enable()
+	{
+		if (active == false)
+		{
+			active = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (active == true)
+		{
+			active = false;
+			CleanUp();
+		}
+	}
+
 	virtual void OnCollision(Collider*, Collider*) {}
+
 public:
 
 	p2SString	name;
@@ -104,4 +101,4 @@ public:
 
 };
 
-#endif // __j1MODULE_H__
+#endif

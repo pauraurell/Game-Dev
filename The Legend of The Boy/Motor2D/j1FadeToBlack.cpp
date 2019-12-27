@@ -90,7 +90,7 @@ bool j1FadeToBlack::FadeToBlack(j1Module* module_in, j1Module* module_out, float
 		to_enable = module_in;
 		to_disable = module_out;
 		to_enable->Init(true);
-		to_disable->Init(false);
+		to_disable->Disable();
 		ret = true;
 	}
 	
