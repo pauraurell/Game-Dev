@@ -48,8 +48,8 @@ bool j1MainMenu::PreUpdate()
 {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	if (App->main_menu->IsEnabled() == false) { testLabel->enabled = false; }
-	else { testLabel->enabled = true; }
+	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false; }
+	else { testButton->enabled = true; testLabel->enabled = true;}
 
 	return true;
 }
@@ -70,6 +70,7 @@ bool j1MainMenu::PostUpdate()
 	{
 		App->fade->FadeToBlack(App->scene, this, 2.f);
 		testLabel->enabled = false;
+		testButton->enabled = false;
 	}
 
 	return ret;
@@ -79,6 +80,8 @@ bool j1MainMenu::PostUpdate()
 bool j1MainMenu::CleanUp()
 {
 	App->tex->UnLoad(texture);
+	testButton->CleanUp();
+	testLabel->CleanUp();
 	return true;
 }
 
