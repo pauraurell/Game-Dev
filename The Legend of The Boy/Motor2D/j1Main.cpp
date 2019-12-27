@@ -53,12 +53,12 @@ int main(int argc, char* args[])
 
 			// Awake all modules -----------------------------------------------
 			case AWAKE:
-			LOG(true, "AWAKE PHASE ===============================");
+			LOG(false, "AWAKE PHASE ===============================");
 			if(App->Awake() == true)
 				state = START;
 			else
 			{
-				LOG(true, "ERROR: Awake failed");
+				LOG(false, "ERROR: Awake failed");
 				state = FAIL;
 			}
 
@@ -66,16 +66,16 @@ int main(int argc, char* args[])
 
 			// Call all modules before first frame  ----------------------------
 			case START:
-			LOG(true, "START PHASE ===============================");
+			LOG(false, "START PHASE ===============================");
 			if(App->Start() == true)
 			{
 				state = LOOP;
-				LOG(true, "UPDATE PHASE ===============================");
+				LOG(false, "UPDATE PHASE ===============================");
 			}
 			else
 			{
 				state = FAIL;
-				LOG(true, "ERROR: Start failed");
+				LOG(false, "ERROR: Start failed");
 			}
 			break;
 
@@ -104,7 +104,7 @@ int main(int argc, char* args[])
 
 			// Exit with errors and shame ---------------------------------------
 			case FAIL:
-			LOG(true, "Exiting with errors :(");
+			LOG(false, "Exiting with errors :(");
 			result = EXIT_FAILURE;
 			state = EXIT;
 			break;

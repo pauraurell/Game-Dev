@@ -21,7 +21,7 @@ j1Fonts::~j1Fonts()
 // Called before render is available
 bool j1Fonts::Awake(pugi::xml_node& conf)
 {
-	LOG(true, "Init True Type Font library");
+	LOG(false, "Init True Type Font library");
 	bool ret = true;
 
 	if (TTF_Init() == -1)
@@ -42,7 +42,7 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 // Called before quitting
 bool j1Fonts::CleanUp()
 {
-	LOG(true, "Freeing True Type fonts and library");
+	LOG(false, "Freeing True Type fonts and library");
 	p2List_item<TTF_Font*>* item;
 
 	for (item = fonts.start; item != NULL; item = item->next)
@@ -72,7 +72,7 @@ TTF_Font* const j1Fonts::Load(const char* path, int size)
 
 	if (font == NULL)
 	{
-		LOG(true, "Could not load TTF font with path: %s. TTF_OpenFont: %s", path, TTF_GetError());
+		//LOG(false, "Could not load TTF font with path: %s. TTF_OpenFont: %s", path, TTF_GetError());
 	}
 	else
 	{
@@ -93,7 +93,7 @@ SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font, i
 
 	if (surface == NULL)
 	{
-		LOG(true, "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+		//LOG(true, "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
 	}
 	else
 	{
@@ -115,7 +115,7 @@ SDL_Texture* j1Fonts::PrintTextBox(const char* text, SDL_Color color, _TTF_Font*
 
 	if (surface == NULL)
 	{
-		LOG(true, "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+		//LOG(true, "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
 	}
 	else
 	{
@@ -129,8 +129,7 @@ bool j1Fonts::CalcSize(const char* text, int& width, int& height, _TTF_Font* fon
 {
 	bool ret = false;
 
-	if (TTF_SizeText((font) ? font : default, text, &width, &height) != 0)
-		LOG(true, "Unable to calc size of text surface! SDL_ttf Error: %s\n", TTF_GetError());
+	if (TTF_SizeText((font) ? font : default, text, &width, &height) != 0) {/*LOG(true, "Unable to calc size of text surface! SDL_ttf Error: %s\n", TTF_GetError());*/; }
 	else
 		ret = true;
 

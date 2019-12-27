@@ -20,13 +20,13 @@ j1Audio::~j1Audio()
 // Called before render is available
 bool j1Audio::Awake(pugi::xml_node& config)
 {
-	LOG(true, "Loading Audio Mixer");
+	LOG(false, "Loading Audio Mixer");
 	bool ret = true;
 	SDL_Init(0);
 
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
-		LOG(true, "SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
+		LOG(false, "SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		active = false;
 		ret = true;
 	}
@@ -37,7 +37,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	if((init & flags) != flags)
 	{
-		LOG(true, "Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
+		LOG(false, "Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
 		active = false;
 		ret = true;
 	}
@@ -45,7 +45,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	//Initialize SDL_mixer
 	if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		LOG(true, "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+		LOG(false, "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		active = false;
 		ret = true;
 	}
@@ -62,7 +62,7 @@ bool j1Audio::CleanUp()
 	if(!active)
 		return true;
 
-	LOG(true, "Freeing sound FX, closing Mixer and Audio subsystem");
+	LOG(false, "Freeing sound FX, closing Mixer and Audio subsystem");
 
 	if(music != NULL)
 	{
@@ -148,7 +148,7 @@ unsigned int j1Audio::LoadFx(const char* path)
 
 	if(chunk == NULL)
 	{
-		LOG(true, "Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
+		LOG(false, "Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
 	}
 	else
 	{

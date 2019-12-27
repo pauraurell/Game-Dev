@@ -41,7 +41,7 @@ bool j1Scene::Awake(pugi::xml_node& config)
 	bool ret = true;
 	pugi::xml_node map;
 
-	LOG(true, "Loading Scene");
+	LOG(false, "Loading Scene");
 
 	for (map = config.child("map"); map; map = map.next_sibling("map"))
 	{
@@ -193,7 +193,7 @@ bool j1Scene::PostUpdate()
 // Called before quitting
 bool j1Scene::CleanUp()
 {
-	LOG(true, "Freeing scene");
+	LOG(false, "Freeing scene");
 
 	return true;
 }
@@ -237,7 +237,8 @@ void j1Scene::RestartCurrentLevel()
 	if (CurrentMap == "SecondLevel.tmx") { Create2MapEnemies(); }
 	player->position.x = PlayerSpawnPointX;
 	player->position.y = PlayerSpawnPointY;
-	App->ui->pLife = 3;
+	if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+	LOG(true, "Restarting Current Level");
 }
 
 //Restarting the first level
@@ -252,7 +253,8 @@ void j1Scene::StartFirstLevel()
 		App->entManager->RestartEntities();
 		scene_change = false;
 		manualFirstLevel = false;
-		App->ui->pLife = 3;
+		if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+		LOG(true, "Starting First Level");
 	}
 	
 	//If the level was restarted by getting there while playing
@@ -284,7 +286,8 @@ void j1Scene::StartFirstLevel()
 			scene_change = false;
 			sceneChangeTimer = false;
 			input = true;
-			App->ui->pLife = 3;
+			if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+			LOG(true, "Starting First Level");
 		}
 	}
 }
@@ -299,7 +302,8 @@ void j1Scene::StartSecondLevel()
 	Create2MapEnemies();
 	scene_change = true;
 	secret_map = false;
-	App->ui->pLife = 3;
+	if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+	LOG(true, "Starting Second Level");
 }
 
 void j1Scene::CreateEnt()

@@ -27,7 +27,7 @@ j1Render::~j1Render()
 // Called before render is available
 bool j1Render::Awake(pugi::xml_node& config)
 {
-	LOG(true, "Create SDL rendering context");
+	LOG(false, "Create SDL rendering context");
 	bool ret = true;
 	// load flags
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
@@ -39,14 +39,14 @@ bool j1Render::Awake(pugi::xml_node& config)
 	{
 		vsyncActive = true;
 		flags |= SDL_RENDERER_PRESENTVSYNC;
-		LOG(true, "Using vsync");
+		LOG(false, "Using vsync");
 	}
 
 	renderer = SDL_CreateRenderer(App->win->window, -1, flags);
 
 	if(renderer == NULL)
 	{
-		LOG(true, "Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
+		LOG(false, "Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -93,7 +93,7 @@ bool j1Render::PostUpdate()
 // Called before quitting
 bool j1Render::CleanUp()
 {
-	LOG(true, "Destroying SDL render");
+	LOG(false, "Destroying SDL render");
 	SDL_DestroyRenderer(renderer);
 	return true;
 }
