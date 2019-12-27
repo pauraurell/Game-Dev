@@ -31,6 +31,7 @@ public:
 
 	SDL_Rect	background;
 	bool		enabled;
+	int			vel;
 	
 	//LICENSE
 	p2List<UIelement*> license;

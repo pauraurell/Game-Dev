@@ -37,6 +37,7 @@ bool j1Credits::Start()
 	licTex = App->tex->Load("textures/Credits/License.png");
 
 	enabled = true;
+	vel = 2;
 
 	/*license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 10 }, { 0,0 }, false, { 0,0,0,0 }, "MIT License", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 50 }, { 0,0 }, false, { 0,0,0,0 }, "Copyright (c) 2019 pauraurell and pgalmor is hereby", this));
@@ -94,6 +95,9 @@ bool j1Credits::PreUpdate()
 		enabled = true;
 	}*/
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { vel = 10; }
+	else { vel = 2; }
+
 	return true;
 }
 
@@ -109,7 +113,8 @@ bool j1Credits::PostUpdate()
 {
 	bool ret = true;
 
-	if (App->render->camera.y > -1000) { App->render->camera.y--; }
+	if (App->render->camera.y > -1000) { App->render->camera.y -= vel; }
+	if (App->render->camera.y < -1000) { App->render->camera.y = -1000; }
 
 	return ret;
 }
