@@ -26,6 +26,7 @@ class j1PathFinding;
 class j1Fonts;
 class j1UI;
 class j1Console;
+class j1MainMenu;
 
 #define DTCOEFICIENT 60
 
@@ -52,7 +53,7 @@ public:
 	bool CleanUp();
 
 	// Add a new module to handle
-	void AddModule(j1Module* module);
+	void AddModule(j1Module* module, bool init = true);
 
 	// Exposing some properties for reading
 	int GetArgc() const;
@@ -110,6 +111,7 @@ public:
 	j1Fonts*			fonts;
 	j1UI*				ui;
 	j1Console*			cons;
+	j1MainMenu*			main_menu;
 
 	#define SCALE 2
 

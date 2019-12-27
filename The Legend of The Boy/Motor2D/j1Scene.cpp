@@ -263,7 +263,7 @@ void j1Scene::StartFirstLevel()
 		if (sceneChangeTimer == false)
 		{
 			scene_change_timer = SDL_GetTicks();
-			App->fade->FadeToBlack(2);
+			App->fade->FadeToBlackVisualEffect(2);
 			sceneChangeTimer = true;
 			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
 			while (entityList) {

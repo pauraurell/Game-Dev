@@ -98,6 +98,7 @@ public:
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
+	p2SString GetText();
 
 private:
 	bool		windowEvents[WE_COUNT];
@@ -115,6 +116,7 @@ public:
 	bool left;
 	bool right;
 	bool up;
+	p2SString	text;
 };
 
 #endif // __j1INPUT_H__

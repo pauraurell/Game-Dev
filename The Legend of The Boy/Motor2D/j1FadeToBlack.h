@@ -12,7 +12,8 @@ public:
 
 	bool Start();
 	bool Update(float dt);
-	bool FadeToBlack(float time = 2.0f);
+	bool FadeToBlackVisualEffect(float time = 2.0f);
+	bool FadeToBlack(j1Module* SceneIn, j1Module* SceneOut, float time = 1.0f);
 
 private:
 
@@ -23,6 +24,8 @@ private:
 		fade_from_black
 	} current_step = fade_step::none;
 
+	j1Module* to_enable = nullptr;
+	j1Module* to_disable = nullptr;
 	Uint32 start_time;
 	Uint32 total_time;
 	SDL_Rect screen;
