@@ -34,11 +34,6 @@ bool j1Credits::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Credits::Start()
 {
-	background.x = App->render->camera.x * -1 / 2;
-	background.y = App->render->camera.y * -1 / 2;
-	background.w = App->render->camera.w;
-	background.h = App->render->camera.h;
-
 	licTex = App->tex->Load("textures/Credits/License.png");
 
 	enabled = true;
@@ -77,8 +72,6 @@ bool j1Credits::Start()
 // Called each loop iteration
 bool j1Credits::PreUpdate()
 {
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 
 	/*if (App->cred->IsEnabled() == false && enabled == true)
 	{
@@ -116,6 +109,8 @@ bool j1Credits::PostUpdate()
 {
 	bool ret = true;
 
+	if (App->render->camera.y > -1000) { App->render->camera.y--; }
+
 	return ret;
 }
 
@@ -137,9 +132,7 @@ bool j1Credits::CleanUp()
 
 bool j1Credits::Draw()
 {
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(App->render->renderer, &background);
-	App->render->Blit(licTex, 0, 0);
+	App->render->Blit(licTex, 40, 20);
 
 	return true;
 }
