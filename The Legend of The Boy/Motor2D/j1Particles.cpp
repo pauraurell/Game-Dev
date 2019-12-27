@@ -52,7 +52,7 @@ bool j1Particles::Start()
 // Unload assets
 bool j1Particles::CleanUp()
 {
-	LOG(true, "Unloading particles");
+	LOG(false, "Unloading particles");
 	App->tex->UnLoad(graphics);
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)

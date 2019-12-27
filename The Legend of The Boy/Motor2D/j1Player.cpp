@@ -640,6 +640,7 @@ void j1Player::Respawn()
 			App->ui->pLife = 3;
 			if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); position.x = App->scene->PlayerSpawnPointX; }
 			if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); position.x = 20; }
+			LOG(true, "Respawning Player");
 		}
 		else 
 		{
