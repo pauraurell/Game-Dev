@@ -23,6 +23,7 @@
 #include "j1UI.h"
 #include "j1Console.h"
 #include "j1MainMenu.h"
+#include "j1Credits.h"
 
 
 // Constructor
@@ -48,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	ui = new j1UI();
 	cons = new j1Console();
 	main_menu = new j1MainMenu();
+	cred = new j1Credits();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -62,10 +64,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(col);
 	AddModule(ui);
 	AddModule(cons);
+	AddModule(main_menu);
+	AddModule(cred, false);
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(fonts);
-	AddModule(main_menu);
 
 	// render last to swap buffer
 	AddModule(render);

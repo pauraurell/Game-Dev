@@ -6,6 +6,7 @@
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "j1MainMenu.h"
+#include "j1Credits.h"
 #include "j1Scene.h"
 
 j1FadeToBlack::j1FadeToBlack()

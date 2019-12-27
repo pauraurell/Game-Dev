@@ -85,11 +85,14 @@
     <ClCompile Include="UI_Label.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClCompile>
-    <ClCompile Include="j1MainMenu.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="UI_Button.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Credits.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="j1MainMenu.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,11 +201,14 @@
     <ClInclude Include="UI_Label.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClInclude>
-    <ClInclude Include="J1MainMenu.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Button.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Credits.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="J1MainMenu.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,7 +36,7 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, true, { 0,0,0,0 }, "Press Space to Continue", this);
+	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, false, { 0,0,0,0 }, "Press Space to Continue", this);
 
 	return true;
 }
@@ -46,6 +46,9 @@ bool j1MainMenu::PreUpdate()
 {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+	if (App->main_menu->IsEnabled() == false) { testLabel->enabled = false; }
+	else { testLabel->enabled = true; }
+
 	return true;
 }
 

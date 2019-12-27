@@ -27,6 +27,7 @@ class j1Fonts;
 class j1UI;
 class j1Console;
 class j1MainMenu;
+class j1Credits;
 
 #define DTCOEFICIENT 60
 
@@ -112,6 +113,7 @@ public:
 	j1UI*				ui;
 	j1Console*			cons;
 	j1MainMenu*			main_menu;
+	j1Credits*			cred;
 
 	#define SCALE 2
 
