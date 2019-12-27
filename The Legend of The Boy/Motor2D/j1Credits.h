@@ -6,6 +6,8 @@
 #include "p2List.h"
 #include "SDL/include/SDL.h"
 
+#define CREDLIMIT -1850
+
 struct SDL_Texture;
 class UIelement;
 

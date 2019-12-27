@@ -34,7 +34,7 @@ bool j1Credits::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Credits::Start()
 {
-	licTex = App->tex->Load("textures/Credits/License.png");
+	licTex = App->tex->Load("textures/Credits/Credits.png");
 
 	enabled = true;
 	vel = 2;
@@ -113,8 +113,8 @@ bool j1Credits::PostUpdate()
 {
 	bool ret = true;
 
-	if (App->render->camera.y > -1000) { App->render->camera.y -= vel; }
-	if (App->render->camera.y < -1000) { App->render->camera.y = -1000; }
+	if (App->render->camera.y > CREDLIMIT) { App->render->camera.y -= vel; }
+	if (App->render->camera.y < CREDLIMIT) { App->render->camera.y = CREDLIMIT; }
 
 	return ret;
 }
@@ -137,7 +137,7 @@ bool j1Credits::CleanUp()
 
 bool j1Credits::Draw()
 {
-	App->render->Blit(licTex, 40, 20);
+	App->render->Blit(licTex, -5, 20);
 
 	return true;
 }

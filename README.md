@@ -55,7 +55,7 @@ Coliders made in Tiled, Particles, secret platforms in 2nd Map and Running dust 
 ### Autors
 -Pol Galán i Morales
 https://github.com/pgalmor
--State Machine, Dash, Secret Map, Respawn, Entity System,.
+-State Machine, Dash, Secret Map, Respawn, Entity System, Life System, Console, Credits.
 
 -Pau Raurell Gomis
 https://github.com/pauraurell
