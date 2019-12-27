@@ -147,6 +147,7 @@ bool j1App::Start()
 	while(item != NULL && ret == true)
 	{
 		ret = item->data->Start();
+		if (item->data->active == false) { item->data->Disable(); }
 		item = item->next;
 	}
 

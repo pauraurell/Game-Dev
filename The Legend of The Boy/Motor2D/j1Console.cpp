@@ -81,6 +81,7 @@ bool j1Console::CleanUp()
 		text.del(item);
 		item = item->next;
 	}
+	text.clear();
 
 	return true;
 }

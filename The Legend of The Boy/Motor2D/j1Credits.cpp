@@ -39,7 +39,11 @@ bool j1Credits::Start()
 	background.w = App->render->camera.w;
 	background.h = App->render->camera.h;
 
-	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 10 }, { 0,0 }, false, { 0,0,0,0 }, "MIT License", this));
+	licTex = App->tex->Load("textures/Credits/License.png");
+
+	enabled = true;
+
+	/*license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 10 }, { 0,0 }, false, { 0,0,0,0 }, "MIT License", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 50 }, { 0,0 }, false, { 0,0,0,0 }, "Copyright (c) 2019 pauraurell and pgalmor is hereby", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 70 }, { 0,0 }, false, { 0,0,0,0 }, "granted, free of charge, to any person obtaining a copy", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 90 }, { 0,0 }, false, { 0,0,0,0 }, "of this software and associated documentation files (the", this));
@@ -65,7 +69,7 @@ bool j1Credits::Start()
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 580 }, { 0,0 }, false, { 0,0,0,0 }, "OF CONTRACT, TORT OR OTHERWISE,", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 605 }, { 0,0 }, false, { 0,0,0,0 }, "ARISING FROM, OUT OF OR IN CONNECTION", this));
 	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 630 }, { 0,0 }, false, { 0,0,0,0 }, "WITH THE SOFTWARE OR THE USE OR", this));
-	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 655 }, { 0,0 }, false, { 0,0,0,0 }, "OTHER DEALINGS IN THE SOFTWARE.", this));
+	license.add(App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 30, 655 }, { 0,0 }, false, { 0,0,0,0 }, "OTHER DEALINGS IN THE SOFTWARE.", this));*/
 
 	return true;
 }
@@ -76,7 +80,7 @@ bool j1Credits::PreUpdate()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	if (App->cred->IsEnabled() == false)
+	/*if (App->cred->IsEnabled() == false && enabled == true)
 	{
 		p2List_item<UIelement*>* item = license.start;
 		while (item)
@@ -84,8 +88,9 @@ bool j1Credits::PreUpdate()
 			item->data->enabled = false;
 			item = item->next;
 		}
+		enabled = false;
 	}
-	else
+	else if(App->cred->IsEnabled() == true && enabled == false)
 	{
 		p2List_item<UIelement*>* item = license.start;
 		while (item)
@@ -93,7 +98,8 @@ bool j1Credits::PreUpdate()
 			item->data->enabled = true;
 			item = item->next;
 		}
-	}
+		enabled = true;
+	}*/
 
 	return true;
 }
@@ -110,19 +116,22 @@ bool j1Credits::PostUpdate()
 {
 	bool ret = true;
 
-	/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
-	{
-		App->fade->FadeToBlack(App->scene, this, 2.f);
-		testLabel->enabled = false;
-	}*/
-
 	return ret;
 }
 
 // Called before quitting
 bool j1Credits::CleanUp()
 {
-	//App->tex->UnLoad(texture);
+	/*p2List_item<UIelement*>* item = license.start;
+	while (item)
+	{
+		item->data->CleanUp();
+		license.del(item);
+		item = item->next;
+	}
+	license.clear();*/
+	App->tex->UnLoad(licTex);
+
 	return true;
 }
 
@@ -130,6 +139,7 @@ bool j1Credits::Draw()
 {
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &background);
+	App->render->Blit(licTex, 0, 0);
 
 	return true;
 }
