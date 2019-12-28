@@ -58,6 +58,7 @@ bool Button::PostUpdate()
 
 bool Button::CleanUp()
 {
+	label->enabled = false;
 	return true;
 }
 

@@ -10,19 +10,19 @@
 	</scene>
 	<entManager>
 		<Entity type="player" dead="false">
-			<position posX="906" posY="243" />
+			<position posX="906" posY="248" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="678" posY="400" />
+		<Entity type="bat" dead="true">
+			<position posX="685" posY="688" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="962" posY="463" />
+		<Entity type="skeleton" dead="true">
+			<position posX="969" posY="463" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1033" posY="105" />
+		<Entity type="bat" dead="true">
+			<position posX="1040" posY="393" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="1552" posY="96753" />
+		<Entity type="skeleton" dead="true">
+			<position posX="1559" posY="96753" />
 		</Entity>
 	</entManager>
 	<particles />
@@ -36,6 +36,6 @@
 	<pathfinding />
 	<fonts />
 	<renderer>
-		<camera x="-1300" y="-102" />
+		<camera x="-1300" y="-116" />
 	</renderer>
 </game_state>
