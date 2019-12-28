@@ -15,10 +15,8 @@ enum class TYPE_UI
 	UI_UNKNOWN
 };
 
-
 class UIelement
 {
-
 public:
 
 	UIelement();
@@ -54,8 +52,9 @@ public:
 	bool enabled;
 	bool above;
 	int size;
+	iPoint posOffset;
 
-	SDL_Rect rect;
+	SDL_Rect section;
 
 };
 

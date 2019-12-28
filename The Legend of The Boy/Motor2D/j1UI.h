@@ -27,12 +27,15 @@ public:
 
 	void Draw();
 
-	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
+	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, char* text = nullptr, j1Module* listener = nullptr);
 
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
 
 	void UIevents(uiEvent type, UIelement* element);
+
+	void EnableAll();
+	void DisableAll();
 
 public:
 

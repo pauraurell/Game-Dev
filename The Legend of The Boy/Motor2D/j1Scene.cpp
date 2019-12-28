@@ -173,6 +173,7 @@ bool j1Scene::PostUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 	{ 
 		App->ui->InGameMenu = !App->ui->InGameMenu;
+		input = !input;
 	}
 
 	return ret;
@@ -299,6 +300,9 @@ void j1Scene::StartSecondLevel()
 
 void j1Scene::EndScene()
 {
+	App->ui->InGameMenu = false;
+	App->ui->DisableAll();
+
 	p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
 	while (entityList) {
 		if (entityList->data->entity_type == j1Entities::Types::player) {

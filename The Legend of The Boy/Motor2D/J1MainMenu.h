@@ -31,6 +31,7 @@ public:
 
 	UIelement* testButton = nullptr;
 	UIelement* exitButton = nullptr;
+	UIelement* creditsButton = nullptr;
 
 	void UIevents(uiEvent type, UIelement* element);
 

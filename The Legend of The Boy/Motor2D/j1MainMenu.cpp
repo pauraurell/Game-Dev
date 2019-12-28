@@ -13,7 +13,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Map.h"
-
+#include "j1Credits.h"
 
 j1MainMenu::j1MainMenu() : j1Module()
 {
@@ -37,19 +37,29 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 200 }, 22, false, { 1,38,153,53 }, "Play", this);
-	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 270 }, 22, false, { 220,174,153,53 }, "Exit", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 200 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 270 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
+	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 300, 270 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
 	return true;
 }
 
 // Called each loop iteration
 bool j1MainMenu::PreUpdate()
 {
-	//App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; exitButton->enabled = false;
+
+	if (App->main_menu->IsEnabled() == false) 
+	{
+		testButton->enabled = false; 
+		exitButton->enabled = false;
+		creditsButton->enabled = false;
 	}
-	else { testButton->enabled = true; exitButton->enabled = true;}
+	else 
+	{
+		testButton->enabled = true; 
+		exitButton->enabled = true;
+		creditsButton->enabled = true;
+	}
 
 	return true;
 }
@@ -70,6 +80,7 @@ bool j1MainMenu::PostUpdate()
 	{
 		testButton->enabled = false;
 		exitButton->enabled = false;
+		creditsButton->enabled = false;
 		App->fade->FadeToBlack(App->scene, this, 2.f);
 	}
 
@@ -82,6 +93,7 @@ bool j1MainMenu::CleanUp()
 	App->tex->UnLoad(texture);
 	testButton->CleanUp();
 	exitButton->CleanUp();
+	creditsButton->CleanUp();
 	return true;
 }
 
@@ -103,11 +115,20 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				App->fade->FadeToBlack(App->scene, this, 2.f);
 				testButton->enabled = false;
 				exitButton->enabled = false;
+				creditsButton->enabled = false;
 			}
 
 			else if (element == exitButton)
 			{
 				App->QuitToDesktop = true;
+			}
+
+			else if (element == creditsButton)
+			{
+				App->fade->FadeToBlack(App->cred, this, 2.f);
+				testButton->enabled = false;
+				exitButton->enabled = false;
+				creditsButton->enabled = false;
 			}
 		}
 	}
