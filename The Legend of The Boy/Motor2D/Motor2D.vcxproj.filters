@@ -94,6 +94,9 @@
     <ClCompile Include="j1MainMenu.cpp">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreScene.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="UI_Image.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClCompile>
@@ -211,6 +214,9 @@
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="J1MainMenu.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScene.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="UI_Image.h">

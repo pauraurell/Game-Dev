@@ -68,9 +68,9 @@ bool j1MainMenu::PostUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
 	{
-		App->fade->FadeToBlack(App->scene, this, 2.f);
 		testLabel->enabled = false;
 		testButton->enabled = false;
+		App->fade->FadeToBlack(App->scene, this, 2.f);
 	}
 
 	return ret;

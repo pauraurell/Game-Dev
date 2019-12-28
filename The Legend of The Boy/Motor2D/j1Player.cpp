@@ -562,22 +562,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 
-	//Map Change
-	if (c1 == colliderBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colliderBody)
-	{
-		if (App->scene->scene_change == true && App->scene->scene_changed == false)
-		{
-			App->scene->StartFirstLevel();
-			App->scene->scene_changed = true;
-		}
-		if (App->scene->scene_change == false && App->scene->scene_changed == false)
-		{
-			App->scene->StartSecondLevel();
-			App->scene->scene_changed = true;
-		}
-		App->scene->scene_changed = false;
-	}
-
 	//Secret path activation
 	if (c1 == colliderBody && c2->type == COLLIDER_SECRET)
 	{
@@ -601,6 +585,19 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 				else if (orientation == "left") { vel.x = 40; }
 				state = PLAYER_IDLE;
 			}
+		}
+	}
+
+	//Map Change
+	if (c1 == colliderBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colliderBody)
+	{
+		if (App->scene->CurrentMap == "FirstLevel.tmx")
+		{
+			App->scene->StartSecondLevel();
+		}
+		if (App->scene->CurrentMap == "SecondLevel.tmx")
+		{
+			App->scene->EndScene();
 		}
 	}
 }

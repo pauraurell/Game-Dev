@@ -5,6 +5,7 @@
 #include "SDL/include/SDL.h"
 #include "UI_Element.h"
 #include "p2List.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 
@@ -27,6 +28,7 @@ public:
 
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
+	j1Timer			time;
 
 	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
 

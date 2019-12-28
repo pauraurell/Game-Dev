@@ -24,6 +24,7 @@
 #include "j1Console.h"
 #include "j1MainMenu.h"
 #include "j1Credits.h"
+#include "ScoreScene.h"
 
 
 // Constructor
@@ -50,6 +51,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	cons = new j1Console();
 	main_menu = new j1MainMenu();
 	cred = new j1Credits();
+	score = new j1ScoreScene();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -66,6 +68,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(cons);
 	AddModule(main_menu);
 	AddModule(cred, false);
+	AddModule(score, false);
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(fonts);
@@ -95,7 +98,8 @@ j1App::~j1App()
 
 void j1App::AddModule(j1Module* module, bool init)
 {
-	module->Init(init);
+	module->active = init;
+	if (init == false) { module->to_enable = false; }
 	modules.add(module);
 }
 
@@ -145,7 +149,7 @@ bool j1App::Start()
 	while(item != NULL && ret == true)
 	{
 		ret = item->data->Start();
-		if (item->data->active == false) { item->data->Disable(); }
+		if (item->data->active == false) { item->data->CleanUp(); }
 		item = item->next;
 	}
 
@@ -158,6 +162,18 @@ bool j1App::Start()
 bool j1App::Update()
 {
 	bool ret = true;
+	p2List_item<j1Module*>* item;
+	item = modules.start;
+
+	while (item != NULL && ret == true)
+	{
+		if (item->data->to_enable == true)
+		{
+			ret = item->data->Start();
+			item->data->to_enable = false;
+		}
+		item = item->next;
+	}
 	PrepareUpdate();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)

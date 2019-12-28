@@ -16,6 +16,7 @@
 #include "j1EntityManager.h"
 #include "j1UI.h"
 #include "j1Console.h"
+#include "j1MainMenu.h"
 #include "Brofiler/Brofiler.h"
 #include "UI_Element.h"
 
@@ -23,13 +24,6 @@
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
-	scene_change = false;
-	scene_changed = false;
-	manualFirstLevel = false;
-	secret_map = false;
-	input = true;
-	sceneChangeTimer = false;
-	cameraTracking = false;
 }
 
 // Destructor
@@ -77,9 +71,19 @@ bool j1Scene::Awake(pugi::xml_node& config)
 bool j1Scene::Start()
 {
 	CurrentMap = MapList.start->data;
+	//CurrentMap = "FirstLevel.tmx";
+
+	scene_changed = false;
+	secret_map = false;
+	input = true;
+	sceneChangeTimer = false;
+	cameraTracking = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
+
+	App->ui->time.Start();
+	App->ui->pLife = 3;
 
 	CreateEnt();
 	return true;
@@ -112,7 +116,6 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		manualFirstLevel = true;
 		StartFirstLevel();
 	}
 
@@ -177,8 +180,20 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG(false, "Freeing scene");
+	App->entManager->CleanUp();
+	App->map->CleanUp();
 
 	return true;
+}
+
+void j1Scene::Disable()
+{
+	if (active == true)
+	{
+		active = false;
+		CleanUp();
+		App->entManager->CleanUp();
+	}
 }
 
 bool j1Scene::Load(pugi::xml_node& data)
@@ -192,7 +207,6 @@ bool j1Scene::Load(pugi::xml_node& data)
 	}
 	else if (App->scene->CurrentMap == "FirstLevel.tmx")
 	{
-		manualFirstLevel = true;
 		App->scene->StartFirstLevel();
 	}
 	//Loading whether or not the secret map was visible for the player when he saved
@@ -228,51 +242,43 @@ void j1Scene::RestartCurrentLevel()
 void j1Scene::StartFirstLevel()
 {
 	//If the level was restarted by pressing F1
-	if (manualFirstLevel == true)
+	App->map->CleanUp();
+	CurrentMap.create("FirstLevel.tmx");
+	App->map->Load(CurrentMap.GetString());
+	App->entManager->RestartEntities();
+	if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+	LOG(true, "Starting First Level");
+	
+	//If the level was restarted by getting there while playing
+	/*if (sceneChangeTimer == false)
+	{
+		scene_change_timer = SDL_GetTicks();
+		App->fade->FadeToBlackVisualEffect(2);
+		sceneChangeTimer = true;
+		p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
+		while (entityList) {
+			if (entityList->data->entity_type == j1Entities::Types::player) {
+				entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
+			}
+			entityList = entityList->next;
+			
+		}
+		input = false;
+	}
+
+	if (SDL_GetTicks() - scene_change_timer > 1040)
 	{
 		App->map->CleanUp();
 		CurrentMap.create("FirstLevel.tmx");
 		App->map->Load(CurrentMap.GetString());
 		App->entManager->RestartEntities();
-		scene_change = false;
-		manualFirstLevel = false;
-		if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
+		Create1MapEnemies();
+		sceneChangeTimer = false;
+		input = true;
+		if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 		LOG(true, "Starting First Level");
-	}
-	
-	//If the level was restarted by getting there while playing
-	else if (manualFirstLevel == false)
-	{
-		if (sceneChangeTimer == false)
-		{
-			scene_change_timer = SDL_GetTicks();
-			App->fade->FadeToBlackVisualEffect(2);
-			sceneChangeTimer = true;
-			p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
-			while (entityList) {
-				if (entityList->data->entity_type == j1Entities::Types::player) {
-					entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
-				}
-				entityList = entityList->next;
-				
-			}
-			input = false;
-		}
+	}*/
 
-		if (SDL_GetTicks() - scene_change_timer > 1040)
-		{
-			App->map->CleanUp();
-			CurrentMap.create("FirstLevel.tmx");
-			App->map->Load(CurrentMap.GetString());
-			App->entManager->RestartEntities();
-			Create1MapEnemies();
-			scene_change = false;
-			sceneChangeTimer = false;
-			input = true;
-			if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
-			LOG(true, "Starting First Level");
-		}
-	}
 }
 
 //Restarting the second level
@@ -283,10 +289,24 @@ void j1Scene::StartSecondLevel()
 	App->map->Load(CurrentMap.GetString());
 	App->entManager->RestartEntities();
 	Create2MapEnemies();
-	scene_change = true;
 	secret_map = false;
 	if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 	LOG(true, "Starting Second Level");
+}
+
+void j1Scene::EndScene()
+{
+	p2List_item<j1Entities*>* entityList = App->entManager->entities.start;
+	while (entityList) {
+		if (entityList->data->entity_type == j1Entities::Types::player) {
+			entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
+		}
+		entityList = entityList->next;
+
+	}
+	input = false;
+	LOG(true, "Ending Main Scene");
+	App->fade->FadeToBlack(App->main_menu, this, 2.f);
 }
 
 void j1Scene::CreateEnt()
@@ -315,4 +335,3 @@ void j1Scene::Create2MapEnemies()
 	//bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX2, Bat2SpawnPointY2 }, false);
 	skeleton2 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { Skeleton2SpawnPointX2, Skeleton2SpawnPointY2 }, false);
 }
-
