@@ -48,7 +48,7 @@ bool j1MainMenu::PreUpdate()
 {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false; }
+	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false; testImage->enabled = false;}
 	else { testButton->enabled = true; testLabel->enabled = true; testImage->enabled = true; }
 
 	return true;
@@ -100,7 +100,10 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 		{
 			if (element == testButton) 
 			{ 
-				LOG(true,"HOLA ESTOY APRETANDO EL Pword BOTON DE LOS Hword");
+				App->fade->FadeToBlack(App->scene, this, 2.f);
+				testLabel->enabled = false;
+				testButton->enabled = false;
+				testImage->enabled = false;
 			}
 		}
 	}

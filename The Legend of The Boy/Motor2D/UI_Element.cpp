@@ -59,10 +59,10 @@ bool UIelement::CleanUp()
 
 void UIelement::Draw()
 {
-	if (above)
+	if ((above == true) && (this->type == TYPE_UI::UI_BUTTON))
 	{
-		SDL_SetTextureColorMod(texture, 176, 12, 174);
-		SDL_SetTextureAlphaMod(texture, 200);
+		SDL_SetTextureColorMod(texture, 255, 190, 170);
+		SDL_SetTextureAlphaMod(texture, 220);
 	}
 	else
 	{
@@ -89,13 +89,15 @@ bool UIelement::Is_above()
 	SDL_Rect intersect = { globalPosition.x , globalPosition.y, rect.w, rect.h };
 	//LOG(true, "%i, %i, %i, %i", intersect.x, intersect.y, intersect.w, intersect.h);
 
-	if (SDL_PointInRect(&mouse, &intersect) && this->enabled && this->interactable) {
+	if (SDL_PointInRect(&mouse, &intersect)) {
+		//LOG(true, "ABOVE");
 		if (listener != nullptr)
 		{
 			this->listener->UIevents(uiEvent::EVENT_HOVER, this);
 		}
 		ret = true;
 	}
+	//else { LOG(true, "NO ABOVE"); }
 	//LOG(true, "%i, %i", mouse.x, mouse.y);
 	
 	return ret;
@@ -104,7 +106,6 @@ bool UIelement::Is_above()
 
 void UIelement::Click()
 {
-	
 	if (listener != nullptr)
 	{
 		this->listener->UIevents(uiEvent::EVENT_ONCLICK, this);

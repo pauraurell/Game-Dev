@@ -40,13 +40,10 @@ bool Button::PreUpdate()
 
 bool Button::Update(float dt)
 {
-	if (interactable)
+	if (above)
 	{
-		if (above)
-		{
-			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
-				Click();
-		}
+		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			Click();
 	}
 	return true;
 }
