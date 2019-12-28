@@ -32,7 +32,7 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 	else
 	{
 		path = conf.child("default_font").attribute("file").as_string(TRI_FONT);
-		int size = 22;
+		int size = 40;
 		default = Load(path, size);
 	}
 
@@ -84,7 +84,7 @@ TTF_Font* const j1Fonts::Load(const char* path, int size)
 }
 
 // Print text using font
-SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font, int size)
+SDL_Texture* j1Fonts::Print(const char* text, int size, SDL_Color color, TTF_Font* font)
 {
 	SDL_Texture* ret = NULL;
 	default = Load(path, size);

@@ -24,8 +24,6 @@ UIelement::~UIelement()
 
 bool UIelement::Start()
 {
-
-
 	return true;
 }
 

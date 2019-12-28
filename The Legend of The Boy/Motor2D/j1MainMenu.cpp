@@ -37,8 +37,8 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, false, { 0,0,0,0 }, "Press Space to Continue", this);
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 300 }, false, { 1,38,153,53 }, "Press here", this);
+	testLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, 20,false, { 0,0,0,0 }, "Press Space to Continue", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 300 }, 20, false, { 1,38,153,53 }, "Press here", this);
 	return true;
 }
 

@@ -18,27 +18,37 @@ public:
 
 	bool Awake(pugi::xml_node& config);
 	bool Start() override;
+
 	bool PreUpdate() override;
 	bool Update(float dt) override;
 	bool PostUpdate() override;
+
 	bool CleanUp() override;
 
 	void Draw();
-	int				pLife;
 
+	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
+
+	void CreateInGameUi();
+	void CreateInGameMenuUi();
+
+	void UIevents(uiEvent type, UIelement* element);
+
+public:
+
+	int				pLife;
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
 	j1Timer			time;
-
-	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
-
 	p2List<UIelement*>	UIelements;
+
 
 	//UI Elements
 	UIelement* coin_image;
 	UIelement* coin_label;
 	UIelement* inGameMenu_label_settings;
 	UIelement* inGameMenu_image;
+	UIelement* inGameMenu_button_QuitToDesktop;
 
 	bool debug;
 	bool InGameMenu;

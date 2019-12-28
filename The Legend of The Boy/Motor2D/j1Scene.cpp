@@ -78,6 +78,7 @@ bool j1Scene::Start()
 	input = true;
 	sceneChangeTimer = false;
 	cameraTracking = false;
+	QuitToDesktop = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
@@ -172,6 +173,8 @@ bool j1Scene::PostUpdate()
 	{ 
 		App->ui->InGameMenu = !App->ui->InGameMenu;
 	}
+
+	if (QuitToDesktop) { return false; }
 
 	return ret;
 }

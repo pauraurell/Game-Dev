@@ -52,6 +52,7 @@ public:
 	char* text = nullptr;
 	bool enabled;
 	bool above;
+	int size;
 
 	SDL_Rect rect;
 

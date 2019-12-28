@@ -8,6 +8,7 @@
 Label::Label()
 {
 	this->type = TYPE_UI::UI_LABEL;
+	this->size = size;
 }
 
 Label::~Label() {
@@ -22,7 +23,7 @@ bool Label::Awake(pugi::xml_node&)
 
 bool Label::Start()
 {
-	texture = App->fonts->Print(text);
+	texture = App->fonts->Print(text, size,{ 15, 15, 15, 255 }, App->fonts->default);
 	return true;
 }
 
@@ -36,7 +37,7 @@ bool Label::PreUpdate()
 
 bool Label::Update(float dt)
 {
-	texture = App->fonts->Print(text);
+	texture = App->fonts->Print(text, size, { 15, 15, 15, 255 }, App->fonts->default);
 	return true;
 }
 

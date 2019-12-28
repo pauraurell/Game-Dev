@@ -39,10 +39,11 @@ bool j1UI::Awake(pugi::xml_node& config)
 bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
-	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 4, 35 }, false, { 62,0,22,22 }, nullptr, this);
-	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 36 }, false, { 0,0,0,0 }, "0", this);
-	inGameMenu_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 190, 120 }, false, { 1,111,160,168 }, nullptr, this);
-	inGameMenu_label_settings = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { inGameMenu_image->Position.x + 20,  inGameMenu_image->Position.y + 10 }, false, { 0,0,0,0 }, "Settings", this);
+
+	CreateInGameUi();
+
+	CreateInGameMenuUi();
+
 	return true;
 }
 
@@ -143,11 +144,13 @@ void j1UI::Draw()
 		{
 			inGameMenu_image->enabled = true;
 			inGameMenu_label_settings->enabled = true;
+			inGameMenu_button_QuitToDesktop->enabled = true;
 		}
 		else 
 		{ 
 			inGameMenu_image->enabled = false; 
 			inGameMenu_label_settings->enabled = false;
+			inGameMenu_button_QuitToDesktop->enabled = false;
 		}
 	}
 
@@ -158,7 +161,7 @@ void j1UI::Draw()
 	}
 }
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text, j1Module* listener)
+UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, char* text, j1Module* listener)
 {
 	UIelement* ui_element = nullptr;
 
@@ -187,9 +190,39 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position,
 		ui_element->enabled = enabled;
 		ui_element->rect = section;
 		ui_element->text = text;
+		ui_element->size = size;
 
 		UIelements.add(ui_element)->data->Start();
 	}
 
 	return ui_element;
+}
+
+void j1UI::CreateInGameMenuUi()
+{
+	inGameMenu_image =Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 190, 120 }, 20, false, { 1,114,197,230 }, nullptr, this);
+	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, "Settings", this);
+	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 140 }, 15, false, { 176,42,145,46 }, "Quit to desktop", this);
+}
+
+void j1UI::CreateInGameUi()
+{
+	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 4, 35 }, 20, false, { 62,0,22,22 }, nullptr, this);
+	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, "0", this);
+}
+
+void j1UI::UIevents(uiEvent type, UIelement* element)
+{
+
+	switch (type)
+	{
+	case uiEvent::EVENT_ONCLICK:
+	{
+		if (element == inGameMenu_button_QuitToDesktop)
+		{
+			App->scene->QuitToDesktop = true;
+		}
+	}
+	}
+
 }
