@@ -233,6 +233,21 @@ void j1UI::UIevents(uiEvent type, UIelement* element)
 		{
 			App->scene->QuitToDesktop = true;
 		}
+
+		else if (element == inGameMenu_button_MainMenu)
+		{
+			
+		}
+
+		else if (element == inGameMenu_button_Save)
+		{
+			App->SaveGame();
+		}
+
+		else if (element == inGameMenu_button_Load)
+		{
+			App->LoadGame();
+		}
 	}
 	}
 

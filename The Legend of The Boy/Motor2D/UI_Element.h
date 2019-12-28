@@ -11,6 +11,7 @@ enum class TYPE_UI
 	UI_BUTTON,
 	UI_LABEL,
 	UI_IMAGE,
+	UI_SLIDER,
 	UI_UNKNOWN
 };
 

@@ -109,6 +109,7 @@
     <ClCompile Include="UI_Element.cpp" />
     <ClCompile Include="UI_Image.cpp" />
     <ClCompile Include="UI_Label.cpp" />
+    <ClCompile Include="UI_Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="UI_Element.h" />
     <ClInclude Include="UI_Image.h" />
     <ClInclude Include="UI_Label.h" />
+    <ClInclude Include="UI_Slider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
