@@ -194,7 +194,8 @@ void j1UI::Draw()
 	}
 }
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener)
+
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener)
 {
 	UIelement* ui_element = nullptr;
 
@@ -214,7 +215,7 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position,
 		break;
 
 	case TYPE_UI::UI_SLIDER:
-		ui_element = new Slider();
+		ui_element = new Slider(typeOfScroll);
 		break;
 
 	}
@@ -238,20 +239,21 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position,
 
 void j1UI::CreateInGameMenuUi()
 {
-	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 166, 66 }, 20, false, { 1,114,197,272 }, { 0,0 }, nullptr, this);
-	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Settings", this);
-	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 216 }, 15, false, { 176,42,145,46 }, { -7,-2 }, "Quit to desktop", this);
-	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Save", this);
-	inGameMenu_button_Load = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 102, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Load", this);
-	inGameMenu_button_MainMenu = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 166 }, 17, false, { 230,114,145,46 }, { 0,0 }, "Main Menu", this);
+	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 166, 66 }, 20, false, { 1,114,197,272 }, { 0,0 }, nullptr, this);
+	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Settings", this);
+	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 216 }, 15, false, { 176,42,145,46 }, { -7,-2 }, "Quit to desktop", this);
+	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Save", this);
+	inGameMenu_button_Load = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 102, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Load", this);
+	inGameMenu_button_MainMenu = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 166 }, 17, false, { 230,114,145,46 }, { 0,0 }, "Main Menu", this);
+	SliderTest = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { inGameMenu_image->Position.x + 10,  inGameMenu_image->Position.y + 50 }, 20, false, { 284, 62, 167, 4 }, { 0,0 }, nullptr, this);
 }
 
 void j1UI::CreateInGameUi()
 {
-	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 4, 35 }, 20, false, { 62,0,22,22 }, { 0,0 }, nullptr, this);
-	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
-	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
-	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
+	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 4, 35 }, 20, false, { 62,0,22,22 }, { 0,0 }, nullptr, this);
+	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
+	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
+	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
 }
 
 void j1UI::UIevents(uiEvent type, UIelement* element)

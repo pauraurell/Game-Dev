@@ -15,6 +15,13 @@ enum class TYPE_UI
 	UI_UNKNOWN
 };
 
+enum class SLIDER_TYPE
+{
+	Music,
+	Fx,
+	NOT_A_SLIDER
+};
+
 class UIelement
 {
 public:
