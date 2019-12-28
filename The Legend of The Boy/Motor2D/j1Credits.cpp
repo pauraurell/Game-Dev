@@ -68,7 +68,7 @@ bool j1Credits::PreUpdate()
 		enabled = true;
 	}*/
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { vel = 10; }
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetMouseButtonDown(1)) { vel = 10; }
 	else { vel = 2; }
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
