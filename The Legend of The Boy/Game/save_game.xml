@@ -8,7 +8,23 @@
 	<scene>
 		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
-	<entManager />
+	<entManager>
+		<Entity type="player" dead="false">
+			<position posX="540" posY="483" />
+		</Entity>
+		<Entity type="bat" dead="false">
+			<position posX="719" posY="400" />
+		</Entity>
+		<Entity type="skeleton" dead="false">
+			<position posX="979" posY="463" />
+		</Entity>
+		<Entity type="bat" dead="false">
+			<position posX="1074" posY="105" />
+		</Entity>
+		<Entity type="skeleton" dead="false">
+			<position posX="1569" posY="320" />
+		</Entity>
+	</entManager>
 	<particles />
 	<collision />
 	<:anonymous />
@@ -20,6 +36,6 @@
 	<pathfinding />
 	<fonts />
 	<renderer>
-		<camera x="0" y="-340" />
+		<camera x="-196" y="-400" />
 	</renderer>
 </game_state>

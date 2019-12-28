@@ -48,7 +48,7 @@ public:
 
 	iPoint Position;
 
-	char* text = nullptr;
+	const char* text = nullptr;
 	bool enabled;
 	bool above;
 	int size;
