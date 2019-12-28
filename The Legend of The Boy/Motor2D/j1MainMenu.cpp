@@ -72,13 +72,8 @@ bool j1MainMenu::PostUpdate()
 		App->fade->FadeToBlack(App->scene, this, 2.f);
 		testLabel->enabled = false;
 		testButton->enabled = false;
+		testImage->enabled = false;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
-	{
-		App->render->camera.x++;
-	}
-
-
 
 	return ret;
 }

@@ -23,7 +23,7 @@ bool Button::Awake(pugi::xml_node&)
 bool Button::Start()
 {
 	if (text != nullptr)
-		label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, this, { Position.x + (rect.w / 5), Position.y + rect.h/ 3}, true, { 0,0,0,0 }, text);
+		label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, this, { Position.x + 16, Position.y + rect.h/ 3}, true, { 0,0,0,0 }, text);
 
 	return true;
 }

@@ -39,6 +39,7 @@ bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
 	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 4, 35 }, false, { 62,0,22,22 }, nullptr, this);
+	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 36 }, false, { 0,0,0,0 }, "0", this);
 	return true;
 }
 
@@ -133,10 +134,15 @@ void j1UI::Draw()
 		}
 
 		coin_image->enabled = true;
+		coin_label->enabled = true;
 	
 	}
 
-	else { coin_image->enabled = false;}
+	else 
+	{ 
+		coin_image->enabled = false;
+		coin_label->enabled = false;
+	}
 }
 
 SDL_Texture* j1UI::GetAtlasTexture() const

@@ -33,6 +33,7 @@ public:
 
 	p2List<UIelement*>	UIelements;
 	UIelement* coin_image;
+	UIelement* coin_label;
 	bool debug;
 
 private:
