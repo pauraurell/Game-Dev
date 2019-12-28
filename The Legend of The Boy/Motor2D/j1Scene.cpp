@@ -135,7 +135,9 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
-		App->map->drawSecretMap();
+		//App->map->drawSecretMap();
+		if (App->score->draw == true) { App->score->draw = false; LOG(true, "Score Draw: False"); }
+		else { App->score->draw = true; LOG(true, "Score Draw: True"); }
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) 
@@ -191,6 +193,16 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
+void j1Scene::Enable()
+{
+	if (active == false)
+	{
+		active = true;
+		Start();
+		App->score->Init(true);
+	}
+}
+
 void j1Scene::Disable()
 {
 	if (active == true)
@@ -198,6 +210,7 @@ void j1Scene::Disable()
 		active = false;
 		CleanUp();
 		App->entManager->CleanUp();
+		App->score->Disable();
 	}
 }
 

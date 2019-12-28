@@ -31,11 +31,13 @@ public:
 
 	bool Draw();
 
-	bool	draw;
+	bool		draw;
+	SDL_Rect	background;
 
 	//COUNTERS
 	int		coins;
 	int		enemies;
+	int		time;
 
 	//SCORE
 	int		timeScore;
@@ -45,6 +47,7 @@ public:
 	int		totalScore;
 	
 	//LABELS
+	UIelement*		score_label;
 	UIelement*		timeScore_label;
 	UIelement*		coinsScore_label;
 	UIelement*		enemiesScore_label;

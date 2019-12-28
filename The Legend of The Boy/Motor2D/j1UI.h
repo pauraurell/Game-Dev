@@ -48,6 +48,7 @@ public:
 	j1Timer		time;
 	int			sec;
 	int			min;
+	p2SString* timer;
 
 	//UI Elements
 	UIelement* coin_image;

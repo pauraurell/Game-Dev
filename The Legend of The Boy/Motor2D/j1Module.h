@@ -33,7 +33,7 @@ public:
 	void Init(bool init)
 	{
 		to_enable = init;
-		active = init;
+		//active = init;
 	}
 
 	// Called before render is available
@@ -84,7 +84,7 @@ public:
 
 	bool IsEnabled() const { return active; }
 
-	void Enable()
+	virtual void Enable()
 	{
 		if (active == false)
 		{
@@ -93,7 +93,7 @@ public:
 		}
 	}
 
-	void Disable()
+	virtual void Disable()
 	{
 		if (active == true)
 		{

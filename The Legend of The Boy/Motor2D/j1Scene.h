@@ -34,6 +34,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void Enable();
 	void Disable();
 
 	//Debug

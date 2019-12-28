@@ -48,6 +48,8 @@ bool j1UI::Start()
 
 	CreateInGameMenuUi();
 
+	timer = new p2SString();
+
 	return true;
 }
 
@@ -148,11 +150,9 @@ void j1UI::Draw()
 
 		if (App->scene->cameraTracking == true)
 		{
-			sec = time.ReadSec();
-			min = sec / 60;
-			sec = sec - (min * 60);
-
-			p2SString* timer = new p2SString();
+			App->score->time = time.ReadSec();
+			min = App->score->time / 60;
+			sec = App->score->time - (min * 60);
 
 			if (min < 10)
 			{
