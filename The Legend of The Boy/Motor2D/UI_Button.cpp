@@ -39,7 +39,7 @@ bool Button::PreUpdate()
 
 bool Button::Update(float dt)
 {
-	if (above)
+	if (above && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 			Click();
