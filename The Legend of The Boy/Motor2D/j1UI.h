@@ -28,10 +28,12 @@ public:
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
 
-	UIelement* AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPosition, iPoint localPosition, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
+	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
 	SDL_Texture* j1UI::GetAtlasTexture() const;
 
 	p2List<UIelement*>	UIelements;
+	UIelement* coin_image;
+	bool debug;
 
 private:
 

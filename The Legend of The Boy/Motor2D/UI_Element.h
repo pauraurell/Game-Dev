@@ -36,27 +36,24 @@ public:
 
 	void Draw();
 
+	void SetPos(int x, int y);
 
 public:
 
+	SDL_Texture* texture = nullptr;
+
 	UIelement* parent = nullptr;
 	j1Module* listener = nullptr;
+
 	TYPE_UI type;
-	iPoint globalPosition;
-	iPoint localPosition;
+
+	iPoint Position;
 
 	char* text = nullptr;
 	bool enabled;
-	bool interactable;
-
-	bool X_drag;
-	bool Y_drag;
-
 	bool above;
-	bool focus;
 
 	SDL_Rect rect;
-	SDL_Texture* texture = nullptr;
 
 };
 

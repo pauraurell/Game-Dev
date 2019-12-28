@@ -44,7 +44,7 @@ bool Label::PostUpdate()
 {
 	if (enabled)
 	{
-		App->render->Blit(texture, globalPosition.x + localPosition.x, globalPosition.y + localPosition.y, nullptr);
+		App->render->Blit(texture, Position.x,  Position.y, nullptr);
 	}
 
 	return true;
