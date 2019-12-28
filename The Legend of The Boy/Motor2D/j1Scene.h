@@ -63,6 +63,10 @@ public:
 	j1Entities* skeleton2;
 
 	iPoint playerSpawnPoint;
+	
+	
+	UIelement* Image;
+
 
 	int PlayerSpawnPointX;
 	int PlayerSpawnPointX2;

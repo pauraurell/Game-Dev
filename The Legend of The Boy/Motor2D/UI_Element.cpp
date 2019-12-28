@@ -10,18 +10,11 @@
 
 UIelement::UIelement()
 {
-	bool enabled = false;
-	bool interactable = false;
-
-	bool X_drag = false;
-	bool Y_drag = false;
-
-	bool above = false;
-	bool focus = false;
-
 	rect = { 0,0,0,0 };
-	globalPosition = { 0,0 };
-	localPosition = { 0,0 };
+	bool enabled = false;
+	bool above = false;
+
+	Position = { 0,0 };
 }
 
 UIelement::~UIelement()
@@ -59,10 +52,10 @@ bool UIelement::CleanUp()
 
 void UIelement::Draw()
 {
-	if (above)
+	if ((above == true) && (this->type == TYPE_UI::UI_BUTTON))
 	{
-		SDL_SetTextureColorMod(texture, 176, 12, 174);
-		SDL_SetTextureAlphaMod(texture, 200);
+		SDL_SetTextureColorMod(texture, 255, 190, 170);
+		SDL_SetTextureAlphaMod(texture, 220);
 	}
 	else
 	{
@@ -70,9 +63,9 @@ void UIelement::Draw()
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-	App->render->Blit(texture, globalPosition.x, globalPosition.y, &rect);
-
-	App->render->DrawQuad({ globalPosition.x*SCALE, globalPosition.y*SCALE, rect.w*SCALE, rect.h*SCALE }, 255, 0, 255, 255, false, false);
+	App->render->Blit(texture, Position.x + App->render->camera.x/-SCALE , Position.y + App->render->camera.y / -SCALE, &rect);
+	if (App->ui->debug) { App->render->DrawQuad({ Position.x*SCALE, Position.y*SCALE, rect.w*SCALE, rect.h*SCALE }, 255, 0, 255, 255, false, false); }
+	
 }
 
 
@@ -86,25 +79,32 @@ bool UIelement::Is_above()
 	mouse.x = mouse.x / SCALE;
 	mouse.y = mouse.y / SCALE;
 
-	SDL_Rect intersect = { globalPosition.x , globalPosition.y, rect.w, rect.h };
+	SDL_Rect intersect = { Position.x , Position.y, rect.w, rect.h };
 	//LOG(true, "%i, %i, %i, %i", intersect.x, intersect.y, intersect.w, intersect.h);
 
-	if (SDL_PointInRect(&mouse, &intersect) && this->enabled && this->interactable) {
+	if (SDL_PointInRect(&mouse, &intersect)) {
+		//LOG(true, "ABOVE");
 		if (listener != nullptr)
 		{
 			this->listener->UIevents(uiEvent::EVENT_HOVER, this);
 		}
 		ret = true;
 	}
+	//else { LOG(true, "NO ABOVE"); }
 	//LOG(true, "%i, %i", mouse.x, mouse.y);
 	
 	return ret;
 }
 
+void UIelement::SetPos(int x, int y)
+{
+	this->Position.x = x * SCALE;
+	this->Position.y = y * SCALE;
+}
+
 
 void UIelement::Click()
 {
-	
 	if (listener != nullptr)
 	{
 		this->listener->UIevents(uiEvent::EVENT_ONCLICK, this);

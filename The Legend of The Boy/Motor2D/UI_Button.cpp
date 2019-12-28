@@ -23,7 +23,7 @@ bool Button::Awake(pugi::xml_node&)
 bool Button::Start()
 {
 	if (text != nullptr)
-		label = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, this, { globalPosition.x + (rect.w / 5), globalPosition.y + rect.h/ 3}, localPosition, true, { 0,0,0,0 }, text);
+		label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, this, { Position.x + 16, Position.y + rect.h/ 3}, true, { 0,0,0,0 }, text);
 
 	return true;
 }
@@ -40,13 +40,10 @@ bool Button::PreUpdate()
 
 bool Button::Update(float dt)
 {
-	if (interactable)
+	if (above)
 	{
-		if (above)
-		{
-			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
-				Click();
-		}
+		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			Click();
 	}
 	return true;
 }

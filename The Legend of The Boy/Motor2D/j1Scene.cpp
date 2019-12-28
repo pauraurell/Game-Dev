@@ -18,6 +18,7 @@
 #include "j1Console.h"
 #include "j1MainMenu.h"
 #include "Brofiler/Brofiler.h"
+#include "UI_Element.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -91,28 +92,13 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-	
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-
 	BROFILER_CATEGORY("Update_Scene", Profiler::Color::CornflowerBlue)
-
-	/*if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y -= 1;
-
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y += 1;
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 2;
-
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 2;*/
-
 
 	//Save and load:
 
@@ -160,13 +146,7 @@ bool j1Scene::Update(float dt)
 		else if (App->cons->active == false) { App->cons->active = true; input = false; }
 	}
 
-
 	App->map->Draw();
-
-	//Entities
-	/*App->player->Draw(dt);
-	App->bat->Draw(dt);
-	App->skeleton->Draw(dt);*/
 	App->entManager->DrawEntities(dt);
 
 	if (cameraTracking) { App->render->cameraFollowingPlayer(App->render->cameraPos.x, App->render->cameraPos.y); }
