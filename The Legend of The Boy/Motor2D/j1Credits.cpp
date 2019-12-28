@@ -13,6 +13,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Map.h"
+#include "J1MainMenu.h"
 
 j1Credits::j1Credits() : j1Module()
 {
@@ -97,6 +98,11 @@ bool j1Credits::PreUpdate()
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) { vel = 10; }
 	else { vel = 2; }
+
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		App->fade->FadeToBlack(App->main_menu, this, 2.f);
+	}
 
 	return true;
 }

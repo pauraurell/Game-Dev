@@ -32,6 +32,7 @@ public:
 
 	void Init(bool init)
 	{
+		to_enable = init;
 		active = init;
 	}
 
@@ -108,6 +109,7 @@ public:
 
 	p2SString	name;
 	bool		active;
+	bool		to_enable;
 
 };
 

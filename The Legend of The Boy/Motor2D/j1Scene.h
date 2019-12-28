@@ -34,6 +34,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void Disable();
+
 	//Debug
 	void RestartCurrentLevel(); //F3
 	void StartFirstLevel(); //F1
@@ -41,12 +43,11 @@ public:
 	void CreateEnt();
 	void Create1MapEnemies();
 	void Create2MapEnemies();
+	void EndScene();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const; 
-	bool scene_change;
 	bool scene_changed;
-	bool manualFirstLevel;
 	bool secret_map;
 	bool input;
 	bool cameraTracking;
