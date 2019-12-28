@@ -11,13 +11,13 @@
 struct SDL_Texture;
 class UIelement;
 
-class j1ScoreScene : public j1Module
+class j1Score : public j1Module
 {
 public:
 
-	j1ScoreScene();
+	j1Score();
 
-	virtual ~j1ScoreScene();
+	virtual ~j1Score();
 
 	bool Awake(pugi::xml_node& config);
 
@@ -30,12 +30,26 @@ public:
 	bool CleanUp();
 
 	bool Draw();
+
+	bool	draw;
+
+	//COUNTERS
+	int		coins;
+	int		enemies;
+
+	//SCORE
+	int		timeScore;
+	int		coinsScore;
+	int		enemiesScore;
+	int		lifesScore;
+	int		totalScore;
 	
-
-	//LICENSE
-	p2List<UIelement*> license;
-	UIelement*	Label = nullptr;
-
+	//LABELS
+	UIelement*		timeScore_label;
+	UIelement*		coinsScore_label;
+	UIelement*		enemiesScore_label;
+	UIelement*		lifesScore_label;
+	UIelement*		totalScore_label;
 
 };
 

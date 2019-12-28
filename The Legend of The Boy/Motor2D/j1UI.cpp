@@ -12,6 +12,7 @@
 #include "j1Input.h"
 #include "j1FadeToBlack.h"
 #include "UI_Slider.h"
+#include "j1Score.h"
 
 j1UI::j1UI()
 {
@@ -142,6 +143,35 @@ void j1UI::Draw()
 
 		coin_image->enabled = true;
 		coin_label->enabled = true;
+		timer_image->enabled = true;
+		timer_label->enabled = true;
+
+		if (App->scene->cameraTracking == true)
+		{
+			sec = time.ReadSec();
+			min = sec / 60;
+			sec = sec - (min * 60);
+
+			p2SString* timer = new p2SString();
+
+			if (min < 10)
+			{
+				if (sec < 10) { timer->create("0%i:0%i", min, sec); }
+				else if (sec >= 10) { timer->create("0%i:%i", min, sec); }
+			}
+			else if (min >= 10)
+			{
+				if (sec < 10) { timer->create("%i:0%i", min, sec); }
+				else if (sec >= 10) { timer->create("%i:%i", min, sec); }
+			}
+
+			timer_label->text = timer->GetString();
+		
+		}
+		else { timer_label->text = "00:00"; }
+
+		p2SString* coins = new p2SString("%i", App->score->coins);
+		coin_label->text = coins->GetString();
 
 		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 
@@ -159,10 +189,13 @@ void j1UI::Draw()
 	{ 
 		coin_image->enabled = false;
 		coin_label->enabled = false;
+		timer_image->enabled = false;
+		timer_label->enabled = false;
 	}
 }
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, char* text, j1Module* listener)
+
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener)
 {
 	UIelement* ui_element = nullptr;
 
@@ -219,6 +252,8 @@ void j1UI::CreateInGameUi()
 {
 	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 4, 35 }, 20, false, { 62,0,22,22 }, { 0,0 }, nullptr, this);
 	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
+	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
+	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
 }
 
 void j1UI::UIevents(uiEvent type, UIelement* element)

@@ -57,6 +57,7 @@ public:
 	void EntityDeath();
 
 	iPoint			position;
+	bool			to_die;
 	bool			dead;
 	bool			OnGround;
 	p2SString		orientation;

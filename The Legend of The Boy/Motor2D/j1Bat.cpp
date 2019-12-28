@@ -15,6 +15,7 @@
 #include "j1PathFinding.h"
 #include "j1Map.h"
 #include "j1EntityManager.h"
+#include "j1Score.h"
 
 j1Bat::j1Bat() : j1Entities(Types::bat)
 {
@@ -28,6 +29,7 @@ j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
 	name.create("bat");
 	position = pos;
 	dead = isDead;
+	to_die = false;
 	orientation = "right";
 	OnGround = true;
 }
@@ -111,11 +113,11 @@ bool j1Bat::Update(float dt)
 
 			case BAT_DEAD:
 				current_animation = &die;
-				EntityDeath();
+				//EntityDeath();
 				break;
 		}
 
-		if (dead == true) { EntityDeath(); }
+		if (to_die == true) { EntityDeath(); }
 
 		SetBatPosition(dt);
 		//Pathfinding(dt);
@@ -254,7 +256,7 @@ void j1Bat::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == colliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
 	{
 		//LOG("coliding hehehe");
-		dead = true;
+		to_die = true;
 	}
 
 }
@@ -349,4 +351,8 @@ void j1Bat::EntityDeath()
 {
 	state = BAT_DEAD;
 	colliderBody->to_delete = true;
+	App->score->enemies += 1;
+	LOG(true, "Enemies killed: %i", App->score->enemies);
+	dead = true;
+	to_die = false;
 }

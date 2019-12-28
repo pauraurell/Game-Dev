@@ -17,6 +17,7 @@
 #include "j1UI.h"
 #include "j1Console.h"
 #include "j1MainMenu.h"
+#include "j1Score.h"
 #include "Brofiler/Brofiler.h"
 #include "UI_Element.h"
 
@@ -75,15 +76,16 @@ bool j1Scene::Start()
 
 	scene_changed = false;
 	secret_map = false;
-	input = true;
+	input = false;
 	sceneChangeTimer = false;
 	cameraTracking = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
 
-	App->ui->time.Start();
 	App->ui->pLife = 3;
+	App->score->enemies = 0;
+	App->score->coins = 0;
 
 	CreateEnt();
 	return true;
@@ -158,7 +160,7 @@ bool j1Scene::Update(float dt)
 		if(App->render->camera.x <= -550) App->render->camera.y --;
 		App->render->camera.x -= 4;
 
-		if (App->render->camera.x <= -1000) { cameraTracking = true; }
+		if (App->render->camera.x <= -1000) { cameraTracking = true; App->ui->time.Start(); input = true; }
 	}
 
 
@@ -249,6 +251,9 @@ void j1Scene::StartFirstLevel()
 	App->map->Load(CurrentMap.GetString());
 	App->entManager->RestartEntities();
 	scene_changed = true;
+	App->ui->time.Start();
+	App->score->coins = 0;
+	App->score->enemies = 0;
 	if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 	LOG(true, "Starting First Level");
 	

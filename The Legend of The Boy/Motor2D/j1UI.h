@@ -27,7 +27,7 @@ public:
 
 	void Draw();
 
-	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, char* text = nullptr, j1Module* listener = nullptr);
+	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr);
 
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
@@ -42,12 +42,18 @@ public:
 	int				pLife;
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
-	j1Timer			time;
 	p2List<UIelement*>	UIelements;
+
+	//TIMER
+	j1Timer		time;
+	int			sec;
+	int			min;
 
 	//UI Elements
 	UIelement* coin_image;
 	UIelement* coin_label;
+	UIelement* timer_image;
+	UIelement* timer_label;
 	UIelement* inGameMenu_label_settings;
 	UIelement* inGameMenu_image;
 	UIelement* inGameMenu_button_QuitToDesktop;

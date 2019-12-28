@@ -15,6 +15,7 @@
 #include "SDL_image/include/SDL_image.h"
 #include "Brofiler/Brofiler.h"
 #include "j1Pathfinding.h"
+#include "j1Score.h"
 
 j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 {
@@ -28,6 +29,7 @@ j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
 	name.create("skeleton");
 	position = pos;
 	dead = isDead;
+	to_die = false;
 	orientation = "left";
 	OnGround = true;
 }
@@ -106,7 +108,7 @@ bool j1Skeleton::Update(float dt)
 		
 	}
 
-	if (dead == true) { EntityDeath(); }
+	if (to_die == true) { EntityDeath(); }
 	else { gravity = 0.19f; }
 
 	SetSkeletonPosition(dt);
@@ -264,7 +266,7 @@ void j1Skeleton::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == colliderBody && c2->type == COLLIDER_PLAYER_ATTACK)
 	{
 		//LOG("coliding hehehe");
-		dead = true;
+		to_die = true;
 	}
 }
 
@@ -352,4 +354,8 @@ void j1Skeleton::EntityDeath()
 	colliderBody->to_delete = true;
 	colliderLegs->to_delete = true;
 	state = SKELETON_DEATH;
+	App->score->enemies += 1;
+	LOG(true, "Enemies killed: %i", App->score->enemies);
+	dead = true;
+	to_die = false;
 }
