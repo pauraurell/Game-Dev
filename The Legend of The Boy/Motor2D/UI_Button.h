@@ -20,6 +20,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	void Drag(float dt);
+
 	bool CleanUp();
 
 	bool Load(pugi::xml_node&) { return true; };
@@ -28,9 +30,9 @@ public:
 private:
 
 	UIelement* label = nullptr;
-	iPoint accuratedDrag = { 0,0 };
+	int MouseMovement;
 
-	bool dragging;
+	bool drag;
 };
 
 

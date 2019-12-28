@@ -27,7 +27,7 @@ public:
 
 	void Draw();
 
-	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr);
+	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false);
 
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
@@ -60,7 +60,10 @@ public:
 	UIelement* inGameMenu_button_Save;
 	UIelement* inGameMenu_button_Load;
 	UIelement* inGameMenu_button_MainMenu;
-	UIelement* SliderTest;
+	UIelement* label_fx;
+	UIelement* label_music;
+	UIelement* SliderFx;
+	UIelement* SliderMusic;
 
 	bool debug;
 	bool InGameMenu;

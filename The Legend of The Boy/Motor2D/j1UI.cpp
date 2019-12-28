@@ -195,7 +195,7 @@ void j1UI::Draw()
 }
 
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener)
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag)
 {
 	UIelement* ui_element = nullptr;
 
@@ -230,6 +230,7 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 		ui_element->text = text;
 		ui_element->size = size;
 		ui_element->posOffset = PositionOffset;
+		ui_element->canMoveIn_X_axis = CanDrag;
 
 		UIelements.add(ui_element)->data->Start();
 	}
@@ -245,7 +246,10 @@ void j1UI::CreateInGameMenuUi()
 	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Save", this);
 	inGameMenu_button_Load = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 102, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Load", this);
 	inGameMenu_button_MainMenu = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 166 }, 17, false, { 230,114,145,46 }, { 0,0 }, "Main Menu", this);
-	SliderTest = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { inGameMenu_image->Position.x + 10,  inGameMenu_image->Position.y + 50 }, 20, false, { 284, 62, 167, 4 }, { 0,0 }, nullptr, this);
+	SliderMusic = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Music, nullptr, { inGameMenu_image->Position.x + 45,  inGameMenu_image->Position.y + 52 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
+	SliderFx = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { inGameMenu_image->Position.x + 45,  inGameMenu_image->Position.y + 90 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
+	label_music = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 52 }, 20, false, { 0, 0, 0, 0 }, { 0,0 }, "Music", this);
+	label_fx = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 90 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Fx", this);
 }
 
 void j1UI::CreateInGameUi()
@@ -296,6 +300,10 @@ void j1UI::EnableAll()
 	inGameMenu_button_Save->enabled = true;
 	inGameMenu_button_Load->enabled = true;
 	inGameMenu_button_MainMenu->enabled = true;
+	SliderMusic->enabled = true;
+	SliderFx->enabled = true;
+	label_music->enabled = true;
+	label_fx->enabled = true;
 }
 
 void j1UI::DisableAll()
@@ -306,4 +314,8 @@ void j1UI::DisableAll()
 	inGameMenu_button_Save->enabled = false;
 	inGameMenu_button_Load->enabled = false;
 	inGameMenu_button_MainMenu->enabled = false;
+	SliderMusic->enabled = false;
+	SliderFx->enabled = false;
+	label_music->enabled = false;
+	label_fx->enabled = false;
 }

@@ -55,6 +55,8 @@ public:
 
 	iPoint Position;
 
+	bool canMoveIn_X_axis = false;
+
 	const char* text = nullptr;
 	bool enabled;
 	bool above;

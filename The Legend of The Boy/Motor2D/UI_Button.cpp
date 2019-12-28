@@ -43,7 +43,25 @@ bool Button::Update(float dt)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 			Click();
+		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
+		{
+			iPoint pos_click = { 0,0 };
+			App->input->GetMousePosition(pos_click.x, pos_click.y);
+			MouseMovement = { pos_click.x - (this->Position.x) };
+			if (canMoveIn_X_axis) { drag = true; }
+		}
 	}
+
+	if (drag) 
+	{
+		if (App->input->GetMouseButtonDown(1) == KEY_IDLE || App->input->GetMouseButtonDown(1) == KEY_UP) {drag = false;}
+			
+		else
+		{
+			Drag(dt);
+		}
+	}
+
 	return true;
 }
 
@@ -61,3 +79,20 @@ bool Button::CleanUp()
 	return true;
 }
 
+void Button::Drag(float dt)
+{
+	iPoint MousePos = { 0,0 };
+	App->input->GetMousePosition(MousePos.x, MousePos.y);
+	iPoint currentposition = this->Position;
+
+	if (canMoveIn_X_axis) { this->Position.x += ((MousePos.x - this->Position.x) - MouseMovement); }
+		
+	if (parent != nullptr)
+	{
+		if (canMoveIn_X_axis) 
+		{
+			this->posOffset.x += currentposition.x - this->Position.x;
+			this->Position.x = parent->Position.x - posOffset.x;
+		}
+	}
+}

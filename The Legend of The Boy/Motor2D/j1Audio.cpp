@@ -48,10 +48,10 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		LOG(false, "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		active = false;
 		ret = true;
-	}
+	}	
 
-	Mix_VolumeMusic(25);
-
+	volume_music = 100;
+	volume_fx = 100;
 
 	return ret;
 }
@@ -160,15 +160,16 @@ unsigned int j1Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool j1Audio::PlayFx(unsigned int id, int repeat, int channel)
+bool j1Audio::PlayFx(unsigned int id, int volume, int repeat, int channel)
 {
 	bool ret = false;
 
 	if(!active)
 		return false;
 
-	if(id > 0 && id <= fx.count())
+	if (id > 0 && id <= fx.count())
 	{
+		Mix_VolumeChunk(fx[id - 1], volume);
 		Mix_PlayChannel(channel, fx[id - 1], repeat);
 	}
 

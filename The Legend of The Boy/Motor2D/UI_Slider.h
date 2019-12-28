@@ -25,6 +25,8 @@ public:
 	bool Load(pugi::xml_node&) { return true; };
 	bool Save(pugi::xml_node&) const  const { return true; };
 
+	void ScrollLimits();
+
 public:
 
 	UIelement* button = nullptr;
