@@ -12,6 +12,7 @@
 #include "j1Input.h"
 #include "j1FadeToBlack.h"
 #include "UI_Slider.h"
+#include "j1Score.h"
 
 j1UI::j1UI()
 {
@@ -145,24 +146,32 @@ void j1UI::Draw()
 		timer_image->enabled = true;
 		timer_label->enabled = true;
 
-		sec = time.ReadSec();
-		min = sec / 60;
-		sec = sec - (min * 60);
-
-		p2SString* timer = new p2SString();
-
-		if (min < 10)
+		if (App->scene->cameraTracking == true)
 		{
-			if (sec < 10) { timer->create("0%i:0%i", min, sec); }
-			else if (sec >= 10) { timer->create("0%i:%i", min, sec); }
-		}
-		else if (min >= 10)
-		{
-			if (sec < 10) { timer->create("%i:0%i", min, sec); }
-			else if (sec >= 10) { timer->create("%i:%i", min, sec); }
-		}
+			sec = time.ReadSec();
+			min = sec / 60;
+			sec = sec - (min * 60);
 
-		timer_label->text = timer->GetString();
+			p2SString* timer = new p2SString();
+
+			if (min < 10)
+			{
+				if (sec < 10) { timer->create("0%i:0%i", min, sec); }
+				else if (sec >= 10) { timer->create("0%i:%i", min, sec); }
+			}
+			else if (min >= 10)
+			{
+				if (sec < 10) { timer->create("%i:0%i", min, sec); }
+				else if (sec >= 10) { timer->create("%i:%i", min, sec); }
+			}
+
+			timer_label->text = timer->GetString();
+		
+		}
+		else { timer_label->text = "00:00"; }
+
+		p2SString* coins = new p2SString("%i", App->score->coins);
+		coin_label->text = coins->GetString();
 
 		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 

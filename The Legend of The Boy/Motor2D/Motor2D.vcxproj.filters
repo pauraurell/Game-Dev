@@ -94,14 +94,14 @@
     <ClCompile Include="j1MainMenu.cpp">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreScene.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="UI_Image.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClCompile>
     <ClCompile Include="UI_Slider.cpp">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Score.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,14 +219,14 @@
     <ClInclude Include="J1MainMenu.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreScene.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Image.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
     </ClInclude>
     <ClInclude Include="UI_Slider.h">
       <Filter>Desenvolupament  ========\Modules\UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Score.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

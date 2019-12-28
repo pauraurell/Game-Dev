@@ -28,7 +28,7 @@ class j1UI;
 class j1Console;
 class j1MainMenu;
 class j1Credits;
-class j1ScoreScene;
+class j1Score;
 
 #define DTCOEFICIENT 60
 
@@ -115,7 +115,7 @@ public:
 	j1Console*			cons;
 	j1MainMenu*			main_menu;
 	j1Credits*			cred;
-	j1ScoreScene*		score;
+	j1Score*		score;
 
 	#define SCALE 2
 

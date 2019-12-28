@@ -17,6 +17,7 @@
 #include "j1Map.h"
 #include "j1UI.h"
 #include "j1Timer.h"
+#include "j1Score.h"
 #include "Brofiler/Brofiler.h"
 
 j1Player::j1Player() : j1Entities(Types::player)

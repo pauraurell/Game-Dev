@@ -24,7 +24,7 @@
 #include "j1Console.h"
 #include "j1MainMenu.h"
 #include "j1Credits.h"
-#include "ScoreScene.h"
+#include "j1Score.h"
 
 
 // Constructor
@@ -51,7 +51,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	cons = new j1Console();
 	main_menu = new j1MainMenu();
 	cred = new j1Credits();
-	score = new j1ScoreScene();
+	score = new j1Score();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
