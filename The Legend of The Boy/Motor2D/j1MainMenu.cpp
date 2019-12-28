@@ -37,9 +37,9 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 200 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
-	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 270 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
-	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 300, 270 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 200 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 270 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
+	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 300, 270 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
 	return true;
 }
 

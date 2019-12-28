@@ -22,7 +22,7 @@ bool Button::Awake(pugi::xml_node&)
 
 bool Button::Start()
 {
-	if (text != nullptr) { label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, this, { Position.x + 16 + posOffset.x, Position.y + section.h / 3 + posOffset.y }, size, true, { 0,0,0,0 }, { 0,0 }, text); }
+	if (text != nullptr) { label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, this, { Position.x + 16 + posOffset.x, Position.y + section.h / 3 + posOffset.y }, size, true, { 0,0,0,0 }, { 0,0 }, text); }
 
 	return true;
 }
@@ -57,7 +57,7 @@ bool Button::PostUpdate()
 
 bool Button::CleanUp()
 {
-	label->enabled = false;
+	if (label != nullptr) { label->enabled = false; }
 	return true;
 }
 
