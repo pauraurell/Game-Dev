@@ -51,7 +51,6 @@ public:
 	bool secret_map;
 	bool input;
 	bool cameraTracking;
-	bool QuitToDesktop;
 
 	int scene_change_timer;
 	bool sceneChangeTimer;

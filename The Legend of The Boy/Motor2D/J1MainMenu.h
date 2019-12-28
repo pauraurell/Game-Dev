@@ -28,9 +28,9 @@ public:
 	bool Draw();
 
 	SDL_Texture* texture = nullptr;
-	UIelement* testLabel = nullptr;
+
 	UIelement* testButton = nullptr;
-	UIelement* testImage = nullptr;
+	UIelement* exitButton = nullptr;
 
 	void UIevents(uiEvent type, UIelement* element);
 

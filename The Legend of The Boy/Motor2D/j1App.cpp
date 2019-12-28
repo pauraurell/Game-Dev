@@ -154,6 +154,7 @@ bool j1App::Start()
 	}
 
 	FrameCapEnabled = true;
+	QuitToDesktop = false;
 
 	return ret;
 }
@@ -332,6 +333,8 @@ bool j1App::PostUpdate()
 
 		ret = item->data->PostUpdate();
 	}
+
+	if (QuitToDesktop) { return false; }
 
 	return ret;
 }

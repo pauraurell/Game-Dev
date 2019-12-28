@@ -121,6 +121,7 @@ public:
 
 	bool FrameCapEnabled = false;
 	uint framerate = 0u;
+	bool QuitToDesktop;
 
 private:
 

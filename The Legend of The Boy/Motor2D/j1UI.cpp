@@ -3,12 +3,14 @@
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Scene.h"
+#include "j1MainMenu.h"
 #include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
 #include "UI_Button.h"
 #include "UI_Label.h"
 #include "UI_Image.h"
 #include "j1Input.h"
+#include "j1FadeToBlack.h"
 
 j1UI::j1UI()
 {
@@ -231,12 +233,12 @@ void j1UI::UIevents(uiEvent type, UIelement* element)
 	{
 		if (element == inGameMenu_button_QuitToDesktop)
 		{
-			App->scene->QuitToDesktop = true;
+			App->QuitToDesktop = true;
 		}
 
 		else if (element == inGameMenu_button_MainMenu)
 		{
-			
+			//App->fade->FadeToBlack(App->main_menu, this, 2.f);
 		}
 
 		else if (element == inGameMenu_button_Save)
