@@ -79,6 +79,7 @@ bool j1Scene::Start()
 	input = false;
 	sceneChangeTimer = false;
 	cameraTracking = false;
+	sceneEnded = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
@@ -191,6 +192,16 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
+void j1Scene::Enable()
+{
+	if (active == false)
+	{
+		active = true;
+		Start();
+		App->score->Init(true);
+	}
+}
+
 void j1Scene::Disable()
 {
 	if (active == true)
@@ -198,6 +209,7 @@ void j1Scene::Disable()
 		active = false;
 		CleanUp();
 		App->entManager->CleanUp();
+		App->score->Disable();
 	}
 }
 
@@ -317,6 +329,8 @@ void j1Scene::EndScene()
 
 	}
 	input = false;
+	App->score->DisableAll();
+	App->score->draw = false;
 	LOG(true, "Ending Main Scene");
 	App->fade->FadeToBlack(App->main_menu, this, 2.f);
 }

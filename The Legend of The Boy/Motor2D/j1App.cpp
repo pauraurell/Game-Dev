@@ -64,11 +64,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entManager);
 	AddModule(particles);
 	AddModule(col);
+	AddModule(score, false);
 	AddModule(ui);
 	AddModule(cons);
 	AddModule(main_menu);
 	AddModule(cred, false);
-	AddModule(score, false);
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(fonts);
@@ -170,7 +170,7 @@ bool j1App::Update()
 	{
 		if (item->data->to_enable == true)
 		{
-			ret = item->data->Start();
+			item->data->Enable();
 			item->data->to_enable = false;
 		}
 		item = item->next;

@@ -596,9 +596,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			App->scene->StartSecondLevel();
 		}
-		if (App->scene->CurrentMap == "SecondLevel.tmx" && App->scene->scene_changed == false)
+		if (App->scene->CurrentMap == "SecondLevel.tmx" && App->scene->sceneEnded == false)
 		{
-			App->scene->EndScene();
+			//App->scene->EndScene();
+			App->score->draw = true;
+			App->ui->time.Stop();
+			App->scene->input = false;
+			SetPlayerState(PLAYER_IDLE);
+			App->scene->sceneEnded = true;
 		}
 		App->scene->scene_changed = false;
 	}
