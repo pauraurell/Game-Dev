@@ -39,7 +39,6 @@ bool j1MainMenu::Start()
 
 	testLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, false, { 0,0,0,0 }, "Press Space to Continue", this);
 	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 300 }, false, { 1,38,153,53 }, "Press here", this);
-	testImage = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 50, 120 }, false, { 1,111,153,101 }, nullptr, this);
 	return true;
 }
 
@@ -48,8 +47,8 @@ bool j1MainMenu::PreUpdate()
 {
 	//App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false; testImage->enabled = false;}
-	else { testButton->enabled = true; testLabel->enabled = true; testImage->enabled = true; }
+	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false;}
+	else { testButton->enabled = true; testLabel->enabled = true; }
 
 	return true;
 }
@@ -72,7 +71,6 @@ bool j1MainMenu::PostUpdate()
 		App->fade->FadeToBlack(App->scene, this, 2.f);
 		testLabel->enabled = false;
 		testButton->enabled = false;
-		testImage->enabled = false;
 	}
 
 	return ret;
@@ -105,7 +103,6 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				App->fade->FadeToBlack(App->scene, this, 2.f);
 				testLabel->enabled = false;
 				testButton->enabled = false;
-				testImage->enabled = false;
 			}
 		}
 	}

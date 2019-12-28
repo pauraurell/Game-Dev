@@ -165,7 +165,10 @@ bool j1Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) { App->cons->active = false; ret = false; }
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
+	{ 
+		App->ui->InGameMenu = !App->ui->InGameMenu;
+	}
 
 	return ret;
 }

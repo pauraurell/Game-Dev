@@ -29,17 +29,19 @@ public:
 	SDL_Rect		emptHeart;
 
 	UIelement* Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text = nullptr, j1Module* listener = nullptr);
-	SDL_Texture* j1UI::GetAtlasTexture() const;
 
 	p2List<UIelement*>	UIelements;
+
+	//UI Elements
 	UIelement* coin_image;
 	UIelement* coin_label;
+	UIelement* inGameMenu_label_settings;
+	UIelement* inGameMenu_image;
+
 	bool debug;
-
-private:
-
+	bool InGameMenu;
 	SDL_Texture*	ui_tex = nullptr;
-	p2SString atlasFile;
+
 };
 
 #endif

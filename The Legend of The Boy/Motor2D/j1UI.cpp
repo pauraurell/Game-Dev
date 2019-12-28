@@ -23,6 +23,7 @@ j1UI::j1UI()
 	emptHeart.h = 24;
 
 	debug = false;
+	InGameMenu = false;
 }
 
 j1UI::~j1UI()
@@ -40,6 +41,8 @@ bool j1UI::Start()
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
 	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 4, 35 }, false, { 62,0,22,22 }, nullptr, this);
 	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 32, 36 }, false, { 0,0,0,0 }, "0", this);
+	inGameMenu_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 190, 120 }, false, { 1,111,160,168 }, nullptr, this);
+	inGameMenu_label_settings = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { inGameMenu_image->Position.x + 20,  inGameMenu_image->Position.y + 10 }, false, { 0,0,0,0 }, "Settings", this);
 	return true;
 }
 
@@ -135,7 +138,17 @@ void j1UI::Draw()
 
 		coin_image->enabled = true;
 		coin_label->enabled = true;
-	
+
+		if (InGameMenu) 
+		{
+			inGameMenu_image->enabled = true;
+			inGameMenu_label_settings->enabled = true;
+		}
+		else 
+		{ 
+			inGameMenu_image->enabled = false; 
+			inGameMenu_label_settings->enabled = false;
+		}
 	}
 
 	else 
@@ -143,11 +156,6 @@ void j1UI::Draw()
 		coin_image->enabled = false;
 		coin_label->enabled = false;
 	}
-}
-
-SDL_Texture* j1UI::GetAtlasTexture() const
-{
-	return ui_tex;
 }
 
 UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position, bool enabled, SDL_Rect section, char* text, j1Module* listener)

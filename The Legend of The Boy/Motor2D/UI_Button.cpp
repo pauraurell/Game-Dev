@@ -6,7 +6,7 @@
 Button::Button() {
 
 	this->type = TYPE_UI::UI_BUTTON;
-	texture = App->ui->GetAtlasTexture();
+	texture = App->ui->ui_tex;
 }
 
 Button::~Button() {

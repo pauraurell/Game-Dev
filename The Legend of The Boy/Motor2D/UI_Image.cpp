@@ -5,7 +5,7 @@ Image::Image()
 {
 	this->type = TYPE_UI::UI_IMAGE;
 
-	texture = App->ui->GetAtlasTexture();
+	texture = App->ui->ui_tex;
 }
 
 Image::~Image() {
