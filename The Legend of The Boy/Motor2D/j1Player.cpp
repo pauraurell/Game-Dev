@@ -591,14 +591,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	//Map Change
 	if (c1 == colliderBody && c2->type == COLLIDER_FINISH || c1->type == COLLIDER_FINISH && c2 == colliderBody)
 	{
-		if (App->scene->CurrentMap == "FirstLevel.tmx")
+		if (App->scene->CurrentMap == "FirstLevel.tmx" && App->scene->scene_changed == false)
 		{
 			App->scene->StartSecondLevel();
 		}
-		if (App->scene->CurrentMap == "SecondLevel.tmx")
+		if (App->scene->CurrentMap == "SecondLevel.tmx" && App->scene->scene_changed == false)
 		{
 			App->scene->EndScene();
 		}
+		App->scene->scene_changed = false;
 	}
 }
 

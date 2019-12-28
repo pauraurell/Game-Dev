@@ -118,11 +118,13 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		StartFirstLevel();
+		scene_changed = false;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		StartSecondLevel();
+		scene_changed = false;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -233,9 +235,8 @@ bool j1Scene::Save(pugi::xml_node& data) const
 void j1Scene::RestartCurrentLevel()
 {
 	//App->entManager->RestartEntities();
-	if (CurrentMap == "FirstLevel.tmx") { Create1MapEnemies(); }
-	if (CurrentMap == "SecondLevel.tmx") { Create2MapEnemies(); }
-	player->position.x = PlayerSpawnPointX;
+	if (CurrentMap == "FirstLevel.tmx") { Create1MapEnemies(); player->position.x = PlayerSpawnPointX; }
+	if (CurrentMap == "SecondLevel.tmx") { Create2MapEnemies(); player->position.x = PlayerSpawnPointX2; }
 	player->position.y = PlayerSpawnPointY;
 	if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 	LOG(true, "Restarting Current Level");
@@ -249,6 +250,7 @@ void j1Scene::StartFirstLevel()
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	App->entManager->RestartEntities();
+	scene_changed = true;
 	if (App->ui->pLife < 3) { App->ui->pLife = 3; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 	LOG(true, "Starting First Level");
 	
@@ -292,6 +294,7 @@ void j1Scene::StartSecondLevel()
 	App->map->Load(CurrentMap.GetString());
 	App->entManager->RestartEntities();
 	Create2MapEnemies();
+	scene_changed = true;
 	secret_map = false;
 	if (App->ui->pLife < 3) { App->ui->pLife += 1; LOG(true, "Player Lifes: %i", App->ui->pLife); }
 	LOG(true, "Starting Second Level");
