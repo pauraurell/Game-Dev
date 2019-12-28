@@ -329,6 +329,7 @@ void j1Scene::EndScene()
 
 	}
 	input = false;
+	App->score->DisableAll();
 	App->score->draw = false;
 	LOG(true, "Ending Main Scene");
 	App->fade->FadeToBlack(App->main_menu, this, 2.f);

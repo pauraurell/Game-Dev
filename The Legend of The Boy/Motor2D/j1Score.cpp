@@ -119,3 +119,13 @@ bool j1Score::Draw()
 
 	return true;
 }
+
+void j1Score::DisableAll()
+{
+	score_label->enabled = false;
+	timeScore_label->enabled = false;
+	coinsScore_label->enabled = false;
+	enemiesScore_label->enabled = false;
+	lifesScore_label->enabled = false;
+	totalScore_label->enabled = false;
+}

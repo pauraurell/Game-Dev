@@ -30,6 +30,7 @@ public:
 	bool CleanUp();
 
 	bool Draw();
+	void DisableAll();
 
 	bool		draw;
 	SDL_Rect	background;
