@@ -7,6 +7,7 @@
 #include "Brofiler/Brofiler.h"
 #include "UI_Button.h"
 #include "UI_Label.h"
+#include "UI_Image.h"
 
 j1UI::j1UI()
 {
@@ -145,6 +146,10 @@ UIelement* j1UI::AddGUIelement(TYPE_UI type, UIelement* parent, iPoint globalPos
 
 	case TYPE_UI::UI_LABEL:
 		ui_element = new Label();
+		break;
+
+	case TYPE_UI::UI_IMAGE:
+		ui_element = new Image();
 		break;
 
 	}

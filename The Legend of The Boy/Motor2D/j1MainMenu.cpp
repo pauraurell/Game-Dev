@@ -39,7 +39,7 @@ bool j1MainMenu::Start()
 
 	testLabel = App->ui->AddGUIelement(TYPE_UI::UI_LABEL, nullptr, { 50, 250 }, { 0,0 }, false, { 0,0,0,0 }, "Press Space to Continue", this);
 	testButton = App->ui->AddGUIelement(TYPE_UI::UI_BUTTON, nullptr, { 50, 300 }, { 0,0 }, false, { 1,38,153,53 }, "Press here", this);
-
+	testImage = App->ui->AddGUIelement(TYPE_UI::UI_IMAGE, nullptr, { 50, 120 }, { 0,0 }, false, { 1,111,153,101 }, nullptr, this);
 	return true;
 }
 
@@ -49,7 +49,7 @@ bool j1MainMenu::PreUpdate()
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	if (App->main_menu->IsEnabled() == false) { testButton->enabled = false; testLabel->enabled = false; }
-	else { testButton->enabled = true; testLabel->enabled = true;}
+	else { testButton->enabled = true; testLabel->enabled = true; testImage->enabled = true; }
 
 	return true;
 }
