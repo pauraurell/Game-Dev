@@ -2,6 +2,8 @@
 #include "j1App.h"
 #include "j1UI.h"
 #include "j1Render.h"
+#include "j1Scene.h"
+#include "j1Input.h"
 
 j1Score::j1Score()
 {
@@ -22,12 +24,12 @@ bool j1Score::Start()
 
 	
 
-	score_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 140,90 }, 25, false, { 0,0,0,0 }, { 0,0 }, "SCORE:", this);
-	timeScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 120,180 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
-	coinsScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 120,140 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
-	enemiesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 120,160 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
-	lifesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 120,120 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
-	totalScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { 120,210 }, 22, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	score_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 140,90 }, 25, false, { 0,0,0,0 }, { 0,0 }, "SCORE:", this);
+	timeScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,180 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	coinsScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,140 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	enemiesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,160 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	lifesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,120 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	totalScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,210 }, 22, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
 
 	return true;
 }
@@ -99,6 +101,11 @@ bool j1Score::Draw()
 		totalScore = lifesScore + coinsScore + enemiesScore + timeScore;
 		string->create("TOTAL SCORE -> %i", totalScore);
 		totalScore_label->text = string->GetString();
+
+		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			App->scene->EndScene();
+		}
 	}
 	else
 	{

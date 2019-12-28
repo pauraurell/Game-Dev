@@ -52,6 +52,7 @@ public:
 	bool secret_map;
 	bool input;
 	bool cameraTracking;
+	bool sceneEnded;
 
 	int scene_change_timer;
 	bool sceneChangeTimer;

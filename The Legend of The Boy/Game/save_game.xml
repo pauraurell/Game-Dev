@@ -10,32 +10,32 @@
 	</scene>
 	<entManager>
 		<Entity type="player" dead="false">
-			<position posX="540" posY="483" />
+			<position posX="585" posY="483" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="719" posY="400" />
+			<position posX="742" posY="400" />
 		</Entity>
 		<Entity type="skeleton" dead="false">
-			<position posX="979" posY="463" />
+			<position posX="982" posY="463" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="1074" posY="105" />
+			<position posX="1097" posY="105" />
 		</Entity>
 		<Entity type="skeleton" dead="false">
-			<position posX="1569" posY="320" />
+			<position posX="1572" posY="132849" />
 		</Entity>
 	</entManager>
 	<particles />
 	<collision />
 	<:anonymous />
 	<:anonymous />
-	<intro />
-	<intro />
 	<:anonymous />
+	<intro />
+	<intro />
 	<fade />
 	<pathfinding />
 	<fonts />
 	<renderer>
-		<camera x="-196" y="-400" />
+		<camera x="-1010" y="-512" />
 	</renderer>
 </game_state>

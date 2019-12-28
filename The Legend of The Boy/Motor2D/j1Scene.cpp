@@ -79,6 +79,7 @@ bool j1Scene::Start()
 	input = false;
 	sceneChangeTimer = false;
 	cameraTracking = false;
+	sceneEnded = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
@@ -135,9 +136,7 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
-		//App->map->drawSecretMap();
-		if (App->score->draw == true) { App->score->draw = false; LOG(true, "Score Draw: False"); }
-		else { App->score->draw = true; LOG(true, "Score Draw: True"); }
+		App->map->drawSecretMap();
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) 
@@ -330,6 +329,7 @@ void j1Scene::EndScene()
 
 	}
 	input = false;
+	App->score->draw = false;
 	LOG(true, "Ending Main Scene");
 	App->fade->FadeToBlack(App->main_menu, this, 2.f);
 }
