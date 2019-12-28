@@ -140,18 +140,26 @@ void j1UI::Draw()
 		coin_image->enabled = true;
 		coin_label->enabled = true;
 
+		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 
 		{
 			inGameMenu_image->enabled = true;
 			inGameMenu_label_settings->enabled = true;
 			inGameMenu_button_QuitToDesktop->enabled = true;
+			inGameMenu_button_Save->enabled = true;
+			inGameMenu_button_Load->enabled = true;
+			inGameMenu_button_MainMenu->enabled = true;
 		}
 		else 
 		{ 
 			inGameMenu_image->enabled = false; 
 			inGameMenu_label_settings->enabled = false;
 			inGameMenu_button_QuitToDesktop->enabled = false;
+			inGameMenu_button_Save->enabled = false;
+			inGameMenu_button_Load->enabled = false;
+			inGameMenu_button_MainMenu->enabled = false;
 		}
+		//------------------------------------------------------------
 	}
 
 	else 
@@ -200,9 +208,12 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, UIelement* parent, iPoint Position,
 
 void j1UI::CreateInGameMenuUi()
 {
-	inGameMenu_image =Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 190, 120 }, 20, false, { 1,114,197,230 }, nullptr, this);
+	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, nullptr, { 166, 66 }, 20, false, { 1,114,197,272 }, nullptr, this);
 	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, "Settings", this);
-	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 140 }, 15, false, { 176,42,145,46 }, "Quit to desktop", this);
+	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 216 }, 15, false, { 176,42,145,46 }, "Quit to desktop", this);
+	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, "Save", this);
+	inGameMenu_button_Load = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 102, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, "Load", this);
+	inGameMenu_button_MainMenu = Add_UIelement(TYPE_UI::UI_BUTTON, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 166 }, 17, false, { 230,114,145,46 }, "Main Menu", this);
 }
 
 void j1UI::CreateInGameUi()

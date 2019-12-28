@@ -49,6 +49,9 @@ public:
 	UIelement* inGameMenu_label_settings;
 	UIelement* inGameMenu_image;
 	UIelement* inGameMenu_button_QuitToDesktop;
+	UIelement* inGameMenu_button_Save;
+	UIelement* inGameMenu_button_Load;
+	UIelement* inGameMenu_button_MainMenu;
 
 	bool debug;
 	bool InGameMenu;
