@@ -10,11 +10,12 @@
 
 UIelement::UIelement()
 {
-	rect = { 0,0,0,0 };
+	Position = { 0,0 };
+
+	section = { 0,0,0,0 };
 	bool enabled = false;
 	bool above = false;
-
-	Position = { 0,0 };
+	posOffset = { 0,0 };
 }
 
 UIelement::~UIelement()
@@ -61,8 +62,8 @@ void UIelement::Draw()
 		SDL_SetTextureAlphaMod(texture, 255);
 	}
 
-	App->render->Blit(texture, Position.x + App->render->camera.x/-SCALE , Position.y + App->render->camera.y / -SCALE, &rect);
-	if (App->ui->debug) { App->render->DrawQuad({ Position.x*SCALE, Position.y*SCALE, rect.w*SCALE, rect.h*SCALE }, 255, 0, 255, 255, false, false); }
+	App->render->Blit(texture, Position.x + App->render->camera.x/-SCALE , Position.y + App->render->camera.y / -SCALE, &section);
+	if (App->ui->debug) { App->render->DrawQuad({ Position.x*SCALE, Position.y*SCALE, section.w*SCALE, section.h*SCALE }, 255, 0, 255, 255, false, false); }
 	
 }
 
@@ -77,7 +78,7 @@ bool UIelement::Is_above()
 	mouse.x = mouse.x / SCALE;
 	mouse.y = mouse.y / SCALE;
 
-	SDL_Rect intersect = { Position.x , Position.y, rect.w, rect.h };
+	SDL_Rect intersect = { Position.x , Position.y, section.w, section.h };
 	//LOG(true, "%i, %i, %i, %i", intersect.x, intersect.y, intersect.w, intersect.h);
 
 	if (SDL_PointInRect(&mouse, &intersect)) {
