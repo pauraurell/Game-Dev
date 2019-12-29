@@ -43,6 +43,7 @@ bool j1MainMenu::Start()
 	texture2 = App->tex->Load("maps/Layer 2.png");
 	texture3 = App->tex->Load("maps/Layer 3.png");
 	title = App->tex->Load("textures/Title/The Legend of The Boy.png");
+	App->audio->PlayMusic("audio/Credits_Menu.ogg");
 	posX1 = 0;
 	posX2 = 0;
 	posX3 = 0;

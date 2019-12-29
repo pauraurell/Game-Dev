@@ -613,6 +613,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 			App->scene->input = false;
 			SetPlayerState(PLAYER_IDLE);
 			App->scene->sceneEnded = true;
+			App->audio->PlayMusic("audio/score.ogg");
 		}
 		App->scene->scene_changed = false;
 	}
