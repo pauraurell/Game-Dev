@@ -20,7 +20,7 @@ j1MainMenu::j1MainMenu() : j1Module()
 {
 	name.create("menu");
 	SettingsMenuIsActive = false;
-	stop = false;
+	stop = false; continuePlaying = false;
 }
 
 // Destructor
@@ -186,6 +186,13 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 			else if (element == settingsButtonOk)
 			{
 				SettingsMenuIsActive = !SettingsMenuIsActive;
+			}
+
+
+			else if (element == ContinueButton)
+			{
+				continuePlaying = true;
+				App->fade->FadeToBlack(App->scene, this, 2.f);
 			}
 		}
 	}
