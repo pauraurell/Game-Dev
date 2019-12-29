@@ -38,6 +38,7 @@ bool j1MainMenu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1MainMenu::Start()
 {
+	App->ui->Start();
 	texture1 = App->tex->Load("maps/Layer 1.png");
 	texture2 = App->tex->Load("maps/Layer 2.png");
 	texture3 = App->tex->Load("maps/Layer 3.png");
@@ -46,7 +47,7 @@ bool j1MainMenu::Start()
 	posX2 = 0;
 	posX3 = 0;
 
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 170 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 170 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this, false);
 	ContinueButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 224 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Continue", this);
 	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 310 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
 	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 300, 210 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
@@ -127,20 +128,12 @@ bool j1MainMenu::PostUpdate()
 // Called before quitting
 bool j1MainMenu::CleanUp()
 {
+
+	App->tex->UnLoad(title);
 	App->tex->UnLoad(texture1);
 	App->tex->UnLoad(texture2);
 	App->tex->UnLoad(texture3);
-	App->tex->UnLoad(title);
-	testButton->CleanUp();
-	exitButton->CleanUp();
-	creditsButton->CleanUp();
-	settingsButton->CleanUp();
-	ContinueButton->CleanUp();
-	settingsButtonOk->CleanUp();
-	sliderFx->CleanUp();
-	sliderFxLabel->CleanUp();
-	sliderMusic->CleanUp();
-	sliderMusicLabel->CleanUp();
+	App->ui->CleanUp();
 
 	return true;
 }
@@ -170,18 +163,7 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 			if (element == testButton) 
 			{ 
 				App->fade->FadeToBlack(App->scene, this, 2.f);
-				testButton->enabled = false;
-				exitButton->enabled = false;
-				creditsButton->enabled = false;
-				settingsButton->enabled = false;
-				ContinueButton->enabled = false;
-				SettingsImage->enabled = false;
-				settingsLabel->enabled = false;
-				sliderFx->enabled = false;
-				sliderMusic->enabled = false;
-				settingsButtonOk->enabled = false;
-				sliderMusicLabel->enabled = false;
-				sliderFxLabel->enabled = false;
+				
 			}
 
 			else if (element == exitButton)
@@ -192,18 +174,7 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 			else if (element == creditsButton)
 			{
 				App->fade->FadeToBlack(App->cred, this, 2.f);
-				testButton->enabled = false;
-				exitButton->enabled = false;
-				creditsButton->enabled = false;
-				settingsButton->enabled = false;
-				ContinueButton->enabled = false;
-				SettingsImage->enabled = false;
-				settingsLabel->enabled = false;
-				sliderFx->enabled = false;
-				sliderMusic->enabled = false;
-				settingsButtonOk->enabled = false;
-				sliderMusicLabel->enabled = false;
-				sliderFxLabel->enabled = false;
+
 			}
 
 			else if (element == settingsButton)

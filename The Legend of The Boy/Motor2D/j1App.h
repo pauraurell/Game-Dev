@@ -120,8 +120,8 @@ public:
 	#define SCALE 2
 
 	bool FrameCapEnabled = false;
-	uint framerate = 0u;
 	bool QuitToDesktop;
+	uint32				frameratecap;
 
 private:
 
@@ -140,18 +140,24 @@ private:
 
 	bool pause = false;
 
-	j1Timer* mainTimer = nullptr;
-	j1PerfTimer* PerfTimer = nullptr;
-	j1Timer* lastSecFrames = nullptr;
-	j1Timer lastFrameTimer;
-	float avg_fps = 0.0f;
+	// - - - - DELTA TIME - - - -
 
-	uint64 frame_count = 0u;
-	uint last_second_frame_count = 0u;
-	uint32 last_frame_ms = 0u;
-	uint32 frames_on_last_update = 0u;
-	
-	float	dt = 0.0f;
+	j1PerfTimer			ptimer;
+	uint64				frame_count = 0;
+	j1Timer				startup_time;
+	j1Timer				frame_time;
+	j1Timer				last_sec_frame_time;
+	uint32				last_sec_frame_count = 0;
+	uint32				prev_last_sec_frame_count = 0;
+	uint32				frames_on_last_update;
+	uint32				last_frame_ms;
+	float				avg_fps;
+	float				seconds_since_startup;
+	float				dt;
+
+
+	// - - - - FRAMERATE CAP - - - -
+
 	p2SString capStr;
 
 };

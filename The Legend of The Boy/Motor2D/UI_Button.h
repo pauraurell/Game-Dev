@@ -12,7 +12,6 @@ public:
 	Button();
 	~Button();
 
-
 	bool Awake(pugi::xml_node&);
 	bool Start();
 

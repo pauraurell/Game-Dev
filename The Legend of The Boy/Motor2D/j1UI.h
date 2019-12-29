@@ -25,53 +25,15 @@ public:
 	bool CleanUp() override;
 
 	void Draw();
-
 	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false, SDL_Color color = { 0,0,0,255 });
-
-	void CreateInGameUi();
-	void CreateInGameMenuUi();
-	void UIevents(uiEvent type, UIelement* element);
-	void EnableAll();
-	void DisableAll();
 
 public:
 
-	int				pLife;
 	int				pts;
-	SDL_Rect		heart;
-	SDL_Rect		emptHeart;
-
 	//All UI Elements List
 	p2List<UIelement*>	UIelements;
 
-	//TIMER
-	j1Timer		time;
-	int			sec;
-	int			min;
-	p2SString* timer;
-
-	//UI Elements
-	UIelement* coin_image;
-	UIelement* coin_label;
-	UIelement* timer_image;
-	UIelement* timer_label;
-	UIelement* pts_image;
-	UIelement* pts_label;
-	UIelement* inGameMenu_label_settings;
-	UIelement* inGameMenu_image;
-	UIelement* inGameMenu_button_QuitToDesktop;
-	UIelement* inGameMenu_button_Save;
-	UIelement* inGameMenu_button_Load;
-	UIelement* inGameMenu_button_MainMenu;
-	UIelement* label_fx;
-	UIelement* label_music;
-	UIelement* SliderFx;
-	UIelement* SliderMusic;
-	UIelement* inGameMenu_button_Continue;
-	UIelement* SettingsButton;
-
 	bool debug;
-	bool InGameMenu;
 	SDL_Texture*	ui_tex = nullptr;
 
 };

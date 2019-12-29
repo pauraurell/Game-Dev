@@ -317,8 +317,8 @@ bool j1Console::Commands(p2SString string)
 
 	else if (string == fps)
 	{
-		if (App->framerate == 60) { App->framerate = 30; }
-		else { App->framerate = 60; }
+		if (App->frameratecap == 60) { App->frameratecap = 30; }
+		else { App->frameratecap = 60; }
 	}
 
 	else if (string == map1)

@@ -23,7 +23,6 @@ bool j1Score::Start()
 	draw = false;
 
 	
-
 	score_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 140,90 }, 25, false, { 0,0,0,0 }, { 0,0 }, "SCORE:", this);
 	timeScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,180 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
 	coinsScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,140 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
@@ -87,8 +86,8 @@ bool j1Score::Draw()
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, 200);
 		SDL_RenderFillRect(App->render->renderer, &background);
 
-		lifesScore = App->ui->pLife * 50;
-		p2SString* string = new p2SString("Lifes: %i x 50 -> %i", App->ui->pLife, lifesScore);
+		lifesScore = App->scene->pLife * 50;
+		p2SString* string = new p2SString("Lifes: %i x 50 -> %i", App->scene->pLife, lifesScore);
 		lifesScore_label->text = string->GetString();
 
 		string->create("Coins: %i x 10 -> %i", coins, coinsScore);
@@ -99,7 +98,7 @@ bool j1Score::Draw()
 
 		timeScore = -(time - 120) * 0.1;
 		if (timeScore > 0) { timeScore = 0; }
-		string->create("Time: %s x -0.1 -> %i", App->ui->timer_label->text, timeScore);
+		string->create("Time: %s x -0.1 -> %i", App->scene->timer_label->text, timeScore);
 		timeScore_label->text = string->GetString();
 
 		totalScore = lifesScore + coinsScore + enemiesScore + timeScore;
