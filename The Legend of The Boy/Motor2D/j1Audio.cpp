@@ -50,7 +50,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}	
 
-	volume_music = 0;
+	volume_music = 100;
 	volume_fx = 100;
 
 	return ret;
