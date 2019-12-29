@@ -22,7 +22,6 @@ bool j1Score::Start()
 {
 	draw = false;
 
-	
 	score_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 140,90 }, 25, false, { 0,0,0,0 }, { 0,0 }, "SCORE:", this);
 	timeScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,180 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
 	coinsScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,140 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);

@@ -119,6 +119,7 @@ public:
 	uint			RunFx;
 	uint			HitFx;
 	float			step_time;
+	uint			CollectCoinFx;
 
 	void Pushbacks();
 

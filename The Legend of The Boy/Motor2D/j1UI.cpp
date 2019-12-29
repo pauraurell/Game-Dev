@@ -165,12 +165,6 @@ void j1UI::Draw()
 		}
 		else { timer_label->text = "00:00"; }
 
-		p2SString* string = new p2SString("%i", App->score->coins);
-		coin_label->text = string->GetString();
-
-		string->create("%i", pts);
-		pts_label->text = string->GetString();
-
 		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 
 		{

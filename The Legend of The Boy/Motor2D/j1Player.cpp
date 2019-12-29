@@ -91,6 +91,7 @@ bool j1Player::Start()
 	JumpFx = App->audio->LoadFx("audio/jumping.wav");
 	RunFx = App->audio->LoadFx("audio/running.wav");
 	HitFx = App->audio->LoadFx("audio/hit.wav");
+	CollectCoinFx = App->audio->LoadFx("audio/coin_sound.wav");
 
 	colliderHead = App->col->AddCollider({ position.x, position.y, 15, 8 }, COLLIDER_PLAYER, this);
 	colliderBody = App->col->AddCollider({ position.x, position.y, 22, 16}, COLLIDER_PLAYER, this);
@@ -569,6 +570,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->scene->secret_map = true;
 	}
+
+	if (c1 == colliderBody && c2->type == COLLIDER_COIN)
+	{
+		App->audio->PlayFx(CollectCoinFx, App->audio->volume_fx, 0, 2);
+	}
+	
 
 	//Collision with enemies
 	if ((c1 == colliderBody || c1 == colliderHead || c1 == colliderLegs) && c2->type == COLLIDER_ENEMY)

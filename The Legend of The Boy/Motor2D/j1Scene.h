@@ -77,6 +77,7 @@ public:
 
 	p2SString CurrentMap;
 	j1Entities* player;
+	j1Entities* coin;
 	j1Entities* bat1;
 	j1Entities* skeleton1;
 	j1Entities* bat2;
@@ -129,6 +130,8 @@ public:
 	UIelement* SliderMusic;
 	UIelement* inGameMenu_button_Continue;
 	UIelement* SettingsButton;
+	UIelement* pts_image;
+	UIelement* pts_label;
 
 private:
 

@@ -8,7 +8,6 @@
 struct SDL_Texture;
 struct Collider;
 
-
 class j1Coin : public j1Entities
 {
 public:
@@ -34,17 +33,23 @@ public:
 	//bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
+
 	// Called before quitting
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
+	void ConfigLoading();
 
+	int				SpawnPointX, SpawnPointY, yLimit;
 	SDL_Texture*	coinTex = nullptr;
+	p2SString		orientation;
+	bool			OnGround;
 
 	//ANIMATIONS
 	Animation*		current_animation = nullptr;
-	Animation		idle;
+	Animation		coin;
 
 	void Pushbacks();
+
 private:
 
 	p2SString		folder;

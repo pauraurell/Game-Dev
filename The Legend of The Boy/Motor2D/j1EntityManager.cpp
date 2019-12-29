@@ -5,6 +5,7 @@
 #include "j1Bat.h"
 #include "j1Skeleton.h"
 #include "j1Scene.h"
+#include "j1Coin.h"
 #include "Animation.h"
 #include "j1App.h"
 #include "j1Map.h"
@@ -132,6 +133,9 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos, bo
 	case j1Entities::Types::bat:
 		ret = new j1Bat(pos, isDead);
 		break;
+	case j1Entities::Types::coin:
+		ret = new j1Coin(pos, isDead);
+		break;
 
 	}
 
@@ -154,6 +158,21 @@ void j1EntityManager::DestroyEntity(j1Entities* entity)
 			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
 			if (entityList->data->colliderLegs != nullptr) { entityList->data->colliderLegs->to_delete = true; }
 			if (entityList->data->colliderHead != nullptr) { entityList->data->colliderHead->to_delete = true; }
+			entities.del(entityList);
+		}
+		entityList = entityList->next;
+	}
+	delete entity;
+}
+
+void j1EntityManager::DestroyCoin(j1Entities* entity)
+{
+	p2List_item<j1Entities*>* entityList = entities.start;
+	while (entityList)
+	{
+		if (entityList->data->entity_type == j1Entities::Types::coin)
+		{
+			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
 			entities.del(entityList);
 		}
 		entityList = entityList->next;

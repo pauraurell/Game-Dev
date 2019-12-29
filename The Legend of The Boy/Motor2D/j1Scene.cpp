@@ -183,6 +183,11 @@ bool j1Scene::Update(float dt)
 
 	if (to_end == true) { to_end = false; EndScene(); }
 
+	p2SString* string = new p2SString("%i", App->score->coins);
+	coin_label->text = string->GetString();
+
+	string->create("%i", App->ui->pts);
+	pts_label->text = string->GetString();
 
 	return true;
 }
@@ -215,8 +220,8 @@ bool j1Scene::CleanUp()
 	timer_image->enabled = false;
 	timer_label->enabled = false;
 	SettingsButton->enabled = false;
-
-
+	pts_image->enabled = false;
+	pts_label->enabled = false;
 
 	App->ui->CleanUp();
 	return true;
@@ -372,6 +377,7 @@ void j1Scene::EndScene()
 void j1Scene::CreateEnt()
 {
 	player = App->entManager->CreateEntity(j1Entities::Types::player, { PlayerSpawnPointX, PlayerSpawnPointY }, false);
+	coin = App->entManager->CreateEntity(j1Entities::Types::coin, { PlayerSpawnPointX + 60, PlayerSpawnPointY }, false);
 	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY }, false);
 	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY }, false);
 	bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX, Bat2SpawnPointY }, false);
@@ -428,6 +434,8 @@ void j1Scene::drawSceneUi()
 	timer_image->enabled = true;
 	timer_label->enabled = true;
 	SettingsButton->enabled = true;
+	pts_image->enabled = true;
+	pts_label->enabled = true;
 	
 	if (App->scene->cameraTracking == true)
 	{
@@ -489,6 +497,8 @@ void j1Scene::CreateInGameUi()
 	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
 	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
 	SettingsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 460 , 6 }, 17, false, { 388,243,40,36 }, { 0,0 }, nullptr, this);
+	pts_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 4, 94 }, 20, false, { 108,0,21,22 }, { 0,0 }, nullptr, this);
+	pts_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 96 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00", this);
 }
 
 void j1Scene::UIevents(uiEvent type, UIelement* element)
