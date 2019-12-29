@@ -68,6 +68,8 @@ public:
 	UIelement* inGameMenu_button_Continue;
 	UIelement* SettingsButton;
 
+	uint clickFx;
+
 	bool debug;
 	bool InGameMenu;
 	SDL_Texture*	ui_tex = nullptr;

@@ -39,6 +39,8 @@ public:
 	UIelement* sliderMusic = nullptr;
 	UIelement* settingsLabel = nullptr;
 	UIelement* settingsButtonOk = nullptr;
+	UIelement* sliderFxLabel = nullptr;
+	UIelement* sliderMusicLabel = nullptr;
 
 	bool SettingsMenuIsActive;
 

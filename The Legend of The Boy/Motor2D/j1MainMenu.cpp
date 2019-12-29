@@ -46,6 +46,10 @@ bool j1MainMenu::Start()
 	SettingsImage = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 265, 137 }, 20, false, { 213,333,180,144 }, { 0,0 }, nullptr, this);
 	settingsLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 279, 146 }, 18, false, { 0,0,0,0 }, { 0,0 }, "Audio Settings", this);
 	settingsButtonOk = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 324 ,244 }, 20, false, { 423,42,61,31 }, { 0,-4 }, "OK", this);
+	sliderMusic = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Music, nullptr, { 290 , 185 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
+	sliderFx = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { 290 , 220 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
+	sliderMusicLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 320, 165 }, 17, false, { 0,0,0,0 }, { 0,0 }, "Music", this);
+	sliderFxLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 330, 200 }, 17, false, { 0,0,0,0 }, { 0,0 }, "Fx", this);
 	return true;
 }
 
@@ -74,18 +78,22 @@ bool j1MainMenu::PreUpdate()
 		{
 			SettingsImage->enabled = true;
 			settingsLabel->enabled = true;
-			//sliderFx->enabled = true;
-			//sliderMusic->enabled = true;
+			sliderFx->enabled = true;
+			sliderMusic->enabled = true;
 			settingsButtonOk->enabled = true;
+			sliderMusicLabel->enabled = true;
+			sliderFxLabel->enabled = true;
 		}
 
 		else
 		{
 			SettingsImage->enabled = false;
 			settingsLabel->enabled = false;
-//			sliderFx->enabled = false;
-		//	sliderMusic->enabled = false;
+			sliderFx->enabled = false;
+			sliderMusic->enabled = false;
 			settingsButtonOk->enabled = false;
+			sliderMusicLabel->enabled = false;
+			sliderFxLabel->enabled = false;
 		}
 	}
 
@@ -104,16 +112,6 @@ bool j1MainMenu::PostUpdate()
 {
 	bool ret = true;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
-	{
-		testButton->enabled = false;
-		exitButton->enabled = false;
-		creditsButton->enabled = false;
-		settingsButton->enabled = false;
-		ContinueButton->enabled = false;
-		App->fade->FadeToBlack(App->scene, this, 2.f);
-	}
-
 	return ret;
 }
 
@@ -126,6 +124,12 @@ bool j1MainMenu::CleanUp()
 	creditsButton->CleanUp();
 	settingsButton->CleanUp();
 	ContinueButton->CleanUp();
+	settingsButtonOk->CleanUp();
+	sliderFx->CleanUp();
+	sliderFxLabel->CleanUp();
+	sliderMusic->CleanUp();
+	sliderMusicLabel->CleanUp();
+
 	return true;
 }
 
@@ -150,6 +154,13 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				creditsButton->enabled = false;
 				settingsButton->enabled = false;
 				ContinueButton->enabled = false;
+				SettingsImage->enabled = false;
+				settingsLabel->enabled = false;
+				sliderFx->enabled = false;
+				sliderMusic->enabled = false;
+				settingsButtonOk->enabled = false;
+				sliderMusicLabel->enabled = false;
+				sliderFxLabel->enabled = false;
 			}
 
 			else if (element == exitButton)
@@ -165,6 +176,13 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				creditsButton->enabled = false;
 				settingsButton->enabled = false;
 				ContinueButton->enabled = false;
+				SettingsImage->enabled = false;
+				settingsLabel->enabled = false;
+				sliderFx->enabled = false;
+				sliderMusic->enabled = false;
+				settingsButtonOk->enabled = false;
+				sliderMusicLabel->enabled = false;
+				sliderFxLabel->enabled = false;
 			}
 
 			else if (element == settingsButton)

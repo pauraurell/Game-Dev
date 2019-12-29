@@ -1,6 +1,7 @@
 #include "j1App.h"
 #include "UI_Button.h"
 #include "j1Input.h"
+#include "j1Audio.h"
 #include "j1UI.h"
 
 Button::Button() {
@@ -22,8 +23,9 @@ bool Button::Awake(pugi::xml_node&)
 
 bool Button::Start()
 {
+	click = App->audio->LoadFx("audio/button_click.wav");	
+	above = App->audio->LoadFx("audio/button_hover.wav");
 	if (text != nullptr) { label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, this, { Position.x + 16 + posOffset.x, Position.y + section.h / 3 + posOffset.y }, size, true, { 0,0,0,0 }, { 0,0 }, text); }
-
 	return true;
 }
 
@@ -39,7 +41,10 @@ bool Button::Update(float dt)
 	if (Is_above() && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+		{
 			Click();
+		}
+		
 		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 		{
 			iPoint pos_click = { 0,0 };

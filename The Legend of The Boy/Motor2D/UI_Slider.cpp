@@ -84,7 +84,7 @@ bool Slider::PostUpdate()
 	}
 	if (this->type_of_slider == SLIDER_TYPE::Music)
 	{
-		Mix_VolumeMusic(v);
+		App->audio->volume_music = v;
 	}
 
 	if (enabled) { Draw(); }

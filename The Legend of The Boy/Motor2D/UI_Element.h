@@ -61,6 +61,10 @@ public:
 	bool enabled;
 	int size;
 	iPoint posOffset;
+	int v;
+	uint click;
+	uint above;
+	bool played;
 
 	SDL_Rect section;
 

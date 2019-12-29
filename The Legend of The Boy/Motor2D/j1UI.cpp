@@ -8,6 +8,7 @@
 #include "Brofiler/Brofiler.h"
 #include "UI_Button.h"
 #include "UI_Label.h"
+#include "j1Audio.h"
 #include "UI_Image.h"
 #include "j1Input.h"
 #include "j1FadeToBlack.h"
@@ -43,10 +44,13 @@ bool j1UI::Awake(pugi::xml_node& config)
 bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
+	clickFx = App->audio->LoadFx("audio/button_click.wav");
 
 	CreateInGameUi();
 
 	CreateInGameMenuUi();
+
+
 
 	timer = new p2SString();
 
