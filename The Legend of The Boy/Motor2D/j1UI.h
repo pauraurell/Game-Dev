@@ -18,22 +18,16 @@ public:
 
 	bool Awake(pugi::xml_node& config);
 	bool Start() override;
-
 	bool PreUpdate() override;
 	bool Update(float dt) override;
 	bool PostUpdate() override;
-
 	bool CleanUp() override;
 
 	void Draw();
-
 	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false);
-
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
-
 	void UIevents(uiEvent type, UIelement* element);
-
 	void EnableAll();
 	void DisableAll();
 
@@ -42,6 +36,8 @@ public:
 	int				pLife;
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
+
+	//All UI Elements List
 	p2List<UIelement*>	UIelements;
 
 	//TIMER
@@ -67,8 +63,6 @@ public:
 	UIelement* SliderMusic;
 	UIelement* inGameMenu_button_Continue;
 	UIelement* SettingsButton;
-
-	uint clickFx;
 
 	bool debug;
 	bool InGameMenu;

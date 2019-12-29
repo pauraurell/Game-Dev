@@ -44,13 +44,9 @@ bool j1UI::Awake(pugi::xml_node& config)
 bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
-	clickFx = App->audio->LoadFx("audio/button_click.wav");
-
 	CreateInGameUi();
 
 	CreateInGameMenuUi();
-
-
 
 	timer = new p2SString();
 

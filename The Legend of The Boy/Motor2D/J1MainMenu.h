@@ -27,7 +27,10 @@ public:
 
 	bool Draw();
 
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* texture1 = nullptr;
+	SDL_Texture* texture2 = nullptr;
+	SDL_Texture* texture3 = nullptr;
+	SDL_Texture* title = nullptr;
 
 	UIelement* testButton = nullptr;
 	UIelement* ContinueButton = nullptr;
@@ -45,6 +48,8 @@ public:
 	bool SettingsMenuIsActive;
 
 	void UIevents(uiEvent type, UIelement* element);
+
+	int posX1, posX2, posX3; bool stop;
 
 };
 
