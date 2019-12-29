@@ -13,7 +13,7 @@ class j1Coin : public j1Entities
 public:
 
 	j1Coin();
-	j1Coin(iPoint pos, bool isDead);
+	j1Coin(iPoint pos, bool isDead, bool isSecret);
 
 	// Destructor
 	virtual ~j1Coin();

@@ -23,7 +23,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
-	j1Entities* CreateEntity(j1Entities::Types type, iPoint pos, bool isDead);
+	j1Entities* CreateEntity(j1Entities::Types type, iPoint pos, bool isDead, bool secret = false);
 	void DestroyEntity(j1Entities* entity);
 	void DestroyCoin(j1Entities* entity);
 	void DestroyEntities();

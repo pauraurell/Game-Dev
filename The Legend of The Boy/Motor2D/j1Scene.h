@@ -48,6 +48,8 @@ public:
 	void CreateEnt();
 	void Create1MapEnemies();
 	void Create2MapEnemies();
+	void Create1MapCoins();
+	void Create2MapCoins();
 	void EndScene();
 	void drawSceneUi();
 
@@ -78,7 +80,6 @@ public:
 
 	p2SString CurrentMap;
 	j1Entities* player;
-	j1Entities* coin;
 	j1Entities* bat1;
 	j1Entities* skeleton1;
 	j1Entities* bat2;
@@ -133,6 +134,28 @@ public:
 	UIelement* SettingsButton;
 	UIelement* pts_image;
 	UIelement* pts_label;
+
+	//COINS
+	j1Entities* coin;
+	j1Entities* coin2;
+	j1Entities* coin3;
+	j1Entities* coin4;
+	j1Entities* coin5;
+	j1Entities* coin6;
+	j1Entities* coin7;
+	j1Entities* coin8;
+	j1Entities* coin9;
+	j1Entities* coin10;
+	j1Entities* coin11;
+	j1Entities* coin12;
+	j1Entities* coin13;
+	j1Entities* coin14;
+	j1Entities* coin15;
+	j1Entities* coin16;
+	j1Entities* coin17;
+	j1Entities* coin18;
+	j1Entities* coin19;
+	j1Entities* coin20;
 
 private:
 
