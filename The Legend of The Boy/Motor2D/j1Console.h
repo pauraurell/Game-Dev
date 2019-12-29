@@ -27,6 +27,7 @@ public:
 	void Log(const char* string);
 	bool ConsoleInput();
 	bool Commands(p2SString string);
+	void EmptyBuffer();
 
 	SDL_Rect	cons;
 	bool		active;

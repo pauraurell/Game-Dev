@@ -66,7 +66,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(col);
 	AddModule(score, false);
 	AddModule(ui);
-	AddModule(cons);
+	AddModule(cons, false);
 	AddModule(main_menu);
 	AddModule(cred, false);
 	AddModule(fade);

@@ -60,17 +60,12 @@ bool j1Console::PreUpdate()
 		inputString.create("%s", inputChar);
 		inputLabel->text = inputString.GetString();
 
-		if (App->input->GetKey(SDL_SCANCODE_KP_ENTER) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_KP_ENTER) == KEY_DOWN && inputChar[0] != ' ')
 		{
 			LOG(true, "%s", inputString.GetString());
 			ret = Commands(inputString);
 			inputString.create(" ");
-			bool r = false;
-			for (int i = 0; i < MAX_INPUT && r == false; i++)
-			{
-				if (inputChar[i] == '>') { inputChar[i] = ' '; r = true; }
-				else { inputChar[i] = ' '; }
-			}
+			EmptyBuffer();
 		}
 	}
 
@@ -322,7 +317,8 @@ bool j1Console::Commands(p2SString string)
 
 	else if (string == fps)
 	{
-
+		if (App->framerate == 60) { App->framerate = 30; }
+		else { App->framerate = 60; }
 	}
 
 	else if (string == map1)
@@ -342,4 +338,15 @@ bool j1Console::Commands(p2SString string)
 	else { LOG(true, "The command was not on the command list"); }
 	
 	return ret;
+}
+
+void j1Console::EmptyBuffer()
+{
+	bool r = false;
+	for (int i = 0; i < MAX_INPUT && r == false; i++)
+	{
+		if (inputChar[0] == ' ' && i == 0) { r = true; }
+		if (inputChar[i] == '>') { inputChar[i] = ' '; r = true; }
+		else { inputChar[i] = ' '; }
+	}
 }
