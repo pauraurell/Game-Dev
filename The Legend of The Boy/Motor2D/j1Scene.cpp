@@ -80,6 +80,7 @@ bool j1Scene::Start()
 	sceneChangeTimer = false;
 	cameraTracking = false;
 	sceneEnded = false;
+	to_end = false;
 
 	App->map->Load(CurrentMap.GetString()); //Load the map
 	App->audio->PlayMusic("audio/music.ogg");
@@ -160,9 +161,12 @@ bool j1Scene::Update(float dt)
 		if (App->render->camera.x > -550)App->render->camera.y = -400;
 		if(App->render->camera.x <= -550) App->render->camera.y --;
 		App->render->camera.x -= 4;
+		input = false;
 
 		if (App->render->camera.x <= -1000) { cameraTracking = true; App->ui->time.Start(); input = true; }
 	}
+
+	if (to_end == true) { to_end = false; EndScene(); }
 
 
 	return true;
@@ -262,6 +266,7 @@ void j1Scene::StartFirstLevel()
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
 	App->entManager->RestartEntities();
+	Create1MapEnemies();
 	scene_changed = true;
 	App->ui->time.Start();
 	App->score->coins = 0;
@@ -331,6 +336,8 @@ void j1Scene::EndScene()
 	input = false;
 	App->score->DisableAll();
 	App->score->draw = false;
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	LOG(true, "Ending Main Scene");
 	App->fade->FadeToBlack(App->main_menu, this, 2.f);
 }

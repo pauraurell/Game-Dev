@@ -54,6 +54,7 @@ public:
 	UIelement*		enemiesScore_label;
 	UIelement*		lifesScore_label;
 	UIelement*		totalScore_label;
+	UIelement*		escToEnd_label;
 
 };
 

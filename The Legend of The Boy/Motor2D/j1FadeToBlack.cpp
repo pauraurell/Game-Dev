@@ -97,3 +97,8 @@ bool j1FadeToBlack::FadeToBlack(j1Module* module_in, j1Module* module_out, float
 	
 	return ret;
 }
+
+void j1FadeToBlack::ResetFade()
+{
+	current_step = fade_step::none;
+}

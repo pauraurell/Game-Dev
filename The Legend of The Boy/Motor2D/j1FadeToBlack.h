@@ -14,6 +14,7 @@ public:
 	bool Update(float dt);
 	bool FadeToBlackVisualEffect(float time = 2.0f);
 	bool FadeToBlack(j1Module* SceneIn, j1Module* SceneOut, float time = 1.0f);
+	void ResetFade();
 
 private:
 

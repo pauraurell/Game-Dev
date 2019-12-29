@@ -76,6 +76,11 @@ bool j1UI::Update(float dt)
 		tmp = tmp->next;
 	}
 
+	if (App->scene->cameraTracking == false)
+	{
+		if (pLife < 3) { pLife = 3; }
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		debug = !debug;

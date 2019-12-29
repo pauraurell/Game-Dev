@@ -30,6 +30,7 @@ bool j1Score::Start()
 	enemiesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,160 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
 	lifesScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,120 }, 20, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
 	totalScore_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 120,210 }, 22, false, { 0,0,0,0 }, { 0,0 }, nullptr, this);
+	escToEnd_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 175,235 }, 15, false, { 0,0,0,0 }, { 0,0 }, "Press ESC to end...", this);
 
 	return true;
 }
@@ -44,7 +45,7 @@ bool j1Score::Update(float dt)
 	background.x = App->render->camera.x * (-1 / 2) + 200;
 	background.y = App->render->camera.y * (-1 / 2) + 150;
 	background.w = 630;
-	background.h = 350;
+	background.h = 365;
 	
 	return true;
 }
@@ -60,7 +61,7 @@ bool j1Score::CleanUp()
 {
 	for (p2List_item<UIelement*>* item = App->ui->UIelements.start; item; item = item->next)
 	{
-		if (item->data == score_label || item->data == timeScore_label || item->data == coinsScore_label || item->data == totalScore_label || item->data == enemiesScore_label || item->data == lifesScore_label)
+		if (item->data == score_label || item->data == timeScore_label || item->data == coinsScore_label || item->data == totalScore_label || item->data == enemiesScore_label || item->data == lifesScore_label || item->data == escToEnd_label)
 		{ item->data->CleanUp(); }
 	}
 
@@ -77,6 +78,7 @@ bool j1Score::Draw()
 		enemiesScore_label->enabled = true;
 		lifesScore_label->enabled = true;
 		totalScore_label->enabled = true;
+		escToEnd_label->enabled = true;
 
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, 200);
 		SDL_RenderFillRect(App->render->renderer, &background);
@@ -115,6 +117,7 @@ bool j1Score::Draw()
 		enemiesScore_label->enabled = false;
 		lifesScore_label->enabled = false;
 		totalScore_label->enabled = false;
+		escToEnd_label->enabled = false;
 	}
 
 	return true;
@@ -128,4 +131,5 @@ void j1Score::DisableAll()
 	enemiesScore_label->enabled = false;
 	lifesScore_label->enabled = false;
 	totalScore_label->enabled = false;
+	escToEnd_label->enabled = false;
 }

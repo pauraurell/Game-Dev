@@ -53,6 +53,7 @@ public:
 	bool input;
 	bool cameraTracking;
 	bool sceneEnded;
+	bool to_end;
 
 	int scene_change_timer;
 	bool sceneChangeTimer;
