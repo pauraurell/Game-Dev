@@ -163,7 +163,7 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN)
 	{
-		if (App->cons->active == true) { App->cons->active = false; input = true; }
+		if (App->cons->active == true) { App->cons->active = false; input = true; App->cons->EmptyBuffer(); }
 		else if (App->cons->active == false) { App->cons->active = true; input = false; }
 	}
 
@@ -244,6 +244,7 @@ void j1Scene::Enable()
 		active = true;
 		Start();
 		App->score->Init(true);
+		App->cons->Init(true);
 	}
 }
 
@@ -253,8 +254,8 @@ void j1Scene::Disable()
 	{
 		active = false;
 		CleanUp();
-		App->entManager->CleanUp();
 		App->score->Disable();
+		App->cons->Disable();
 	}
 }
 

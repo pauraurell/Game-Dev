@@ -265,7 +265,7 @@ bool j1Player::Update(float dt)
 	}
 
 	//God Mode Input, State & Movement
-	if (godMode)
+	if (godMode == true && App->scene->input == true)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) { godModeUp = true; }
 		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP) { godModeUp = false; }
@@ -598,7 +598,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			App->scene->StartSecondLevel();
 		}
-		if (App->scene->CurrentMap == "SecondLevel.tmx" && App->scene->sceneEnded == false)
+		if (App->scene->CurrentMap == "SecondLevel.tmx" && App->scene->sceneEnded == false && App->scene->scene_changed == false)
 		{
 			//App->scene->EndScene();
 			App->score->draw = true;

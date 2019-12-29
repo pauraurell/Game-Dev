@@ -6,6 +6,8 @@
 #include "p2Log.h"
 #include "SDL/include/SDL_render.h"
 
+struct SDL_Color;
+
 enum class TYPE_UI
 {
 	UI_BUTTON,
@@ -61,6 +63,7 @@ public:
 	bool enabled;
 	int size;
 	iPoint posOffset;
+	SDL_Color color;
 	int v;
 	uint click;
 	uint above;

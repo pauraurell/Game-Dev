@@ -27,11 +27,6 @@
 	</entManager>
 	<particles />
 	<collision />
-	<:anonymous />
-	<:anonymous />
-	<:anonymous />
-	<intro />
-	<intro />
 	<fade />
 	<pathfinding />
 	<fonts />

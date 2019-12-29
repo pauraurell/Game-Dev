@@ -17,7 +17,6 @@
 
 j1UI::j1UI()
 {
-
 	debug = false;
 
 }
@@ -35,6 +34,8 @@ bool j1UI::Awake(pugi::xml_node& config)
 bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
+
+	pts = 0;
 
 	return true;
 }
@@ -138,6 +139,8 @@ void j1UI::Draw()
 		coin_label->enabled = true;
 		timer_image->enabled = true;
 		timer_label->enabled = true;
+		pts_image->enabled = true;
+		pts_label->enabled = true;
 		SettingsButton->enabled = true;
 
 		if (App->scene->cameraTracking == true)
@@ -162,8 +165,11 @@ void j1UI::Draw()
 		}
 		else { timer_label->text = "00:00"; }
 
-		p2SString* coins = new p2SString("%i", App->score->coins);
-		coin_label->text = coins->GetString();
+		p2SString* string = new p2SString("%i", App->score->coins);
+		coin_label->text = string->GetString();
+
+		string->create("%i", pts);
+		pts_label->text = string->GetString();
 
 		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 
@@ -183,12 +189,14 @@ void j1UI::Draw()
 		coin_label->enabled = false;
 		timer_image->enabled = false;
 		timer_label->enabled = false;
+		pts_image->enabled = false;
+		pts_label->enabled = false;
 		SettingsButton->enabled = false;
 	}*/
 }
 
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag)
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag, SDL_Color color)
 {
 	UIelement* ui_element = nullptr;
 
@@ -224,9 +232,11 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 		ui_element->size = size;
 		ui_element->posOffset = PositionOffset;
 		ui_element->canMoveIn_X_axis = CanDrag;
+		ui_element->color = color;
 
 		UIelements.add(ui_element)->data->Start();
 	}
 
 	return ui_element;
 }
+
