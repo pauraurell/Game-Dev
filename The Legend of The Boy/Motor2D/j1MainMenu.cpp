@@ -18,6 +18,7 @@
 j1MainMenu::j1MainMenu() : j1Module()
 {
 	name.create("intro");
+	SettingsMenuIsActive = false;
 }
 
 // Destructor
@@ -37,9 +38,14 @@ bool j1MainMenu::Start()
 {
 	texture = App->tex->Load("textures/Background.png");
 
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 200 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 60 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	ContinueButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 120 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Continue", this);
 	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 270 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
-	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 300, 270 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
+	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 300, 300 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
+	settingsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 190 }, 22, false, { 176,42,145,46 }, { 6,-8 }, "Settings", this);
+	SettingsImage = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 265, 137 }, 20, false, { 213,333,180,144 }, { 0,0 }, nullptr, this);
+	settingsLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 279, 146 }, 18, false, { 0,0,0,0 }, { 0,0 }, "Audio Settings", this);
+	settingsButtonOk = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 324 ,244 }, 20, false, { 423,42,61,31 }, { 0,-4 }, "OK", this);
 	return true;
 }
 
@@ -53,12 +59,34 @@ bool j1MainMenu::PreUpdate()
 		testButton->enabled = false; 
 		exitButton->enabled = false;
 		creditsButton->enabled = false;
+		settingsButton->enabled = false;
+		ContinueButton->enabled = false;
 	}
 	else 
 	{
 		testButton->enabled = true; 
 		exitButton->enabled = true;
 		creditsButton->enabled = true;
+		settingsButton->enabled = true;
+		ContinueButton->enabled = true;
+
+		if (SettingsMenuIsActive)
+		{
+			SettingsImage->enabled = true;
+			settingsLabel->enabled = true;
+			//sliderFx->enabled = true;
+			//sliderMusic->enabled = true;
+			settingsButtonOk->enabled = true;
+		}
+
+		else
+		{
+			SettingsImage->enabled = false;
+			settingsLabel->enabled = false;
+//			sliderFx->enabled = false;
+		//	sliderMusic->enabled = false;
+			settingsButtonOk->enabled = false;
+		}
 	}
 
 	return true;
@@ -81,6 +109,8 @@ bool j1MainMenu::PostUpdate()
 		testButton->enabled = false;
 		exitButton->enabled = false;
 		creditsButton->enabled = false;
+		settingsButton->enabled = false;
+		ContinueButton->enabled = false;
 		App->fade->FadeToBlack(App->scene, this, 2.f);
 	}
 
@@ -94,6 +124,8 @@ bool j1MainMenu::CleanUp()
 	testButton->CleanUp();
 	exitButton->CleanUp();
 	creditsButton->CleanUp();
+	settingsButton->CleanUp();
+	ContinueButton->CleanUp();
 	return true;
 }
 
@@ -116,6 +148,8 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				testButton->enabled = false;
 				exitButton->enabled = false;
 				creditsButton->enabled = false;
+				settingsButton->enabled = false;
+				ContinueButton->enabled = false;
 			}
 
 			else if (element == exitButton)
@@ -129,6 +163,18 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 				testButton->enabled = false;
 				exitButton->enabled = false;
 				creditsButton->enabled = false;
+				settingsButton->enabled = false;
+				ContinueButton->enabled = false;
+			}
+
+			else if (element == settingsButton)
+			{
+				SettingsMenuIsActive = !SettingsMenuIsActive;
+			}
+
+			else if (element == settingsButtonOk)
+			{
+				SettingsMenuIsActive = !SettingsMenuIsActive;
 			}
 		}
 	}

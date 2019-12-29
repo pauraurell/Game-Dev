@@ -30,8 +30,17 @@ public:
 	SDL_Texture* texture = nullptr;
 
 	UIelement* testButton = nullptr;
+	UIelement* ContinueButton = nullptr;
 	UIelement* exitButton = nullptr;
 	UIelement* creditsButton = nullptr;
+	UIelement* settingsButton = nullptr;
+	UIelement* SettingsImage = nullptr;
+	UIelement* sliderFx = nullptr;
+	UIelement* sliderMusic = nullptr;
+	UIelement* settingsLabel = nullptr;
+	UIelement* settingsButtonOk = nullptr;
+
+	bool SettingsMenuIsActive;
 
 	void UIevents(uiEvent type, UIelement* element);
 

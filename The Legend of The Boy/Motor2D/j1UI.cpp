@@ -152,6 +152,7 @@ void j1UI::Draw()
 		coin_label->enabled = true;
 		timer_image->enabled = true;
 		timer_label->enabled = true;
+		SettingsButton->enabled = true;
 
 		if (App->scene->cameraTracking == true)
 		{
@@ -196,6 +197,7 @@ void j1UI::Draw()
 		coin_label->enabled = false;
 		timer_image->enabled = false;
 		timer_label->enabled = false;
+		SettingsButton->enabled = false;
 	}
 }
 
@@ -264,6 +266,7 @@ void j1UI::CreateInGameUi()
 	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
 	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
 	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
+	SettingsButton = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 460 , 6 }, 17, false, { 388,243,40,36 }, { 0,0 }, nullptr, this);
 }
 
 void j1UI::UIevents(uiEvent type, UIelement* element)
@@ -298,6 +301,11 @@ void j1UI::UIevents(uiEvent type, UIelement* element)
 		else if (element == inGameMenu_button_Continue)
 		{
 			InGameMenu = false;
+		}
+
+		else if (element == SettingsButton)
+		{
+			InGameMenu = !InGameMenu;
 		}
 	}
 	}

@@ -66,6 +66,7 @@ public:
 	UIelement* SliderFx;
 	UIelement* SliderMusic;
 	UIelement* inGameMenu_button_Continue;
+	UIelement* SettingsButton;
 
 	bool debug;
 	bool InGameMenu;
