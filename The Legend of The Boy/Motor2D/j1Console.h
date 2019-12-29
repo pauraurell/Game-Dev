@@ -28,6 +28,7 @@ public:
 	bool ConsoleInput();
 	bool Commands(p2SString string);
 	void EmptyBuffer();
+	int CharToInt(char c);
 
 	SDL_Rect	cons;
 	bool		active;
@@ -43,7 +44,7 @@ public:
 	p2SString list;
 	p2SString god_mode;
 	p2SString quit;
-	p2SString fps;
+	//p2SString fps;
 	p2SString map1;
 	p2SString map2;
 	p2SString photo_mode;

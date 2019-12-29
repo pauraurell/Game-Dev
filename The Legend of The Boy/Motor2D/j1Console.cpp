@@ -33,7 +33,7 @@ bool j1Console::Start()
 	list.create("list ->");
 	god_mode.create("god_mode ->");
 	quit.create("quit ->");
-	fps.create("FPS ->");
+	//fps.create("FPS ->");
 	map1.create("map FirstLevel.tmx ->");
 	map2.create("map SecondLevel.tmx ->");
 	photo_mode.create("photo_mode ->");
@@ -315,10 +315,15 @@ bool j1Console::Commands(p2SString string)
 		ret = false;
 	}
 
-	else if (string == fps)
+	else if (inputChar[0] == 'F' &&  inputChar[1] == 'P' && inputChar[2] == 'S')
 	{
-		if (App->frameratecap == 60) { App->frameratecap = 30; }
-		else { App->frameratecap = 60; }
+		int fps;
+		fps = CharToInt(inputChar[4]) * 10;
+		fps = fps + CharToInt(inputChar[5]);
+		if (fps < 30) { fps = 30; }
+		else if (fps > 99) { fps = 99; }
+		App->frameratecap = fps;
+		LOG(true, "FPS cap at %i fps", fps);
 	}
 
 	else if (string == map1)
@@ -354,4 +359,47 @@ void j1Console::EmptyBuffer()
 			else { inputChar[i] = '\0'; }
 		}
 	}
+}
+
+int j1Console::CharToInt(char c)
+{
+	int num;
+	switch (c)
+	{
+		case '1':
+			num = 1;
+			break;
+		case '2':
+			num = 2;
+			break;
+		case '3':
+			num = 3;
+			break;
+		case '4':
+			num = 4;
+			break;
+		case '5':
+			num = 5;
+			break;
+		case '6':
+			num = 6;
+			break;
+		case '7':
+			num = 7;
+			break;
+		case '8':
+			num = 8;
+			break;
+		case '9':
+			num = 9;
+			break;
+		case '0':
+			num = 0;
+			break;
+		default:
+			num = 0;
+			break;
+	}
+
+	return num;
 }

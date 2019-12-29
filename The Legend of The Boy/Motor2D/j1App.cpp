@@ -256,21 +256,18 @@ void j1App::FinishUpdate()
 	if (App->FrameCapEnabled)
 		capStr.create("Enabled");
 
-	if (frameratecap == 30)
-	{
-		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: %s   || Vsync: Disabled",
-		GetTitle(),  avg_fps, frames_on_last_update, last_frame_ms,  capStr.GetString());
-		App->win->SetTitle(title.GetString());
-		App->render->vsyncActive = false;
-	}
+	p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: %s   || Vsync: Disabled",
+	GetTitle(),  avg_fps, frames_on_last_update, last_frame_ms,  capStr.GetString());
+	App->win->SetTitle(title.GetString());
+	App->render->vsyncActive = false;
 
-	else if (frameratecap == 60)
+	/*else if (frameratecap == 60)
 	{
 		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: Disabled   || Vsync: Enabled",
 			GetTitle(), avg_fps, frames_on_last_update, last_frame_ms);
 		App->win->SetTitle(title.GetString());
 		App->render->vsyncActive = true;
-	}
+	}*/
 
 	Mix_VolumeMusic(App->audio->volume_music);
 }

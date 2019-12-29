@@ -115,7 +115,7 @@ public:
 	j1Console*			cons;
 	j1MainMenu*			main_menu;
 	j1Credits*			cred;
-	j1Score*		score;
+	j1Score*			score;
 
 	#define SCALE 2
 
