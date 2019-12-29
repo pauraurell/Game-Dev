@@ -173,8 +173,8 @@ void j1EntityManager::DestroyCoins()
 		if (entityList->data->entity_type == j1Entities::Types::coin)
 		{
 			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
-			entityList->data->CleanUp();
-			RELEASE(entityList->data);
+			//entityList->data->CleanUp();
+			//RELEASE(entityList->data);
 			entities.del(entityList);
 		}
 		entityList = entityList->next;

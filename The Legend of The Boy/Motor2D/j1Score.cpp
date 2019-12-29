@@ -136,15 +136,17 @@ void j1Score::DisableAll()
 
 bool j1Score::Load(pugi::xml_node& data)
 {
-	coins = data.child("coins").attribute("coins").as_int();
+	coins = data.child("Score").attribute("coins").as_int();
+	enemies = data.child("Score").attribute("enemies").as_int();
 
 	return true;
 }
 
 bool j1Score::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node coins = data.append_child("Coins");
-	coins.append_child("coins").append_attribute("coins");
+	pugi::xml_node scoreNode = data.append_child("Score");
+	scoreNode.append_attribute("coins") = coins;
+	scoreNode.append_attribute("enemies") = enemies;
 
 	return true;
 }
