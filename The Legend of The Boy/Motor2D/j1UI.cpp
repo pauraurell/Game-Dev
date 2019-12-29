@@ -240,7 +240,7 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 
 void j1UI::CreateInGameMenuUi()
 {
-	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 166, 66 }, 20, false, { 1,114,197,272 }, { 0,0 }, nullptr, this);
+	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 166, 30 }, 20, false, { 1,114,197,322 }, { 0,0 }, nullptr, this);
 	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Settings", this);
 	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 216 }, 15, false, { 176,42,145,46 }, { -7,-2 }, "Quit to desktop", this);
 	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Save", this);
@@ -250,6 +250,7 @@ void j1UI::CreateInGameMenuUi()
 	SliderFx = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { inGameMenu_image->Position.x + 45,  inGameMenu_image->Position.y + 90 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
 	label_music = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 52 }, 20, false, { 0, 0, 0, 0 }, { 0,0 }, "Music", this);
 	label_fx = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 90 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Fx", this);
+	inGameMenu_button_Continue = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 35, inGameMenu_image->Position.y + 269 }, 17, false, { 223,285,132,37 }, { 0,0 }, "Continue", this);
 }
 
 void j1UI::CreateInGameUi()
@@ -288,6 +289,11 @@ void j1UI::UIevents(uiEvent type, UIelement* element)
 		{
 			App->LoadGame();
 		}
+
+		else if (element == inGameMenu_button_Continue)
+		{
+			InGameMenu = false;
+		}
 	}
 	}
 }
@@ -304,6 +310,7 @@ void j1UI::EnableAll()
 	SliderFx->enabled = true;
 	label_music->enabled = true;
 	label_fx->enabled = true;
+	inGameMenu_button_Continue->enabled = true;
 }
 
 void j1UI::DisableAll()
@@ -318,4 +325,5 @@ void j1UI::DisableAll()
 	SliderFx->enabled = false;
 	label_music->enabled = false;
 	label_fx->enabled = false;
+	inGameMenu_button_Continue->enabled = false;
 }
