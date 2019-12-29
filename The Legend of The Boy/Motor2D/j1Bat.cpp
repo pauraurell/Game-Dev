@@ -22,6 +22,7 @@ j1Bat::j1Bat() : j1Entities(Types::bat)
 	name.create("bat");
 	orientation = "right";
 	OnGround = true;
+	secret = false;
 }
 
 j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
@@ -32,6 +33,7 @@ j1Bat::j1Bat(iPoint pos, bool isDead) : j1Entities(Types::bat)
 	to_die = false;
 	orientation = "right";
 	OnGround = true;
+	secret = false;
 }
 
 // Destructor
@@ -167,6 +169,7 @@ bool j1Bat::Save(pugi::xml_node& data) const
 	pugi::xml_node batNode = data;
 	batNode.append_attribute("type") = name.GetString();
 	batNode.append_attribute("dead") = dead;
+	batNode.append_attribute("secret") = secret;
 	batNode = data.append_child("position");
 	batNode.append_attribute("posX") = position.x;
 	batNode.append_attribute("posY") = position.y;

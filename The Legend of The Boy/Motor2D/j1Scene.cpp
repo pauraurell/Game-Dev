@@ -285,6 +285,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 void j1Scene::RestartCurrentLevel()
 {
 	//App->entManager->RestartEntities();
+	App->entManager->DestroyCoins();
 	if (CurrentMap == "FirstLevel.tmx") { Create1MapEnemies(); player->position.x = PlayerSpawnPointX; }
 	if (CurrentMap == "SecondLevel.tmx") { Create2MapEnemies(); player->position.x = PlayerSpawnPointX2; }
 	player->position.y = PlayerSpawnPointY;
@@ -296,6 +297,7 @@ void j1Scene::RestartCurrentLevel()
 void j1Scene::StartFirstLevel()
 {
 	//If the level was restarted by pressing F1
+	App->entManager->DestroyCoins();
 	App->map->CleanUp();
 	CurrentMap.create("FirstLevel.tmx");
 	App->map->Load(CurrentMap.GetString());
@@ -342,6 +344,7 @@ void j1Scene::StartFirstLevel()
 //Restarting the second level
 void j1Scene::StartSecondLevel()
 {
+	App->entManager->DestroyCoins();
 	App->map->CleanUp();
 	CurrentMap.create("SecondLevel.tmx");
 	App->map->Load(CurrentMap.GetString());

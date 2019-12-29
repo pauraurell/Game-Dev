@@ -22,6 +22,7 @@ j1Skeleton::j1Skeleton() : j1Entities(Types::skeleton)
 	name.create("skeleton");
 	orientation = "left";
 	OnGround = true;
+	secret = false;
 }
 
 j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
@@ -32,6 +33,7 @@ j1Skeleton::j1Skeleton(iPoint pos, bool isDead) : j1Entities(Types::skeleton)
 	to_die = false;
 	orientation = "left";
 	OnGround = true;
+	secret = false;
 }
 
 // Destructor
@@ -162,6 +164,7 @@ bool j1Skeleton::Save(pugi::xml_node& data) const
 	pugi::xml_node skeletonNode = data;
 	skeletonNode.append_attribute("type") = name.GetString();
 	skeletonNode.append_attribute("dead") = dead;
+	skeletonNode.append_attribute("secret") = secret;
 	skeletonNode = data.append_child("position");
 	skeletonNode.append_attribute("posX") = position.x;
 	skeletonNode.append_attribute("posY") = position.y;

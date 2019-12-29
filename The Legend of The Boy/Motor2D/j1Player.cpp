@@ -41,6 +41,7 @@ j1Player::j1Player() : j1Entities(Types::player)
 	godModeDown = false;
 	hit = false;
 	cantGetHit = false;
+	secret = false;
 }
 
 j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
@@ -63,6 +64,7 @@ j1Player::j1Player(iPoint pos) : j1Entities(Types::player)
 	godModeLeft = false;
 	godModeUp = false;
 	godModeDown = false;
+	secret = false;
 }
 
 // Destructor
@@ -379,6 +381,7 @@ bool j1Player::Save(pugi::xml_node& data) const
 	pugi::xml_node playerNode = data;
 	playerNode.append_attribute("type") = name.GetString();
 	playerNode.append_attribute("dead") = dead;
+	playerNode.append_attribute("secret") = secret;
 	playerNode = data.append_child("position");
 	playerNode.append_attribute("posX") = position.x;
 	playerNode.append_attribute("posY") = position.y;
