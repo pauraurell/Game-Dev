@@ -234,3 +234,19 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 	return ui_element;
 }
 
+bool j1UI::Load(pugi::xml_node& data)
+{
+	/*coins = data.child("Score").attribute("coins").as_int();
+	enemies = data.child("Score").attribute("enemies").as_int();*/
+
+	return true;
+}
+
+bool j1UI::Save(pugi::xml_node& data) const
+{
+	/*pugi::xml_node scoreNode = data.append_child("UI");
+	scoreNode.append_attribute("pLifes") = ;
+	scoreNode.append_attribute("enemies") = enemies;*/
+
+	return true;
+}

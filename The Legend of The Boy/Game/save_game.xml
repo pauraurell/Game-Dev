@@ -6,88 +6,49 @@
 	<audio />
 	<map />
 	<scene>
-		<map currentMap="FirstLevel.tmx" secretMap="false" />
+		<map currentMap="FirstLevel.tmx" secretMap="false" pLifes="3" />
 	</scene>
 	<entManager>
-		<Entity type="player" dead="false">
-			<position posX="638" posY="483" />
+		<Entity type="player" dead="false" secret="false">
+			<position posX="540" posY="483" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="673" posY="400" />
+		<Entity type="bat" dead="false" secret="false">
+			<position posX="769" posY="400" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="947" posY="463" />
+		<Entity type="skeleton" dead="false" secret="false">
+			<position posX="949" posY="463" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1028" posY="105" />
+		<Entity type="bat" dead="false" secret="false">
+			<position posX="1124" posY="105" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="1537" posY="18371" />
+		<Entity type="skeleton" dead="false" secret="false">
+			<position posX="1539" posY="8203" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="792" posY="400" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1030" posY="450" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1250" posY="350" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1320" posY="379" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1088" posY="195" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="860" posY="150" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="660" posY="180" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1345" posY="124" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1600" posY="140" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1736" posY="187" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1425" posY="220" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1453" posY="430" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1553" posY="332" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1481" posY="592" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1605" posY="544" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1760" posY="445" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1490" posY="124" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="944" posY="187" />
-		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1950" posY="455" />
-		</Entity>
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
+		<Entity />
 	</entManager>
 	<particles />
 	<collision />
 	<score>
-		<Coins>
-			<coins coins="" />
-		</Coins>
+		<Score coins="0" enemies="0" />
 	</score>
 	<:anonymous />
 	<:anonymous />

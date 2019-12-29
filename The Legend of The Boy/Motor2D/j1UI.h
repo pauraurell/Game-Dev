@@ -24,6 +24,9 @@ public:
 	bool PostUpdate() override;
 	bool CleanUp() override;
 
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
 	void Draw();
 	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* mod = nullptr, bool CanDrag = false, SDL_Color color = { 0,0,0,255 });
 

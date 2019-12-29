@@ -266,6 +266,7 @@ bool j1Scene::Load(pugi::xml_node& data)
 	}
 	//Loading whether or not the secret map was visible for the player when he saved
 	App->scene->secret_map = data.child("map").attribute("secretMap").as_bool();
+	pLife = data.child("map").attribute("pLifes").as_int();
 	return true;
 }
 
@@ -278,6 +279,7 @@ bool j1Scene::Save(pugi::xml_node& data) const
 	sceneNode.append_attribute("currentMap") = App->scene->CurrentMap.GetString();
 	//Saving whether or not the secret map is visible for the player
 	sceneNode.append_attribute("secretMap") = App->scene->secret_map;
+	sceneNode.append_attribute("pLifes") = pLife;
 	return true;
 }
 
