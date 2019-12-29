@@ -149,12 +149,12 @@ bool j1MainMenu::Draw()
 {
 	posX1--; posX2 = posX2 - 2; posX3 = posX3 - 7; 
 	SDL_Rect r; r = { 0,0,2000,276 };
-	
-	LOG(true, "%i", posX3);
 	App->render->Blit(texture1, posX1, 0, &r, SDL_FLIP_NONE);
 	App->render->Blit(texture2, posX2, 40, &r, SDL_FLIP_NONE);
 	App->render->Blit(texture3, posX3, 108, &r, SDL_FLIP_NONE);
-	if (posX3 <= -1000) { posX3 = 0; posX2 = 0; posX1 = 0;}
+	if (posX3 <= -1024) posX3 = 0; 
+	if (posX2 <= -1024) posX2 = 0;
+	if (posX1 <= -1024) posX1 = 0;
 	App->render->Blit(title, 52, 8);
 
 	return true;
