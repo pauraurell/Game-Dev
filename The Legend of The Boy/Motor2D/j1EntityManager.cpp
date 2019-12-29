@@ -165,19 +165,20 @@ void j1EntityManager::DestroyEntity(j1Entities* entity)
 	delete entity;
 }
 
-void j1EntityManager::DestroyCoin(j1Entities* entity)
+void j1EntityManager::DestroyCoins()
 {
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList)
 	{
-		if (entityList->data == entity)
+		if (entityList->data->entity_type == j1Entities::Types::coin)
 		{
 			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
+			entityList->data->CleanUp();
+			RELEASE(entityList->data);
 			entities.del(entityList);
 		}
 		entityList = entityList->next;
 	}
-	delete entity;
 }
 
 void j1EntityManager::DestroyEntities()
@@ -202,8 +203,8 @@ void j1EntityManager::DrawEntities(float dt)
 	while (entityList) {
 		if(entityList->data->entity_type == j1Entities::Types::coin)
 		{
-			if (entityList->data->secret == false) { entityList->data->Draw(dt); }
-			else if (entityList->data->secret == true && App->scene->secret_map == true) { entityList->data->Draw(dt); }
+			if (entityList->data->secret == false && entityList->data->dead == false) { entityList->data->Draw(dt); }
+			else if (entityList->data->secret == true && App->scene->secret_map == true && entityList->data->dead == false) { entityList->data->Draw(dt); }
 		}
 		else { entityList->data->Draw(dt); }
 		entityList = entityList->next;

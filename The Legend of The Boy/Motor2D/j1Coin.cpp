@@ -23,11 +23,12 @@ j1Coin::j1Coin() : j1Entities(Types::coin)
 	name.create("coin");
 	orientation = "right";
 	OnGround = true;
+	secret = false;
 }
 
 j1Coin::j1Coin(iPoint pos, bool isDead, bool isSecret) : j1Entities(Types::coin)
 {
-	name.create("bat");
+	name.create("coin");
 	position = pos;
 	dead = isDead;
 	to_die = false;
@@ -64,7 +65,7 @@ bool j1Coin::Start()
 // Called each loop iteration
 bool j1Coin::PreUpdate()
 {
-	if(dead == true) { App->entManager->DestroyCoin(this); }
+	if(dead == true) { colliderBody->to_delete = true;/*App->entManager->DestroyCoin(this);*/ }
 	colliderBody->SetPos(position.x, position.y);
 
 	return true;
@@ -116,19 +117,20 @@ bool j1Coin::CleanUp()
 // Save Game State
 bool j1Coin::Save(pugi::xml_node& data) const
 {
-	pugi::xml_node batNode = data;
-	batNode.append_attribute("type") = name.GetString();
-	batNode.append_attribute("dead") = dead;
-	batNode = data.append_child("position");
-	batNode.append_attribute("posX") = position.x;
-	batNode.append_attribute("posY") = position.y;
+	/*pugi::xml_node coinNode = data;
+	coinNode.append_attribute("type") = name.GetString();
+	coinNode.append_attribute("dead") = dead;
+	coinNode.append_attribute("secret") = secret;
+	coinNode = data.append_child("position");
+	coinNode.append_attribute("posX") = position.x;
+	coinNode.append_attribute("posY") = position.y;*/
 
 	return true;
 }
 
 void j1Coin::ConfigLoading()
 {
-	pugi::xml_document	config_file;
+	/*pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	config = App->LoadConfig(config_file);
 	config = config.child("bat");
@@ -138,7 +140,7 @@ void j1Coin::ConfigLoading()
 	SpawnPointY = config.child("initialPosition").attribute("y").as_int();
 	orientation = config.child("initialPosition").attribute("orientation").as_string();
 	gravity = config.child("gravity").attribute("value").as_float();
-	node = config;
+	node = config;*/
 }
 
 
