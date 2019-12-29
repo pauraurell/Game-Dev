@@ -25,16 +25,7 @@ public:
 	bool CleanUp() override;
 
 	void Draw();
-	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false);
-	
-
-public:
-
-	//All UI Elements List
-	p2List<UIelement*>	UIelements;
-
 	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false, SDL_Color color = { 0,0,0,255 });
-
 
 public:
 

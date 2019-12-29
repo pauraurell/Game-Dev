@@ -216,22 +216,7 @@ bool j1Scene::CleanUp()
 	timer_label->enabled = false;
 	SettingsButton->enabled = false;
 
-	inGameMenu_image = nullptr;
-	inGameMenu_label_settings = nullptr;
-	inGameMenu_button_QuitToDesktop = nullptr;
-	inGameMenu_button_Save = nullptr;
-	inGameMenu_button_Load = nullptr;
-	inGameMenu_button_MainMenu = nullptr;
-	SliderMusic = nullptr;
-	SliderFx = nullptr;
-	label_music = nullptr;
-	label_fx = nullptr;
-	inGameMenu_button_Continue = nullptr;
-	coin_image = nullptr;
-	coin_label = nullptr;
-	timer_image = nullptr;
-	timer_label = nullptr;
-	SettingsButton = nullptr;
+
 
 	App->ui->CleanUp();
 	return true;

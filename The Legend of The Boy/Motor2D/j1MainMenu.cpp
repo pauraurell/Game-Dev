@@ -47,7 +47,7 @@ bool j1MainMenu::Start()
 	posX2 = 0;
 	posX3 = 0;
 
-	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 170 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this);
+	testButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 170 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Play", this, false);
 	ContinueButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 224 }, 22, false, { 1,38,153,53 }, { 0,-1 }, "Continue", this);
 	exitButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 50, 310 }, 22, false, { 220,174,153,53 }, { 0,-1 }, "Exit", this);
 	creditsButton = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 300, 210 }, 22, false, { 230,114,145,46 }, { 6,-8 }, "Credits", this);
@@ -128,16 +128,7 @@ bool j1MainMenu::PostUpdate()
 // Called before quitting
 bool j1MainMenu::CleanUp()
 {
-	testButton = nullptr;
-	exitButton = nullptr;
-	creditsButton = nullptr;
-	settingsButton = nullptr;
-	ContinueButton = nullptr;
-	settingsButtonOk = nullptr;
-	sliderFx = nullptr;
-	sliderFxLabel = nullptr;
-	sliderMusic = nullptr;
-	sliderMusicLabel = nullptr;
+
 	App->tex->UnLoad(title);
 	App->tex->UnLoad(texture1);
 	App->tex->UnLoad(texture2);
