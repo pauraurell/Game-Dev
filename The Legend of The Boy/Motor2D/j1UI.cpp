@@ -49,6 +49,7 @@ bool j1UI::Start()
 	CreateInGameMenuUi();
 
 	timer = new p2SString();
+	pts = 0;
 
 	return true;
 }
@@ -152,6 +153,8 @@ void j1UI::Draw()
 		coin_label->enabled = true;
 		timer_image->enabled = true;
 		timer_label->enabled = true;
+		pts_image->enabled = true;
+		pts_label->enabled = true;
 		SettingsButton->enabled = true;
 
 		if (App->scene->cameraTracking == true)
@@ -176,8 +179,11 @@ void j1UI::Draw()
 		}
 		else { timer_label->text = "00:00"; }
 
-		p2SString* coins = new p2SString("%i", App->score->coins);
-		coin_label->text = coins->GetString();
+		p2SString* string = new p2SString("%i", App->score->coins);
+		coin_label->text = string->GetString();
+
+		string->create("%i", pts);
+		pts_label->text = string->GetString();
 
 		//----- In Game Menu -----// ---------------------------------
 		if (InGameMenu) 
@@ -197,12 +203,14 @@ void j1UI::Draw()
 		coin_label->enabled = false;
 		timer_image->enabled = false;
 		timer_label->enabled = false;
+		pts_image->enabled = false;
+		pts_label->enabled = false;
 		SettingsButton->enabled = false;
 	}
 }
 
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag)
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag, SDL_Color color)
 {
 	UIelement* ui_element = nullptr;
 
@@ -238,6 +246,7 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 		ui_element->size = size;
 		ui_element->posOffset = PositionOffset;
 		ui_element->canMoveIn_X_axis = CanDrag;
+		ui_element->color = color;
 
 		UIelements.add(ui_element)->data->Start();
 	}
@@ -266,6 +275,8 @@ void j1UI::CreateInGameUi()
 	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
 	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
 	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
+	pts_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 4, 94 }, 20, false, { 108,0,21,22 }, { 0,0 }, nullptr, this);
+	pts_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 96 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00", this);
 	SettingsButton = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 460 , 6 }, 17, false, { 388,243,40,36 }, { 0,0 }, nullptr, this);
 }
 

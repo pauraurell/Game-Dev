@@ -46,6 +46,10 @@ bool j1Score::Update(float dt)
 	background.y = App->render->camera.y * (-1 / 2) + 150;
 	background.w = 630;
 	background.h = 365;
+
+	coinsScore = coins * 10;
+	enemiesScore = enemies * 30;
+	App->ui->pts = coinsScore + enemiesScore;
 	
 	return true;
 }
@@ -87,12 +91,10 @@ bool j1Score::Draw()
 		p2SString* string = new p2SString("Lifes: %i x 50 -> %i", App->ui->pLife, lifesScore);
 		lifesScore_label->text = string->GetString();
 
-		coinsScore = coins * 10;
 		string->create("Coins: %i x 10 -> %i", coins, coinsScore);
 		coinsScore_label->text = string->GetString();
 
-		enemiesScore = enemies * 10;
-		string->create("Enemies: %i x 10 -> %i", enemies, enemiesScore);
+		string->create("Enemies: %i x 30 -> %i", enemies, enemiesScore);
 		enemiesScore_label->text = string->GetString();
 
 		timeScore = -(time - 120) * 0.1;

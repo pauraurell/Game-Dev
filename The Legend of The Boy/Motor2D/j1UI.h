@@ -8,6 +8,7 @@
 #include "j1Timer.h"
 
 struct SDL_Texture;
+struct SDL_Color;
 
 class j1UI : public j1Module
 {
@@ -27,7 +28,7 @@ public:
 
 	void Draw();
 
-	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false);
+	UIelement* Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll, UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text = nullptr, j1Module* listener = nullptr, bool CanDrag = false, SDL_Color color = { 0,0,0,255 });
 
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
@@ -40,6 +41,7 @@ public:
 public:
 
 	int				pLife;
+	int				pts;
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
 	p2List<UIelement*>	UIelements;
@@ -55,6 +57,8 @@ public:
 	UIelement* coin_label;
 	UIelement* timer_image;
 	UIelement* timer_label;
+	UIelement* pts_image;
+	UIelement* pts_label;
 	UIelement* inGameMenu_label_settings;
 	UIelement* inGameMenu_image;
 	UIelement* inGameMenu_button_QuitToDesktop;

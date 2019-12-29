@@ -10,19 +10,19 @@
 	</scene>
 	<entManager>
 		<Entity type="player" dead="false">
-			<position posX="585" posY="483" />
+			<position posX="564" posY="483" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="742" posY="400" />
+		<Entity type="bat" dead="true">
+			<position posX="741" posY="400" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="982" posY="463" />
+		<Entity type="skeleton" dead="true">
+			<position posX="1145" posY="3807" />
 		</Entity>
-		<Entity type="bat" dead="false">
-			<position posX="1097" posY="105" />
+		<Entity type="bat" dead="true">
+			<position posX="1096" posY="105" />
 		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="1572" posY="132849" />
+		<Entity type="skeleton" dead="true">
+			<position posX="1351" posY="44931" />
 		</Entity>
 	</entManager>
 	<particles />

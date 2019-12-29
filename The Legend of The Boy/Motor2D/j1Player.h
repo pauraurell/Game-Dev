@@ -109,7 +109,6 @@ public:
 	bool		ColOffssetON;
 
 	//GOD MODE
-	bool godMode;
 	bool godModeRight;
 	bool godModeLeft;
 	bool godModeUp;

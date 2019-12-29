@@ -63,6 +63,7 @@ public:
 	p2SString		orientation;
 	int				SpawnPointX, SpawnPointY;
 	float			gravity;
+	bool			godMode;
 	
 	//COLLIDERS
 	Collider*		colliderHead = nullptr;
