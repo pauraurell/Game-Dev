@@ -54,6 +54,7 @@ public:
 	bool cameraTracking;
 	bool sceneEnded;
 	bool to_end;
+	bool photo_mode;
 
 	int scene_change_timer;
 	bool sceneChangeTimer;
