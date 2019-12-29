@@ -6,27 +6,35 @@
 	<audio />
 	<map />
 	<scene>
-		<map currentMap="FirstLevel.tmx" secretMap="true" />
+		<map currentMap="FirstLevel.tmx" secretMap="false" />
 	</scene>
 	<entManager>
 		<Entity type="player" dead="false">
-			<position posX="540" posY="483" />
+			<position posX="570" posY="483" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="723" posY="400" />
-		</Entity>
-		<Entity type="skeleton" dead="false">
-			<position posX="983" posY="463" />
+			<position posX="600" posY="450" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="1078" posY="105" />
+			<position posX="746" posY="400" />
 		</Entity>
 		<Entity type="skeleton" dead="false">
-			<position posX="1573" posY="323" />
+			<position posX="974" posY="463" />
+		</Entity>
+		<Entity type="bat" dead="false">
+			<position posX="1101" posY="105" />
+		</Entity>
+		<Entity type="skeleton" dead="false">
+			<position posX="1564" posY="10239" />
 		</Entity>
 	</entManager>
 	<particles />
 	<collision />
+	<score coins="0" />
+	<:anonymous />
+	<:anonymous />
+	<menu />
+	<intro />
 	<fade />
 	<pathfinding />
 	<fonts />

@@ -28,7 +28,7 @@ public:
 
 private:
 
-	UIelement* label = nullptr;
+	UIelement* ButtonLabel = nullptr;
 	int MouseMovement;
 
 	bool drag;

@@ -18,7 +18,7 @@
 
 j1MainMenu::j1MainMenu() : j1Module()
 {
-	name.create("intro");
+	name.create("menu");
 	SettingsMenuIsActive = false;
 	stop = false;
 }

@@ -63,7 +63,7 @@ bool Slider::Update(float dt)
 bool Slider::PostUpdate()
 {
 	int v = 0;
-	float volume = ((float)-button->posOffset.x / 122.f) *100.f;
+	volume = ((float)-button->posOffset.x / 122.f) *100.f;
 
 	if (button->posOffset.x > 0)
 	{

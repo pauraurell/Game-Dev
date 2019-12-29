@@ -7,7 +7,7 @@
 
 j1Score::j1Score()
 {
-
+	name.create("score");
 }
 
 j1Score::~j1Score()
@@ -132,4 +132,19 @@ void j1Score::DisableAll()
 	lifesScore_label->enabled = false;
 	totalScore_label->enabled = false;
 	escToEnd_label->enabled = false;
+}
+
+bool j1Score::Load(pugi::xml_node& data)
+{
+	coins = data.child("coins").attribute("coins").as_int();
+
+	return true;
+}
+
+bool j1Score::Save(pugi::xml_node& data) const
+{
+	LOG(true, "saving");
+	data.append_attribute("coins") = coins;
+
+	return true;
 }
