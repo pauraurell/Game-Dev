@@ -29,17 +29,14 @@ bool Button::Start()
 
 bool Button::PreUpdate()
 {
-	if (label != nullptr)
-		label->enabled = enabled;
-
-	above = Is_above();
+	if (label != nullptr) { label->enabled = enabled; }
 
 	return true;
 }
 
 bool Button::Update(float dt)
 {
-	if (above && enabled)
+	if (Is_above() && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 			Click();
@@ -67,9 +64,8 @@ bool Button::Update(float dt)
 
 bool Button::PostUpdate()
 {
-	if (enabled)
-		Draw();
-
+	if (enabled) { Draw(); }
+	
 	return true;
 }
 
@@ -85,7 +81,7 @@ void Button::Drag(float dt)
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 	iPoint currentposition = this->Position;
 
-	if (canMoveIn_X_axis) { this->Position.x += ((MousePos.x - this->Position.x) - MouseMovement); }
+	if (canMoveIn_X_axis) { this->Position.x += ((MousePos.x - this->Position.x) - MouseMovement)*1/2; }
 		
 	if (parent != nullptr)
 	{

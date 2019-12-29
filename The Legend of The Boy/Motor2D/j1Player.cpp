@@ -120,7 +120,7 @@ bool j1Player::Update(float dt)
 		switch (state) {
 		case PLAYER_JUMP:
 			OnGround = false;
-			App->audio->PlayFx(JumpFx, 0, 2);
+			App->audio->PlayFx(JumpFx, App->audio->volume_fx, 0, 2);
 			while (vel.y > -4.5)
 			{
 				current_animation = &jump;
@@ -398,7 +398,7 @@ void j1Player::GetPlayerState()
 
 		else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN && dash == false)
 		{
-			App->audio->PlayFx(JumpFx, 0, 3);
+			App->audio->PlayFx(JumpFx, App->audio->volume_fx, 0, 2);
 			if (orientation == "right") {App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0);}
 			if (orientation == "left") { App->particles->AddParticle(App->particles->DashParticle, position.x - 8, position.y + 16, 0, 250, 0, 0, SDL_FLIP_HORIZONTAL); }
 			

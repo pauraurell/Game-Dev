@@ -59,7 +59,6 @@ public:
 
 	const char* text = nullptr;
 	bool enabled;
-	bool above;
 	int size;
 	iPoint posOffset;
 

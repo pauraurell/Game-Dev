@@ -14,7 +14,6 @@ UIelement::UIelement()
 
 	section = { 0,0,0,0 };
 	bool enabled = false;
-	bool above = false;
 	posOffset = { 0,0 };
 }
 
@@ -51,7 +50,7 @@ bool UIelement::CleanUp()
 
 void UIelement::Draw()
 {
-	if ((above == true) && (this->type == TYPE_UI::UI_BUTTON))
+	if ((Is_above() == true) && (this->type == TYPE_UI::UI_BUTTON))
 	{
 		SDL_SetTextureColorMod(texture, 255, 190, 170);
 		SDL_SetTextureAlphaMod(texture, 220);

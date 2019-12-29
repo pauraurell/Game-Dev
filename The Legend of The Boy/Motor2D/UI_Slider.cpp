@@ -46,14 +46,14 @@ bool Slider::Start()
 bool Slider::PreUpdate()
 {
 	if (enabled) { button->enabled = true; }
-	above = Is_above();
+	else { button->enabled = false; }
 
 	return true;
 }
 
 bool Slider::Update(float dt)
 {
-	if (above && enabled)
+	if (Is_above() && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN) { Click(); }
 	}
@@ -78,10 +78,10 @@ bool Slider::PostUpdate()
 
 	v = (int)volume;
 
-	/*if (this->type_of_slider == SLIDER_TYPE::Fx)
+	if (this->type_of_slider == SLIDER_TYPE::Fx)
 	{
-	
-	}*/
+		App->audio->volume_fx = v;
+	}
 	if (this->type_of_slider == SLIDER_TYPE::Music)
 	{
 		Mix_VolumeMusic(v);
