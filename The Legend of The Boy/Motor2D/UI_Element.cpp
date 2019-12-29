@@ -51,7 +51,7 @@ bool UIelement::CleanUp()
 
 void UIelement::Draw()
 {
-	if ((Is_above() == true) && (this->type == TYPE_UI::UI_BUTTON))
+	if ((OnTop() == true) && (this->type == TYPE_UI::UI_BUTTON))
 	{
 		SDL_SetTextureColorMod(texture, 255, 190, 170);
 		SDL_SetTextureAlphaMod(texture, 220);
@@ -67,26 +67,27 @@ void UIelement::Draw()
 	
 }
 
-
-bool UIelement::Is_above()
+bool UIelement::OnTop()
 {
 	bool ret = false;
-	
-	SDL_Point mouse;
-	SDL_Point mousePos;
+
+	SDL_Point mouse; SDL_Point mousePos;
 	App->input->GetMousePosition(mouse.x, mouse.y);
 	mouse.x = mouse.x / SCALE;
 	mouse.y = mouse.y / SCALE;
 
-	SDL_Rect intersect = { Position.x , Position.y, section.w, section.h };
+	SDL_Rect Rect = { Position.x , Position.y, section.w, section.h };
 	//LOG(true, "%i, %i, %i, %i", intersect.x, intersect.y, intersect.w, intersect.h);
 
-	if (SDL_PointInRect(&mouse, &intersect)) {
+	if (SDL_PointInRect(&mouse, &Rect)) {
 		//LOG(true, "ABOVE");
-		if (listener != nullptr)
+		if (mod != nullptr)
 		{
-			if (played == false && this->enabled == true) { App->audio->PlayFx(above, App->audio->volume_fx, 0, 3); played = true; }
-			this->listener->UIevents(uiEvent::EVENT_HOVER, this);
+			if (played == false && this->enabled == true)
+			{
+				App->audio->PlayFx(above, App->audio->volume_fx, 0, 3); played = true;
+			}
+			this->mod->UIevents(uiEvent::EVENT_HOVER, this);
 		}
 		ret = true;
 	}
@@ -94,7 +95,7 @@ bool UIelement::Is_above()
 
 	//else { LOG(true, "NO ABOVE"); }
 	//LOG(true, "%i, %i", mouse.x, mouse.y);
-	
+
 	return ret;
 }
 
@@ -107,9 +108,15 @@ void UIelement::SetPos(int x, int y)
 
 void UIelement::Click()
 {
-	if (listener != nullptr)
+	if (mod != nullptr)
 	{
 		App->audio->PlayFx(click, App->audio->volume_fx, 0, 3);
-		this->listener->UIevents(uiEvent::EVENT_ONCLICK, this);
+		this->mod->UIevents(uiEvent::EVENT_ONCLICK, this);
 	}
+}
+
+void UIelement::Blit()
+{
+	App->render->Blit(texture, Position.x + App->render->camera.x / -SCALE, Position.y + App->render->camera.y / -SCALE, &section);
+	if (App->ui->debug) { App->render->DrawQuad({ Position.x*SCALE, Position.y*SCALE, section.w*SCALE, section.h*SCALE }, 255, 0, 255, 255, false, false); }
 }

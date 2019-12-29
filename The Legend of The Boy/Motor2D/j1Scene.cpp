@@ -318,7 +318,6 @@ void j1Scene::StartFirstLevel()
 				entityList->data->SetPlayerState(j1Entities::playerStates::PLAYER_IDLE);
 			}
 			entityList = entityList->next;
-			
 		}
 		input = false;
 	}

@@ -39,8 +39,9 @@ public:
 
 	virtual bool CleanUp();
 
-	bool Is_above();
+	bool OnTop();
 	virtual void Click();
+	void Blit();
 
 	void Draw();
 
@@ -49,26 +50,19 @@ public:
 public:
 
 	SDL_Texture* texture = nullptr;
-
 	UIelement* parent = nullptr;
-	j1Module* listener = nullptr;
-
+	j1Module* mod = nullptr;
 	TYPE_UI type;
-
 	iPoint Position;
-
 	bool canMoveIn_X_axis = false;
-
 	const char* text = nullptr;
 	bool enabled;
 	int size;
 	iPoint posOffset;
 	SDL_Color color;
-	int v;
 	uint click;
 	uint above;
 	bool played;
-
 	SDL_Rect section;
 
 };

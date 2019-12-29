@@ -190,7 +190,7 @@ void j1UI::Draw()
 }
 
 
-UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* listener, bool CanDrag, SDL_Color color)
+UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelement* parent, iPoint Position, int size, bool enabled, SDL_Rect section, iPoint PositionOffset, const char* text, j1Module* mod, bool CanDrag, SDL_Color color)
 {
 	UIelement* ui_element = nullptr;
 
@@ -218,7 +218,7 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 	if (ui_element !=nullptr)
 	{
 		ui_element->parent = parent;		
-		ui_element->listener = listener;	
+		ui_element->mod = mod;
 		ui_element->Position = Position;
 		ui_element->enabled = enabled;
 		ui_element->section = section;
