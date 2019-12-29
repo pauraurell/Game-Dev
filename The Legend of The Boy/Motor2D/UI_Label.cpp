@@ -43,7 +43,7 @@ bool Label::Update(float dt)
 
 bool Label::PostUpdate()
 {
-	if (enabled)
+	if (enabled && texture!=nullptr)
 	{
 		App->render->Blit(texture, Position.x + App->render->camera.x/-SCALE,  Position.y + App->render->camera.y / -SCALE, nullptr);
 	}

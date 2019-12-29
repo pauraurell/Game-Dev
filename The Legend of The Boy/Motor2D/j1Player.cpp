@@ -329,7 +329,7 @@ bool j1Player::Update(float dt)
 
 	if (hitTimer->ReadSec() > 3 && cantGetHit == true) { cantGetHit = false; }
 
-	if (App->ui->pLife == 0) { dead = true; }
+	if (App->scene->pLife == 0) { dead = true; }
 
 	OnGround = false;
 
@@ -576,11 +576,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		if (godMode == false && cantGetHit == false)
 		{
 			//dead = true;
-			if (App->ui->pLife > 0)
+			if (App->scene->pLife > 0)
 			{
-				App->ui->pLife -= 1;
+				App->scene->pLife -= 1;
 				App->audio->PlayFx(HitFx, App->audio->volume_fx, 0, 2);
-				if (App->scene->cameraTracking == true) { LOG(true, "Player Lifes: %i", App->ui->pLife); }
+				if (App->scene->cameraTracking == true) { LOG(true, "Player Lifes: %i", App->scene->pLife); }
 				hit = true;
 				App->scene->input = false;
 				vel.y = -4;
@@ -602,7 +602,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 		{
 			//App->scene->EndScene();
 			App->score->draw = true;
-			App->ui->time.Stop();
+			App->scene->time.Stop();
 			App->scene->input = false;
 			SetPlayerState(PLAYER_IDLE);
 			App->scene->sceneEnded = true;
@@ -641,23 +641,23 @@ void j1Player::Respawn()
 		App->scene->input = true;
 		respawnTimer = false;
 		App->scene->secret_map = false;
-		if (App->ui->pLife == 0 || App->ui->pLife - 1 == 0)
+		if (App->scene->pLife == 0 || App->scene->pLife - 1 == 0)
 		{ 
 			//App->ui->pLife = 3;
 			//if (App->scene->CurrentMap == "FirstLevel.tmx") { App->scene->Create1MapEnemies(); position.x = App->scene->PlayerSpawnPointX; }
 			//if (App->scene->CurrentMap == "SecondLevel.tmx") { App->scene->Create2MapEnemies(); position.x = 20; }
-			App->fade->ResetFade();
+		//	App->fade->ResetFade();
 			App->scene->to_end = true;
 			LOG(true, "Player Died");
 		}
 		else 
 		{
-			App->ui->pLife -= 1;
+			App->scene->pLife -= 1;
 			if (App->scene->CurrentMap == "FirstLevel.tmx") { position.x = App->scene->PlayerSpawnPointX; }
 			if (App->scene->CurrentMap == "SecondLevel.tmx") { position.x = 20; }
 			LOG(true, "Respawning Player");
 		}
-		LOG(true, "Player Lifes: %i", App->ui->pLife);
+		LOG(true, "Player Lifes: %i", App->scene->pLife);
 	}
 }
 

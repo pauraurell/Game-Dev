@@ -17,18 +17,9 @@
 
 j1UI::j1UI()
 {
-	pLife = 3;
-	heart.x = 0;
-	heart.y = 0;
-	heart.w = 26;
-	heart.h = 24;
-	emptHeart.x = 27;
-	emptHeart.y = 0;
-	emptHeart.w = 26;
-	emptHeart.h = 24;
 
 	debug = false;
-	InGameMenu = false;
+
 }
 
 j1UI::~j1UI()
@@ -44,11 +35,6 @@ bool j1UI::Awake(pugi::xml_node& config)
 bool j1UI::Start()
 {
 	ui_tex = App->tex->Load("textures/UI/atlas.png");
-	CreateInGameUi();
-
-	CreateInGameMenuUi();
-
-	timer = new p2SString();
 
 	return true;
 }
@@ -78,7 +64,7 @@ bool j1UI::Update(float dt)
 
 	if (App->scene->cameraTracking == false)
 	{
-		if (pLife < 3) { pLife = 3; }
+		if (App->scene->pLife < 3) { App->scene->pLife = 3; }
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
@@ -121,7 +107,7 @@ void j1UI::Draw()
 {
 	BROFILER_CATEGORY("Draw_UI", Profiler::Color::PowderBlue)
 
-	if (App->scene->active) 
+	/*if (App->scene->active) 
 	{
 		if (pLife == 3)
 		{
@@ -198,7 +184,7 @@ void j1UI::Draw()
 		timer_image->enabled = false;
 		timer_label->enabled = false;
 		SettingsButton->enabled = false;
-	}
+	}*/
 }
 
 
@@ -243,100 +229,4 @@ UIelement* j1UI::Add_UIelement(TYPE_UI type, SLIDER_TYPE typeOfScroll,  UIelemen
 	}
 
 	return ui_element;
-}
-
-void j1UI::CreateInGameMenuUi()
-{
-	inGameMenu_image = Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 166, 30 }, 20, false, { 1,114,197,322 }, { 0,0 }, nullptr, this);
-	inGameMenu_label_settings = Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 46,  inGameMenu_image->Position.y + 10 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Settings", this);
-	inGameMenu_button_QuitToDesktop = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 216 }, 15, false, { 176,42,145,46 }, { -7,-2 }, "Quit to desktop", this);
-	inGameMenu_button_Save = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 23, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Save", this);
-	inGameMenu_button_Load = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 102, inGameMenu_image->Position.y + 120 }, 17, false, { 339,42,72,46 }, { 0,0 }, "Load", this);
-	inGameMenu_button_MainMenu = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 27, inGameMenu_image->Position.y + 166 }, 17, false, { 230,114,145,46 }, { 0,0 }, "Main Menu", this);
-	SliderMusic = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Music, nullptr, { inGameMenu_image->Position.x + 45,  inGameMenu_image->Position.y + 52 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
-	SliderFx = App->ui->Add_UIelement(TYPE_UI::UI_SLIDER, SLIDER_TYPE::Fx, nullptr, { inGameMenu_image->Position.x + 45,  inGameMenu_image->Position.y + 90 }, 20, false, { 220, 248, 128, 4 }, { 0,0 }, nullptr, this);
-	label_music = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 52 }, 20, false, { 0, 0, 0, 0 }, { 0,0 }, "Music", this);
-	label_fx = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 15,  inGameMenu_image->Position.y + 90 }, 20, false, { 0,0,0,0 }, { 0,0 }, "Fx", this);
-	inGameMenu_button_Continue = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { inGameMenu_image->Position.x + 35, inGameMenu_image->Position.y + 269 }, 17, false, { 223,285,132,37 }, { 0,0 }, "Continue", this);
-}
-
-void j1UI::CreateInGameUi()
-{
-	coin_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 4, 35 }, 20, false, { 62,0,22,22 }, { 0,0 }, nullptr, this);
-	coin_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 36 }, 20,  false, { 0,0,0,0 }, { 0,0 }, "0", this);
-	timer_image = App->ui->Add_UIelement(TYPE_UI::UI_IMAGE, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 7, 65 }, 20, false, { 89,0,15,22 }, { 0,0 }, nullptr, this);
-	timer_label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 32, 66 }, 20, false, { 0,0,0,0 }, { 0,0 }, "00:00", this);
-	SettingsButton = Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, nullptr, { 460 , 6 }, 17, false, { 388,243,40,36 }, { 0,0 }, nullptr, this);
-}
-
-void j1UI::UIevents(uiEvent type, UIelement* element)
-{
-
-	switch (type)
-	{
-	case uiEvent::EVENT_ONCLICK:
-	{
-		if (element == inGameMenu_button_QuitToDesktop)
-		{
-			App->QuitToDesktop = true;
-		}
-
-		else if (element == inGameMenu_button_MainMenu)
-		{
-			App->render->camera.x = 0;
-			App->render->camera.y = 0;
-			App->scene->EndScene();
-		}
-
-		else if (element == inGameMenu_button_Save)
-		{
-			App->SaveGame();
-		}
-
-		else if (element == inGameMenu_button_Load)
-		{
-			App->LoadGame();
-		}
-
-		else if (element == inGameMenu_button_Continue)
-		{
-			InGameMenu = false;
-		}
-
-		else if (element == SettingsButton)
-		{
-			InGameMenu = !InGameMenu;
-		}
-	}
-	}
-}
-
-void j1UI::EnableAll()
-{
-	inGameMenu_image->enabled = true;
-	inGameMenu_label_settings->enabled = true;
-	inGameMenu_button_QuitToDesktop->enabled = true;
-	inGameMenu_button_Save->enabled = true;
-	inGameMenu_button_Load->enabled = true;
-	inGameMenu_button_MainMenu->enabled = true;
-	SliderMusic->enabled = true;
-	SliderFx->enabled = true;
-	label_music->enabled = true;
-	label_fx->enabled = true;
-	inGameMenu_button_Continue->enabled = true;
-}
-
-void j1UI::DisableAll()
-{
-	inGameMenu_image->enabled = false;
-	inGameMenu_label_settings->enabled = false;
-	inGameMenu_button_QuitToDesktop->enabled = false;
-	inGameMenu_button_Save->enabled = false;
-	inGameMenu_button_Load->enabled = false;
-	inGameMenu_button_MainMenu->enabled = false;
-	SliderMusic->enabled = false;
-	SliderFx->enabled = false;
-	label_music->enabled = false;
-	label_fx->enabled = false;
-	inGameMenu_button_Continue->enabled = false;
 }

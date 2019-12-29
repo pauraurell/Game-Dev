@@ -2,6 +2,10 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
+#include "SDL/include/SDL.h"
+#include "UI_Element.h"
+#include "p2List.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 class j1Entities;
@@ -45,9 +49,22 @@ public:
 	void Create1MapEnemies();
 	void Create2MapEnemies();
 	void EndScene();
+	void drawSceneUi();
+
+	void CreateInGameUi();
+	void CreateInGameMenuUi();
+	void UIevents(uiEvent type, UIelement* element);
+	void EnableAll();
+	void DisableAll();
+
+	int				pLife;
+	SDL_Rect		heart;
+	SDL_Rect		emptHeart;
+	bool InGameMenu;
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const; 
+
 	bool scene_changed;
 	bool secret_map;
 	bool input;
@@ -67,10 +84,6 @@ public:
 
 	iPoint playerSpawnPoint;
 	
-	
-	UIelement* Image;
-
-
 	int PlayerSpawnPointX;
 	int PlayerSpawnPointX2;
 	int PlayerSpawnPointY;
@@ -93,6 +106,29 @@ public:
 	int Skeleton2SpawnPointX2;
 	int Skeleton2SpawnPointY2;
 
+	//TIMER
+	j1Timer		time;
+	int			sec;
+	int			min;
+	p2SString* timer;
+
+	//UI Elements
+	UIelement* coin_image;
+	UIelement* coin_label;
+	UIelement* timer_image;
+	UIelement* timer_label;
+	UIelement* inGameMenu_label_settings;
+	UIelement* inGameMenu_image;
+	UIelement* inGameMenu_button_QuitToDesktop;
+	UIelement* inGameMenu_button_Save;
+	UIelement* inGameMenu_button_Load;
+	UIelement* inGameMenu_button_MainMenu;
+	UIelement* label_fx;
+	UIelement* label_music;
+	UIelement* SliderFx;
+	UIelement* SliderMusic;
+	UIelement* inGameMenu_button_Continue;
+	UIelement* SettingsButton;
 
 private:
 

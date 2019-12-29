@@ -6,23 +6,23 @@
 	<audio />
 	<map />
 	<scene>
-		<map currentMap="FirstLevel.tmx" secretMap="false" />
+		<map currentMap="FirstLevel.tmx" secretMap="true" />
 	</scene>
 	<entManager>
 		<Entity type="player" dead="false">
-			<position posX="585" posY="483" />
+			<position posX="540" posY="483" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="742" posY="400" />
+			<position posX="723" posY="400" />
 		</Entity>
 		<Entity type="skeleton" dead="false">
-			<position posX="982" posY="463" />
+			<position posX="983" posY="463" />
 		</Entity>
 		<Entity type="bat" dead="false">
-			<position posX="1097" posY="105" />
+			<position posX="1078" posY="105" />
 		</Entity>
 		<Entity type="skeleton" dead="false">
-			<position posX="1572" posY="132849" />
+			<position posX="1573" posY="323" />
 		</Entity>
 	</entManager>
 	<particles />

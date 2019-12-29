@@ -76,9 +76,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// render last to swap buffer
 	AddModule(render);
 
-	mainTimer = new j1Timer();
-	PerfTimer = new j1PerfTimer();
-	lastSecFrames = new j1Timer();
 }
 
 // Destructor
@@ -121,7 +118,7 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
-		framerate = app_config.child("framerateCap").attribute("fps").as_int();;
+		frameratecap = app_config.child("framerateCap").attribute("fps").as_int();;
 	}
 
 	if(ret == true)
@@ -212,15 +209,15 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 void j1App::PrepareUpdate()
 {
 	frame_count++;
-	last_second_frame_count++;
+	last_sec_frame_count++;
 
-	//Controls pause of the game
+	// Let's pause the game.
 	if (!pause)
-		dt = lastFrameTimer.ReadSec();
+		dt = frame_time.ReadSec();
 	else
 		dt = 0.0f;
 
-	lastFrameTimer.Start();
+	frame_time.Start();
 }
 
 // ---------------------------------------------
@@ -234,21 +231,32 @@ void j1App::FinishUpdate()
 
 	// Framerate
 
-	float seconds_since_startup = mainTimer->ReadSec();
-	avg_fps = float(frame_count) / seconds_since_startup;
-	last_frame_ms = lastFrameTimer.Read();
-
-	if (lastSecFrames->Read() >= 1000)
+	if (last_sec_frame_time.Read() > 1000)
 	{
-		frames_on_last_update = last_second_frame_count;
-		last_second_frame_count = 0;
-		lastSecFrames->Start();
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+
+	avg_fps = float(frame_count) / startup_time.ReadSec();
+	seconds_since_startup = startup_time.ReadSec();
+	last_frame_ms = frame_time.Read();
+	frames_on_last_update = prev_last_sec_frame_count;
+
+
+
+	if (last_frame_ms < (1000 / frameratecap))
+	{
+		j1PerfTimer timer;
+		SDL_Delay((1000 / frameratecap) - last_frame_ms);
+
+
 	}
 
 	if (App->FrameCapEnabled)
 		capStr.create("Enabled");
 
-	if (framerate == 30) 
+	if (frameratecap == 30)
 	{
 		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: %s   || Vsync: Disabled",
 		GetTitle(),  avg_fps, frames_on_last_update, last_frame_ms,  capStr.GetString());
@@ -256,20 +264,15 @@ void j1App::FinishUpdate()
 		App->render->vsyncActive = false;
 	}
 
-	else if (framerate == 60)
+	else if (frameratecap == 60)
 	{
 		p2SString title("%s ||  Av. fps: %.2f  ||  Frames last second: %d  ||  Last Frame Ms: %u  ||  FrameCap: Disabled   || Vsync: Enabled",
 			GetTitle(), avg_fps, frames_on_last_update, last_frame_ms);
 		App->win->SetTitle(title.GetString());
 		App->render->vsyncActive = true;
 	}
-	
 
-	if (FrameCapEnabled)
-		if (last_frame_ms < 1000 / framerate)
-		{
-			SDL_Delay((1000 / framerate) - last_frame_ms);
-		}
+	Mix_VolumeMusic(App->audio->volume_music);
 }
 
 // Call modules before each loop iteration
@@ -336,7 +339,7 @@ bool j1App::PostUpdate()
 
 	if (QuitToDesktop) { return false; }
 
-	Mix_VolumeMusic(App->audio->volume_music);
+
 
 	return ret;
 }
