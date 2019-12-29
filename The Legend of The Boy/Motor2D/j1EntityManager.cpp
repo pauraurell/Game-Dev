@@ -170,7 +170,7 @@ void j1EntityManager::DestroyCoin(j1Entities* entity)
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList)
 	{
-		if (entityList->data->entity_type == j1Entities::Types::coin)
+		if (entityList->data == entity)
 		{
 			if (entityList->data->colliderBody != nullptr) { entityList->data->colliderBody->to_delete = true; }
 			entities.del(entityList);

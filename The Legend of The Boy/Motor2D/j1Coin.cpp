@@ -63,6 +63,7 @@ bool j1Coin::Start()
 // Called each loop iteration
 bool j1Coin::PreUpdate()
 {
+	if(dead == true) { App->entManager->DestroyCoin(this); }
 	colliderBody->SetPos(position.x, position.y);
 
 	return true;
@@ -146,7 +147,7 @@ void j1Coin::Pushbacks()
 	coin.PushBack({ 19, 0, 10, 16 }, 0.12f, 1, 1, 1, 1);
 	coin.PushBack({ 37, 0, 6, 16 }, 0.12f, 1, 1, 1, 1);
 	coin.PushBack({ 51, 0, 10, 16 }, 0.12f, 1, 1, 1, 1);
-	coin.PushBack({ 61, 0, 13, 16 }, 0.12f, 1, 1, 1, 1);
+	coin.PushBack({ 65, 0, 13, 16 }, 0.12f, 1, 1, 1, 1);
 }
 
 
@@ -156,6 +157,6 @@ void j1Coin::OnCollision(Collider* c1, Collider* c2)
 	{
 		LOG(true, "Coin Collected");
 		App->score->coins++;
-		App->entManager->DestroyCoin(this);
+		dead = true;
 	}
 }

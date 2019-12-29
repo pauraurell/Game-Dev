@@ -377,11 +377,11 @@ void j1Scene::EndScene()
 void j1Scene::CreateEnt()
 {
 	player = App->entManager->CreateEntity(j1Entities::Types::player, { PlayerSpawnPointX, PlayerSpawnPointY }, false);
-	coin = App->entManager->CreateEntity(j1Entities::Types::coin, { PlayerSpawnPointX + 60, PlayerSpawnPointY }, false);
 	bat1 = App->entManager->CreateEntity(j1Entities::Types::bat, { BatSpawnPointX, BatSpawnPointY }, false);
 	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY }, false);
 	bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX, Bat2SpawnPointY }, false);
 	skeleton2 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { Skeleton2SpawnPointX, Skeleton2SpawnPointY }, false);
+	Create1MapCoins();
 }
 
 void j1Scene::Create1MapEnemies()
@@ -391,6 +391,7 @@ void j1Scene::Create1MapEnemies()
 	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX, SkeletonSpawnPointY }, false);
 	bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX, Bat2SpawnPointY }, false);
 	skeleton2 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { Skeleton2SpawnPointX, Skeleton2SpawnPointY}, false);
+	Create1MapCoins();
 }
 
 void j1Scene::Create2MapEnemies()
@@ -400,6 +401,7 @@ void j1Scene::Create2MapEnemies()
 	skeleton1 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { SkeletonSpawnPointX2, SkeletonSpawnPointY2}, false);
 	//bat2 = App->entManager->CreateEntity(j1Entities::Types::bat, { Bat2SpawnPointX2, Bat2SpawnPointY2 }, false);
 	skeleton2 = App->entManager->CreateEntity(j1Entities::Types::skeleton, { Skeleton2SpawnPointX2, Skeleton2SpawnPointY2 }, false);
+	Create2MapCoins();
 }
 
 void j1Scene::drawSceneUi()
@@ -573,4 +575,50 @@ void j1Scene::DisableAll()
 	inGameMenu_button_Continue->enabled = false;
 }
 
+void j1Scene::Create1MapCoins()
+{
+	coin = App->entManager->CreateEntity(j1Entities::Types::coin, { PlayerSpawnPointX + 60, PlayerSpawnPointY }, false);
+	coin2 = App->entManager->CreateEntity(j1Entities::Types::coin, { 792, 400 }, false);
+	coin3 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1030, 450 }, false);
+	coin4 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1250, 350 }, false);
+	coin5 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1320, 379 }, false);
+	coin6 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1088, 195 }, false);
+	coin7 = App->entManager->CreateEntity(j1Entities::Types::coin, { 860, 150 }, false);
+	coin8 = App->entManager->CreateEntity(j1Entities::Types::coin, { 660, 180 }, false);
+	coin9 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1345, 124 }, false);
+	coin10 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1600, 140 }, false);
+	coin11 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1736, 187 }, false);
+	coin12 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1425, 220 }, false);
+	coin13 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1453, 430 }, false);
+	coin14 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1553, 332 }, false);
+	coin15 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1481, 592 }, false);
+	coin16 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1605, 544 }, false);
+	coin17 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1760, 445 }, false);
+	coin18 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1490, 124 }, false);
+	coin19 = App->entManager->CreateEntity(j1Entities::Types::coin, { 944, 187 }, false);
+	coin20 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1950, 455 }, false);
+}
 
+void j1Scene::Create2MapCoins()
+{
+	coin = App->entManager->CreateEntity(j1Entities::Types::coin, { 124, 480 }, false);
+	coin2 = App->entManager->CreateEntity(j1Entities::Types::coin, { 300, 495 }, false);
+	coin3 = App->entManager->CreateEntity(j1Entities::Types::coin, { 510, 397 }, false);
+	coin4 = App->entManager->CreateEntity(j1Entities::Types::coin, { 720, 175 }, false); //NOT DRAW
+	coin5 = App->entManager->CreateEntity(j1Entities::Types::coin, { 800, 410 }, false);
+	coin6 = App->entManager->CreateEntity(j1Entities::Types::coin, { 456, 190 }, false);
+	coin7 = App->entManager->CreateEntity(j1Entities::Types::coin, { 289, 157 }, false);
+	coin8 = App->entManager->CreateEntity(j1Entities::Types::coin, { 140, 190 }, false);
+	coin9 = App->entManager->CreateEntity(j1Entities::Types::coin, { 767, 95 }, false); //NOT DRAW
+	coin10 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1360, 235 }, false); //NOT DRAW
+	coin11 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1280, 93 }, false); //NOT DRAW
+	coin12 = App->entManager->CreateEntity(j1Entities::Types::coin, { 905, 78 }, false); //NOT DRAW
+	coin13 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1057, 60 }, false); //NOT DRAW
+	coin14 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1185, 60 }, false); //NOT DRAW
+	coin15 = App->entManager->CreateEntity(j1Entities::Types::coin, { 850, 150 }, false); //NOT DRAW
+	coin16 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1155, 330 }, false);
+	coin17 = App->entManager->CreateEntity(j1Entities::Types::coin, { 1670, 219 }, false);
+	coin18 = App->entManager->CreateEntity(j1Entities::Types::coin, { 2017, 140 }, false);
+	coin19 = App->entManager->CreateEntity(j1Entities::Types::coin, { 2170, 350 }, false);
+	coin20 = App->entManager->CreateEntity(j1Entities::Types::coin, { 2453, 365 }, false);
+}
