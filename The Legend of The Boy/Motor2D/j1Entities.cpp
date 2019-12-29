@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Player.h"
 #include "j1Bat.h"
+#include "j1Coin.h"
 #include "j1Skeleton.h"
 #include "j1Textures.h"
 #include "j1Scene.h"

@@ -25,6 +25,7 @@ public:
 
 	j1Entities* CreateEntity(j1Entities::Types type, iPoint pos, bool isDead);
 	void DestroyEntity(j1Entities* entity);
+	void DestroyCoin(j1Entities* entity);
 	void DestroyEntities();
 	void DestroyEnemies();
 	void RestartEntities();
