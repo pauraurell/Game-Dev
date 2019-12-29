@@ -243,15 +243,15 @@ bool j1Console::ConsoleInput()
 					inputChar[i] = ' ';
 					inputChar[i + 1] = '-';
 					inputChar[i + 2] = '>';
-					inputChar[i + 3] = ' ';
+					inputChar[i + 3] = '\0';
 					ret = true;
 				}
 				else
 				{
 					inputChar[i] = ' ';
-					inputChar[i + 1] = ' ';
-					inputChar[i + 2] = ' ';
-					inputChar[i + 3] = ' ';
+					inputChar[i + 1] = '\0';
+					inputChar[i + 2] = '\0';
+					inputChar[i + 3] = '\0';
 					ret = true;
 				}
 			}
@@ -332,7 +332,8 @@ bool j1Console::Commands(p2SString string)
 
 	else if (string == photo_mode)
 	{
-
+		if (App->scene->photo_mode == true) { App->scene->photo_mode = false; LOG(true, "Photo Mode deactivated"); }
+		else { App->scene->photo_mode = true; LOG(true, "Photo Mode activated"); }
 	}
 
 	else { LOG(true, "The command was not on the command list"); }
@@ -346,7 +347,11 @@ void j1Console::EmptyBuffer()
 	for (int i = 0; i < MAX_INPUT && r == false; i++)
 	{
 		if (inputChar[0] == ' ' && i == 0) { r = true; }
-		if (inputChar[i] == '>') { inputChar[i] = ' '; r = true; }
-		else { inputChar[i] = ' '; }
+		if (inputChar[i] == '>') { inputChar[i] = '\0'; r = true; }
+		else
+		{
+			if (i == 0) { inputChar[i] = ' '; }
+			else { inputChar[i] = '\0'; }
+		}
 	}
 }
