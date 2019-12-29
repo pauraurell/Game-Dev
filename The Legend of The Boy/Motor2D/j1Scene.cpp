@@ -105,6 +105,8 @@ bool j1Scene::Start()
 	CreateInGameUi();
 	CreateInGameMenuUi();
 
+	if (App->main_menu->continuePlaying) { App->LoadGame(); }
+
 	return true;
 }
 

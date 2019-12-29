@@ -20,7 +20,7 @@ j1MainMenu::j1MainMenu() : j1Module()
 {
 	name.create("menu");
 	SettingsMenuIsActive = false;
-	stop = false;
+	stop = false; continuePlaying = false;
 }
 
 // Destructor
@@ -43,6 +43,7 @@ bool j1MainMenu::Start()
 	texture2 = App->tex->Load("maps/Layer 2.png");
 	texture3 = App->tex->Load("maps/Layer 3.png");
 	title = App->tex->Load("textures/Title/The Legend of The Boy.png");
+	App->audio->PlayMusic("audio/Credits_Menu.ogg");
 	posX1 = 0;
 	posX2 = 0;
 	posX3 = 0;
@@ -185,6 +186,13 @@ void j1MainMenu::UIevents(uiEvent type, UIelement* element)
 			else if (element == settingsButtonOk)
 			{
 				SettingsMenuIsActive = !SettingsMenuIsActive;
+			}
+
+
+			else if (element == ContinueButton)
+			{
+				continuePlaying = true;
+				App->fade->FadeToBlack(App->scene, this, 2.f);
 			}
 		}
 	}

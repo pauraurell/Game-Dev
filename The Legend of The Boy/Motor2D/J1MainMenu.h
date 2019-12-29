@@ -46,6 +46,7 @@ public:
 	UIelement* sliderMusicLabel = nullptr;
 
 	bool SettingsMenuIsActive;
+	bool continuePlaying;
 
 	void UIevents(uiEvent type, UIelement* element);
 
