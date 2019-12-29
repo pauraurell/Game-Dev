@@ -64,6 +64,10 @@ public:
 	int size;
 	iPoint posOffset;
 	SDL_Color color;
+	int v;
+	uint click;
+	uint above;
+	bool played;
 
 	SDL_Rect section;
 

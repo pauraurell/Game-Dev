@@ -117,6 +117,7 @@ public:
 	//AUDIO
 	uint			JumpFx;
 	uint			RunFx;
+	uint			HitFx;
 	float			step_time;
 
 	void Pushbacks();

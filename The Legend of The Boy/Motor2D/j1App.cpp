@@ -336,6 +336,8 @@ bool j1App::PostUpdate()
 
 	if (QuitToDesktop) { return false; }
 
+	Mix_VolumeMusic(App->audio->volume_music);
+
 	return ret;
 }
 

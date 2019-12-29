@@ -19,11 +19,9 @@ public:
 
 	bool Awake(pugi::xml_node& config);
 	bool Start() override;
-
 	bool PreUpdate() override;
 	bool Update(float dt) override;
 	bool PostUpdate() override;
-
 	bool CleanUp() override;
 
 	void Draw();
@@ -32,9 +30,7 @@ public:
 
 	void CreateInGameUi();
 	void CreateInGameMenuUi();
-
 	void UIevents(uiEvent type, UIelement* element);
-
 	void EnableAll();
 	void DisableAll();
 
@@ -44,6 +40,8 @@ public:
 	int				pts;
 	SDL_Rect		heart;
 	SDL_Rect		emptHeart;
+
+	//All UI Elements List
 	p2List<UIelement*>	UIelements;
 
 	//TIMER

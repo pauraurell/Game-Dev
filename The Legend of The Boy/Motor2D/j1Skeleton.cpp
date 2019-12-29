@@ -350,6 +350,7 @@ void j1Skeleton::ConfigLoading()
 
 void j1Skeleton::EntityDeath()
 {
+	App->audio->PlayFx(enkilledFx, App->audio->volume_fx, 0, 2);
 	gravity = 0;
 	colliderBody->to_delete = true;
 	colliderLegs->to_delete = true;

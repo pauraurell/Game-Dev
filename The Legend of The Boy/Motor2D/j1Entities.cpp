@@ -13,6 +13,8 @@
 j1Entities::j1Entities(Types type)
 {
 	entity_type = type;
+	enkilledFx = App->audio->LoadFx("audio/enemy_killed.wav");
+
 }
 
 j1Entities::~j1Entities()

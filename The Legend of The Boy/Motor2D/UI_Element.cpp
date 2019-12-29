@@ -6,7 +6,7 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Window.h"
-
+#include "j1Audio.h"
 
 UIelement::UIelement()
 {
@@ -15,6 +15,7 @@ UIelement::UIelement()
 	section = { 0,0,0,0 };
 	bool enabled = false;
 	posOffset = { 0,0 };
+	played = false;
 }
 
 UIelement::~UIelement()
@@ -84,10 +85,13 @@ bool UIelement::Is_above()
 		//LOG(true, "ABOVE");
 		if (listener != nullptr)
 		{
+			if (played == false && this->enabled == true) { App->audio->PlayFx(above, App->audio->volume_fx, 0, 3); played = true; }
 			this->listener->UIevents(uiEvent::EVENT_HOVER, this);
 		}
 		ret = true;
 	}
+	else { played = false; }
+
 	//else { LOG(true, "NO ABOVE"); }
 	//LOG(true, "%i, %i", mouse.x, mouse.y);
 	
@@ -105,6 +109,7 @@ void UIelement::Click()
 {
 	if (listener != nullptr)
 	{
+		App->audio->PlayFx(click, App->audio->volume_fx, 0, 3);
 		this->listener->UIevents(uiEvent::EVENT_ONCLICK, this);
 	}
 }
