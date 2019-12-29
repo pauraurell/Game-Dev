@@ -143,8 +143,8 @@ bool j1Score::Load(pugi::xml_node& data)
 
 bool j1Score::Save(pugi::xml_node& data) const
 {
-	LOG(true, "saving");
-	data.append_attribute("coins") = coins;
+	pugi::xml_node coins = data.append_child("Coins");
+	coins.append_child("coins").append_attribute("coins");
 
 	return true;
 }
