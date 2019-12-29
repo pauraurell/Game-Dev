@@ -118,7 +118,7 @@ bool j1EntityManager::Save(pugi::xml_node& data) const
 	return true;
 }
 
-j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos, bool isDead)
+j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos, bool isDead, bool secret)
 {
 	j1Entities* ret = nullptr;
 
@@ -134,7 +134,7 @@ j1Entities* j1EntityManager::CreateEntity(j1Entities::Types type, iPoint pos, bo
 		ret = new j1Bat(pos, isDead);
 		break;
 	case j1Entities::Types::coin:
-		ret = new j1Coin(pos, isDead);
+		ret = new j1Coin(pos, isDead, secret);
 		break;
 
 	}
@@ -200,7 +200,12 @@ void j1EntityManager::DrawEntities(float dt)
 {
 	p2List_item<j1Entities*>* entityList = entities.start;
 	while (entityList) {
-		entityList->data->Draw(dt);
+		if(entityList->data->entity_type == j1Entities::Types::coin)
+		{
+			if (entityList->data->secret == false) { entityList->data->Draw(dt); }
+			else if (entityList->data->secret == true && App->scene->secret_map == true) { entityList->data->Draw(dt); }
+		}
+		else { entityList->data->Draw(dt); }
 		entityList = entityList->next;
 	}
 }

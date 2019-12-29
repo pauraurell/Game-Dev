@@ -65,6 +65,7 @@ public:
 	float			gravity;
 	bool			godMode;
 	uint			enkilledFx;
+	bool			secret;
 	
 	//COLLIDERS
 	Collider*		colliderHead = nullptr;

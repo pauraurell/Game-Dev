@@ -25,7 +25,7 @@ j1Coin::j1Coin() : j1Entities(Types::coin)
 	OnGround = true;
 }
 
-j1Coin::j1Coin(iPoint pos, bool isDead) : j1Entities(Types::coin)
+j1Coin::j1Coin(iPoint pos, bool isDead, bool isSecret) : j1Entities(Types::coin)
 {
 	name.create("bat");
 	position = pos;
@@ -33,6 +33,7 @@ j1Coin::j1Coin(iPoint pos, bool isDead) : j1Entities(Types::coin)
 	to_die = false;
 	orientation = "right";
 	OnGround = true;
+	secret = isSecret;
 }
 
 // Destructor
