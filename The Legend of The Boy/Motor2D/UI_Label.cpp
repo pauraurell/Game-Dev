@@ -37,7 +37,7 @@ bool Label::PreUpdate()
 
 bool Label::Update(float dt)
 {
-	texture = App->fonts->Print(text, size, color, App->fonts->default);
+	Print();
 	return true;
 }
 
@@ -56,3 +56,9 @@ bool Label::CleanUp()
 	App->tex->UnLoad(texture);
 	return true;
 }
+
+void Label::Print()
+{
+	texture = App->fonts->Print(text, size, color, App->fonts->default);
+}
+

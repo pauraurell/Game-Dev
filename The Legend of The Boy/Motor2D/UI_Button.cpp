@@ -25,20 +25,20 @@ bool Button::Start()
 {
 	click = App->audio->LoadFx("audio/button_click.wav");	
 	above = App->audio->LoadFx("audio/button_hover.wav");
-	if (text != nullptr) { label = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, this, { Position.x + 16 + posOffset.x, Position.y + section.h / 3 + posOffset.y }, size, true, { 0,0,0,0 }, { 0,0 }, text); }
+	if (text != nullptr) { ButtonLabel = App->ui->Add_UIelement(TYPE_UI::UI_LABEL, SLIDER_TYPE::NOT_A_SLIDER, this, { Position.x + 16 + posOffset.x, Position.y + section.h / 3 + posOffset.y }, size, true, { 0,0,0,0 }, { 0,0 }, text); }
 	return true;
 }
 
 bool Button::PreUpdate()
 {
-	if (label != nullptr) { label->enabled = enabled; }
+	if (ButtonLabel != nullptr) { ButtonLabel->enabled = enabled; }
 
 	return true;
 }
 
 bool Button::Update(float dt)
 {
-	if (Is_above() && enabled)
+	if (OnTop() && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 		{
@@ -47,8 +47,7 @@ bool Button::Update(float dt)
 		
 		if (App->input->GetMouseButtonDown(1) == KEY_REPEAT)
 		{
-			iPoint pos_click = { 0,0 };
-			App->input->GetMousePosition(pos_click.x, pos_click.y);
+			iPoint pos_click = { 0,0 };App->input->GetMousePosition(pos_click.x, pos_click.y);
 			MouseMovement = { pos_click.x - (this->Position.x) };
 			if (canMoveIn_X_axis) { drag = true; }
 		}
@@ -76,7 +75,7 @@ bool Button::PostUpdate()
 
 bool Button::CleanUp()
 {
-	if (label != nullptr) { label->enabled = false; }
+	if (ButtonLabel != nullptr) { ButtonLabel->enabled = false; }
 	return true;
 }
 

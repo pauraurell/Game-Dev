@@ -349,6 +349,7 @@ void j1Bat::BatFlyingToThePlayer(float dt)
 
 void j1Bat::EntityDeath()
 {
+	App->audio->PlayFx(enkilledFx, App->audio->volume_fx, 0, 2);
 	state = BAT_DEAD;
 	colliderBody->to_delete = true;
 	App->score->enemies += 1;

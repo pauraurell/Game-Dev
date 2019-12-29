@@ -27,7 +27,7 @@ bool Slider::Start()
 {
 	texture = App->ui->ui_tex;
 	
-	button = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, this, Position, 20, false, { 220, 256, 6 , 10 }, posOffset, nullptr, this->listener, true);
+	button = App->ui->Add_UIelement(TYPE_UI::UI_BUTTON, SLIDER_TYPE::NOT_A_SLIDER, this, Position, 20, false, { 220, 256, 6 , 10 }, posOffset, nullptr, this->mod, true);
 	button->Position.y = Position.y - button->section.h / 2 + section.h / 2;
 	button_position = 0;
 
@@ -53,7 +53,7 @@ bool Slider::PreUpdate()
 
 bool Slider::Update(float dt)
 {
-	if (Is_above() && enabled)
+	if (OnTop() && enabled)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN) { Click(); }
 	}
